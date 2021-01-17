@@ -1,0 +1,18 @@
+CPSC 471: Data Base Management Systems
+Winter 2021
+
+Group Project Member Information
+
+
+Member 1:
+Logan Perry-Din
+ID: 30070661
+Tutorial 03
+
+Member 2:
+Brody Wells
+ID: 289853
+Tutorial 03
+
+Member 3:
+Articuler
