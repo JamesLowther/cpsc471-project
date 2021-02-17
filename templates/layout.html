@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+	<meta name="viewport" content="initial-scale=1, width=device-width">
+	<title>	Medical Clinic Portal </title>
+
+	<link rel="stylesheet" href="/static/css/bootstrap.min.css">
+</head>
+
+
+<body class="bg-light">
+	{% include 'navbar.html' %}
+	{%block content%}
+	replace me
+	{% endblock %} 
+
+
+	{% block bottom_content %}
+	 
+	{% endblock %}
+
+	<script src="/static/js/jquery.min.js"></script>
+	<script src="/static/js/bootstrap.bundle.min.js"></script>
+
+	<div class="collapse" id="navbarToggleExternalContent">
+	  <div class="bg-dark p-4">
+	    <h5 class="text-white h4">A place to put some stuff....</h5>
+	    <span class="text-muted">This is probably useless, just testing ui features</span>
+	  </div>
+	</div>
+	<nav class="navbar navbar-dark bg-dark">
+	  <div class="container-fluid">
+	    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+	      <span class="navbar-toggler-icon"></span>
+	    </button>
+	  </div>
+	</nav>
+
+<footer class="footer mt-auto py-3 bg-dark">
+  <div class="container">
+    <span class="text-muted">Place sticky footer content here.</span>
+    <br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br>
+    <br><br><br><br><br><br><br><br><br>
+  </div>
+</footer>
+</body>
+</html>

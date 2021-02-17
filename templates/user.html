@@ -1,0 +1,24 @@
+{% extends "layout.html" %}
+{% block content %}
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for msg in messages %}
+				<p>{{msg}}</p>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+
+<br><br>
+<div class="container bg-light">
+	<div class="col-5">
+		<div class="row g-3">
+			<form action="#" method="POST">
+				<label for="email" class="form-label">Email</label>
+				<p><input type="email" class="form-control" name="email" id="email01"  placeholder="Enter email" value="{{email if email}}" /></p>
+				<p><input type="submit" class="btn btn-primary" value="submit" /></p>
+			</form>
+		</div>
+	</div>
+</div>
+
+{% endblock %}

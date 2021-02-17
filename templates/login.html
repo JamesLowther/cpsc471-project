@@ -1,0 +1,30 @@
+{% extends "layout.html" %}
+{% block content %}
+	{% with messages = get_flashed_messages() %}
+		{% if messages %}
+			{% for msg in messages %}
+				<p>{{msg}}</p>
+			{% endfor %}
+		{% endif %}
+	{% endwith %}
+
+<br><br>
+<div class="container bg-light">
+	<div class="col-5">
+		<div class="row g-3">
+			<form action="#" method="POST">
+				
+				<label for="email" class="form-label">Email</label>
+				<p><input type="name" class="form-control" name="email_username" id="email_username01" /></p>
+
+				<label for="password" class="form-label">Password</label>
+				<p><input type="name" class="form-control" name="pw" id="password01" /></p>
+				<p><input type="submit" class="btn btn-primary" value="submit" /></p>
+			
+			</form>
+		</div>
+	</div>
+</div>
+<br>
+
+{% endblock %}
