@@ -1,5 +1,5 @@
 <template>
-  <div class="login">
+  <div class="new-account">
     <div class="flex fixed">
       <router-link
         to="/"
@@ -7,7 +7,7 @@
         >Back</router-link
       >
     </div>
-    <p class="text-center text-5xl mt-10">Login</p>
+    <p class="text-center text-5xl mt-10">New Account</p>
     <div class="flex justify-center my-64">
       <div class="text-xl">
         <label class="mr-3" for="select">Type:</label>
@@ -36,7 +36,7 @@
           class="text-white px-4 py-2 shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg"
           @click="loginPost()"
         >
-          Login
+          Create Account
         </button>
       </div>
     </div>
@@ -60,7 +60,7 @@ export default {
   methods: {
     loginPost() {
       axios
-        .post(`http://127.0.0.1:5000/login`, {
+        .post(`http://127.0.0.1:5000/new-account`, {
           user_type: this.user_type,
           username: this.username,
           password: this.password,

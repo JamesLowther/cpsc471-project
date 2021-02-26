@@ -1,18 +1,13 @@
 <template>
-  <div id="app">
-    <LoginPage />
+  <div class="relative w-full" id="app">
+    <router-view />
   </div>
 </template>
 
 <script>
-import LoginPage from './components/LoginPage.vue'
-
 export default {
-  name: 'App',
-  components: {
-    LoginPage
-  }
-}
+  name: "App",
+};
 </script>
 
 <style>
@@ -22,6 +17,5 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
 }
 </style>
