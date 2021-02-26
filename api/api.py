@@ -21,7 +21,7 @@ def add_api_endpoints():
     """
     api.add_resource(Login, '/login')
 
+init_api()
 
 if __name__ == '__main__':
-    init_api()
     app.run(debug=True)
