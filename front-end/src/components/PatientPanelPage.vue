@@ -54,7 +54,6 @@ export default {
       });
     },
   logout() {
-    console.log("sdfsd")
     localStorage.removeItem('jwt');
     this.$router.push('/')
   }
