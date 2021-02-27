@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Index from '../views/Index.vue'
 import Login from '../views/Login.vue'
 import NewAccount from '../views/NewAccount.vue'
+import PatientPanel from '../views/PatientPanel.vue'
 
 Vue.use(VueRouter)
 
@@ -21,6 +22,11 @@ const routes = [
     path: '/new-account',
     name: 'new-account',
     component: NewAccount
+  },
+  {
+    path: '/patient-panel',
+    name: 'patient-panel',
+    component: PatientPanel
   }
 ]
 

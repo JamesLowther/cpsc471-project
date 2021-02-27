@@ -1,13 +1,21 @@
 from flask import Flask
 from flask_restful import Api, Resource
+from flask_cors import CORS
+
+from flask_jwt_extended import JWTManager
 
 from endpoints.login import Login
 from endpoints.new_account import NewAccount
+from endpoints.patient import Patient
+
 from database import db
 
 app = Flask(__name__)
-api = Api(app)
+CORS(app=app, supports_credentials=True)
+app.config["JWT_SECRET_KEY"] = "hello-world"
 
+api = Api(app)
+jwt = JWTManager(app)
 
 def init_api():
     """ Call functions which initialize the API.
@@ -22,16 +30,7 @@ def add_api_endpoints():
     """
     api.add_resource(Login, '/login')
     api.add_resource(NewAccount, '/new-account')
-
-
-@app.after_request
-def after_request(response):
-    """Required for CORS workaround.
-    """
-    response.headers.add('Access-Control-Allow-Origin', '*')
-    response.headers.add('Access-Control-Allow-Headers', 'Content-Type,Authorization')
-    response.headers.add('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE')
-    return response
+    api.add_resource(Patient, '/patient')
 
 
 init_api()
