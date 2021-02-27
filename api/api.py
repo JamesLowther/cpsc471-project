@@ -12,7 +12,7 @@ from database import db
 
 app = Flask(__name__)
 CORS(app=app, supports_credentials=True)
-app.config["JWT_SECRET_KEY"] = "hello-world"
+app.config["JWT_SECRET_KEY"] = "GRu7cjtC5YwbKBS*#jmHz"
 
 api = Api(app)
 jwt = JWTManager(app)
