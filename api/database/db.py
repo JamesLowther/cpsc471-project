@@ -22,7 +22,7 @@ def connect_db():
 
     connection = sqlite3.connect(DB_PATH)
     connection.row_factory = sqlite3.Row
-    return (connection, connection.cursor(),)
+    return (connection, connection.cursor())
 
 
 def populate_db():
@@ -34,8 +34,8 @@ def populate_db():
     if not path.exists(full_path):
         exit("Populate file does not exist.")
 
-    cursor = connect_db()
-
+    conn, cursor = connect_db()
+    
     with open(full_path, "r") as fp:
         cursor.executescript(fp.read())
 
@@ -44,4 +44,7 @@ def populate_db():
         test_data_path = path.dirname(path.abspath(__file__)) + "/" + TEST_DATA_FILE
         with open(test_data_path, "r") as fp:
             cursor.executescript(fp.read())
+
+    conn.commit()
+    conn.close()
         
