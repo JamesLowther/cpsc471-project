@@ -34,8 +34,8 @@ def populate_db():
     if not path.exists(full_path):
         exit("Populate file does not exist.")
 
-    conn, cursor = connect_db()
-    
+    con, cursor = connect_db()
+
     with open(full_path, "r") as fp:
         cursor.executescript(fp.read())
 
@@ -45,6 +45,6 @@ def populate_db():
         with open(test_data_path, "r") as fp:
             cursor.executescript(fp.read())
 
-    conn.commit()
-    conn.close()
+    con.commit()
+    con.close()
         
