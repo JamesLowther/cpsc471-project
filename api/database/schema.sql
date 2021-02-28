@@ -28,21 +28,21 @@ DROP TABLE IF EXISTS Past_Illnesses;
 CREATE TABLE Doctor (
     SSN             TEXT,
     Specialization  TEXT,
-    Fname           TEXT,
-    Lname           TEXT,
+    Fname           TEXT NOT NULL,
+    Lname           TEXT NOT NULL,
     Intial          TEXT,
     DoB             TEXT,
-    Password        TEXT,
+    Password        TEXT NOT NULL,
     PRIMARY KEY (SSN)
 );
 
 CREATE TABLE Clerk (
     SSN             TEXT,
-    Fname           TEXT,
+    Fname           TEXT NOT NULL,
     Lname           TEXT,
     Intial          TEXT,
     DoB             TEXT,
-    Password        TEXT,
+    Password        TEXT NOT NULL,
     PRIMARY KEY (SSN)
 );
 
@@ -58,13 +58,13 @@ CREATE TABLE Works_At (
     Loc_Name        TEXT,
     SSN             TEXT,
     PRIMARY KEY (Loc_Name, SSN),
-    FOREIGN KEY (Loc_Name) REFERENCES Medical_Centre(Location),
+    FOREIGN KEY (Loc_Name) REFERENCES Medical_Centre(Name),
     FOREIGN KEY (SSN) REFERENCES Doctor(SSN)
 );
 
 CREATE TABLE Patient (
     P_SSN           TEXT,
-    Password        TEXT,
+    Password        TEXT NOT NULL,
     PRIMARY KEY (P_SSN)
 );
 
@@ -74,12 +74,12 @@ CREATE TABLE New_Applicant_Form (
     Gender          TEXT,
     Sex             TEXT,
     Phone           TEXT,
-    Fname           TEXT,
+    Fname           TEXT NOT NULL,
     Intial          TEXT,
-    Lname           TEXT,
-    Healthcare_no   TEXT,
-    HCN_expiry      TEXT,
-    HCN_province    TEXT,
+    Lname           TEXT NOT NULL,
+    Healthcare_no   TEXT NOT NULL,
+    HCN_expiry      TEXT NOT NULL,
+    HCN_province    TEXT NOT NULL,
     DoB             TEXT,
     PRIMARY KEY (Email, P_SSN),
     FOREIGN KEY (P_SSN) REFERENCES Patient(P_SSN)
@@ -97,11 +97,11 @@ CREATE TABLE Authorizes (
 CREATE TABLE Covid_Screen (
     Date                TEXT,
     P_SSN               TEXT,
-    Shortness_breath    INTEGER,
-    New_cough           INTEGER,
-    Fever               INTEGER,
-    Sore_throat         INTEGER,
-    Runny_nose          INTEGER,
+    Shortness_breath    INTEGER NOT NULL,
+    New_cough           INTEGER NOT NULL,
+    Fever               INTEGER NOT NULL,
+    Sore_throat         INTEGER NOT NULL,
+    Runny_nose          INTEGER NOT NULL,
     PRIMARY KEY (Date, P_SSN),
     FOREIGN KEY (P_SSN) REFERENCES Patient(P_SSN)
 );
@@ -182,7 +182,6 @@ CREATE TABLE Diagnoses (
 CREATE TABLE Medical_History (
     HID             TEXT,
     P_SSN           TEXT,
-    Age_of_onset    INTEGER,
     TPAL_total      INTEGER,
     TPAL_preterm    INTEGER,
     TPAL_aborted    INTEGER,
@@ -223,6 +222,7 @@ CREATE TABLE Past_Illnesses (
     HID             TEXT,
     P_SSN           TEXT,
     Illness_name    TEXT,
+    Age_of_onset    INTEGER,
     PRIMARY KEY (HID, P_SSN, Illness_name),
     FOREIGN KEY (HID, P_SSN) REFERENCES Medical_History(HID, P_SSN),
     FOREIGN KEY (Illness_name) REFERENCES Illness(Name)

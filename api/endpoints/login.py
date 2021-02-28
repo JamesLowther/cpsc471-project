@@ -27,7 +27,7 @@ class Login(Resource):
             status = login_patient(args)
         elif args["user_type"] == "doctor":
             status = login_doctor(args)
-        else:
+        elif args["user_type"] == "clerk":
             status = login_clerk(args)
 
         # User did not successfully log in.
@@ -70,11 +70,37 @@ def login_doctor(args):
     """Handle the login logic for doctors.
     Return True if login successful and False otherwise.
     """
-    pass
+    con, cursor = db.connect_db()
+
+    cursor.execute("SELECT * FROM Doctor WHERE SSN = ? AND Password = ?;",
+                     (args["ssn"], args["password"]))
+
+    # No user in database with those credentials.
+    res = cursor.fetchone()
+    if not res:
+        con.close()
+        return False
+
+    # User has correct credentials.
+    con.close()
+    return True
 
 
 def login_clerk(args):
     """Handle the login logic for clerks.
     Return True if login successful and False otherwise.
     """
-    pass
+    con, cursor = db.connect_db()
+
+    cursor.execute("SELECT * FROM Clerk WHERE SSN = ? AND Password = ?;",
+                     (args["ssn"], args["password"]))
+
+    # No user in database with those credentials.
+    res = cursor.fetchone()
+    if not res:
+        con.close()
+        return False
+
+    # User has correct credentials.
+    con.close()
+    return True
