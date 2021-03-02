@@ -26,7 +26,7 @@ DROP TABLE IF EXISTS Past_Illnesses;
 
 -- Create new tables
 CREATE TABLE Doctor (
-    SSN             TEXT,
+    SSN             INTEGER NOT NULL,
     Specialization  TEXT,
     Fname           TEXT NOT NULL,
     Lname           TEXT NOT NULL,
@@ -37,9 +37,9 @@ CREATE TABLE Doctor (
 );
 
 CREATE TABLE Clerk (
-    SSN             TEXT,
+    SSN             INTEGER NOT NULL,
     Fname           TEXT NOT NULL,
-    Lname           TEXT,
+    Lname           TEXT NOT NULL,
     Intial          TEXT,
     DoB             TEXT,
     Password        TEXT NOT NULL,
@@ -56,21 +56,21 @@ CREATE TABLE Medical_Centre (
 -- Might be problem with foreign key
 CREATE TABLE Works_At (
     Loc_Name        TEXT,
-    SSN             TEXT,
+    SSN             INTEGER,
     PRIMARY KEY (Loc_Name, SSN),
     FOREIGN KEY (Loc_Name) REFERENCES Medical_Centre(Name),
     FOREIGN KEY (SSN) REFERENCES Doctor(SSN)
 );
 
 CREATE TABLE Patient (
-    P_SSN           TEXT,
+    P_SSN           INTEGER NOT NULL,
     Password        TEXT NOT NULL,
     PRIMARY KEY (P_SSN)
 );
 
 CREATE TABLE New_Applicant_Form (
     Email           TEXT,
-    P_SSN           TEXT,
+    P_SSN           INTEGER,
     Gender          TEXT,
     Sex             TEXT,
     Phone           TEXT,
@@ -87,7 +87,7 @@ CREATE TABLE New_Applicant_Form (
 
 CREATE TABLE Authorizes (
     Email           TEXT,
-    P_SSN           TEXT,
+    P_SSN           INTEGER,
     SSN             TEXT,
     PRIMARY KEY (Email, P_SSN),
     FOREIGN KEY (Email, P_SSN) REFERENCES New_Applicant_Form(Email, P_SSN),
@@ -96,7 +96,7 @@ CREATE TABLE Authorizes (
 
 CREATE TABLE Covid_Screen (
     Date                TEXT,
-    P_SSN               TEXT,
+    P_SSN               INTEGER,
     Shortness_breath    INTEGER NOT NULL,
     New_cough           INTEGER NOT NULL,
     Fever               INTEGER NOT NULL,
@@ -108,7 +108,7 @@ CREATE TABLE Covid_Screen (
 
 CREATE TABLE Report (
     Report_ID           TEXT,
-    P_SSN               TEXT,
+    P_SSN               INTEGER,
     SSN                 TEXT,
     PRIMARY KEY (Report_ID, P_SSN, SSN),
     FOREIGN KEY (P_SSN) REFERENCES Patient(P_SSN),
@@ -117,8 +117,8 @@ CREATE TABLE Report (
 
 CREATE TABLE Assigned (
     Report_ID           TEXT,
-    P_SSN               TEXT,
-    SSN                 TEXT,
+    P_SSN               INTEGER,
+    SSN                 INTEGER,
     Med_Centre_Name     TEXT,
     PRIMARY KEY (Report_ID, P_SSN, SSN, Med_Centre_Name),
     FOREIGN KEY (Report_ID, P_SSN, SSN) REFERENCES Report(Report_ID, P_SSN, SSN),
@@ -142,7 +142,7 @@ CREATE TABLE Prescribes (
     Med_name            TEXT,
     Report_ID           TEXT,
     P_SSN               TEXT,
-    SSN                 TEXT,
+    SSN                 INTEGER,
     PRIMARY KEY (Med_name, Report_ID, P_SSN, SSN),
     FOREIGN KEY (Med_name) REFERENCES Medication(Name),
     FOREIGN KEY (Report_ID, P_SSN, SSN) REFERENCES Report(Report_ID, P_SSN, SSN)
@@ -172,8 +172,8 @@ CREATE TABLE Treats (
 CREATE TABLE Diagnoses (
     Name            TEXT,
     Report_ID       TEXT,
-    P_SSN           TEXT,
-    SSN             TEXT,
+    P_SSN           INTEGER,
+    SSN             INTEGER,
     PRIMARY KEY (Name, Report_ID, P_SSN, SSN),
     FOREIGN KEY (Name) REFERENCES Illness(Name),
     FOREIGN KEY (Report_ID, P_SSN, SSN) REFERENCES Report(Report_ID, P_SSN, SSN)
@@ -181,7 +181,7 @@ CREATE TABLE Diagnoses (
 
 CREATE TABLE Medical_History (
     HID             TEXT,
-    P_SSN           TEXT,
+    P_SSN           INTEGER,
     TPAL_total      INTEGER,
     TPAL_preterm    INTEGER,
     TPAL_aborted    INTEGER,
@@ -192,7 +192,7 @@ CREATE TABLE Medical_History (
 
 CREATE TABLE Allergies (
     HID             TEXT,
-    P_SSN           TEXT,
+    P_SSN           INTEGER,
     Allergy         TEXT,
     PRIMARY KEY (HID, P_SSN, Allergy),
     FOREIGN KEY (HID, P_SSN) REFERENCES Medical_History(HID, P_SSN)
@@ -200,7 +200,7 @@ CREATE TABLE Allergies (
 
 CREATE TABLE Immunization (
     HID             TEXT,
-    P_SSN           TEXT,
+    P_SSN           INTEGER,
     Immunization    TEXT,
     PRIMARY KEY (HID, P_SSN, Immunization),
     FOREIGN KEY (HID, P_SSN) REFERENCES Medical_History(HID, P_SSN)
@@ -208,7 +208,7 @@ CREATE TABLE Immunization (
 
 CREATE TABLE Treatment_Done (
     HID             TEXT,
-    P_SSN           TEXT,
+    P_SSN           INTEGER,
     Med_name        TEXT,
     Illness_name    TEXT,
     Date            TEXT,
@@ -220,7 +220,7 @@ CREATE TABLE Treatment_Done (
 
 CREATE TABLE Past_Illnesses (
     HID             TEXT,
-    P_SSN           TEXT,
+    P_SSN           INTEGER,
     Illness_name    TEXT,
     Age_of_onset    INTEGER,
     PRIMARY KEY (HID, P_SSN, Illness_name),

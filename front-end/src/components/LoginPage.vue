@@ -26,6 +26,7 @@
         <input
           class="border border-black my-4 p-1 rounded-lg"
           type="text"
+          pattern="[0-9]{9}"
           placeholder="SSN"
           id="ssn"
           name="ssn"
