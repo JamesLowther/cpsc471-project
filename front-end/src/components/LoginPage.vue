@@ -24,21 +24,25 @@
           <option value="clerk">Clerk</option></select
         ><br />
         <input
-          class="border border-black my-4 p-1 rounded-lg"
+          class="border my-4 p-1 rounded-lg"
+          v-bind:class="[invalid_ssn ? 'border-red-700':'border-black']"
           type="text"
           pattern="[0-9]{9}"
           placeholder="SSN"
           id="ssn"
           name="ssn"
           v-model="ssn"
+          ref="ssn"
         /><br />
         <input
           class="border border-black p-1 rounded-lg"
+          v-bind:class="[empty_pass ? 'border-red-700':'border-black']"
           type="password"
           placeholder="Password"
           id="password"
           name="password"
           v-model="password"
+          ref="pass"
         /><br /><br />
         <button
           class="text-white px-4 py-2 shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg"
@@ -64,11 +68,53 @@ export default {
       ssn: "",
       password: "",
       error: "",
+      invalid_ssn: false,
+      empty_pass: false
     };
   },
 
   methods: {
+
+    /* check if the input SSN fits format
+     * sets boolean to true, changing class of input*/
+    invalidSSN() {
+      // test if the ssn matches 9 digit number
+      let ssnStr = this.$refs.ssn.value;
+      if (!(/^[0-9]{9}$/).test(ssnStr)) {
+
+        //change to red border, if black
+        if (!this.invalid_ssn) this.invalid_ssn = !this.invalid_ssn;
+        console.log("input ssn is not 9 digit number: "+ ssnStr);
+        this.error = "Invalid ssn: must be 9 digits";
+        return true;
+      }
+      return false;
+    },
+
+
+    /* check if the input password is empty
+     * sets boolean to true, changing class of input*/
+    invalidPass() {
+      let pass = this.$refs.pass.value;
+      if (!pass) {
+        if (!this.empty_pass) this.empty_pass = !this.empty_pass;
+        console.log("Password is empty");
+        this.error = "Password cannot be empty.";
+        return true;
+      }
+      return false;
+    },
+
+
+
     loginPost() {
+      
+      // check for proper input
+      if (!this.invalidSSN()) this.invalid_ssn=false; 
+      else return;
+      if (!this.invalidPass()) this.empty_pass=false;
+      else return;
+
       axios
         .post(
           `http://localhost:5000/login`,
