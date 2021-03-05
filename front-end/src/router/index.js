@@ -5,6 +5,11 @@ import Login from '../views/Login.vue'
 import NewAccount from '../views/NewAccount.vue'
 import PatientPanel from '../views/PatientPanel.vue'
 
+import PatientPanelPage from '../components/patient/PatientPanelPage.vue'
+import FormPage from '../components/patient/FormPage.vue'
+import ReportEditPage from '../components/patient/ReportEditPage.vue'
+import NewApplicantEditPage from '../components/patient/NewApplicantEditPage.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -26,7 +31,28 @@ const routes = [
   {
     path: '/patient-panel',
     name: 'patient-panel',
-    component: PatientPanel
+    component: PatientPanel,
+    children: [
+      {
+        path: '/',
+        component: PatientPanelPage
+      },
+      {
+        path: 'forms',
+        component: FormPage
+      },
+      {
+        path: 'forms/edit-report/:id?',
+        name: 'edit-report',
+        props: true,
+        component: ReportEditPage
+      },
+      {
+        path: 'forms/edit-new-applicant/:email?',
+        name: 'edit-new-applicant',
+        component: NewApplicantEditPage
+      }
+    ]
   }
 ]
 
