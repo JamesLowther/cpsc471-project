@@ -10,6 +10,9 @@ import FormPage from '../components/patient/FormPage.vue'
 import ReportEditPage from '../components/patient/ReportEditPage.vue'
 import NewApplicantEditPage from '../components/patient/NewApplicantEditPage.vue'
 
+import ClerkPanel from '../views/ClerkPanel.vue'
+//import ClerkPanelPage from '../components/clerk/ClerkPanelPage.vue'
+
 Vue.use(VueRouter)
 
 const routes = [
@@ -28,6 +31,16 @@ const routes = [
     name: 'new-account',
     component: NewAccount
   },
+
+
+  {
+    path: '/clerk-panel',
+    name: 'clerk-panel',
+    component: ClerkPanel
+  },
+
+
+
   {
     path: '/patient-panel',
     name: 'patient-panel',

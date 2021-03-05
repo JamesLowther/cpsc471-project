@@ -8,6 +8,8 @@ from endpoints.login import Login
 from endpoints.new_account import NewAccount
 from endpoints.patient import Patient, PatientForms
 
+from endpoints.clerk import Clerk
+
 from database import db
 
 app = Flask(__name__)
@@ -36,6 +38,9 @@ def add_api_endpoints():
     # Patient endpoints.
     api.add_resource(Patient, '/patient')
     api.add_resource(PatientForms, '/patient/forms')
+
+    # Clerk
+    api.add_resource(Clerk, '/clerk')
 
 init_api()
 
