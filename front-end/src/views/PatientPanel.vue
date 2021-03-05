@@ -1,14 +1,9 @@
 <template>
-  <PatientPanelPage />
+    <router-view />
 </template>
 
 <script>
-import PatientPanelPage from "@/components/PatientPanelPage.vue";
-
 export default {
-  name: "PatientPanel",
-  components: {
-    PatientPanelPage,
-  },
+    name: "PatientPanel",
 };
 </script>
