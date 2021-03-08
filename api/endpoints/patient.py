@@ -12,10 +12,8 @@ class Patient(Resource):
     def get(self):
         if verify_jwt_in_request():
             current = get_jwt_identity()
-            if current["user_type"] == "patient":
-                return jsonify({**current, "logged_in": 1})
-            else:
-                return jsonify({**current, "logged_in": 0})
+
+        return jsonify({**current, "logged_in": 1})
 
 
 forms_parser = reqparse.RequestParser()
@@ -54,7 +52,7 @@ class PatientForms(Resource):
 
         # Get medical history forms.
         cursor.execute(
-            "SELECT HID FROM Medical_History WHERE P_SSN = ?;", (current["ssn"],))
+            "SELECT Hx_ID FROM Medical_History WHERE P_SSN = ?;", (current["ssn"],))
         medical_history = cursor.fetchall()
 
         con.close()

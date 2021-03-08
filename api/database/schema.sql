@@ -47,18 +47,19 @@ CREATE TABLE Clerk (
 );
 
 CREATE TABLE Medical_Centre (
-    MedCenterName   TEXT,
+    MedCenter_id    INTEGER,
+    MedCenter_Name  TEXT,
     Address         TEXT,
     Type            TEXT,
-    PRIMARY KEY (MedCenterName)
+    PRIMARY KEY (MedCenter_id)
 );
 
 -- Might be problem with foreign key
 CREATE TABLE Works_At (
-    Loc_Name        TEXT,
+    Loc_id          INTEGER,
     SSN             INTEGER,
-    PRIMARY KEY (Loc_Name, SSN),
-    FOREIGN KEY (Loc_Name) REFERENCES Medical_Centre(MedCenterName),
+    PRIMARY KEY (Loc_id, SSN),
+    FOREIGN KEY (Loc_id) REFERENCES Medical_Centre(MedCenter_id),
     FOREIGN KEY (SSN) REFERENCES Doctor(SSN)
 );
 
@@ -118,10 +119,10 @@ CREATE TABLE Assigned (
     Report_ID           INTEGER,
     P_SSN               INTEGER,
     SSN                 INTEGER,
-    Med_Centre_Name     TEXT,
-    PRIMARY KEY (Report_ID, P_SSN, SSN, Med_Centre_Name),
+    MedCenter_id      TEXT,
+    PRIMARY KEY (Report_ID, P_SSN, SSN, MedCenter_id),
     FOREIGN KEY (Report_ID, P_SSN, SSN) REFERENCES Report(Report_ID, P_SSN, SSN),
-    FOREIGN KEY (Med_Centre_Name) REFERENCES  Medical_Centre(Name)
+    FOREIGN KEY (MedCenter_id) REFERENCES  Medical_Centre(MedCenter_id)
 );
 
 CREATE TABLE Medication (

@@ -13,7 +13,5 @@ class Clerk(Resource):
     def get(self):
         if verify_jwt_in_request():
             current = get_jwt_identity()
-            if current["user_type"] == "clerk":
-                return jsonify({**current, "logged_in": 1})
-            else:
-                return jsonify({**current, "logged_in": 0})
+
+        return jsonify({**current, "logged_in": 1})
