@@ -12,8 +12,10 @@ class Patient(Resource):
     def get(self):
         if verify_jwt_in_request():
             current = get_jwt_identity()
-
-        return jsonify({**current, "logged_in": 1})
+            if current["user_type"] == "patient":
+                return jsonify({**current, "logged_in": 1})
+            else:
+                return jsonify({**current, "logged_in": 0})
 
 
 forms_parser = reqparse.RequestParser()

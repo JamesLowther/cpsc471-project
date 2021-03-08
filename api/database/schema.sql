@@ -47,10 +47,10 @@ CREATE TABLE Clerk (
 );
 
 CREATE TABLE Medical_Centre (
-    Name            TEXT,
-    Location        TEXT,
+    MedCenterName   TEXT,
+    Address         TEXT,
     Type            TEXT,
-    PRIMARY KEY (Name)
+    PRIMARY KEY (MedCenterName)
 );
 
 -- Might be problem with foreign key
@@ -58,7 +58,7 @@ CREATE TABLE Works_At (
     Loc_Name        TEXT,
     SSN             INTEGER,
     PRIMARY KEY (Loc_Name, SSN),
-    FOREIGN KEY (Loc_Name) REFERENCES Medical_Centre(Name),
+    FOREIGN KEY (Loc_Name) REFERENCES Medical_Centre(MedCenterName),
     FOREIGN KEY (SSN) REFERENCES Doctor(SSN)
 );
 
@@ -126,7 +126,7 @@ CREATE TABLE Assigned (
 
 CREATE TABLE Medication (
     Med_id              INTEGER,
-    Name                TEXT,
+    Med_Name            TEXT,
     Is_prescription     INTEGER,
     PRIMARY KEY (Med_id)
 );
@@ -150,7 +150,7 @@ CREATE TABLE Prescribes (
 
 CREATE TABLE Illness (
     Illness_id          INTEGER,
-    Name                TEXT,
+    Illness_Name        TEXT,
     Organ_system        TEXT,
     PRIMARY KEY (Illness_id)
 );
@@ -181,50 +181,50 @@ CREATE TABLE Diagnoses (
 );
 
 CREATE TABLE Medical_History (
-    HID             INTEGER,
+    Hx_ID           INTEGER,
     P_SSN           INTEGER,
     TPAL_total      INTEGER,
     TPAL_preterm    INTEGER,
     TPAL_aborted    INTEGER,
     TPAL_living     INTEGER,
-    PRIMARY KEY (HID, P_SSN),
+    PRIMARY KEY (Hx_ID, P_SSN),
     FOREIGN KEY (P_SSN) REFERENCES Patient(P_SSN)
 );
 
 CREATE TABLE Allergies (
-    HID             INTEGER,
+    Hx_ID           INTEGER,
     P_SSN           INTEGER,
     Allergy         TEXT,
-    PRIMARY KEY (HID, P_SSN, Allergy),
-    FOREIGN KEY (HID, P_SSN) REFERENCES Medical_History(HID, P_SSN)
+    PRIMARY KEY (Hx_ID, P_SSN, Allergy),
+    FOREIGN KEY (Hx_ID, P_SSN) REFERENCES Medical_History(Hx_ID, P_SSN)
 );
 
 CREATE TABLE Immunization (
-    HID             INTEGER,
+    Hx_ID           INTEGER,
     P_SSN           INTEGER,
     Immunization    TEXT,
-    PRIMARY KEY (HID, P_SSN, Immunization),
-    FOREIGN KEY (HID, P_SSN) REFERENCES Medical_History(HID, P_SSN)
+    PRIMARY KEY (Hx_ID, P_SSN, Immunization),
+    FOREIGN KEY (Hx_ID, P_SSN) REFERENCES Medical_History(Hx_ID, P_SSN)
 );
 
 CREATE TABLE Treatment_Done (
-    HID             INTEGER,
+    Hx_ID           INTEGER,
     P_SSN           INTEGER,
-    Med_id      INTEGER,
+    Med_id          INTEGER,
     Illness_id      INTEGER,
     Date            TEXT,
-    PRIMARY KEY (HID, P_SSN, Med_id, Illness_id),
-    FOREIGN KEY (HID, P_SSN) REFERENCES Medical_History(HID, P_SSN),
+    PRIMARY KEY (Hx_ID, P_SSN, Med_id, Illness_id),
+    FOREIGN KEY (Hx_ID, P_SSN) REFERENCES Medical_History(Hx_ID, P_SSN),
     FOREIGN KEY (Med_id) REFERENCES Medication(Med_id),
     FOREIGN KEY (Illness_id) REFERENCES Illness(Illness_id)
 );
 
 CREATE TABLE Past_Illnesses (
-    HID             INTEGER,
+    Hx_ID           INTEGER,
     P_SSN           INTEGER,
-    Illness_id    INTEGER,
+    Illness_id      INTEGER,
     Age_of_onset    INTEGER,
-    PRIMARY KEY (HID, P_SSN, Illness_id),
-    FOREIGN KEY (HID, P_SSN) REFERENCES Medical_History(HID, P_SSN),
+    PRIMARY KEY (Hx_ID, P_SSN, Illness_id),
+    FOREIGN KEY (Hx_ID, P_SSN) REFERENCES Medical_History(Hx_ID, P_SSN),
     FOREIGN KEY (Illness_id) REFERENCES Illness(Illness_id)
 );
