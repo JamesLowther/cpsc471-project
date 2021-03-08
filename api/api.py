@@ -7,6 +7,7 @@ from flask_jwt_extended import JWTManager
 from endpoints.login import Login
 from endpoints.new_account import NewAccount
 from endpoints.patient import Patient, PatientForms
+from endpoints.doctor import Doctor
 
 from endpoints.clerk import Clerk
 
@@ -41,6 +42,9 @@ def add_api_endpoints():
 
     # Clerk
     api.add_resource(Clerk, '/clerk')
+
+    # Doctor
+    api.add_resource(Doctor, '/doctor')
 
 init_api()
 

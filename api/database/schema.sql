@@ -88,7 +88,7 @@ CREATE TABLE New_Applicant_Form (
 CREATE TABLE Authorizes (
     Email           TEXT,
     P_SSN           INTEGER,
-    SSN             TEXT,
+    SSN             INTEGER,
     PRIMARY KEY (Email, P_SSN),
     FOREIGN KEY (Email, P_SSN) REFERENCES New_Applicant_Form(Email, P_SSN),
     FOREIGN KEY (SSN) REFERENCES Clerk(SSN)
@@ -107,16 +107,16 @@ CREATE TABLE Covid_Screen (
 );
 
 CREATE TABLE Report (
-    Report_ID           TEXT,
+    Report_ID           INTEGER,
     P_SSN               INTEGER,
-    SSN                 TEXT,
+    SSN                 INTEGER,
     PRIMARY KEY (Report_ID, P_SSN, SSN),
     FOREIGN KEY (P_SSN) REFERENCES Patient(P_SSN),
     FOREIGN KEY (SSN) REFERENCES Doctor(SSN)
 );
 
 CREATE TABLE Assigned (
-    Report_ID           TEXT,
+    Report_ID           INTEGER,
     P_SSN               INTEGER,
     SSN                 INTEGER,
     Med_Centre_Name     TEXT,
@@ -140,8 +140,8 @@ CREATE TABLE Side_Effects (
 
 CREATE TABLE Prescribes (
     Med_name            TEXT,
-    Report_ID           TEXT,
-    P_SSN               TEXT,
+    Report_ID           INTEGER,
+    P_SSN               INTEGER,
     SSN                 INTEGER,
     PRIMARY KEY (Med_name, Report_ID, P_SSN, SSN),
     FOREIGN KEY (Med_name) REFERENCES Medication(Name),
@@ -171,7 +171,7 @@ CREATE TABLE Treats (
 
 CREATE TABLE Diagnoses (
     Name            TEXT,
-    Report_ID       TEXT,
+    Report_ID       INTEGER,
     P_SSN           INTEGER,
     SSN             INTEGER,
     PRIMARY KEY (Name, Report_ID, P_SSN, SSN),
@@ -180,7 +180,7 @@ CREATE TABLE Diagnoses (
 );
 
 CREATE TABLE Medical_History (
-    HID             TEXT,
+    HID             INTEGER,
     P_SSN           INTEGER,
     TPAL_total      INTEGER,
     TPAL_preterm    INTEGER,
@@ -191,7 +191,7 @@ CREATE TABLE Medical_History (
 );
 
 CREATE TABLE Allergies (
-    HID             TEXT,
+    HID             INTEGER,
     P_SSN           INTEGER,
     Allergy         TEXT,
     PRIMARY KEY (HID, P_SSN, Allergy),
@@ -199,7 +199,7 @@ CREATE TABLE Allergies (
 );
 
 CREATE TABLE Immunization (
-    HID             TEXT,
+    HID             INTEGER,
     P_SSN           INTEGER,
     Immunization    TEXT,
     PRIMARY KEY (HID, P_SSN, Immunization),
@@ -207,7 +207,7 @@ CREATE TABLE Immunization (
 );
 
 CREATE TABLE Treatment_Done (
-    HID             TEXT,
+    HID             INTEGER,
     P_SSN           INTEGER,
     Med_name        TEXT,
     Illness_name    TEXT,
@@ -219,7 +219,7 @@ CREATE TABLE Treatment_Done (
 );
 
 CREATE TABLE Past_Illnesses (
-    HID             TEXT,
+    HID             INTEGER,
     P_SSN           INTEGER,
     Illness_name    TEXT,
     Age_of_onset    INTEGER,
