@@ -110,7 +110,7 @@ CREATE TABLE Report (
     P_SSN               INTEGER,
     SSN                 INTEGER,
     Complaint           TEXT,
-    PRIMARY KEY (Report_ID, P_SSN, SSN),
+    PRIMARY KEY (Report_ID, P_SSN),
     FOREIGN KEY (P_SSN) REFERENCES Patient(P_SSN),
     FOREIGN KEY (SSN) REFERENCES Doctor(SSN)
 );
@@ -118,10 +118,9 @@ CREATE TABLE Report (
 CREATE TABLE Assigned (
     Report_ID           INTEGER,
     P_SSN               INTEGER,
-    SSN                 INTEGER,
     MedCenter_Name      TEXT,
-    PRIMARY KEY (Report_ID, P_SSN, SSN, MedCenter_Name),
-    FOREIGN KEY (Report_ID, P_SSN, SSN) REFERENCES Report(Report_ID, P_SSN, SSN),
+    PRIMARY KEY (Report_ID, P_SSN, MedCenter_Name),
+    FOREIGN KEY (Report_ID, P_SSN) REFERENCES Report(Report_ID, P_SSN),
     FOREIGN KEY (MedCenter_Name) REFERENCES  Medical_Centre(Name)
 );
 
@@ -142,10 +141,9 @@ CREATE TABLE Prescribes (
     Med_Name            TEXT,
     Report_ID           INTEGER,
     P_SSN               INTEGER,
-    SSN                 INTEGER,
-    PRIMARY KEY (Med_Name, Report_ID, P_SSN, SSN),
+    PRIMARY KEY (Med_Name, Report_ID, P_SSN),
     FOREIGN KEY (Med_Name) REFERENCES Medication(Name),
-    FOREIGN KEY (Report_ID, P_SSN, SSN) REFERENCES Report(Report_ID, P_SSN, SSN)
+    FOREIGN KEY (Report_ID, P_SSN) REFERENCES Report(Report_ID, P_SSN)
 );
 
 CREATE TABLE Illness (
@@ -173,10 +171,9 @@ CREATE TABLE Diagnoses (
     Illness_name    TEXT,
     Report_ID       INTEGER,
     P_SSN           INTEGER,
-    SSN             INTEGER,
-    PRIMARY KEY (Illness_name, Report_ID, P_SSN, SSN),
+    PRIMARY KEY (Illness_name, Report_ID, P_SSN),
     FOREIGN KEY (Illness_name) REFERENCES Illness(Name),
-    FOREIGN KEY (Report_ID, P_SSN, SSN) REFERENCES Report(Report_ID, P_SSN, SSN)
+    FOREIGN KEY (Report_ID, P_SSN) REFERENCES Report(Report_ID, P_SSN)
 );
 
 CREATE TABLE Medical_History (

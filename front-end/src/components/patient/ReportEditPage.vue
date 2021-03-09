@@ -27,12 +27,104 @@
                     />
                 </div>
                 <div v-if="!create_mode" class="w-full">
-                    <p class="text-xl">Assigned Doctor</p>
-                    <p class="text-lg font-bold">{{ this.form.Fname + " " + this.form.Initial + ". " + this.form.Lname }}</p>
+                    <div class="w-full mb-6">
+                        <p class="text-xl">Assigned Doctor</p>
+                        <p class="text-lg font-bold">
+                            {{
+                                this.form.Fname +
+                                    " " +
+                                    this.form.Initial +
+                                    ". " +
+                                    this.form.Lname
+                            }}
+                        </p>
+                    </div>
+                    <div class="w-full mb-6">
+                        <p class="text-xl mb-1">Diagnosis</p>
+                        <table class="table-fixed w-full mb-10">
+                            <thead>
+                                <th class="w-1/4 border-black border-2">Illness</th>
+                                <th class="w-1/4 border-black border-2">Organ System</th>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    v-for="illness in form.Illness"
+                                    :key="illness.Name"
+                                >
+                                    <td class="border-black border-2">
+                                        {{ illness.Name }}
+                                    </td>
+                                    <td class="border-black border-2">
+                                        {{ illness.Organ_system }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="w-full mb-6">
+                        <p class="text-xl mb-1">Medications</p>
+                        <table class="table-fixed w-full mb-10">
+                            <thead>
+                                <th class="w-1/4 border-black border-2">Name</th>
+                                <th class="w-1/4 border-black border-2">Prescription</th>
+                                <th class="w-2/4 border-black border-2">Side Effects</th>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    v-for="medication in form.Medications"
+                                    :key="medication.Name"
+                                >
+                                    <td class="border-black border-2">
+                                        {{ medication.Name }}
+                                    </td>
+                                    <td class="border-black border-2">
+                                        {{ medication.Is_prescription }}
+                                    </td>
+                                    <td class="border-black border-2">
+                                        <ul class="list-disc">
+                                            <li v-for="effect in medication.Effects" :key="effect">
+                                                {{ effect }}
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="w-full mb-6">
+                        <p class="text-xl mb-1">Medical Centres</p>
+                        <table class="table-fixed w-full mb-10">
+                            <thead>
+                                <th class="w-1/4 border-black border-2">Name</th>
+                                <th class="w-1/4 border-black border-2">Type</th>
+                                <th class="w-2/4 border-black border-2">Address</th>
+                            </thead>
+                            <tbody>
+                                <tr
+                                    v-for="medical_centre in form.Medical_centres"
+                                    :key="medical_centre.Name"
+                                >
+                                    <td class="border-black border-2">
+                                        {{ medical_centre.Name }}
+                                    </td>
+                                    <td class="border-black border-2">
+                                        {{ medical_centre.Type }}
+                                    </td>
+                                    <td class="border-black border-2">
+                                        {{ medical_centre.Address }}
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
                 <div v-if="create_mode" class="w-full">
-                    <p class="text-xl">Medical Center</p>
-                    <select class="bg-gray-300 rounded py-1 px-10" id="select" v-model="medical_centre">
+                    <p class="text-xl">Medical Centre</p>
+                    <select
+                        class="bg-gray-300 rounded py-1 px-10"
+                        id="select"
+                        v-model="medical_centre"
+                    >
                         <option
                             v-for="centre in medical_centres"
                             :key="centre.Name"
@@ -48,7 +140,7 @@
                 class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-green-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
                 @click="postCreateReportForm()"
             >
-                Save
+                Create
             </button>
             <button
                 v-else
@@ -82,7 +174,10 @@ export default {
                 Fname: "",
                 Initial: "",
                 Lname: "",
-            },
+                Illnesses: [],
+                Medications: [],
+                Medical_centres: []
+            }
         };
     },
 
@@ -103,21 +198,21 @@ export default {
                     {
                         action_type: "get_form",
                         form_type: "report",
-                        report_id: this.$route.params.id,
+                        report_id: this.$route.params.id
                     },
                     {
                         headers: {
                             Authorization:
-                                "Bearer " + localStorage.getItem("jwt"),
-                        },
+                                "Bearer " + localStorage.getItem("jwt")
+                        }
                     }
                 )
-                .then((response) => {
+                .then(response => {
                     if (response.data.logged_in != "1") return;
 
                     this.form = response.data.form;
                 })
-                .catch((e) => {
+                .catch(e => {
                     console.log(e);
                 });
         },
@@ -131,14 +226,17 @@ export default {
                     form: {
                         Complaint: this.form.Complaint,
                         medical_centre: this.medical_centre
-                    },
+                    }
                 },
                 {
                     headers: {
-                        Authorization: "Bearer " + localStorage.getItem("jwt"),
-                    },
+                        Authorization: "Bearer " + localStorage.getItem("jwt")
+                    }
                 }
-            );
+            )
+            .then(() => {
+                this.$router.push("/patient-panel/forms");
+            })
         },
         postReportForm() {
             axios.post(
@@ -149,12 +247,12 @@ export default {
                     report_id: this.$route.params.id,
                     form: {
                         Complaint: this.form.Complaint
-                    },
+                    }
                 },
                 {
                     headers: {
-                        Authorization: "Bearer " + localStorage.getItem("jwt"),
-                    },
+                        Authorization: "Bearer " + localStorage.getItem("jwt")
+                    }
                 }
             );
         },
@@ -166,15 +264,15 @@ export default {
                     {
                         headers: {
                             Authorization:
-                                "Bearer " + localStorage.getItem("jwt"),
-                        },
+                                "Bearer " + localStorage.getItem("jwt")
+                        }
                     }
                 )
-                .then((response) => {
+                .then(response => {
                     this.medical_centres = response.data.result;
                 })
-                .catch((e) => console.log(e));
-        },
-    },
+                .catch(e => console.log(e));
+        }
+    }
 };
 </script>

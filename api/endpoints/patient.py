@@ -155,9 +155,54 @@ class PatientForms(Resource):
         )
         doctor = cursor.fetchone()
 
+        # Get diagnosed illnesses.
+        cursor.execute(
+            "SELECT i.Name, i.Organ_system FROM Illness i, Diagnoses d WHERE d.Illness_name = i.Name AND d.Report_ID = ? AND d.P_SSN = ?;",
+            (id, ssn)
+        )
+        illnesses = cursor.fetchall()
+        illnesses = [dict(x) for x in illnesses]
+
+        # Get assigned medications.
+        cursor.execute(
+            "SELECT m.Name, m.Is_prescription FROM Medication m, Prescribes p WHERE m.Name = p.Med_Name AND p.Report_ID = ? AND p.P_SSN = ?;",
+            (id, ssn)
+        )
+        medications = cursor.fetchall()
+        medications = [dict(x) for x in medications]
+
+        # Get side-effects
+        cursor.execute(
+            "SELECT m.Name, s.Effect FROM Medication m, Prescribes p, Side_Effects s WHERE s.Med_Name = m.Name AND m.Name = p.Med_Name AND p.Report_ID = ? AND p.P_SSN = ?;",
+            (id, ssn)
+        )
+        side_effects = cursor.fetchall()
+        side_effects = [dict(x) for x in side_effects]
+
+        # Add the effects to the medications.
+        for medication in medications:
+            medication["Effects"] = []
+            for side_effect in side_effects:
+                if medication["Name"] == side_effect["Name"]:
+                    medication["Effects"].append(side_effect["Effect"])
+
+        # Get assigned medical centres.
+        cursor.execute(
+            "SELECT m.Name, m.Address, m.type FROM Medical_Centre m, Assigned a WHERE m.Name = a.MedCenter_Name AND a.Report_ID = ? AND a.P_SSN = ?;",
+            (id, ssn)
+        )
+        medical_centres = cursor.fetchall()
+        medical_centres = [dict(x) for x in medical_centres]
+
         con.close()
 
-        return {**dict(result), **dict(doctor)}
+        return {
+            **dict(result), 
+            **dict(doctor), 
+            **dict(illnesses), 
+            "Illness": list(illnesses),
+            "Medications": list(medications), 
+            "Medical_centres": list(medical_centres)}
 
     def update_report(self, ssn, id, form):
          
