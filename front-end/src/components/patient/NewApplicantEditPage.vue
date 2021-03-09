@@ -23,7 +23,7 @@
                         class="border border-black mb-6 p-1 rounded-lg"
                         type="text"
                         name="email"
-                        v-model="email"
+                        v-model="form.Email"
                     />
                 </div>
                 <div class="flex flex-row">
@@ -33,7 +33,7 @@
                             class="border border-black mb-6 p-1 rounded-lg"
                             type="text"
                             name="fname"
-                            v-model="fname"
+                            v-model="form.Fname"
                         />
                     </div>
                     <div class="mr-4">
@@ -42,7 +42,7 @@
                             class="border border-black mb-6 p-1 rounded-lg"
                             type="text"
                             name="initial"
-                            v-model="initial"
+                            v-model="form.Initial"
                         />
                     </div>
                     <div>
@@ -51,7 +51,7 @@
                             class="border border-black mb-6 p-1 rounded-lg"
                             type="text"
                             name="lname"
-                            v-model="lname"
+                            v-model="form.Lname"
                         />
                     </div>
                 </div>
@@ -62,7 +62,7 @@
                             class="border border-black mb-6 p-1 rounded-lg"
                             type="text"
                             name="gender"
-                            v-model="gender"
+                            v-model="form.Gender"
                         />
                     </div>
                     <div>
@@ -71,7 +71,7 @@
                             class="border border-black mb-6 p-1 rounded-lg"
                             type="text"
                             name="sex"
-                            v-model="sex"
+                            v-model="form.Sex"
                         />
                     </div>
                 </div>
@@ -81,7 +81,7 @@
                         class="border border-black mb-6 p-1 rounded-lg"
                         type="text"
                         name="dob"
-                        v-model="dob"
+                        v-model="form.DoB"
                     />
                 </div>
                 <div>
@@ -90,7 +90,7 @@
                         class="border border-black mb-6 p-1 rounded-lg"
                         type="text"
                         name="phone"
-                        v-model="phone"
+                        v-model="form.Phone"
                     />
                 </div>
                 <div class="flex flex-row">
@@ -100,7 +100,7 @@
                             class="border border-black mb-6 p-1 rounded-lg"
                             type="text"
                             name="healthcare_no"
-                            v-model="healthcare_no"
+                            v-model="form.Healthcare_no"
                         />
                     </div>
                     <div class="mr-4">
@@ -109,7 +109,7 @@
                             class="border border-black mb-6 p-1 rounded-lg"
                             type="text"
                             name="hcn_expiry"
-                            v-model="hcn_expiry"
+                            v-model="form.HCN_expiry"
                         />
                     </div>
                     <div class="mr-4">
@@ -118,7 +118,7 @@
                             class="border border-black mb-6 p-1 rounded-lg"
                             type="text"
                             name="hcn_provice"
-                            v-model="hcn_province"
+                            v-model="form.HCN_province"
                         />
                     </div>
                 </div>
@@ -147,22 +147,23 @@ export default {
         return {
             logged_in: true,
             create_mode: true,
-            email: "",
-            fname: "",
-            initial: "",
-            lname: "",
-            gender: "",
-            sex: "",
-            dob: "",
-            phone: "",
-            healthcare_no: "",
-            hcn_expiry: "",
-            hcn_province: "",
+            form: {
+                Email: "",
+                Fname: "",
+                Initial: "",
+                Lname: "",
+                Gender: "",
+                Sex: "",
+                DoB: "",
+                Phone: "",
+                Healthcare_no: "",
+                HCN_expiry: "",
+                HCN_province: "",
+            }
         };
     },
 
     created() {
-        console.log(typeof this.$route.params.email != "undefined");
         if (typeof this.$route.params.email != "undefined") {
             this.create_mode = false;
             this.getForm();
@@ -189,17 +190,7 @@ export default {
                 .then((response) => {
                     if (response.data.logged_in != "1") return;
 
-                    this.email = response.data.form.Email;
-                    this.fname = response.data.form.Fname;
-                    this.initial = response.data.form.Initial;
-                    this.lname = response.data.form.Lname;
-                    this.gender = response.data.form.Gender;
-                    this.sex = response.data.form.Sex;
-                    this.dob = response.data.form.DoB;
-                    this.phone = response.data.form.Phone;
-                    this.healthcare_no = response.data.form.Healthcare_no;
-                    this.hcn_expiry = response.data.form.HCN_expiry;
-                    this.hcn_province = response.data.form.HCN_province;
+                    this.form = response.data.form;
                 })
                 .catch((e) => {
                     console.log(e);
@@ -207,9 +198,10 @@ export default {
         },
         postForm() {
             let email_data = this.$route.params.email;
+            console.log(email_data)
 
             if (this.create_mode) {
-                email_data = this.email;
+                email_data = this.form.Email;
             }
 
             console.log(this.create_mode);
@@ -222,16 +214,16 @@ export default {
                     form_type: "new_applicant_form",
                     form: {
                         email: email_data,
-                        fname: this.fname,
-                        initial: this.initial,
-                        lname: this.lname,
-                        gender: this.gender,
-                        sex: this.sex,
-                        dob: this.dob,
-                        phone: this.phone,
-                        healthcare_no: this.healthcare_no,
-                        hcn_expiry: this.hcn_expiry,
-                        hcn_province: this.hcn_province,
+                        fname: this.form.Fname,
+                        initial: this.form.Initial,
+                        lname: this.form.Lname,
+                        gender: this.form.Gender,
+                        sex: this.form.Sex,
+                        dob: this.form.DoB,
+                        phone: this.form.Phone,
+                        healthcare_no: this.form.Healthcare_no,
+                        hcn_expiry: this.form.HCN_expiry,
+                        hcn_province: this.form.HCN_province,
                     },
                 },
                 {

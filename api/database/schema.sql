@@ -30,7 +30,7 @@ CREATE TABLE Doctor (
     Specialization  TEXT,
     Fname           TEXT NOT NULL,
     Lname           TEXT NOT NULL,
-    Intial          TEXT,
+    Initial         TEXT,
     DoB             TEXT,
     Password        TEXT NOT NULL,
     PRIMARY KEY (SSN)
@@ -40,7 +40,7 @@ CREATE TABLE Clerk (
     SSN             INTEGER NOT NULL,
     Fname           TEXT NOT NULL,
     Lname           TEXT NOT NULL,
-    Intial          TEXT,
+    Initial          TEXT,
     DoB             TEXT,
     Password        TEXT NOT NULL,
     PRIMARY KEY (SSN)
@@ -109,6 +109,7 @@ CREATE TABLE Report (
     Report_ID           INTEGER,
     P_SSN               INTEGER,
     SSN                 INTEGER,
+    Complaint           TEXT,
     PRIMARY KEY (Report_ID, P_SSN, SSN),
     FOREIGN KEY (P_SSN) REFERENCES Patient(P_SSN),
     FOREIGN KEY (SSN) REFERENCES Doctor(SSN)

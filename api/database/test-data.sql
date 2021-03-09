@@ -29,14 +29,14 @@ INSERT INTO Symptoms (Illness_Name, Symptom_name) VALUES ('Common Cold', 'Sneezi
 INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('UofC Clinic', 	'2500 University Dr NW', 	'Clinic');
 INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('Foothills', 		'1403 29 St NW', 			'Hospital');
 
-INSERT INTO Doctor (SSN, Specialization, Fname, Lname, Intial, DoB, Password) VALUES (200000000, 'GP', 			'Brody', 	'Wells', 'W', 		'1990-01-01', 'pass123');
-INSERT INTO Doctor (SSN, Specialization, Fname, Lname, Intial, DoB, Password) VALUES (200000001, 'Oncology', 	'James', 	'Lowther', 'L', 	'1990-01-01', 'pass123');
-INSERT INTO Doctor (SSN, Specialization, Fname, Lname, Intial, DoB, Password) VALUES (200000002, 'Nephrology', 	'Logan', 	'Perry-Din', 'P', 	'1990-01-01', 'pass123');
-INSERT INTO Doctor (SSN, Specialization, Fname, Lname, Intial, DoB, Password) VALUES (200000003, 'GP', 			'Ann', 		'Preston', 'P', 	'1990-01-01', 'pass123');
-INSERT INTO Doctor (SSN, Specialization, Fname, Lname, Intial, DoB, Password) VALUES (200000004, 'Obstetrics', 	'Virginia', 'Apgar', 'A', 		'1990-01-01', 'pass123');
+INSERT INTO Doctor (SSN, Specialization, Fname, Lname, Initial, DoB, Password) VALUES (200000000, 'GP', 			'Brody', 	'Wells', 'W', 		'1990-01-01', 'pass123');
+INSERT INTO Doctor (SSN, Specialization, Fname, Lname, Initial, DoB, Password) VALUES (200000001, 'Oncology', 	'James', 	'Lowther', 'L', 	'1990-01-01', 'pass123');
+INSERT INTO Doctor (SSN, Specialization, Fname, Lname, Initial, DoB, Password) VALUES (200000002, 'Nephrology', 	'Logan', 	'Perry-Din', 'P', 	'1990-01-01', 'pass123');
+INSERT INTO Doctor (SSN, Specialization, Fname, Lname, Initial, DoB, Password) VALUES (200000003, 'GP', 			'Ann', 		'Preston', 'P', 	'1990-01-01', 'pass123');
+INSERT INTO Doctor (SSN, Specialization, Fname, Lname, Initial, DoB, Password) VALUES (200000004, 'Obstetrics', 	'Virginia', 'Apgar', 'A', 		'1990-01-01', 'pass123');
 
-INSERT INTO Clerk (SSN, Fname, Lname, Intial, DoB, Password) VALUES (300000000, 'Justin', 'P', 'Trudeau', 	'1990-01-01', 'primePass');
-INSERT INTO Clerk (SSN, Fname, Lname, Intial, DoB, Password) VALUES (300000001, 'Sherry', 'W', 'Worth', 	'1990-01-01', 'clerk');
+INSERT INTO Clerk (SSN, Fname, Lname, Initial, DoB, Password) VALUES (300000000, 'Justin', 'P', 'Trudeau', 	'1990-01-01', 'primePass');
+INSERT INTO Clerk (SSN, Fname, Lname, Initial, DoB, Password) VALUES (300000001, 'Sherry', 'W', 'Worth', 	'1990-01-01', 'clerk');
 
 INSERT INTO Works_At (Loc_Name, SSN) VALUES ('UofC Clinic', 200000000);
 INSERT INTO Works_At (Loc_Name, SSN) VALUES ('Foothills', 200000001);
@@ -70,10 +70,10 @@ INSERT INTO Past_Illnesses (Hx_ID, P_SSN, Illness_Name, Age_of_onset) VALUES (2,
 INSERT INTO Covid_Screen (Date, P_SSN, Shortness_breath, New_cough, Fever, Sore_throat, Runny_nose) VALUES ('2021-03-07', 100000000, 0, 0, 0, 0, 0);
 INSERT INTO Covid_Screen (Date, P_SSN, Shortness_breath, New_cough, Fever, Sore_throat, Runny_nose) VALUES ('2021-03-06', 100000001, 1, 1, 1, 1, 1);
 
-INSERT INTO Report (Report_ID, P_SSN, SSN) VALUES (0, 100000001, 200000000);
-INSERT INTO Report (Report_ID, P_SSN, SSN) VALUES (1, 100000002, 200000001);
-INSERT INTO Report (Report_ID, P_SSN, SSN) VALUES (2, 100000003, 200000002);
-INSERT INTO Report (Report_ID, P_SSN, SSN) VALUES (3, 100000000, 200000000);
+INSERT INTO Report (Report_ID, P_SSN, SSN, Complaint) VALUES (0, 100000001, 200000000, "Test 1");
+INSERT INTO Report (Report_ID, P_SSN, SSN, Complaint) VALUES (1, 100000002, 200000001, "Test 2");
+INSERT INTO Report (Report_ID, P_SSN, SSN, Complaint) VALUES (2, 100000003, 200000002, "Test 3");
+INSERT INTO Report (Report_ID, P_SSN, SSN, Complaint) VALUES (3, 100000000, 200000000, "Test 4");
 
 INSERT INTO Diagnoses (Illness_Name, Report_ID, P_SSN, SSN) VALUES ('Common Cold', 			0, 100000001, 200000000);
 INSERT INTO Diagnoses (Illness_Name, Report_ID, P_SSN, SSN) VALUES ('High Blood Pressure', 	3, 100000000, 200000000);

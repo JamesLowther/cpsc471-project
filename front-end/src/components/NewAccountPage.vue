@@ -10,7 +10,7 @@
         <div class="flex fixed">
             <router-link
                 to="/"
-                class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
+                class="text-white mt-5 sssn,hadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
                 >Back</router-link
             >
         </div>
