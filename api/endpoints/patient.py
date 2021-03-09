@@ -52,7 +52,7 @@ class PatientForms(Resource):
 
         # Get medical history forms.
         cursor.execute(
-            "SELECT HID FROM Medical_History WHERE P_SSN = ?;", (current["ssn"],))
+            "SELECT Hx_ID FROM Medical_History WHERE P_SSN = ?;", (current["ssn"],))
         medical_history = cursor.fetchall()
 
         con.close()
