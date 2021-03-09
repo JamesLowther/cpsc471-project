@@ -49,7 +49,7 @@
                                         <div
                                             class="text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 rounded-lg py-2 px-1 mx-6 my-1"
                                         >
-                                            Edit
+                                            View
                                         </div>
                                     </router-link>
                                 </td>

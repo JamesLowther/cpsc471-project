@@ -6,6 +6,7 @@ from flask_jwt_extended import JWTManager
 
 from endpoints.login import Login
 from endpoints.new_account import NewAccount
+from endpoints.keys import Keys
 from endpoints.patient import Patient, PatientForms
 from endpoints.doctor import Doctor
 
@@ -35,6 +36,7 @@ def add_api_endpoints():
     # General endpoints.
     api.add_resource(Login, '/login')
     api.add_resource(NewAccount, '/new-account')
+    api.add_resource(Keys, "/keys")
 
     # Patient endpoints.
     api.add_resource(Patient, '/patient')
