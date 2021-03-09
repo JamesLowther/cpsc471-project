@@ -10,7 +10,7 @@ from endpoints.keys import Keys
 from endpoints.patient import Patient, PatientForms
 from endpoints.doctor import Doctor
 
-from endpoints.clerk import Clerk
+from endpoints.clerk import Clerk, ClerkForms
 
 from database import db
 
@@ -44,6 +44,7 @@ def add_api_endpoints():
 
     # Clerk
     api.add_resource(Clerk, '/clerk')
+    api.add_resource(ClerkForms, '/clerk/forms')
 
     # Doctor
     api.add_resource(Doctor, '/doctor')

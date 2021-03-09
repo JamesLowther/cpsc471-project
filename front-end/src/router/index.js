@@ -14,7 +14,8 @@ import ReportEditPage from "../components/patient/ReportEditPage.vue";
 import NewApplicantEditPage from "../components/patient/NewApplicantEditPage.vue";
 
 import ClerkPanel from "../views/ClerkPanel.vue";
-//import ClerkPanelPage from '../components/clerk/ClerkPanelPage.vue'
+import ClerkPanelPage from '../components/clerk/ClerkPanelPage.vue'
+import ClerkForms from '../components/clerk/ClerkForms.vue'
 
 Vue.use(VueRouter);
 
@@ -38,7 +39,17 @@ const routes = [
     {
         path: "/clerk-panel",
         name: "clerk-panel",
-        component: ClerkPanel
+        component: ClerkPanel,
+        children: [
+            {
+                path: "/",
+                component: ClerkPanelPage
+            },
+            {
+                path: "forms",
+                component: ClerkForms
+            }
+        ]
     },
 
     {

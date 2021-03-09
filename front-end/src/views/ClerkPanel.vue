@@ -1,14 +1,10 @@
 <template>
-    <ClerkPage />
+    <router-view />
 </template>
 
 <script>
-import ClerkPage from "@/components/clerk/ClerkPanelPage.vue";
 
 export default {
-    name: "Clerk",
-    components: {
-        ClerkPage,
-    },
+    name: "ClerkPanel"
 };
 </script>
