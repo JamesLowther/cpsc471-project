@@ -7,6 +7,11 @@ import PatientPanel from "../views/PatientPanel.vue";
 import DoctorPanel from "../views/DoctorPanel.vue";
 
 import DoctorPanelPage from "../components/doctor/DoctorPanelPage.vue";
+import DoctorFormPage from "../components/doctor/DoctorFormPage.vue";
+import DoctorReportEditPage from "../components/doctor/DoctorReportEditPage.vue";
+
+import EntitiesPanel from "../components/entities/EntitiesPanel.vue";
+import EntitiesFormPage from "../components/entities/EntitiesFormPage.vue";
 
 import PatientPanelPage from "../components/patient/PatientPanelPage.vue";
 import FormPage from "../components/patient/FormPage.vue";
@@ -87,7 +92,45 @@ const routes = [
             {
                 path: "/",
                 component: DoctorPanelPage
+            },
+            {
+                path: "forms",
+                name: "view-patients",
+                component: DoctorFormPage
+            },
+            {
+                path: "forms",
+                name: "view-reports",
+                component: DoctorReportEditPage
             }
+        ]
+    },
+
+    {
+        path: "/entities-panel",
+        name: "entities-panel",
+        component: EntitiesPanel,
+        children: [
+            {
+                path: "medications",
+                name: "search-medications",
+                component: EntitiesFormPage
+            },
+            {
+                path: "medications/:name?",
+                name: "edit-medications",
+                component: EntitiesFormPage
+            },
+            {
+                path: "illnesses",
+                name: "search-illnesses",
+                component: EntitiesFormPage
+            },
+            {
+                path: "illnesses/:illness_name?",
+                name: "edit-illnesses",
+                component: EntitiesFormPage
+            },
         ]
     }
 ];

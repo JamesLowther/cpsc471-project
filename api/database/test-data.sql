@@ -1,33 +1,3 @@
-/* The following INSERTS are deployment data */
-INSERT INTO Illness (Name, Organ_system) VALUES ('Common Cold', 			'Respiratory');
-INSERT INTO Illness (Name, Organ_system) VALUES ('Asthma', 					'Respiratory');
-INSERT INTO Illness (Name, Organ_system) VALUES ('COPD', 					'Respiratory');
-INSERT INTO Illness (Name, Organ_system) VALUES ('Congestive Heart Failure', 'Circulatory');
-INSERT INTO Illness (Name, Organ_system) VALUES ('High Blood Pressure', 	'Circulatory');
-INSERT INTO Illness (Name, Organ_system) VALUES ('Pneumonia', 				'Respiratory');
-
-INSERT INTO Medication (Name, Is_prescription) VALUES ('Advil', 		0);
-INSERT INTO Medication (Name, Is_prescription) VALUES ('Tramadol', 		1);
-INSERT INTO Medication (Name, Is_prescription) VALUES ('Lisinopril', 	1);
-
-INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Advil', 'Nausea');
-INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Lisinopril', 'Tiredness');
-INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Lisinopril', 'Headache');
-
-INSERT INTO Treats (Med_Name, Illness_Name) VALUES ('Advil',		'Common Cold');
-INSERT INTO Treats (Med_Name, Illness_Name) VALUES ('Lisinopril',	'High Blood Pressure');
-
-INSERT INTO Symptoms (Illness_Name, Symptom_name) VALUES ('Common Cold', 'Fever');
-INSERT INTO Symptoms (Illness_Name, Symptom_name) VALUES ('Common Cold', 'Cough');
-INSERT INTO Symptoms (Illness_Name, Symptom_name) VALUES ('Common Cold', 'Sore Throat');
-INSERT INTO Symptoms (Illness_Name, Symptom_name) VALUES ('Common Cold', 'Congestion');
-INSERT INTO Symptoms (Illness_Name, Symptom_name) VALUES ('Common Cold', 'Sneezing');
-
-
-
-
-
-/* The following INSERTS are for development testing*/
 INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('UofC Clinic', 	'2500 University Dr NW', 	'Clinic');
 INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('Foothills', 		'1403 29 St NW', 			'Hospital');
 
@@ -49,10 +19,37 @@ INSERT INTO Patient (P_SSN, Password) VALUES (100000001, 'pass');
 INSERT INTO Patient (P_SSN, Password) VALUES (100000002, 'pass');
 INSERT INTO Patient (P_SSN, Password) VALUES (100000003, 'pass');
 INSERT INTO Patient (P_SSN, Password) VALUES (100000004, 'pass');
+INSERT INTO Patient (P_SSN, Password) VALUES (100000005, 'pass');
+INSERT INTO Patient (P_SSN, Password) VALUES (100000006, 'pass');
+INSERT INTO Patient (P_SSN, Password) VALUES (100000007, 'pass');
+INSERT INTO Patient (P_SSN, Password) VALUES (100000008, 'pass');
+INSERT INTO Patient (P_SSN, Password) VALUES (100000009, 'pass');
+INSERT INTO Patient (P_SSN, Password) VALUES (100000010, 'pass');
+INSERT INTO Patient (P_SSN, Password) VALUES (100000011, 'pass');
+INSERT INTO Patient (P_SSN, Password) VALUES (100000012, 'pass');
+INSERT INTO Patient (P_SSN, Password) VALUES (100000013, 'pass');
+INSERT INTO Patient (P_SSN, Password) VALUES (100000014, 'pass');
+INSERT INTO Patient (P_SSN, Password) VALUES (100000015, 'pass');
+INSERT INTO Patient (P_SSN, Password) VALUES (100000016, 'pass');
+INSERT INTO Patient (P_SSN, Password) VALUES (100000017, 'pass');
 
 INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB) VALUES (100000001, 'Greg.man@goomail.com', 	'M', 'M', '4031110000', 'Greg', 'M', 'Man', 	'1111111110', '2025-01-01', 'AB', '1960-01-01');
 INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB) VALUES (100000002, 'Brenda.boo@goomail.com', 'F', 'F', '4031110001', 'Brenda', 'B', 'Boo', 	'1111111111', '2025-01-01', 'AB', '1975-01-01');
 INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB) VALUES (100000003, 'Jenny.girl@goomail.com', 'F', 'F', '4031110002', 'Jenny', 'G', 'Girl', 	'1111111112', '2025-01-01', 'AB', '2002-01-01');
+INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB) VALUES (100000004, 'Cierra.Vega@goomail.com', 'F', 'F', '4031110003', 'Cierra', 'G', 'Vega', 	'1111111113', '2025-01-01', 'AB', '2002-01-01');
+INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB) VALUES (100000005, 'Alden.Cantrell@goomail.com', 'F', 'F', '4031110004', 'Alden', 'G', 'Cantrell', 	'1111111114', '2025-01-01', 'AB', '2002-01-01');
+INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB) VALUES (100000006, 'Kierra.Gentry@goomail.com', 'F', 'F', '4031110005', 'Kierra', 'G', 'Gentry', 	'1111111115', '2025-01-01', 'AB', '2002-01-01');
+INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB) VALUES (100000007, 'Pierre.Cox@goomail.com', 'F', 'F', '4031110006', 'Pierre', 'G', 'Cox', 	'1111111116', '2025-01-01', 'AB', '2002-01-01');
+INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB) VALUES (100000008, 'Thomas.Crane@goomail.com', 'F', 'F', '4031110007', 'Thomas', 'G', 'Crane', 	'1111111117', '2025-01-01', 'AB', '2002-01-01');
+INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB) VALUES (100000009, 'Jenny.Shaffer@goomail.com', 'F', 'F', '4031110008', 'Miranda', 'G', 'Shaffer', 	'1111111118', '2025-01-01', 'AB', '2002-01-01');
+INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB) VALUES (100000010, 'Bradyn.Kramer@goomail.com', 'F', 'F', '4031110009', 'Bradyn', 'G', 'Kramer', 	'1111111119', '2025-01-01', 'AB', '2002-01-01');
+INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB) VALUES (100000011, 'Alvaro.Mcgee@goomail.com', 'F', 'F', '4031110010', 'Alvaro', 'G', 'Mcgee', 	'1111111120', '2025-01-01', 'AB', '2002-01-01');
+INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB) VALUES (100000012, 'Celeste.Luna@goomail.com', 'F', 'F', '4031110002', 'Celeste', 'G', 'Luna', 	'1111111112', '2025-01-01', 'AB', '2002-01-01');
+INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB) VALUES (100000013, 'Gwen.Benally@goomail.com', 'F', 'F', '4031110002', 'Gwen', 'G', 'Benally', 	'1111111112', '2025-01-01', 'AB', '2002-01-01');
+INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB) VALUES (100000014, 'Paulita.Esslinger@goomail.com', 'F', 'F', '4031110002', 'Paulita', 'G', 'Esslinger', 	'1111111112', '2025-01-01', 'AB', '2002-01-01');
+INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB) VALUES (100000015, 'Keva.Rioux@goomail.com', 'F', 'F', '4031110002', 'Keva', 'G', 'Rioux', 	'1111111112', '2025-01-01', 'AB', '2002-01-01');
+INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB) VALUES (100000016, 'Madelaine.Elmendorf@goomail.com', 'F', 'F', '4031110002', 'Madelaine', 'G', 'Elmendorf', 	'1111111112', '2025-01-01', 'AB', '2002-01-01');
+INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB) VALUES (100000017, 'Isidro.Landaverde@goomail.com', 'F', 'F', '4031110002', 'Isidro', 'G', 'Landaverde', 	'1111111112', '2025-01-01', 'AB', '2002-01-01');
 
 INSERT INTO Authorizes (P_SSN, SSN) VALUES (100000001, 300000000);
 
