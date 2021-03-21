@@ -81,6 +81,7 @@ CREATE TABLE New_Applicant_Form (
     HCN_expiry      TEXT NOT NULL,
     HCN_province    TEXT NOT NULL,
     DoB             TEXT,
+    Is_approved     INTEGER,
     PRIMARY KEY (P_SSN),
     FOREIGN KEY (P_SSN) REFERENCES Patient(P_SSN)
 );
@@ -169,7 +170,7 @@ CREATE TABLE Treats (
 
 CREATE TABLE Diagnoses (
     Illness_name    TEXT,
-    Report_ID       INTEGER,
+    Report_ID       INTEGER,    
     P_SSN           INTEGER,
     PRIMARY KEY (Illness_name, Report_ID, P_SSN),
     FOREIGN KEY (Illness_name) REFERENCES Illness(Name),
