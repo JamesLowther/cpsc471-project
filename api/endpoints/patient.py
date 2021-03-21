@@ -5,7 +5,7 @@ from flask_jwt_extended import get_jwt_identity, verify_jwt_in_request
 
 from database import db
 
-import json
+import json, datetime
 
 
 class Patient(Resource):
@@ -76,14 +76,17 @@ class PatientForms(Resource):
                 if args["new_form"]:
                     self.create_report(current["ssn"], args["form"])
                 else:
-                    self.update_report(current["ssn"], args["report_id"], args["form"])
+                    self.update_report(
+                        current["ssn"], args["report_id"], args["form"])
 
             elif (args["form_type"] == "new_applicant_form"):
                 self.update_new_applicant_form(current["ssn"], args["form"])
 
-            elif (args["form_type"] == "medical_history"):
-                pass
-
+            elif (args["form_type"] == "covid_screen"):
+                if args["new_form"]:
+                    self.create_covid_screen(current["ssn"], args["form"])
+                else:
+                    self.update_covid_screen(current["ssn"], args["screen_date"], args["form"])
             else:
                 pass
 
@@ -93,14 +96,16 @@ class PatientForms(Resource):
 
         else:
             if (args["form_type"] == "report"):
-                form = self.get_report(current["ssn"], args["report_id"])
+                form = self.get_report(
+                    current["ssn"], args["report_id"])
 
             elif (args["form_type"] == "new_applicant_form"):
                 form = self.get_new_applicant_form(
                     current["ssn"], args["applicant_form"])
 
-            elif (args["form_type"] == "medical_history"):
-                pass
+            elif (args["form_type"] == "covid_screen"):
+                form = self.get_covid_screen(
+                    current["ssn"], args["screen_date"])
 
             else:
                 pass
@@ -197,18 +202,19 @@ class PatientForms(Resource):
         con.close()
 
         return {
-            **dict(result), 
-            **dict(doctor), 
-            **dict(illnesses), 
+            **dict(result),
+            **dict(doctor),
+            **dict(illnesses),
             "Illness": list(illnesses),
-            "Medications": list(medications), 
+            "Medications": list(medications),
             "Medical_centres": list(medical_centres)}
 
     def update_report(self, ssn, id, form):
-         
+
         con, cursor = db.connect_db()
 
-        cursor.execute("UPDATE Report SET Complaint = ? WHERE Report_ID = ? AND P_SSN = ?;", (form["Complaint"], id, ssn))
+        cursor.execute(
+            "UPDATE Report SET Complaint = ? WHERE Report_ID = ? AND P_SSN = ?;", (form["Complaint"], id, ssn))
 
         con.commit()
         con.close()
@@ -246,5 +252,58 @@ class PatientForms(Resource):
                        )
                        )
         con.commit()
+        con.close()
+
+    def get_covid_screen(self, ssn, date):
+        con, cursor = db.connect_db()
+
+        cursor.execute("SELECT * FROM Covid_Screen WHERE Date = ? AND P_SSN = ?;", (date, ssn))
+        result = cursor.fetchone()
 
         con.close()
+
+        return dict(result)
+
+    def create_covid_screen(self, ssn, form):
+        con, cursor = db.connect_db()
+
+        date = str(datetime.date.today())
+
+        # Create new covid screen.
+        cursor.execute(
+            "INSERT OR REPLACE INTO Covid_Screen (Date, P_SSN, Shortness_breath, New_cough, Fever, Sore_throat, Runny_nose) VALUES (?, ?, ?, ?, ?, ?, ?);",
+            (   
+                date,
+                ssn,
+                form["Shortness_breath"],
+                form["New_cough"],
+                form["Fever"],
+                form["Sore_throat"],
+                form["Runny_nose"]
+            )
+        )
+
+        con.commit()
+        con.close()
+
+    def update_covid_screen(self, ssn, date, form):
+        con, cursor = db.connect_db()
+
+        print(ssn)
+        print(date)
+
+        cursor.execute("UPDATE Covid_Screen SET Shortness_breath = ?, New_cough = ?, Fever = ?, Sore_throat = ?, Runny_nose = ? WHERE Date = ? AND P_SSN = ?;",
+            (
+                form["Shortness_breath"],
+                form["New_cough"],
+                form["Fever"],
+                form["Sore_throat"],
+                form["Runny_nose"],
+                date,
+                ssn
+            )
+        )
+
+        con.commit()
+        con.close()
+
