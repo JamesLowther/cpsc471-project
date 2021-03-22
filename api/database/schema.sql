@@ -81,6 +81,7 @@ CREATE TABLE New_Applicant_Form (
     HCN_expiry      TEXT NOT NULL,
     HCN_province    TEXT NOT NULL,
     DoB             TEXT,
+    Is_approved     INTEGER,
     PRIMARY KEY (P_SSN),
     FOREIGN KEY (P_SSN) REFERENCES Patient(P_SSN)
 );
@@ -169,7 +170,7 @@ CREATE TABLE Treats (
 
 CREATE TABLE Diagnoses (
     Illness_name    TEXT,
-    Report_ID       INTEGER,
+    Report_ID       INTEGER,    
     P_SSN           INTEGER,
     PRIMARY KEY (Illness_name, Report_ID, P_SSN),
     FOREIGN KEY (Illness_name) REFERENCES Illness(Name),
@@ -224,3 +225,30 @@ CREATE TABLE Past_Illnesses (
     FOREIGN KEY (Hx_ID, P_SSN) REFERENCES Medical_History(Hx_ID, P_SSN),
     FOREIGN KEY (Illness_name) REFERENCES Illness(Name)
 );
+
+
+
+
+INSERT INTO Illness (Name, Organ_system) VALUES ('Common Cold',             'Respiratory');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Asthma',                  'Respiratory');
+INSERT INTO Illness (Name, Organ_system) VALUES ('COPD',                    'Respiratory');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Congestive Heart Failure', 'Circulatory');
+INSERT INTO Illness (Name, Organ_system) VALUES ('High Blood Pressure',     'Circulatory');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Pneumonia',               'Respiratory');
+
+INSERT INTO Medication (Name, Is_prescription) VALUES ('Advil',         0);
+INSERT INTO Medication (Name, Is_prescription) VALUES ('Tramadol',      1);
+INSERT INTO Medication (Name, Is_prescription) VALUES ('Lisinopril',    1);
+
+INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Advil', 'Nausea');
+INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Lisinopril', 'Tiredness');
+INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Lisinopril', 'Headache');
+
+INSERT INTO Treats (Med_Name, Illness_Name) VALUES ('Advil',        'Common Cold');
+INSERT INTO Treats (Med_Name, Illness_Name) VALUES ('Lisinopril',   'High Blood Pressure');
+
+INSERT INTO Symptoms (Illness_Name, Symptom_name) VALUES ('Common Cold', 'Fever');
+INSERT INTO Symptoms (Illness_Name, Symptom_name) VALUES ('Common Cold', 'Cough');
+INSERT INTO Symptoms (Illness_Name, Symptom_name) VALUES ('Common Cold', 'Sore Throat');
+INSERT INTO Symptoms (Illness_Name, Symptom_name) VALUES ('Common Cold', 'Congestion');
+INSERT INTO Symptoms (Illness_Name, Symptom_name) VALUES ('Common Cold', 'Sneezing');

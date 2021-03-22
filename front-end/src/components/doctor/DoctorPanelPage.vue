@@ -15,13 +15,71 @@
                 <p class="text-3xl mt-4">SSN: {{ ssn }}</p>
             </div>
             <div class="flex flex-wrap items-center justify-center mt-48">
-                <router-link to="doctor-panel/forms">
-                    <div
-                        class="text-white shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-8 px-4"
-                    >
-                        Reports, Forms, and Screens
-                    </div>
-                </router-link>
+                <div class="w-1/2">
+                    <table class="table-fixed w-full mb-10">
+                        <thead>
+                            <tr>
+                                <td class="width: 0%"></td>
+                                <td class="width: 100%">
+                                    <p class="text-3xl mt-2 mb-2">Patient Report Records:</p>
+                                </td>
+                                <td class="width: 0%"></td>
+                            </tr>
+                            <tr>
+                                <td></td>
+                                <td>
+                                    <router-link to="doctor-panel/forms">
+                                        <div
+                                            class="text-white shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-8 px-4 m-2"
+                                        >
+                                            Search
+                                        </div>
+                                    </router-link>
+                                </td>
+                                <td></td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="width: 0%"></td>
+                                <td class="width: 100%">
+                                    <p class="text-3xl mt-2 mb-2">Update Database:</p>
+                                </td>
+                                <td class="width: 0%"></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                    <router-link to="entities-panel/medications">
+                                        <div
+                                            class="text-white shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-8 px-4 m-2"
+                                        >
+                                            Medications
+                                        </div>
+                                    </router-link>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                </td>
+                                <td>
+                                    <router-link to="entities-panel/illnesses">
+                                        <div
+                                            class="text-white shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-8 px-4 m-2"
+                                        >
+                                            Illnesses
+                                        </div>
+                                    </router-link>
+                                </td>
+                                <td>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <div v-else class="flex flex-col">

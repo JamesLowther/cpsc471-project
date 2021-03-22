@@ -17,8 +17,9 @@ from flask_jwt_extended import unset_jwt_cookies
 from endpoints.login import Login
 from endpoints.new_account import NewAccount
 from endpoints.keys import Keys
+from endpoints.entities import Entities, EntitiesForms
 from endpoints.patient import Patient, PatientForms
-from endpoints.doctor import Doctor
+from endpoints.doctor import Doctor, DoctorForms
 
 from endpoints.clerk import Clerk, ClerkForms
 
@@ -77,6 +78,12 @@ def add_api_endpoints():
 
     # Doctor
     api.add_resource(Doctor, '/doctor')
+    api.add_resource(DoctorForms, '/doctor/forms')
+
+    # Entity
+    api.add_resource(Entities, '/entities')
+    api.add_resource(EntitiesForms, '/entities/forms')
+
 
 init_api()
 
