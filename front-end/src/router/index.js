@@ -17,6 +17,7 @@ import PatientPanelPage from "../components/patient/PatientPanelPage.vue";
 import FormPage from "../components/patient/FormPage.vue";
 import ReportEditPage from "../components/patient/ReportEditPage.vue";
 import NewApplicantEditPage from "../components/patient/NewApplicantEditPage.vue";
+import CovidScreenEditPage from "../components/patient/CovidScreenEditPage.vue";
 
 import ClerkPanel from "../views/ClerkPanel.vue";
 import ClerkPanelPage from '../components/clerk/ClerkPanelPage.vue'
@@ -80,6 +81,11 @@ const routes = [
                 path: "forms/edit-new-applicant/:email?",
                 name: "edit-new-applicant",
                 component: NewApplicantEditPage
+            },
+            {
+                path: "forms/edit-covid-screen/:date?",
+                name: "edit-covid-screen",
+                component: CovidScreenEditPage
             }
         ]
     },

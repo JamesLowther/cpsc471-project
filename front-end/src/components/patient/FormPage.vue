@@ -114,19 +114,40 @@
                                     Date
                                 </th>
                                 <th class="w-1/4 border-black border-2">
-                                    Link
+                                    <router-link
+                                        :to="{ name: 'edit-covid-screen' }"
+                                    >
+                                        <div
+                                            class="text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1"
+                                        >
+                                            New
+                                        </div>
+                                    </router-link>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr
-                                v-for="report in covid_screens"
+                                v-for="report in covid_screen"
                                 :key="report.date"
                             >
                                 <td class="border-black border-2">
-                                    {{ report.date }}
+                                    {{ report.Date }}
                                 </td>
-                                <td class="border-black border-2">test</td>
+                                <td class="border-black border-2">
+                                    <router-link
+                                        :to="{
+                                            name: 'edit-covid-screen',
+                                            params: { date: report.Date },
+                                        }"
+                                    >
+                                        <div
+                                            class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 rounded-lg py-2 px-1 mx-6 my-1"
+                                        >
+                                            Edit
+                                        </div>
+                                    </router-link>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -176,7 +197,7 @@ export default {
             logged_in: false,
             reports: [],
             new_applicant: [],
-            covid_screens: [],
+            covid_screen: [],
             medical_history: [],
         };
     },
@@ -200,7 +221,7 @@ export default {
 
                     this.reports = response.data.reports;
                     this.new_applicant = response.data.new_applicant;
-                    this.covid_screens = response.data.covid_screens;
+                    this.covid_screen = response.data.covid_screen;
                     this.medical_history = response.data.medical_history;
                 })
                 .catch((e) => {
