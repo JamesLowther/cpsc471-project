@@ -169,7 +169,7 @@
                         <thead>
                             <tr>
                                 <th class="w-3/4 border-black border-2">
-                                    History ID
+                                    SSN
                                 </th>
                                  <th class="w-1/4 border-black border-2">
                                     <router-link
@@ -188,16 +188,16 @@
                         <tbody>
                             <tr
                                 v-for="report in medical_history"
-                                :key="report.Hx_ID"
+                                :key="report.P_SSN"
                             >
                                 <td class="border-black border-2">
-                                    {{ report.Hx_ID }}
+                                    {{ report.P_SSN }}
                                 </td>
                                 <td class="border-black border-2">
                                     <router-link
                                         :to="{
                                             name: 'edit-medical-history',
-                                            params: { id: report.Hx_ID },
+                                            params: { id: report.P_SSN },
                                         }"
                                     >
                                         <div

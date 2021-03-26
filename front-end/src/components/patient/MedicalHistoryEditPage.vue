@@ -16,123 +16,223 @@
                 </p>
                 <p v-else class="text-5xl mt-20">Edit Medical History Form</p>
             </div>
-            <div class="flex flex-col items-start mt-10 w-1/3 mx-auto">
-                <div>
-                    <p class="text-xl">Email</p>
-                    <input
-                        class="border border-black mb-6 p-1 rounded-lg"
-                        type="text"
-                        name="email"
-                        v-model="form.Email"
-                    />
-                </div>
-                <div class="flex flex-row">
-                    <div class="mr-4">
-                        <p class="text-xl">First Name</p>
+            <div class="flex flex-col items-start mt-10 w-1/2 mx-auto">
+                <p class="font-bold text-3xl">Pregnancy Info:</p>
+                <div
+                    class="flex flex-row justify-around items-center w-full mx-auto"
+                >
+                    <div>
+                        <p class="text-xl">Total births:</p>
                         <input
-                            class="border border-black mb-6 p-1 rounded-lg"
-                            type="text"
-                            name="fname"
-                            v-model="form.Fname"
-                        />
-                    </div>
-                    <div class="mr-4">
-                        <p class="text-xl">Initial</p>
-                        <input
-                            class="border border-black mb-6 p-1 rounded-lg"
-                            type="text"
-                            name="initial"
-                            v-model="form.Initial"
+                            class="border border-black mb-6 p-1 rounded-lg text-right"
+                            type="number"
+                            min="0"
+                            value="0"
+                            name="total_births"
+                            v-model="form.TPAL_total"
                         />
                     </div>
                     <div>
-                        <p class="text-xl">Last Name</p>
+                        <p class="text-xl">Preterm births:</p>
                         <input
-                            class="border border-black mb-6 p-1 rounded-lg"
-                            type="text"
-                            name="lname"
-                            v-model="form.Lname"
-                        />
-                    </div>
-                </div>
-                <div class="flex flex-row">
-                    <div class="mr-4">
-                        <p class="text-xl">Gender</p>
-                        <input
-                            class="border border-black mb-6 p-1 rounded-lg"
-                            type="text"
-                            name="gender"
-                            v-model="form.Gender"
+                            class="border border-black mb-6 p-1 rounded-lg text-right"
+                            type="number"
+                            min="0"
+                            value="0"
+                            name="preterm_births"
+                            v-model="form.TPAL_preterm"
                         />
                     </div>
                     <div>
-                        <p class="text-xl">Sex</p>
+                        <p class="text-xl">Aborted:</p>
                         <input
-                            class="border border-black mb-6 p-1 rounded-lg"
-                            type="text"
-                            name="sex"
-                            v-model="form.Sex"
+                            class="border border-black mb-6 p-1 rounded-lg text-right"
+                            type="number"
+                            min="0"
+                            value="0"
+                            name="aborted"
+                            v-model="form.TPAL_aborted"
+                        />
+                    </div>
+                    <div>
+                        <p class="text-xl">Living children:</p>
+                        <input
+                            class="border border-black mb-6 p-1 rounded-lg text-right"
+                            type="number"
+                            min="0"
+                            value="0"
+                            name="living_children"
+                            v-model="form.TPAL_living"
                         />
                     </div>
                 </div>
-                <div>
-                    <p class="text-xl">Date of Birth</p>
-                    <input
-                        class="border border-black mb-6 p-1 rounded-lg"
-                        type="text"
-                        name="dob"
-                        v-model="form.DoB"
-                    />
-                </div>
-                <div>
-                    <p class="text-xl">Phone</p>
-                    <input
-                        class="border border-black mb-6 p-1 rounded-lg"
-                        type="text"
-                        name="phone"
-                        v-model="form.Phone"
-                    />
-                </div>
-                <div class="flex flex-row">
-                    <div class="mr-4">
-                        <p class="text-xl">HCN</p>
-                        <input
-                            class="border border-black mb-6 p-1 rounded-lg"
-                            type="text"
-                            name="healthcare_no"
-                            v-model="form.Healthcare_no"
-                        />
-                    </div>
-                    <div class="mr-4">
-                        <p class="text-xl">HCN Expiry</p>
-                        <input
-                            class="border border-black mb-6 p-1 rounded-lg"
-                            type="text"
-                            name="hcn_expiry"
-                            v-model="form.HCN_expiry"
-                        />
-                    </div>
-                    <div class="mr-4">
-                        <p class="text-xl">HCN Province</p>
-                        <input
-                            class="border border-black mb-6 p-1 rounded-lg"
-                            type="text"
-                            name="hcn_provice"
-                            v-model="form.HCN_province"
-                        />
-                    </div>
-                </div>
+                <table class="table-fixed w-full mb-10">
+                    <thead>
+                        <tr>
+                            <th class="w-1/3 border-black border-2">
+                                Past Illnesses:
+                            </th>
+                            <th class="w-1/3 border-black border-2">
+                                Age of Onset:
+                            </th>
+                            <th class="w-1/3 border-black border-2"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            v-for="illness in form.Past_illnesses"
+                            :key="illness.Illness_name"
+                        >
+                            <td class="border-black border-2">
+                                {{ illness.Illness_name }}
+                            </td>
+                            <td class="border-black border-2">
+                                {{ illness.Age_of_onset }}
+                            </td>
+                            <td class="border-black border-2">
+                                <button
+                                    class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-3"
+                                    v-on:click="removeIllness(illness.Illness_name)"
+                                >
+                                    Remove
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border-black border-2">
+                                <input
+                                    class="border border-black mb-2 mt-2 p-1 rounded-lg w-4/5"
+                                    type="text"
+                                    name="illness-search"
+                                    placeholder="Search"
+                                    v-model="illness_query"
+                                    v-on:keyup="queryIllness()"
+                                />
+                            </td>
+                            <td class="border-black border-2">
+                                <input
+                                    class="border border-black mb-2 mt-2 p-1 rounded-lg w-4/5 text-right"
+                                    type="number"
+                                    min="0"
+                                    value="0"
+                                    name="age-of-onset"
+                                    v-model="new_age_of_onset"
+                                />
+                            </td>
+                        </tr>
+                        <tr
+                            v-for="illness in illness_results"
+                            :key="illness.Name"
+                        >
+                            <td class="border-black border-2">
+                                {{ illness.Name }}
+                            </td>
+                            <td class="border-black border-2">
+                                <button
+                                    class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 w-1/4 m-3"
+                                    v-on:click="addNewIllness(illness.Name)"
+                                >
+                                    Add
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table-fixed w-full mb-10">
+                    <thead>
+                        <tr>
+                            <th class="w-1/3 border-black border-2">
+                                Allergies:
+                            </th>
+                            <th class="w-1/3 border-black border-2"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="allergy in form.Allergies" :key="allergy">
+                            <td class="border-black border-2">
+                                {{ allergy }}
+                            </td>
+                            <td class="border-black border-2">
+                                <button
+                                    class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 w-1/4 m-3"
+                                    v-on:click="removeAllergy(allergy)"
+                                >
+                                    Remove
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border-black border-2">
+                                <input
+                                    class="border border-black mb-2 mt-2 p-1 rounded-lg w-4/5"
+                                    type="text"
+                                    name="new-allergy"
+                                    placeholder="Allergy name"
+                                    v-model="new_allergy"
+                                />
+                            </td>
+                            <td class="border-black border-2">
+                                <button
+                                    class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 w-1/4 m-3"
+                                    v-on:click="addNewAllergy()"
+                                >
+                                    Add
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <table class="table-fixed w-full mb-10">
+                    <thead>
+                        <tr>
+                            <th class="w-1/3 border-black border-2">
+                                Immunizations:
+                            </th>
+                            <th class="w-1/3 border-black border-2"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr v-for="immunization in form.Immunizations" :key="immunization">
+                            <td class="border-black border-2">
+                                {{ immunization }}
+                            </td>
+                            <td class="border-black border-2">
+                                <button
+                                    class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 w-1/4 m-3"
+                                    v-on:click="removeImmunization(immunization)"
+                                >
+                                    Remove
+                                </button>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="border-black border-2">
+                                <input
+                                    class="border border-black mb-2 mt-2 p-1 rounded-lg w-4/5"
+                                    type="text"
+                                    name="new-immunization"
+                                    placeholder="Immunization name"
+                                    v-model="new_immunization"
+                                />
+                            </td>
+                            <td class="border-black border-2">
+                                <button
+                                    class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 w-1/4 m-3"
+                                    v-on:click="addNewImmunization()"
+                                >
+                                    Add
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
             <button
                 class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-green-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
                 @click="postForm()"
             >
-                <div v-if="create_mode">
-                    Create
-                </div>
-                <div v-else>
-                    Save
-                </div>
+                <div v-if="create_mode">Create</div>
+                <div v-else>Save</div>
             </button>
         </div>
         <div v-else class="flex flex-col">
@@ -156,20 +256,23 @@ export default {
                 Hx_ID: "",
                 P_SSN: "",
                 TPAL_total: "",
-                TPAL_: "",
-                Gender: "",
-                Sex: "",
-                DoB: "",
-                Phone: "",
-                Healthcare_no: "",
-                HCN_expiry: "",
-                HCN_province: "",
-            }
+                TPAL_preterm: "",
+                TPAL_aborted: "",
+                TPAL_living: "",
+                Past_illnesses: [],
+                Allergies: [],
+                Immunizations: [],
+            },
+            illness_query: "",
+            illness_results: [],
+            new_age_of_onset: 0,
+            new_allergy: "",
+            new_immunization: "",
         };
     },
 
     created() {
-        if (typeof this.$route.params.email != "undefined") {
+        if (typeof this.$route.params.id != "undefined") {
             this.create_mode = false;
             this.getForm();
         }
@@ -182,8 +285,8 @@ export default {
                     `http://localhost:5000/patient/forms`,
                     {
                         action_type: "get_form",
-                        form_type: "new_applicant_form",
-                        applicant_form: this.$route.params.email,
+                        form_type: "medical_history",
+                        history_id: this.$route.params.id,
                     },
                     {
                         headers: {
@@ -202,47 +305,116 @@ export default {
                 });
         },
         postForm() {
-            let email_data = this.$route.params.email;
-            console.log(email_data)
+            axios
+                .post(
+                    `http://localhost:5000/patient/forms`,
+                    {
+                        action_type: "submit_form",
+                        form_type: "medical_history",
+                        form: this.form
+                    },
+                    {
+                        headers: {
+                            Authorization:
+                                "Bearer " + localStorage.getItem("jwt"),
+                        },
+                    }
+                );
+        },
+        queryIllness() {
+            axios
+                .post(
+                    `http://localhost:5000/entities/forms`,
+                    {
+                        entity_type: "illness",
+                        method: "query",
+                        query_string: this.illness_query,
+                    },
+                    {
+                        headers: {
+                            Authorization:
+                                "Bearer " + localStorage.getItem("jwt"),
+                        },
+                    }
+                )
+                .then((response) => {
+                    if (response.data.logged_in != "1") return;
 
-            if (this.create_mode) {
-                email_data = this.form.Email;
+                    this.logged_in = true;
+                    this.illness_results = response.data.results;
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        },
+        addNewIllness(illness) {
+            for (let i = 0; i < this.form.Past_illnesses.length; i++) {
+                if (this.form.Past_illnesses[i].Illness_name == illness) {
+                    return;
+                }
             }
 
-            console.log(this.create_mode);
-            console.log(email_data);
+            this.form.Past_illnesses.push({
+                Illness_name: illness,
+                Age_of_onset: this.new_age_of_onset,
+            })
 
-            axios.post(
-                `http://localhost:5000/patient/forms`,
-                {
-                    action_type: "submit_form",
-                    form_type: "new_applicant_form",
-                    form: {
-                        email: email_data,
-                        fname: this.form.Fname,
-                        initial: this.form.Initial,
-                        lname: this.form.Lname,
-                        gender: this.form.Gender,
-                        sex: this.form.Sex,
-                        dob: this.form.DoB,
-                        phone: this.form.Phone,
-                        healthcare_no: this.form.Healthcare_no,
-                        hcn_expiry: this.form.HCN_expiry,
-                        hcn_province: this.form.HCN_province,
-                    },
-                },
-                {
-                    headers: {
-                        Authorization: "Bearer " + localStorage.getItem("jwt"),
-                    },
-                }
-            )
-            .then(() => {
-                if (this.create_mode) {
-                    this.$router.push("/patient-panel/forms")
-                }
-            });
+            this.new_age_of_onset = 0;
         },
+        removeIllness(illness) {
+            let temp_array = this.form.Past_illnesses;
+            this.form.Past_illnesses = [];
+            
+            for (let i = 0; i < temp_array.length; i++) {
+                if (temp_array[i].Illness_name != illness) {
+                    this.form.Past_illnesses.push(temp_array[i]);
+                }
+            }
+        },
+        addNewAllergy() {
+            if (this.new_allergy == "") return;
+
+            for (let i = 0; i < this.form.Allergies.length; i++) {
+                if (this.form.Allergies[i] == this.new_allergy) {
+                    return;
+                }
+            }
+
+            this.form.Allergies.push(this.new_allergy);
+            this.new_allergy = "";
+        },
+        removeAllergy(allergy) {
+            let temp_array = this.form.Allergies;
+            this.form.Allergies = [];
+            
+            for (let i = 0; i < temp_array.length; i++) {
+                if (temp_array[i] != allergy) {
+                    this.form.Allergies.push(temp_array[i]);
+                }
+            }
+        },
+        addNewImmunization() {
+            if (this.new_immunization == "") return;
+
+            for (let i = 0; i < this.form.Immunizations.length; i++) {
+                if (this.form.Immunizations[i] == this.new_immunization) {
+                    return;
+                }
+            }
+
+            this.form.Immunizations.push(this.new_immunization);
+            this.new_immunization = "";
+        },
+        removeImmunization(immunization) {
+            let temp_array = this.form.Immunizations;
+            this.form.Immunizations = [];
+            
+            for (let i = 0; i < temp_array.length; i++) {
+                if (temp_array[i] != immunization) {
+                    this.form.Immunizations.push(temp_array[i]);
+                }
+            }
+        }
     },
 };
 </script>

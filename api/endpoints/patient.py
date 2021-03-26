@@ -52,7 +52,7 @@ class PatientForms(Resource):
 
         # Get medical history forms.
         cursor.execute(
-            "SELECT Hx_ID FROM Medical_History WHERE P_SSN = ?;", (current["ssn"],))
+            "SELECT P_SSN FROM Medical_History WHERE P_SSN = ?;", (current["ssn"],))
         medical_history = cursor.fetchall()
 
         con.close()
@@ -87,8 +87,9 @@ class PatientForms(Resource):
                     self.create_covid_screen(current["ssn"], args["form"])
                 else:
                     self.update_covid_screen(current["ssn"], args["screen_date"], args["form"])
-            else:
-                pass
+
+            elif (args["form_type"] == "medical_history"):
+                    self.update_medical_history(current["ssn"], args["form"])
 
             return jsonify(
                 successful=1
@@ -107,8 +108,9 @@ class PatientForms(Resource):
                 form = self.get_covid_screen(
                     current["ssn"], args["screen_date"])
 
-            else:
-                pass
+            elif (args["form_type"] == "medical_history"):
+                form = self.get_medical_history(
+                    current["ssn"])
 
             return jsonify(
                 logged_in=1,
@@ -289,9 +291,6 @@ class PatientForms(Resource):
     def update_covid_screen(self, ssn, date, form):
         con, cursor = db.connect_db()
 
-        print(ssn)
-        print(date)
-
         cursor.execute("UPDATE Covid_Screen SET Shortness_breath = ?, New_cough = ?, Fever = ?, Sore_throat = ?, Runny_nose = ? WHERE Date = ? AND P_SSN = ?;",
             (
                 form["Shortness_breath"],
@@ -307,3 +306,58 @@ class PatientForms(Resource):
         con.commit()
         con.close()
 
+    def get_medical_history(self, ssn):
+        con, cursor = db.connect_db()
+
+        cursor.execute("SELECT * FROM Medical_History WHERE P_SSN = ?;", (ssn,))
+        medical_history = cursor.fetchone()
+        medical_history = dict(medical_history)
+
+        cursor.execute("SELECT p.Illness_name, p.Age_of_onset FROM Past_Illnesses p WHERE P_SSN = ?;", (ssn,))
+        past_illnesses = cursor.fetchall()
+        past_illnesses = [dict(x) for x in past_illnesses]
+        medical_history["Past_illnesses"] = past_illnesses
+
+        cursor.execute("SELECT a.Allergy FROM Allergies a WHERE P_SSN = ?;", (ssn,))
+        allergies = cursor.fetchall()
+        allergies = [x["Allergy"] for x in allergies]
+        medical_history["Allergies"] = allergies
+
+        cursor.execute("SELECT i.Immunization FROM Immunization i WHERE P_SSN = ?;", (ssn,))
+        immunizations = cursor.fetchall()
+        immunizations = [x["Immunization"] for x in immunizations]
+        medical_history["Immunizations"] = immunizations
+
+        return medical_history
+
+    def update_medical_history(self, ssn, form):
+        con, cursor = db.connect_db()
+
+        # Create the medical history form.
+        cursor.execute("INSERT OR REPLACE INTO Medical_History VALUES (?, ?, ?, ?, ?);",
+            (
+                ssn,
+                form["TPAL_total"],
+                form["TPAL_preterm"],
+                form["TPAL_aborted"],
+                form["TPAL_living"]
+            )
+        )
+
+        # Update past illness.
+        cursor.execute("DELETE FROM Past_Illnesses WHERE P_SSN = ?;", (ssn,))
+        for illness in form["Past_illnesses"]:
+            cursor.execute("INSERT INTO Past_Illnesses VALUES (?, ?, ?);", (ssn, illness["Illness_name"], illness["Age_of_onset"]))
+
+        # Update allergies.
+        cursor.execute("DELETE FROM Allergies WHERE P_SSN = ?;", (ssn,))
+        for allergy in form["Allergies"]:
+            cursor.execute("INSERT INTO Allergies VALUES (?, ?);", (ssn, allergy))
+
+        # Update immunizations.
+        cursor.execute("DELETE FROM Immunization WHERE P_SSN = ?;", (ssn,))
+        for immunization in form["Immunizations"]:
+            cursor.execute("INSERT INTO Immunization VALUES (?, ?);", (ssn, immunization))
+
+        con.commit()
+        con.close()
