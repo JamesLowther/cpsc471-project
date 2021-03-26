@@ -42,7 +42,7 @@ class PatientForms(Resource):
 
         # Get all new applicant forms.
         cursor.execute(
-            "SELECT Email FROM New_Applicant_Form WHERE P_SSN = ?;", (current["ssn"],))
+            "SELECT Email, Is_approved FROM New_Applicant_Form WHERE P_SSN = ?;", (current["ssn"],))
         new_applicant = cursor.fetchall()
 
         # Get all covid screens.
@@ -235,7 +235,7 @@ class PatientForms(Resource):
 
         con, cursor = db.connect_db()
 
-        cursor.execute("INSERT OR REPLACE INTO New_Applicant_Form VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);",
+        cursor.execute("INSERT OR REPLACE INTO New_Applicant_Form VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0);",
                        (
                            ssn,
                            form["email"],

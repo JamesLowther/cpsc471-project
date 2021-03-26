@@ -62,10 +62,13 @@
                     <table class="table-fixed w-full mb-10">
                         <thead>
                             <tr>
-                                <th class="w-3/4 border-black border-2">
+                                <th class="w-3/5 border-black border-2">
                                     Email
                                 </th>
-                                <th class="w-1/4 border-black border-2">
+                                <th class="w-1/5 border-black border-2">
+                                    Approved
+                                </th>
+                                <th class="w-1/5 border-black border-2">
                                     <router-link
                                         :to="{ name: 'edit-new-applicant' }"
                                         v-if="new_applicant.length == 0"
@@ -86,6 +89,14 @@
                             >
                                 <td class="border-black border-2">
                                     {{ report.Email }}
+                                </td>
+                                <td class="border-black border-2">
+                                    <svg v-if="report.Is_approved" class="w-1/4 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="green">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
+                                    <svg v-else class="w-1/4 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="red">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    </svg>
                                 </td>
                                 <td class="border-black border-2">
                                     <router-link
