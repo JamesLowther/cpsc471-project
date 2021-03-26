@@ -160,20 +160,42 @@
                                 <th class="w-3/4 border-black border-2">
                                     History ID
                                 </th>
-                                <th class="w-1/4 border-black border-2">
-                                    Link
+                                 <th class="w-1/4 border-black border-2">
+                                    <router-link
+                                        :to="{ name: 'edit-medical-history' }"
+                                        v-if="medical_history.length == 0"
+                                    >
+                                        <div
+                                            class="text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1"
+                                        >
+                                            New
+                                        </div>
+                                    </router-link>
                                 </th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr
                                 v-for="report in medical_history"
-                                :key="report.HID"
+                                :key="report.Hx_ID"
                             >
                                 <td class="border-black border-2">
-                                    {{ report.HID }}
+                                    {{ report.Hx_ID }}
                                 </td>
-                                <td class="border-black border-2">test</td>
+                                <td class="border-black border-2">
+                                    <router-link
+                                        :to="{
+                                            name: 'edit-medical-history',
+                                            params: { id: report.Hx_ID },
+                                        }"
+                                    >
+                                        <div
+                                            class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 rounded-lg py-2 px-1 mx-6 my-1"
+                                        >
+                                            Edit
+                                        </div>
+                                    </router-link>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
