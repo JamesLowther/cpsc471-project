@@ -32,6 +32,8 @@ INSERT INTO Patient (P_SSN, Password) VALUES (100000014, 'pass');
 INSERT INTO Patient (P_SSN, Password) VALUES (100000015, 'pass');
 INSERT INTO Patient (P_SSN, Password) VALUES (100000016, 'pass');
 INSERT INTO Patient (P_SSN, Password) VALUES (100000017, 'pass');
+INSERT INTO Patient (P_SSN, Password) VALUES (101000018, 'pass');
+INSERT INTO Patient (P_SSN, Password) VALUES (101000019, 'pass');
 
 INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB, Is_approved) VALUES (100000001, 'Greg.man@goomail.com', 	'M', 'M', '4031110000', 'Greg', 'M', 'Man', 	'1111111110', '2025-01-01', 'AB', '1960-01-01', 1);
 INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB, Is_approved) VALUES (100000002, 'Brenda.boo@goomail.com', 'F', 'F', '4031110001', 'Brenda', 'B', 'Boo', 	'1111111111', '2025-01-01', 'AB', '1975-01-01', 1);
