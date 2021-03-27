@@ -17,14 +17,17 @@
                 <p v-else class="text-5xl mt-20">Edit Report</p>
             </div>
             <div class="flex flex-col items-start mt-10 w-1/3 mx-auto">
-                <div class="w-full">
+                <div class="w-full mb-6">
                     <p class="text-xl">Chief Complaint</p>
                     <textarea
-                        class="border border-black mb-6 p-1 rounded-lg w-full text-xl"
+                        class="border border-black mb-2 p-1 rounded-lg w-full text-xl"
                         type="text"
                         name="email"
                         v-model="form.Complaint"
                     />
+                    <p class="text-xl mx-auto text-red-600">
+                        {{ complaint_error }}
+                    </p>
                 </div>
                 <div v-if="!create_mode" class="w-full">
                     <div class="w-full mb-6">
@@ -121,7 +124,7 @@
                 <div v-if="create_mode" class="w-full">
                     <p class="text-xl">Medical Centre</p>
                     <select
-                        class="bg-gray-300 rounded py-1 px-10"
+                        class="bg-gray-300 rounded py-1 px-10 mb-3"
                         id="select"
                         v-model="medical_centre"
                     >
@@ -133,6 +136,9 @@
                             {{ centre.Name }}
                         </option>
                     </select>
+                    <p class="text-xl mx-auto text-red-600">
+                        {{ medical_centre_error }}
+                    </p>
                 </div>
             </div>
             <button
@@ -177,7 +183,9 @@ export default {
                 Illnesses: [],
                 Medications: [],
                 Medical_centres: []
-            }
+            },
+            complaint_error: "",
+            medical_centre_error: "",
         };
     },
 
@@ -217,6 +225,9 @@ export default {
                 });
         },
         postCreateReportForm() {
+
+            if (![this.checkComplaint(), this.checkMedicalCentre()].every((x) => {return x === true})) return
+
             axios.post(
                 `http://localhost:5000/patient/forms`,
                 {
@@ -239,6 +250,10 @@ export default {
             })
         },
         postReportForm() {
+            if (!this.checkComplaint()) {
+                return;
+            } 
+
             axios.post(
                 `http://localhost:5000/patient/forms`,
                 {
@@ -272,6 +287,22 @@ export default {
                     this.medical_centres = response.data.result;
                 })
                 .catch(e => console.log(e));
+        },
+        checkComplaint() {
+            if (this.form.Complaint === "") {
+                this.complaint_error = "Chief complaint can not be empty.";
+                return false;
+            }
+            this.complaint_error = "";
+            return true;
+        },
+        checkMedicalCentre() {
+            if (this.medical_centre === "") {
+                this.medical_centre_error = "Please choose a medical center."
+                return false;
+            }
+            this.medical_centre_error = "";
+            return true;
         }
     }
 };

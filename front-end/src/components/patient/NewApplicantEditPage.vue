@@ -17,122 +17,151 @@
                 <p v-else class="text-5xl mt-20">Edit New Applicant Form</p>
             </div>
             <div class="flex flex-col items-start mt-10 w-1/3 mx-auto">
-                <div>
-                    <p class="text-xl">Email</p>
-                    <input
-                        class="border border-black mb-6 p-1 rounded-lg"
-                        type="text"
-                        name="email"
-                        v-model="form.Email"
-                    />
-                </div>
-                <div class="flex flex-row">
-                    <div class="mr-4">
-                        <p class="text-xl">First Name</p>
-                        <input
-                            class="border border-black mb-6 p-1 rounded-lg"
-                            type="text"
-                            name="fname"
-                            v-model="form.Fname"
-                        />
-                    </div>
-                    <div class="mr-4">
-                        <p class="text-xl">Initial</p>
-                        <input
-                            class="border border-black mb-6 p-1 rounded-lg"
-                            type="text"
-                            name="initial"
-                            v-model="form.Initial"
-                        />
-                    </div>
+                <div class="flex flex-col items-start mb-6">
                     <div>
-                        <p class="text-xl">Last Name</p>
+                        <p class="text-xl">Email</p>
                         <input
-                            class="border border-black mb-6 p-1 rounded-lg"
+                            class="border border-black mb-2 p-1 rounded-lg"
                             type="text"
-                            name="lname"
-                            v-model="form.Lname"
+                            name="email"
+                            v-model="form.Email"
+                            placeholder="john.smith@abc.com"
                         />
                     </div>
+                    <p class="text-xl mx-auto text-red-600">
+                        {{ email_error }}
+                    </p>
                 </div>
-                <div class="flex flex-row">
-                    <div class="mr-4">
-                        <p class="text-xl">Gender</p>
-                        <input
-                            class="border border-black mb-6 p-1 rounded-lg"
-                            type="text"
-                            name="gender"
-                            v-model="form.Gender"
-                        />
+                <div class="mb-6">
+                    <div class="flex flex-row">
+                        <div class="mr-4">
+                            <p class="text-xl">First Name</p>
+                            <input
+                                class="border border-black mb-2 p-1 rounded-lg"
+                                type="text"
+                                name="fname"
+                                v-model="form.Fname"
+                            />
+                        </div>
+                        <div class="mr-4">
+                            <p class="text-xl">Initial</p>
+                            <input
+                                class="border border-black mb-2 p-1 rounded-lg"
+                                type="text"
+                                name="initial"
+                                v-model="form.Initial"
+                            />
+                        </div>
+                        <div>
+                            <p class="text-xl">Last Name</p>
+                            <input
+                                class="border border-black mb-2 p-1 rounded-lg"
+                                type="text"
+                                name="lname"
+                                v-model="form.Lname"
+                            />
+                        </div>
                     </div>
+                    <p class="text-xl text-left text-red-600">
+                        {{ name_error }}
+                    </p>
+                </div>
+                <div class="mb-6">
+                    <div class="flex flex-row">
+                        <div class="mr-4">
+                            <p class="text-xl">Gender</p>
+                            <input
+                                class="border border-black mb-2 p-1 rounded-lg"
+                                type="text"
+                                name="gender"
+                                v-model="form.Gender"
+                            />
+                        </div>
+                        <div>
+                            <p class="text-xl">Sex</p>
+                            <input
+                                class="border border-black mb-2 p-1 rounded-lg"
+                                type="text"
+                                name="sex"
+                                v-model="form.Sex"
+                            />
+                        </div>
+                    </div>
+                    <p class="text-xl text-left text-red-600">
+                        {{ gender_error }}
+                    </p>
+                </div>
+                <div class="flex flex-col items-start mb-6">
                     <div>
-                        <p class="text-xl">Sex</p>
+                        <p class="text-xl">Date of Birth</p>
                         <input
-                            class="border border-black mb-6 p-1 rounded-lg"
+                            class="border border-black mb-2 p-1 rounded-lg"
                             type="text"
-                            name="sex"
-                            v-model="form.Sex"
+                            name="dob"
+                            v-model="form.DoB"
+                            placeholder="yyyy-mm-dd"
                         />
                     </div>
+                    <p class="text-xl mx-auto text-red-600">
+                        {{ DoB_error }}
+                    </p>
                 </div>
-                <div>
-                    <p class="text-xl">Date of Birth</p>
-                    <input
-                        class="border border-black mb-6 p-1 rounded-lg"
-                        type="text"
-                        name="dob"
-                        v-model="form.DoB"
-                    />
+                <div class="flex flex-col items-start mb-6">
+                    <div>
+                        <p class="text-xl">Phone</p>
+                        <input
+                            class="border border-black mb-2 p-1 rounded-lg"
+                            type="text"
+                            name="phone"
+                            v-model="form.Phone"
+                            placeholder="123-123-1234"
+                        />
+                    </div>
+                    <p class="text-xl mx-auto text-red-600">
+                        {{ phone_error }}
+                    </p>
                 </div>
-                <div>
-                    <p class="text-xl">Phone</p>
-                    <input
-                        class="border border-black mb-6 p-1 rounded-lg"
-                        type="text"
-                        name="phone"
-                        v-model="form.Phone"
-                    />
-                </div>
-                <div class="flex flex-row">
-                    <div class="mr-4">
-                        <p class="text-xl">HCN</p>
-                        <input
-                            class="border border-black mb-6 p-1 rounded-lg"
-                            type="text"
-                            name="healthcare_no"
-                            v-model="form.Healthcare_no"
-                        />
+                <div class="mb-6">
+                    <div class="flex flex-row">
+                        <div class="mr-4">
+                            <p class="text-xl">HCN</p>
+                            <input
+                                class="border border-black mb-2 p-1 rounded-lg"
+                                type="text"
+                                name="healthcare_no"
+                                v-model="form.Healthcare_no"
+                            />
+                        </div>
+                        <div class="mr-4">
+                            <p class="text-xl">HCN Expiry</p>
+                            <input
+                                class="border border-black mb-2 p-1 rounded-lg"
+                                type="text"
+                                name="hcn_expiry"
+                                v-model="form.HCN_expiry"
+                            />
+                        </div>
+                        <div class="mr-4">
+                            <p class="text-xl">HCN Province</p>
+                            <input
+                                class="border border-black mb-2 p-1 rounded-lg"
+                                type="text"
+                                name="hcn_provice"
+                                v-model="form.HCN_province"
+                            />
+                        </div>
                     </div>
-                    <div class="mr-4">
-                        <p class="text-xl">HCN Expiry</p>
-                        <input
-                            class="border border-black mb-6 p-1 rounded-lg"
-                            type="text"
-                            name="hcn_expiry"
-                            v-model="form.HCN_expiry"
-                        />
-                    </div>
-                    <div class="mr-4">
-                        <p class="text-xl">HCN Province</p>
-                        <input
-                            class="border border-black mb-6 p-1 rounded-lg"
-                            type="text"
-                            name="hcn_provice"
-                            v-model="form.HCN_province"
-                        />
-                    </div>
+                    <p class="text-xl text-left text-red-600">
+                        {{ HCN_error }}
+                    </p>
                 </div>
             </div>
             <button
                 class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-green-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
                 @click="postForm()"
             >
-                <div v-if="create_mode">
-                    Create
-                </div>
-                <div v-else>
-                    Save
-                </div>
+                <div v-if="create_mode">Create</div>
+                <div v-else>Save</div>
             </button>
         </div>
         <div v-else class="flex flex-col">
@@ -164,7 +193,13 @@ export default {
                 Healthcare_no: "",
                 HCN_expiry: "",
                 HCN_province: "",
-            }
+            },
+            email_error: "",
+            name_error: "",
+            gender_error: "",
+            DoB_error: "",
+            phone_error: "",
+            HCN_error: "",
         };
     },
 
@@ -202,8 +237,22 @@ export default {
                 });
         },
         postForm() {
+            if (
+                ![
+                    this.checkEmail(),
+                    this.checkName(),
+                    this.checkGender(),
+                    this.checkDoB(),
+                    this.checkPhone(),
+                    this.checkHCN(),
+                ].every((x) => {
+                    return x === true;
+                })
+            )
+                return;
+
             let email_data = this.$route.params.email;
-            console.log(email_data)
+            console.log(email_data);
 
             if (this.create_mode) {
                 email_data = this.form.Email;
@@ -212,36 +261,105 @@ export default {
             console.log(this.create_mode);
             console.log(email_data);
 
-            axios.post(
-                `http://localhost:5000/patient/forms`,
-                {
-                    action_type: "submit_form",
-                    form_type: "new_applicant_form",
-                    form: {
-                        email: email_data,
-                        fname: this.form.Fname,
-                        initial: this.form.Initial,
-                        lname: this.form.Lname,
-                        gender: this.form.Gender,
-                        sex: this.form.Sex,
-                        dob: this.form.DoB,
-                        phone: this.form.Phone,
-                        healthcare_no: this.form.Healthcare_no,
-                        hcn_expiry: this.form.HCN_expiry,
-                        hcn_province: this.form.HCN_province,
+            axios
+                .post(
+                    `http://localhost:5000/patient/forms`,
+                    {
+                        action_type: "submit_form",
+                        form_type: "new_applicant_form",
+                        form: {
+                            email: email_data,
+                            fname: this.form.Fname,
+                            initial: this.form.Initial,
+                            lname: this.form.Lname,
+                            gender: this.form.Gender,
+                            sex: this.form.Sex,
+                            dob: this.form.DoB,
+                            phone: this.form.Phone,
+                            healthcare_no: this.form.Healthcare_no,
+                            hcn_expiry: this.form.HCN_expiry,
+                            hcn_province: this.form.HCN_province,
+                        },
                     },
-                },
-                {
-                    headers: {
-                        Authorization: "Bearer " + localStorage.getItem("jwt"),
-                    },
-                }
-            )
-            .then(() => {
-                if (this.create_mode) {
-                    this.$router.push("/patient-panel/forms")
-                }
-            });
+                    {
+                        headers: {
+                            Authorization:
+                                "Bearer " + localStorage.getItem("jwt"),
+                        },
+                    }
+                )
+                .then(() => {
+                    if (this.create_mode) {
+                        this.$router.push("/patient-panel/forms");
+                    }
+                });
+        },
+        checkEmail() {
+            // I just found this regex from https://codepen.io/CSWApps/pen/MmpBjV
+            // Since email validation is no joke.
+            if (
+                !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/.test(
+                    this.form.Email
+                )
+            ) {
+                this.email_error = "Please enter a valid email.";
+                return false;
+            }
+            this.email_error = "";
+            return true;
+        },
+        checkName() {
+            if (
+                this.form.Fname === "" ||
+                this.form.Initial === "" ||
+                this.form.Lname === ""
+            ) {
+                this.name_error = "Please fill out all of the fields.";
+                return false;
+            }
+            this.name_error = "";
+            return true;
+        },
+        checkGender() {
+            if (this.form.Gender === "" || this.form.Sex === "") {
+                this.gender_error = "Please fill out all of the fields.";
+                return false;
+            }
+            this.gender_error = "";
+            return true;
+        },
+        checkDoB() {
+            let regex = new RegExp("^[0-9]{4}-[0-9]{2}-[0-9]{2}$");
+            if (!regex.test(this.form.DoB)) {
+                this.DoB_error =
+                    "Please enter your date of birth in the form yyyy/mm/dd.";
+                return false;
+            }
+            this.DoB_error = "";
+            return true;
+        },
+        checkPhone() {
+            // Taken from https://stackoverflow.com/questions/16699007/regular-expression-to-match-standard-10-digit-phone-number.
+            let regex = new RegExp("^[0-9]{3}-[0-9]{3}-[0-9]{4}$");
+            if (!regex.test(this.form.Phone)) {
+                this.phone_error =
+                    "Please enter your phone in the form 123-123-1324.";
+                return false;
+            }
+            this.phone_error = "";
+            return true;
+        },
+        checkHCN() {
+            if (
+                this.form.Healthcare_no === "" ||
+                this.form.HCN_expiry === "" ||
+                this.form.HCN_province === ""
+            ) {
+                this.HCN_error = "Please fill out all of the fields.";
+                return false;
+            }
+            this.HCN_error = "";
+            return true;
         },
     },
 };
