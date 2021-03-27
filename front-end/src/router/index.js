@@ -23,6 +23,7 @@ import MedicalHistoryEditPage from "../components/patient/MedicalHistoryEditPage
 import ClerkPanel from "../views/ClerkPanel.vue";
 import ClerkPanelPage from '../components/clerk/ClerkPanelPage.vue'
 import ClerkForms from '../components/clerk/ClerkForms.vue'
+import ClerkNewAppForm from '../components/clerk/ClerkNewAppForm.vue'
 
 Vue.use(VueRouter);
 
@@ -55,6 +56,10 @@ const routes = [
             {
                 path: "forms",
                 component: ClerkForms
+            },
+            {
+                path: "forms/new-applicant-form",
+                component: ClerkNewAppForm
             }
         ]
     },
