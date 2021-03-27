@@ -41,6 +41,7 @@
                                 type="text"
                                 name="fname"
                                 v-model="form.Fname"
+                                placeholder="John"
                             />
                         </div>
                         <div class="mr-4">
@@ -50,6 +51,7 @@
                                 type="text"
                                 name="initial"
                                 v-model="form.Initial"
+                                placeholder="A"
                             />
                         </div>
                         <div>
@@ -59,6 +61,7 @@
                                 type="text"
                                 name="lname"
                                 v-model="form.Lname"
+                                placeholder="Smith"
                             />
                         </div>
                     </div>
