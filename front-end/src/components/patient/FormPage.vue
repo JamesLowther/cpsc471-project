@@ -11,19 +11,19 @@
         </div>
         <div v-if="logged_in">
             <div class="flex flex-col items-center">
-                <p class="text-5xl mt-20 mb-24">Forms</p>
-                <div class="w-1/2">
+                <p class="text-5xl mt-20 mb-14">Forms</p>
+                <div class="w-1/2 mb-10">
                     <p class="text-3xl mb-4">Reports</p>
-                    <table class="table-fixed w-full mb-10">
+                    <table class="table-fixed w-full">
                         <thead>
-                            <tr>
+                            <tr class="text-lg">
                                 <th class="w-3/4 border-black border-2">
                                     Report ID
                                 </th>
                                 <th class="w-1/4 border-black border-2">
                                     <router-link :to="{ name: 'edit-report' }">
                                         <div
-                                            class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1"
+                                            class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1"
                                         >
                                             New
                                         </div>
@@ -47,7 +47,7 @@
                                         }"
                                     >
                                         <div
-                                            class="text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 rounded-lg py-2 px-1 mx-6 my-1"
+                                            class="text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-blue-600 rounded-lg py-2 px-1 mx-6 my-1"
                                         >
                                             View
                                         </div>
@@ -57,11 +57,11 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="w-1/2">
+                <div class="w-1/2 mb-10">
                     <p class="text-3xl mb-4">New Applicant Forms</p>
-                    <table class="table-fixed w-full mb-10">
+                    <table class="table-fixed w-full">
                         <thead>
-                            <tr>
+                            <tr class="text-lg">
                                 <th class="w-3/5 border-black border-2">
                                     Email
                                 </th>
@@ -74,7 +74,7 @@
                                         v-if="new_applicant.length == 0"
                                     >
                                         <div
-                                            class="text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1"
+                                            class="text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1"
                                         >
                                             New
                                         </div>
@@ -106,7 +106,7 @@
                                         }"
                                     >
                                         <div
-                                            class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 rounded-lg py-2 px-1 mx-6 my-1"
+                                            class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-blue-600 rounded-lg py-2 px-1 mx-6 my-1"
                                         >
                                             Edit
                                         </div>
@@ -116,11 +116,11 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="w-1/2">
+                <div class="w-1/2 mb-10">
                     <p class="text-3xl mb-4">Covid Screens</p>
-                    <table class="table-fixed w-full mb-10">
+                    <table class="table-fixed w-full">
                         <thead>
-                            <tr>
+                            <tr class="text-lg">
                                 <th class="w-3/4 border-black border-2">
                                     Date
                                 </th>
@@ -129,7 +129,7 @@
                                         :to="{ name: 'edit-covid-screen' }"
                                     >
                                         <div
-                                            class="text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1"
+                                            class="text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1"
                                         >
                                             New
                                         </div>
@@ -153,7 +153,7 @@
                                         }"
                                     >
                                         <div
-                                            class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 rounded-lg py-2 px-1 mx-6 my-1"
+                                            class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-blue-600 rounded-lg py-2 px-1 mx-6 my-1"
                                         >
                                             Edit
                                         </div>
@@ -163,11 +163,11 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="w-1/2">
+                <div class="w-1/2 mb-10">
                     <p class="text-3xl mb-4">Medical History</p>
                     <table class="table-fixed w-full">
                         <thead>
-                            <tr>
+                            <tr class="text-lg">
                                 <th class="w-3/4 border-black border-2">
                                     SSN
                                 </th>
@@ -177,7 +177,7 @@
                                         v-if="medical_history.length == 0"
                                     >
                                         <div
-                                            class="text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1"
+                                            class="text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1"
                                         >
                                             New
                                         </div>
@@ -201,7 +201,7 @@
                                         }"
                                     >
                                         <div
-                                            class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 rounded-lg py-2 px-1 mx-6 my-1"
+                                            class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-blue-600 rounded-lg py-2 px-1 mx-6 my-1"
                                         >
                                             Edit
                                         </div>
