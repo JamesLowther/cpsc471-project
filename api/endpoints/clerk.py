@@ -48,22 +48,21 @@ class ClerkForms(Resource):
 
         con, cursor = db.connect_db()
 
-        # Get all new applicant forms.
+       
+        # Get Patients and keys of all their forms. Null if no report of that kind exists
         cursor.execute(
-            "SELECT P_SSN FROM New_Applicant_Form")
-        new_applicant = cursor.fetchall()
-
-        # Get all covid screens.
-        cursor.execute(
-            "SELECT Date, P_SSN FROM Covid_Screen")
-        covid_screens = cursor.fetchall()
+            "SELECT p.P_SSN, n.Is_approved, c.Date, r.Report_ID \
+            FROM Patient as p \
+            LEFT JOIN New_Applicant_Form as n ON p.P_SSN=n.P_SSN\
+            LEFT JOIN Covid_Screen as c ON p.P_SSN=c.P_SSN\
+            LEFT JOIN Report as r ON p.P_SSN=r.P_SSN ")
+        forms = cursor.fetchall()
 
         con.close()
 
         return jsonify (
             logged_in=1,
-            covid_screens=[dict(s) for s in covid_screens],
-            new_applicant=[dict(f) for f in new_applicant]
+            forms = [dict(f) for f in forms]
         )
 
 
