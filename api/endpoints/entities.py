@@ -24,7 +24,7 @@ class EntitiesForms(Resource):
     parser.add_argument("ill_name", type=int, required=False)
     parser.add_argument("symp_name", type=str, required=False)
     parser.add_argument("form", type=dict, required=False)
-    parser.add_argument("theMedicationName", type=str)
+    parser.add_argument("query_string", type=str)
 
     def get(self):
         if verify_jwt_in_request():
@@ -52,21 +52,47 @@ class EntitiesForms(Resource):
 
         args = self.parser.parse_args()
 
-        con, cursor = db.connect_db()
+        results = {}
 
-        medications = {}
+        if args["method"] == "query":
+            results = self.query(args)
 
-        if (args["entity_type"] == "medication"):
-            cursor.execute("SELECT m.Name, s.Effect FROM Medication AS m LEFT OUTER JOIN Side_Effects AS s ON m.Name = s.Med_Name WHERE m.name LIKE ?;", ("%" + args["theMedicationName"] + "%",))
-            medications = cursor.fetchall()
-        elif (args["entity_type"] == "illness"):
-            cursor.execute("SELECT Name FROM Illness;")
-            results = cursor.fetchall()  
-        elif (args["entity_type"] == "symptom"):
-            cursor.execute("SELECT Symptom_name FROM Symptoms;")
-            results = cursor.fetchall()    
+        # Only doctors and clerks can accses add/delete functions.
+        elif current["user_type"] in {"doctor", "clerk"}:
+            if args["method"] == "add":
+                # Write code to add illness/medication.
+                pass
+
+            if args["method"] == "delete":
+                # Write code to delete illness/medication.
+                pass
 
         return jsonify(
             logged_in=1,
-            medications=[dict(x) for x in medications]
+            results=[dict(x) for x in results]
         )
+
+    def query(self, args):
+        results = {}
+
+        # This to to prevent returning all results (issue when lots of data).
+        if args["query_string"] == "":
+            return {}
+
+        con, cursor = db.connect_db()
+
+        entity_type = args["entity_type"]
+
+        if (entity_type == "medication"):
+            cursor.execute("SELECT m.Name, s.Effect FROM Medication AS m LEFT OUTER JOIN Side_Effects AS s ON m.Name = s.Med_Name WHERE m.name LIKE ?;", ("%" + args["query_string"] + "%",))
+            results = cursor.fetchall()
+        elif (entity_type == "illness"):
+            cursor.execute("SELECT Name FROM Illness WHERE Name LIKE ?;", ("%" + args["query_string"] + "%",))
+            results = cursor.fetchall()  
+        elif (entity_type == "symptom"):
+            cursor.execute("SELECT Symptom_name FROM Symptoms WHERE Name LIKE ?;", ("%" + args["query_string"] + "%",))
+            results = cursor.fetchall() 
+
+        con.close()
+
+        return results

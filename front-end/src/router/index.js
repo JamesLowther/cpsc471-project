@@ -18,10 +18,12 @@ import FormPage from "../components/patient/FormPage.vue";
 import ReportEditPage from "../components/patient/ReportEditPage.vue";
 import NewApplicantEditPage from "../components/patient/NewApplicantEditPage.vue";
 import CovidScreenEditPage from "../components/patient/CovidScreenEditPage.vue";
+import MedicalHistoryEditPage from "../components/patient/MedicalHistoryEditPage.vue";
 
 import ClerkPanel from "../views/ClerkPanel.vue";
 import ClerkPanelPage from '../components/clerk/ClerkPanelPage.vue'
 import ClerkForms from '../components/clerk/ClerkForms.vue'
+import ClerkNewAppForm from '../components/clerk/ClerkNewAppForm.vue'
 
 Vue.use(VueRouter);
 
@@ -54,6 +56,10 @@ const routes = [
             {
                 path: "forms",
                 component: ClerkForms
+            },
+            {
+                path: "forms/new-applicant-form",
+                component: ClerkNewAppForm
             }
         ]
     },
@@ -86,6 +92,11 @@ const routes = [
                 path: "forms/edit-covid-screen/:date?",
                 name: "edit-covid-screen",
                 component: CovidScreenEditPage
+            },
+            {
+                path: "forms/edit-medical-history/:id?",
+                name: "edit-medical-history",
+                component: MedicalHistoryEditPage
             }
         ]
     },

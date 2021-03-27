@@ -41,19 +41,6 @@
                     ref="ssn"
                 /><br />
                 <input
-                    class="border border-black my-4 p-1 rounded-lg"
-                    v-bind:class="[
-                        invalid_email ? 'border-red-700' : 'border-black',
-                    ]"
-                    type="text"
-                    pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"
-                    placeholder="Email Address"
-                    id="email"
-                    name="email"
-                    v-model="email"
-                    ref="email"
-                /><br />
-                <input
                     class="border border-black p-1 rounded-lg"
                     v-bind:class="[
                         empty_pass ? 'border-red-700' : 'border-black',
@@ -90,7 +77,6 @@ export default {
             password: "",
             error: "",
             invalid_ssn: false,
-            invalid_email: false,
             empty_pass: false,
         };
     },
@@ -106,30 +92,6 @@ export default {
                 if (!this.invalid_ssn) this.invalid_ssn = !this.invalid_ssn;
                 console.log("input ssn is not 9 digit number: " + ssnStr);
                 this.error = "Invalid ssn: must be 9 digits";
-                return true;
-            }
-            return false;
-        },
-
-        /* check if the input email fits format
-         * sets boolean to true, changing class of input*/
-        invalidEmail() {
-            let emailStr = this.$refs.email.value;
-            // I just found this regex from https://codepen.io/CSWApps/pen/MmpBjV
-            // Since email validation is no joke.
-            if (
-                !/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,24}))$/.test(
-                    emailStr
-                )
-            ) {
-                //change to red border, if black
-                if (!this.invalid_email)
-                    this.invalid_email = !this.invalid_email;
-                console.log(
-                    "input email is not formatted correctly: " + emailStr
-                );
-                this.error =
-                    "Invalid email: please use format similar to email@url.com";
                 return true;
             }
             return false;
@@ -155,11 +117,6 @@ export default {
                 this.error = "";
             } else return;
 
-            if (!this.invalidEmail()) {
-                this.invalid_email = false;
-                this.error = "";
-            } else return;
-
             if (!this.invalidPass()) {
                 this.empty_pass = false;
                 this.error = "";
@@ -169,7 +126,6 @@ export default {
                 .post(`http://localhost:5000/new-account`, {
                     user_type: this.user_type,
                     ssn: this.ssn,
-                    email: this.email,
                     password: this.password,
                 })
                 .then((response) => {

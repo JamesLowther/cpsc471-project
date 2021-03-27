@@ -178,51 +178,46 @@ CREATE TABLE Diagnoses (
 );
 
 CREATE TABLE Medical_History (
-    Hx_ID           INTEGER,
     P_SSN           INTEGER,
     TPAL_total      INTEGER,
     TPAL_preterm    INTEGER,
     TPAL_aborted    INTEGER,
     TPAL_living     INTEGER,
-    PRIMARY KEY (Hx_ID, P_SSN),
+    PRIMARY KEY (P_SSN),
     FOREIGN KEY (P_SSN) REFERENCES Patient(P_SSN)
 );
 
 CREATE TABLE Allergies (
-    Hx_ID           INTEGER,
     P_SSN           INTEGER,
     Allergy         TEXT,
-    PRIMARY KEY (Hx_ID, P_SSN, Allergy),
-    FOREIGN KEY (Hx_ID, P_SSN) REFERENCES Medical_History(Hx_ID, P_SSN)
+    PRIMARY KEY (P_SSN, Allergy),
+    FOREIGN KEY (P_SSN) REFERENCES Medical_History(P_SSN)
 );
 
 CREATE TABLE Immunization (
-    Hx_ID           INTEGER,
     P_SSN           INTEGER,
     Immunization    TEXT,
-    PRIMARY KEY (Hx_ID, P_SSN, Immunization),
-    FOREIGN KEY (Hx_ID, P_SSN) REFERENCES Medical_History(Hx_ID, P_SSN)
+    PRIMARY KEY (P_SSN, Immunization),
+    FOREIGN KEY (P_SSN) REFERENCES Medical_History(P_SSN)
 );
 
 CREATE TABLE Treatment_Done (
-    Hx_ID           INTEGER,
     P_SSN           INTEGER,
     Med_Name        TEXT,
     Illness_name    TEXT,
     Date            TEXT,
-    PRIMARY KEY (Hx_ID, P_SSN, Med_Name, Illness_name),
-    FOREIGN KEY (Hx_ID, P_SSN) REFERENCES Medical_History(Hx_ID, P_SSN),
+    PRIMARY KEY (P_SSN, Med_Name, Illness_name),
+    FOREIGN KEY (P_SSN) REFERENCES Medical_History(P_SSN),
     FOREIGN KEY (Med_Name) REFERENCES Medication(Name),
     FOREIGN KEY (Illness_name) REFERENCES Illness(Name)
 );
 
 CREATE TABLE Past_Illnesses (
-    Hx_ID           INTEGER,
     P_SSN           INTEGER,
     Illness_name    TEXT,
     Age_of_onset    INTEGER,
-    PRIMARY KEY (Hx_ID, P_SSN, Illness_name),
-    FOREIGN KEY (Hx_ID, P_SSN) REFERENCES Medical_History(Hx_ID, P_SSN),
+    PRIMARY KEY (P_SSN, Illness_name),
+    FOREIGN KEY (P_SSN) REFERENCES Medical_History(P_SSN),
     FOREIGN KEY (Illness_name) REFERENCES Illness(Name)
 );
 

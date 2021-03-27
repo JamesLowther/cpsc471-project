@@ -125,7 +125,7 @@ export default {
                 {
                     entity_type: "medication",
                     method: "query",
-                    theMedicationName: this.form.medicationName
+                    query_string: this.form.medicationName
                 },
                 {
                     headers: {
@@ -137,7 +137,7 @@ export default {
                     if (response.data.logged_in != "1") return;
 
                     this.logged_in = true;
-                    this.medicationList = response.data.medications;
+                    this.medicationList = response.data.results;
                 })
                 .catch((e) => {
                     console.log(e);
