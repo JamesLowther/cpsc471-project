@@ -14,7 +14,10 @@
                 <p v-if="create_mode" class="text-5xl mt-20">
                     Create Covid Screen
                 </p>
-                <p v-else class="text-5xl mt-20">Edit Covid Screen</p>
+                <div v-else>
+                    <p class="text-5xl mt-20">Edit Covid Screen</p>
+                    <p class="text-4xl mt-3">{{ this.$route.params.date }}</p>
+                </div>
             </div>
             <div class="flex flex-col items-start mt-10 w-1/3 mx-auto">
                 <div class="text-left text-xl w-full mb-10">
@@ -82,7 +85,7 @@
                         </div>
                     </form> 
                 </div>
-                <div class="text-left text-xl w-full mb-10">
+                <div class="text-left text-xl w-full mb-5">
                     <p class="text-3xl">Are you experiencing:</p>
                     <ul class="list-disc ml-10 mt-4">
                         <li>A runny nose</li>
