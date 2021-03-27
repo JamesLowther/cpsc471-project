@@ -22,13 +22,12 @@
                                     Patient SSN
                                 </th>
                                 <th class="w-1/4 border-black border-2">
-                                    <router-link
-                                        :to="{ name: 'LINK TO NEW APPLICANT FORM' }"
+                                    <router-link to="/clerk-panel/forms/new-applicant-form"
                                     >
                                         <div
                                             class="text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1"
                                         >
-                                            to:new app form
+                                            Create a New Applicant Form
                                         </div>
                                     </router-link>
                                 </th>
