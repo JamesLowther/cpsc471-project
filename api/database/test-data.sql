@@ -55,18 +55,21 @@ INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial
 
 INSERT INTO Authorizes (P_SSN, SSN) VALUES (100000001, 300000000);
 
-INSERT INTO Medical_History (Hx_ID, P_SSN, TPAL_total, TPAL_preterm, TPAL_aborted, TPAL_living) VALUES (1, 100000001, 0, 0, 0, 0);
-INSERT INTO Medical_History (Hx_ID, P_SSN, TPAL_total, TPAL_preterm, TPAL_aborted, TPAL_living) VALUES (2, 100000002, 2, 0, 0, 2);
-INSERT INTO Medical_History (Hx_ID, P_SSN, TPAL_total, TPAL_preterm, TPAL_aborted, TPAL_living) VALUES (3, 100000000, 0, 0, 0, 0);
+INSERT INTO Medical_History (P_SSN, TPAL_total, TPAL_preterm, TPAL_aborted, TPAL_living) VALUES (100000001, 0, 0, 0, 0);
+INSERT INTO Medical_History (P_SSN, TPAL_total, TPAL_preterm, TPAL_aborted, TPAL_living) VALUES (100000002, 2, 0, 0, 2);
+INSERT INTO Medical_History (P_SSN, TPAL_total, TPAL_preterm, TPAL_aborted, TPAL_living) VALUES (100000000, 0, 0, 0, 0);
 
-INSERT INTO Allergies (Hx_ID, P_SSN, Allergy) VALUES (1, 100000001, 'Peanuts');
-INSERT INTO Allergies (Hx_ID, P_SSN, Allergy) VALUES (2, 100000002, 'Peanuts');
+INSERT INTO Allergies (P_SSN, Allergy) VALUES (100000000, 'Peanuts');
+INSERT INTO Allergies (P_SSN, Allergy) VALUES (100000001, 'Peanuts');
+INSERT INTO Allergies (P_SSN, Allergy) VALUES (100000002, 'Peanuts');
 
-INSERT INTO Immunization (Hx_ID, P_SSN, Immunization) VALUES (1, 100000001, 'Measles');
-INSERT INTO Immunization (Hx_ID, P_SSN, Immunization) VALUES (2, 100000002, 'Measles');
+INSERT INTO Immunization (P_SSN, Immunization) VALUES (100000000, 'Measles');
+INSERT INTO Immunization (P_SSN, Immunization) VALUES (100000001, 'Measles');
+INSERT INTO Immunization (P_SSN, Immunization) VALUES (100000002, 'Measles');
 
-INSERT INTO Past_Illnesses (Hx_ID, P_SSN, Illness_Name, Age_of_onset) VALUES (1, 100000001, 'Common Cold', 	35);
-INSERT INTO Past_Illnesses (Hx_ID, P_SSN, Illness_Name, Age_of_onset) VALUES (2, 100000002, 'Pneumonia', 	30);
+INSERT INTO Past_Illnesses (P_SSN, Illness_Name, Age_of_onset) VALUES (100000000, 'Common Cold', 	35);
+INSERT INTO Past_Illnesses (P_SSN, Illness_Name, Age_of_onset) VALUES (100000001, 'Common Cold', 	35);
+INSERT INTO Past_Illnesses (P_SSN, Illness_Name, Age_of_onset) VALUES (100000002, 'Pneumonia', 	30);
 
 INSERT INTO Covid_Screen (Date, P_SSN, Shortness_breath, New_cough, Fever, Sore_throat, Runny_nose) VALUES ('2021-03-07', 100000000, 0, 0, 0, 0, 0);
 INSERT INTO Covid_Screen (Date, P_SSN, Shortness_breath, New_cough, Fever, Sore_throat, Runny_nose) VALUES ('2021-03-06', 100000001, 1, 1, 1, 1, 1);
@@ -88,6 +91,6 @@ INSERT INTO Assigned (Report_ID, P_SSN, MedCenter_Name) VALUES (2, 100000003, 'F
 INSERT INTO Prescribes (Med_Name, Report_ID, P_SSN) VALUES ('Advil', 		0, 100000001);
 INSERT INTO Prescribes (Med_Name, Report_ID, P_SSN) VALUES ('Lisinopril', 	3, 100000000);
 
-INSERT INTO Treatment_Done (Hx_ID, P_SSN, Med_Name, Illness_Name, Date) VALUES (1, 100000001, 'Advil', 		'Common Cold', 			'2021-03-07');
-INSERT INTO Treatment_Done (Hx_ID, P_SSN, Med_Name, Illness_Name, Date) VALUES (3, 100000000, 'Lisinopril', 'High Blood Pressure', 	'2021-03-07');
+INSERT INTO Treatment_Done (P_SSN, Med_Name, Illness_Name, Date) VALUES (100000001, 'Advil', 		'Common Cold', 			'2021-03-07');
+INSERT INTO Treatment_Done (P_SSN, Med_Name, Illness_Name, Date) VALUES (100000000, 'Lisinopril', 'High Blood Pressure', 	'2021-03-07');
 
