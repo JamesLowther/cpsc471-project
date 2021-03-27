@@ -17,7 +17,7 @@
                 <p v-else class="text-5xl mt-20">Edit Medical History Form</p>
             </div>
             <div class="flex flex-col items-start mt-10 w-1/2 mx-auto">
-                <p class="font-bold text-3xl">Pregnancy Info:</p>
+                <p class="font-bold text-3xl mb-1">Pregnancy Info:</p>
                 <div
                     class="flex flex-row justify-around items-center w-full mx-auto"
                 >
@@ -66,13 +66,14 @@
                         />
                     </div>
                 </div>
+                <p class="font-bold text-3xl mb-1">Past Illnesses:</p>
                 <table class="table-fixed w-full mb-10">
                     <thead>
                         <tr>
-                            <th class="w-1/3 border-black border-2">
+                            <th class="text-lg w-1/3 border-black border-2">
                                 Past Illnesses:
                             </th>
-                            <th class="w-1/3 border-black border-2">
+                            <th class="text-lg w-1/3 border-black border-2">
                                 Age of Onset:
                             </th>
                             <th class="w-1/3 border-black border-2"></th>
@@ -138,11 +139,12 @@
                         </tr>
                     </tbody>
                 </table>
+                <p class="font-bold text-3xl mb-1">Allergies:</p>
                 <table class="table-fixed w-full mb-10">
                     <thead>
                         <tr>
-                            <th class="w-1/3 border-black border-2">
-                                Allergies:
+                            <th class="text-lg w-1/3 border-black border-2">
+                                Allergy:
                             </th>
                             <th class="w-1/3 border-black border-2"></th>
                         </tr>
@@ -182,11 +184,12 @@
                         </tr>
                     </tbody>
                 </table>
+                <p class="font-bold text-3xl mb-1">Immunizations:</p>
                 <table class="table-fixed w-full mb-10">
                     <thead>
                         <tr>
-                            <th class="w-1/3 border-black border-2">
-                                Immunizations:
+                            <th class="text-lg w-1/3 border-black border-2">
+                                Immunization:
                             </th>
                             <th class="w-1/3 border-black border-2"></th>
                         </tr>
