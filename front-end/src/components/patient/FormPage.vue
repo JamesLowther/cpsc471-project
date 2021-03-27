@@ -11,7 +11,7 @@
         </div>
         <div v-if="logged_in">
             <div class="flex flex-col items-center">
-                <p class="text-5xl mt-20 mb-14">Forms</p>
+                <p class="text-5xl mt-20 mb-14">Reports, Forms and Screens</p>
                 <div class="w-1/2 mb-10">
                     <p class="text-3xl mb-4">Reports</p>
                     <table class="table-fixed w-full">

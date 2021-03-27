@@ -14,7 +14,7 @@
                 <p v-if="create_mode" class="text-5xl mt-20">
                     Create New Report
                 </p>
-                <p v-else class="text-5xl mt-20">Edit Report</p>
+                <p v-else class="text-5xl mt-20">Edit Report {{ this.$route.params.id }}</p>
             </div>
             <div class="flex flex-col items-start mt-10 w-1/3 mx-auto">
                 <div class="w-full mb-6">

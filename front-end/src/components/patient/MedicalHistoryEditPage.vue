@@ -18,16 +18,17 @@
             </div>
             <div class="flex flex-col items-start mt-10 w-1/2 mx-auto">
                 <div class="w-full mb-10">
-                    <p class="font-bold text-3xl mb-1 text-left">
+                    <p class="font-bold text-3xl text-left">
                         Pregnancy Info:
                     </p>
+                    <p class="text-left text-lg mb-2">Set values to 0 if not applicable</p>
                     <div
                         class="flex flex-row justify-around items-center w-full mx-auto"
                     >
-                        <div>
+                        <div class="w-1/4 p-3">
                             <p class="text-xl">Total births:</p>
                             <input
-                                class="border border-black mb-6 p-1 rounded-lg text-right"
+                                class="border border-black mb-6 p-1 rounded-lg text-right w-full"
                                 type="number"
                                 min="0"
                                 value="0"
@@ -36,10 +37,10 @@
                                 v-model="form.TPAL_total"
                             />
                         </div>
-                        <div>
+                        <div class="w-1/4 p-3">
                             <p class="text-xl">Preterm births:</p>
                             <input
-                                class="border border-black mb-6 p-1 rounded-lg text-right"
+                                class="border border-black mb-6 p-1 rounded-lg text-right w-full"
                                 type="number"
                                 min="0"
                                 value="0"
@@ -48,10 +49,10 @@
                                 v-model="form.TPAL_preterm"
                             />
                         </div>
-                        <div>
+                        <div class="w-1/4 p-3">
                             <p class="text-xl">Aborted:</p>
                             <input
-                                class="border border-black mb-6 p-1 rounded-lg text-right"
+                                class="border border-black mb-6 p-1 rounded-lg text-right w-full"
                                 type="number"
                                 min="0"
                                 value="0"
@@ -60,10 +61,10 @@
                                 v-model="form.TPAL_aborted"
                             />
                         </div>
-                        <div>
+                        <div class="w-1/4 p-3">
                             <p class="text-xl">Living children:</p>
                             <input
-                                class="border border-black mb-6 p-1 rounded-lg text-right"
+                                class="border border-black mb-6 p-1 rounded-lg text-right w-full"
                                 type="number"
                                 min="0"
                                 value="0"
@@ -212,7 +213,7 @@
                         {{ allergies_error }}
                     </p>
                 </div>
-                <div class="w-full mb-10">
+                <div class="w-full mb-5">
                     <p class="font-bold text-3xl mb-1 text-left">
                         Immunizations:
                     </p>

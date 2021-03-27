@@ -9,14 +9,14 @@
                 </div>
             </router-link>
         </div>
-        <div v-if="logged_in">
+        <div v-if="logged_in" class="flex flex-col items-center mx-auto">
             <div class="flex flex-col">
                 <p v-if="create_mode" class="text-5xl mt-20">
                     Create New Applicant Form
                 </p>
                 <p v-else class="text-5xl mt-20">Edit New Applicant Form</p>
             </div>
-            <div class="flex flex-col items-start mt-10 w-1/3 mx-auto">
+            <div class="flex flex-col items-start mt-10 mx-auto">
                 <div class="flex flex-col items-start mb-6">
                     <div>
                         <p class="text-xl">Email</p>
