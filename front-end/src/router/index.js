@@ -23,7 +23,6 @@ import MedicalHistoryEditPage from "../components/patient/MedicalHistoryEditPage
 import ClerkPanel from "../views/ClerkPanel.vue";
 import ClerkPanelPage from '../components/clerk/ClerkPanelPage.vue'
 import ClerkForms from '../components/clerk/ClerkForms.vue'
-import ClerkNewAppForm from '../components/clerk/ClerkNewAppForm.vue'
 
 Vue.use(VueRouter);
 
@@ -58,8 +57,10 @@ const routes = [
                 component: ClerkForms
             },
             {
-                path: "forms/new-applicant-form",
-                component: ClerkNewAppForm
+                path: "forms/edit-new-applicant/:ssn?",
+                name: "edit-new-applicant",
+                props: true,
+                component: NewApplicantEditPage,
             }
         ]
     },

@@ -346,8 +346,8 @@ export default {
             axios.post(
                 `http://localhost:5000/clerk/forms`,
                 {
-                    action_type: "submit_form",
                     form_type: "new_application_form",
+                    action_type: "submit_form",
                     P_SSN: this.$route.params.ssn,
                 },
                 {
@@ -355,9 +355,11 @@ export default {
                         Authorization: "Bearer " + localStorage.getItem("jwt"),
                     },
                 }
+            ).then(() => {
+                // Reload the form data after the post.
+                this.getForm();}
             );
-            // Reload the form data after the post.
-            this.getForm();
+            
         },
         checkEmail() {
             // I just found this regex from https://codepen.io/CSWApps/pen/MmpBjV

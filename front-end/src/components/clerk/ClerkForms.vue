@@ -13,11 +13,6 @@
                 
                 <div class="mx-36">
                     <p class="text-3xl mb-4"></p>
-                    <router-link to="/clerk-panel/forms/new-applicant-form">
-                        <div class="w-1/4 text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1">
-                            Create a New Applicant Form
-                        </div>
-                    </router-link>
                     <table class="table-fixed w-full h-full mb-10 border-black">
                         <thead>
                             <tr class="h-14">
@@ -52,7 +47,7 @@
                                     <!--Applicant is Approved: link to existing form-->
                                     <div v-if="patient.Is_approved==1"> 
                                         <p class="bg-green-300 w-1/3 inline-block m-2 rounded">Approved</p>
-                                        <router-link :to="{name: 'edit-new-applicant',params: { email: patient.Email }}">
+                                        <router-link :to="{name: 'edit-new-applicant',params: { ssn: patient.P_SSN, isClerk: true }}">
                                             <div class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-blue-500 rounded-lg py-1 px-1 mx-6 my-1">
                                                 View/Edit
                                             </div>
@@ -62,7 +57,7 @@
                                     <!--Applicant is Pending: link to existing form-->
                                     <div v-else-if="patient.Is_approved==0"> 
                                         <p class="bg-yellow-300 w-1/3 inline-block m-2 rounded">Pending</p>
-                                        <router-link :to="{name: 'edit-new-applicant',params: { email: patient.Email }}">
+                                        <router-link :to="{name: 'edit-new-applicant',params: { ssn: patient.P_SSN, isClerk: true }}">
                                             <div class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-yellow-500 rounded-lg py-1 px-1 mx-6 my-1">
                                                 View & Approve
                                             </div>
@@ -72,7 +67,7 @@
                                     <!--Applicant has not submitted: link to create new form-->
                                     <div v-else>
                                     <p class="bg-red-300 w-1/3 inline-block m-2 rounded">Not Submitted</p>
-                                        <router-link :to="{name: 'edit-new-applicant'}">
+                                        <router-link :to="{name: 'edit-new-applicant',params: { ssn: patient.P_SSN, isClerk: true }}">
                                             <div class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-green-500 rounded-lg py-1 px-1 mx-6 my-1">
                                                 Create New
                                             </div>
