@@ -11,26 +11,29 @@
             <div class="flex flex-col items-center">
                 <p class="text-5xl mt-20 mb-24">Clerk Workstation</p>
                 
-                <div class="w-2/3">
+                <div class="mx-36">
                     <p class="text-3xl mb-4"></p>
                     <router-link to="/clerk-panel/forms/new-applicant-form">
-                                        <div class="w-1/4 text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1">
-                                            Create a New Applicant Form
-                                        </div>
-                                    </router-link>
-                    <table class="table-fixed w-full mb-10">
+                        <div class="w-1/4 text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1">
+                            Create a New Applicant Form
+                        </div>
+                    </router-link>
+                    <table class="table-fixed w-full h-full mb-10 border-black">
                         <thead>
                             <tr class="h-14">
                                 <th class="w-1/6 border-black border-2">
                                     Patient SSN
                                 </th>
-                                <th class="w-2/5 border-black border-2">
+                                <th class="w-1/6 border-black border-2">
+                                    Patient Name
+                                </th>
+                                <th class="w-2/6 border-black border-2">
                                     New Application Status
                                 </th>
-                                <th class="w-2/5 border-black border-2">
+                                <th class="w-2/6 border-black border-2">
                                     Covid Screen Date
                                 </th>
-                                <th class="w-2/5 border-black border-2">
+                                <th class="w-2/6 border-black border-2">
                                     Report ID
                                 </th>
                             </tr>
@@ -38,12 +41,44 @@
                         <tbody>
                             <tr v-for="patient in forms" v-bind:key="patient.P_SSN" class="h-10">
                                 <td class="border-black border-2">
-                                    {{ patient.P_SSN}}
+                                    {{ patient.P_SSN }}
                                 </td>
                                 <td class="border-black border-2">
-                                    <div v-if="patient.Is_approved==1" class="bg-green-300">Approved</div>
-                                    <div v-else-if="patient.Is_approved==0" class="bg-yellow-300">Pending</div>
-                                    <div v-else class="bg-red-300">Not Submitted</div>
+                                    <div v-if="patient.Lname">{{ patient.Lname}}, {{ patient.Fname}}</div>
+                                    <div v-else class="bg-red-300 w-1/3 inline-block m-2 rounded">N/A</div>    
+                                </td>
+                                
+                                <td class="border-black border-2">
+                                    <!--Applicant is Approved: link to existing form-->
+                                    <div v-if="patient.Is_approved==1"> 
+                                        <p class="bg-green-300 w-1/3 inline-block m-2 rounded">Approved</p>
+                                        <router-link :to="{name: 'edit-new-applicant',params: { email: patient.Email }}">
+                                            <div class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-blue-500 rounded-lg py-1 px-1 mx-6 my-1">
+                                                View/Edit
+                                            </div>
+                                        </router-link>
+                                    </div>
+                                    
+                                    <!--Applicant is Pending: link to existing form-->
+                                    <div v-else-if="patient.Is_approved==0"> 
+                                        <p class="bg-yellow-300 w-1/3 inline-block m-2 rounded">Pending</p>
+                                        <router-link :to="{name: 'edit-new-applicant',params: { email: patient.Email }}">
+                                            <div class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-yellow-500 rounded-lg py-1 px-1 mx-6 my-1">
+                                                View & Approve
+                                            </div>
+                                        </router-link>
+                                    </div>
+
+                                    <!--Applicant has not submitted: link to create new form-->
+                                    <div v-else>
+                                    <p class="bg-red-300 w-1/3 inline-block m-2 rounded">Not Submitted</p>
+                                        <router-link :to="{name: 'edit-new-applicant'}">
+                                            <div class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-green-500 rounded-lg py-1 px-1 mx-6 my-1">
+                                                Create New
+                                            </div>
+                                        </router-link>
+                                    </div>
+                                    
                                 </td>
                                 <td class="border-black border-2">
                                     <div v-if="patient.Date">{{ patient.Date}}</div>

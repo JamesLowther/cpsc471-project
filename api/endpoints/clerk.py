@@ -24,7 +24,6 @@ class ClerkForms(Resource):
     """
     Initialize arguments for a post request. Specifies the keys for the json object to be exchanged.
     Keys are for getting forms and submitting data. 
-    Forms are either New_Applicant_Form or Covid_Screen.
     """
     parser = reqparse.RequestParser()
     parser.add_argument("form_type", type=str, required=True, choices=("new_applicant_form","covid_screen"),
@@ -39,7 +38,7 @@ class ClerkForms(Resource):
 
     def get(self):
         """
-        A GET request returns all New_Applicant_Forms and Covid_Screens.
+        A GET request returns all Patient's SSN's and the keys of their existing forms.
         """
 
         # Verify the request is sent from logged in user
@@ -51,7 +50,7 @@ class ClerkForms(Resource):
        
         # Get Patients and keys of all their forms. Null if no report of that kind exists
         cursor.execute(
-            "SELECT p.P_SSN, n.Is_approved, c.Date, r.Report_ID \
+            "SELECT p.P_SSN, n.Fname, n.Lname, n.Email, n.Is_approved, c.Date, r.Report_ID \
             FROM Patient as p \
             LEFT JOIN New_Applicant_Form as n ON p.P_SSN=n.P_SSN\
             LEFT JOIN Covid_Screen as c ON p.P_SSN=c.P_SSN\
