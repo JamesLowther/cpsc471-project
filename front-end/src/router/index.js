@@ -84,9 +84,10 @@ const routes = [
                 component: ReportEditPage
             },
             {
-                path: "forms/edit-new-applicant/:email?",
+                path: "forms/edit-new-applicant/:ssn?",
                 name: "edit-new-applicant",
-                component: NewApplicantEditPage
+                props: true,
+                component: NewApplicantEditPage,
             },
             {
                 path: "forms/edit-covid-screen/:date?",

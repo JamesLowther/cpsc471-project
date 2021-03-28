@@ -24,7 +24,7 @@ class PatientForms(Resource):
                         help="Bad choice: {error_msg}")
     parser.add_argument("new_form", type=int)
     parser.add_argument("report_id", type=int, required=False)
-    parser.add_argument("applicant_form", type=str, required=False)
+    parser.add_argument("applicant_form_ssn", type=int, required=False)
     parser.add_argument("history_id", type=int, required=False)
     parser.add_argument("screen_date", type=str, required=False)
     parser.add_argument("form", type=dict)
@@ -42,7 +42,7 @@ class PatientForms(Resource):
 
         # Get all new applicant forms.
         cursor.execute(
-            "SELECT Email, Is_approved FROM New_Applicant_Form WHERE P_SSN = ?;", (current["ssn"],))
+            "SELECT P_SSN, Email, Is_approved FROM New_Applicant_Form WHERE P_SSN = ?;", (current["ssn"],))
         new_applicant = cursor.fetchall()
 
         # Get all covid screens.
@@ -80,7 +80,10 @@ class PatientForms(Resource):
                         current["ssn"], args["report_id"], args["form"])
 
             elif (args["form_type"] == "new_applicant_form"):
-                self.update_new_applicant_form(current["ssn"], args["form"])
+                if current["user_type"] == "clerk":
+                    self.update_new_applicant_form(args["applicant_form_ssn"], args["form"])
+                else:
+                    self.update_new_applicant_form(current["ssn"], args["form"])
 
             elif (args["form_type"] == "covid_screen"):
                 if args["new_form"]:
@@ -101,8 +104,11 @@ class PatientForms(Resource):
                     current["ssn"], args["report_id"])
 
             elif (args["form_type"] == "new_applicant_form"):
-                form = self.get_new_applicant_form(
-                    current["ssn"], args["applicant_form"])
+                # Check if patient is getting the form or a clerk is getting it on behalf of a patient.
+                if current["user_type"] == "clerk":
+                    form = self.get_new_applicant_form(args["applicant_form_ssn"])
+                else:
+                    form = self.get_new_applicant_form(current["ssn"])
 
             elif (args["form_type"] == "covid_screen"):
                 form = self.get_covid_screen(
@@ -221,12 +227,12 @@ class PatientForms(Resource):
         con.commit()
         con.close()
 
-    def get_new_applicant_form(self, ssn, email):
+    def get_new_applicant_form(self, ssn):
 
         con, cursor = db.connect_db()
 
         cursor.execute(
-            "SELECT * FROM New_Applicant_Form WHERE P_SSN = ? AND Email = ?;", (ssn, email))
+            "SELECT * FROM New_Applicant_Form WHERE P_SSN = ?;", (ssn,))
         result = cursor.fetchone()
 
         con.close()
