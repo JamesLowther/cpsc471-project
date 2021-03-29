@@ -10,6 +10,7 @@ import json
 class Keys(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument("entity", type=str, required=True, choices={"medical_centre"})
+    parser.add_argument("query_string", type=str)
 
     def post(self):
         """Returns the primary keys from certain tables in our database.
@@ -25,7 +26,11 @@ class Keys(Resource):
         results = {}
 
         if (args["entity"] == "medical_centre"):
-            cursor.execute("SELECT Name FROM Medical_Centre;")
-            results = cursor.fetchall()    
+            if (args["query_string"] is not None):
+                cursor.execute("SELECT Name FROM Medical_Centre WHERE Name LIKE ?';" ("%" + args["query_string"] + "%",),)
+                results = cursor.fetchall()  
+            else:
+                cursor.execute("SELECT Name FROM Medical_Centre;")
+                results = cursor.fetchall()    
 
         return jsonify(result=[dict(x) for x in results])

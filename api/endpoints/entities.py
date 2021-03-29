@@ -84,10 +84,10 @@ class EntitiesForms(Resource):
         entity_type = args["entity_type"]
 
         if (entity_type == "medication"):
-            cursor.execute("SELECT m.Name, s.Effect FROM Medication AS m LEFT OUTER JOIN Side_Effects AS s ON m.Name = s.Med_Name WHERE m.name LIKE ?;", ("%" + args["query_string"] + "%",))
+            cursor.execute("SELECT DISTINCT m.Name, m.Is_prescription, s.Effect FROM Medication AS m LEFT OUTER JOIN Side_Effects AS s ON m.Name = s.Med_Name WHERE m.name LIKE ?;", ("%" + args["query_string"] + "%",))
             results = cursor.fetchall()
         elif (entity_type == "illness"):
-            cursor.execute("SELECT Name FROM Illness WHERE Name LIKE ?;", ("%" + args["query_string"] + "%",))
+            cursor.execute("SELECT Name, Organ_system FROM Illness WHERE Name LIKE ?;", ("%" + args["query_string"] + "%",))
             results = cursor.fetchall()  
         elif (entity_type == "symptom"):
             cursor.execute("SELECT Symptom_name FROM Symptoms WHERE Name LIKE ?;", ("%" + args["query_string"] + "%",))
