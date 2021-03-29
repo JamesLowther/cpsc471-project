@@ -27,10 +27,13 @@ class Keys(Resource):
 
         if (args["entity"] == "medical_centre"):
             if (args["query_string"] is not None):
-                cursor.execute("SELECT Name FROM Medical_Centre WHERE Name LIKE ?';" ("%" + args["query_string"] + "%",),)
+                cursor.execute("SELECT Name, Type, Address FROM Medical_Centre WHERE Name LIKE ?;", ("%" + args["query_string"] + "%",),)
                 results = cursor.fetchall()  
             else:
                 cursor.execute("SELECT Name FROM Medical_Centre;")
                 results = cursor.fetchall()    
 
-        return jsonify(result=[dict(x) for x in results])
+        return jsonify(
+            result=[dict(x) for x in results],
+            logged_in=1,
+        )

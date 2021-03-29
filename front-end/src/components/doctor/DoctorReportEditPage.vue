@@ -11,7 +11,7 @@
         </div>
         <div v-if="logged_in">
             <div class="flex flex-col">
-                <p class="text-5xl mt-20">Edit Report</p>
+                <p class="text-5xl mt-20 bg-blue-300"><b>Edit Report</b>
                 <br />Patient SSN: {{ p_ssn }}
                 <br />Patient Name: {{
                                         this.form.Fname +
@@ -20,6 +20,7 @@
                                         ". " +
                                         this.form.Lname
                                     }}
+                </p>
             </div>
             <div class="flex flex-col items-start mt-10 w-1/3 mx-auto">
                 <div class="w-full">
@@ -33,7 +34,7 @@
                 </div>
                 <button
                     class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-green-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
-                    @click="postReportForm()"
+                    @click="updateComplaint()"
                 >
                     Save
                 </button>
@@ -107,9 +108,9 @@
                                 </tr>
                                 <tr>
                                     <td class="border-black border-2 bg-gray-300">
-                                        Search Illnesses:
+                                        <b>Search Illnesses:</b>
                                     </td>
-                                    <td class="border-black border-2 bg-gray-300">
+                                    <td class="border-black border-2 bg-gray-300" colspan="2">
                                         <input
                                             class="border border-black mb-2 mt-2 p-1 rounded-lg w-4/5"
                                             type="text"
@@ -176,10 +177,10 @@
                                     <td class="border-black border-2">
                                         {{ medication.Name }}
                                     </td>
-                                    <td v-if="medication.Is_prescription == 1" class="border-black border-2">
+                                    <td v-if="medication.Is_prescription == 1" class="border-black border-2 bg-green-300">
                                         YES
                                     </td>
-                                    <td v-else class="border-black border-2">
+                                    <td v-else class="border-black border-2 bg-red-300">
                                         NO
                                     </td>
                                     <td class="border-black border-2">
@@ -202,9 +203,9 @@
                                 </tr>
                                 <tr>
                                     <td class="border-black border-2 bg-gray-300">
-                                        Search Medications:
+                                        <b>Search Medications:</b>
                                     </td>
-                                    <td class="border-black border-2 bg-gray-300">
+                                    <td class="border-black border-2 bg-gray-300" colspan="3">
                                         <input
                                             class="border border-black mb-2 mt-2 p-1 rounded-lg w-4/5"
                                             type="text"
@@ -216,8 +217,6 @@
                                     </td>
                                     <td class="border-black border-2 bg-gray-300">
                                     </td>
-                                    <td class="border-black border-2 bg-gray-300">
-                                    </td>
                                 </tr>
                                 <tr
                                     v-for="medication in medication_results"
@@ -226,8 +225,11 @@
                                     <td class="border-black border-2">
                                         {{ medication.Name }}
                                     </td>
-                                    <td class="border-black border-2">
-                                        {{ medication.Is_prescription }}
+                                    <td v-if="medication.Is_prescription == 1" class="border-black border-2 bg-green-300">
+                                        YES
+                                    </td>
+                                    <td v-else class="border-black border-2 bg-red-300">
+                                        NO
                                     </td>
                                         <td class="border-black border-2">
                                             <ul class="list-disc">
@@ -278,7 +280,7 @@
                                         <button
                                             class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:scale-105 rounded-lg py-2 px-8 m-3"
                                             v-on:click="
-                                                removeMedicalCener(medical_centre.Name)
+                                                removeMedCenter(medical_centre.Name)
                                             "
                                         >
                                             Remove
@@ -286,10 +288,10 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="border-black border-2 bg-gray-300">
-                                        Search Medical Centers:
+                                    <td class="border-black border-2 bg-gray-300" colspan="2">
+                                        <b>Search Medical Centers:</b>
                                     </td>
-                                    <td class="border-black border-2 bg-gray-300">
+                                    <td class="border-black border-2 bg-gray-300" colspan="2">
                                         <input
                                             class="border border-black mb-2 mt-2 p-1 rounded-lg w-4/5"
                                             type="text"
@@ -299,14 +301,10 @@
                                             v-on:keyup="queryMedCenters()"
                                         />
                                     </td>
-                                    <td class="border-black border-2 bg-gray-300">
-                                    </td>
-                                    <td class="border-black border-2 bg-gray-300">
-                                    </td>
                                 </tr>
                                 <tr
-                                    v-for="med_center in Medical_Centers_results"
-                                    :key="med_center.Name"
+                                    v-for="(med_center, i) in Medical_Centers_results"
+                                    :key="`${i}-${med_center}`"
                                 >
                                     <td class="border-black border-2">
                                         {{ med_center.Name }}
@@ -328,6 +326,9 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <p class="text-xl mx-auto text-red-600">
+                            {{ medCenter_error }}
+                        </p>
                     </div>
                 </div>
             </div>
@@ -360,7 +361,7 @@ export default {
                 Doc_Lname: "",
                 Illnesses: [],
                 Medications: [],
-                Medical_centres: []
+                Medical_centres: [],
             },
             illness_query: "",
             illness_results: [],
@@ -369,7 +370,7 @@ export default {
             med_center_query: "",
             Medical_Centers_results: [],
             diagnosed_illnesses_error: "",
-            medical_centre_error: "",
+            medCenter_error: "",
             add_medication_error: "",
         };
     },
@@ -412,16 +413,15 @@ export default {
                     console.log(e);
                 });
         },
-        postReportForm() {
+        updateComplaint() {
             axios.post(
                 `http://localhost:5000/doctor/forms`,
                 {
-                    action_type: "submit_form",
+                    action_type: "update_complaint",
                     form_type: "report",
-                    report_id: this.$route.params.id,
-                    form: {
-                        Complaint: this.form.Complaint
-                    }
+                    p_ssn: this.$route.params.p_ssn,
+                    id: this.$route.params.id,
+                    complaint: this.form.Complaint,
                 },
                 {
                     headers: {
@@ -510,8 +510,6 @@ export default {
                         Name: illness,
                         Organ_system: Organ_system,
                     });
-
-                    this.new_age_of_onset = "";
 
 
                     })
@@ -622,8 +620,6 @@ export default {
                         Effect: Effect,
                     });
 
-                    this.new_age_of_onset = "";
-
 
                     })
                     .catch(e => {
@@ -687,11 +683,94 @@ export default {
                     if (response.data.logged_in != "1") return;
 
                     this.logged_in = true;
-                    this.Medical_Centers_results = response.data.results;
+                    this.Medical_Centers_results = response.data.result;
                 })
                 .catch((e) => {
                     console.log(e);
                 });
+        },
+        addMedCenter(MedCenter_Name, type, address) {
+            // Check for a duplicate illness insert and abort if there is one
+            for (let i = 0; i < this.form.Medical_centres.length; i++) {
+                if (this.form.Medical_centres[i].Name == MedCenter_Name) {
+                    this.medCenter_error =
+                        "You have already added that Medical Center to the report.";
+                    return;
+                }
+            }
+
+            axios.post(
+                `http://localhost:5000/doctor/forms`,
+                {
+                    action_type: "add_medCenter",
+                    form_type: "report",
+                    medCenter_to_add: MedCenter_Name,
+                    id: this.id,
+                    p_ssn: this.p_ssn,
+                },
+                    {
+                        headers: {
+                            Authorization:
+                                "Bearer " + localStorage.getItem("jwt")
+                        }
+                    }
+                    )
+                    .then(response => {
+                        if (response.data.logged_in != "1") return;
+
+
+                    // Update the html list of Diagnosed illnesses
+                    this.medCenter_error = "";
+
+                    this.form.Medical_centres.push({
+                        Name: MedCenter_Name,
+                        Type: type,
+                        Address: address,
+                    });
+
+
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    }
+            );
+        },
+        removeMedCenter(MedCenter_Name) {
+
+            axios.post(
+                `http://localhost:5000/doctor/forms`,
+                {
+                    action_type: "remove_medCenter",
+                    form_type: "report",
+                    medCenter_to_remove: MedCenter_Name,
+                    id: this.id,
+                    p_ssn: this.p_ssn,
+                },
+                    {
+                        headers: {
+                            Authorization:
+                                "Bearer " + localStorage.getItem("jwt")
+                        }
+                    }
+                    )
+                    .then(response => {
+                        if (response.data.logged_in != "1") return;
+
+                    //If successful then update the html form to reflect the removal
+                    let temp_array = this.form.Medical_centres;
+                    this.form.Medical_centres = [];
+
+                    for (let i = 0; i < temp_array.length; i++) {
+                        if (temp_array[i].Name != MedCenter_Name) {
+                            this.form.Medical_centres.push(temp_array[i]);
+                        }
+                    }
+
+                    })
+                    .catch(e => {
+                        console.log(e);
+                    }
+            );
         },
     }
 };

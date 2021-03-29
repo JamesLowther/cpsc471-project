@@ -23,7 +23,7 @@ class DoctorForms(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument("form_type", type=str, required=True, choices=("patient_search", "medical_history", "report"),
                         help="Bad choice: {error_msg}")
-    parser.add_argument("action_type", type=str, required=True, choices=("get_form", "submit_form", "remove_illness", "add_illness", "remove_medication", "add_medication"),
+    parser.add_argument("action_type", type=str, required=True, choices=("get_form", "submit_form", "update_complaint", "remove_illness", "add_illness", "remove_medication", "add_medication", "remove_medCenter", "add_medCenter"),
                         help="Bad choice: {error_msg}")
     parser.add_argument("thePatientName", type=str)
     parser.add_argument("p_ssn", type=int)
@@ -33,6 +33,9 @@ class DoctorForms(Resource):
     parser.add_argument("illness_to_add", type=str)
     parser.add_argument("medication_to_remove", type=str)
     parser.add_argument("medication_to_add", type=str)
+    parser.add_argument("medCenter_to_remove", type=str)
+    parser.add_argument("medCenter_to_add", type=str)
+    parser.add_argument("complaint", type=str)
 
 
     def get(self):
@@ -78,7 +81,15 @@ class DoctorForms(Resource):
                 )
 
         elif (args["p_ssn"] != -1):
-            if (args["action_type"] == "get_form"):
+            #If the doctor wants to save changes to the complaint form:
+            if (args["action_type"] == "update_complaint"):
+                self.update_complaint(args["p_ssn"], args["id"], args["complaint"])
+
+                return jsonify(
+                    logged_in=1,
+                )
+
+            elif (args["action_type"] == "get_form"):
                 if (args["form_type"] == "report"): 
 
                     form = self.get_report(args["p_ssn"], args["id"])
@@ -139,6 +150,41 @@ class DoctorForms(Resource):
                         logged_in=1,
                         p_ssn=args["p_ssn"],
                     )
+            #If the doctor is requesting to remove a Medical Center from the patients report
+            elif (args["action_type"] == "remove_medCenter"):
+
+                    #first remove the diagnosis from the database
+                    self.remove_medCenter(args["p_ssn"], args["id"], args["medCenter_to_remove"])
+                    #then return updated report information
+                    # form = self.get_report(args["p_ssn"], args["id"])
+
+                    return jsonify(
+                        logged_in=1,
+                        p_ssn=args["p_ssn"],
+                    )
+
+            #If the doctor is requesting to add a Medical Center from the patients report
+            elif (args["action_type"] == "add_medCenter"):
+
+                    #first remove the diagnosis from the database
+                    self.add_medCenter(args["p_ssn"], args["id"], args["medCenter_to_add"])
+                    #then return updated report information
+                    # form = self.get_report(args["p_ssn"], args["id"])
+
+                    return jsonify(
+                        logged_in=1,
+                        p_ssn=args["p_ssn"],
+                    )
+
+    def update_complaint(self, ssn, id, complaint):
+
+        con, cursor = db.connect_db()
+
+        # Add a diagnosed illness.
+        cursor.execute("UPDATE Report SET Complaint = ? WHERE P_SSN = ? AND Report_ID = ?;", (complaint, ssn, id,),)
+        con.commit()
+        con.close()
+
 
     def add_diagnosis(self, ssn, id, illness):
 
@@ -155,7 +201,7 @@ class DoctorForms(Resource):
 
         con, cursor = db.connect_db()
 
-        # Remove a diagnosed illness.
+        # Remove a medication from patients report.
         cursor.execute("DELETE FROM Diagnoses WHERE P_SSN = ? AND Report_ID = ? AND Illness_name = ?;", (ssn, id, illness,),)
 
         con.commit()
@@ -165,7 +211,7 @@ class DoctorForms(Resource):
 
         con, cursor = db.connect_db()
 
-        # Add a diagnosed illness.
+        # Add a medication to patients report.
         cursor.execute("INSERT INTO Prescribes (Med_Name, Report_ID, P_SSN) VALUES (?,?,?);", (medication, id, ssn,),)
 
         con.commit()
@@ -178,6 +224,27 @@ class DoctorForms(Resource):
 
         # Remove a diagnosed illness.
         cursor.execute("DELETE FROM Prescribes WHERE P_SSN = ? AND Report_ID = ? AND Med_Name = ?;", (ssn, id, medication,),)
+
+        con.commit()
+        con.close()
+
+    def add_medCenter(self, ssn, id, medCenter):
+
+        con, cursor = db.connect_db()
+
+        # Add a medcenter to patients report.
+        cursor.execute("INSERT INTO Assigned (Report_ID, P_SSN, MedCenter_Name) VALUES (?,?,?);", (id, ssn, medCenter,),)
+
+        con.commit()
+        con.close()
+
+
+    def remove_medCenter(self, ssn, id, medCenter):
+
+        con, cursor = db.connect_db()
+
+        # Remove a medcenter from patients report.
+        cursor.execute("DELETE FROM Assigned WHERE P_SSN = ? AND Report_ID = ? AND MedCenter_Name = ?;", (ssn, id, medCenter,),)
 
         con.commit()
         con.close()

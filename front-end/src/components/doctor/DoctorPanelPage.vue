@@ -11,8 +11,8 @@
         </div>
         <div v-if="logged_in">
             <div class="flex flex-col">
-                <p class="text-5xl mt-20">Doctor Panel</p>
-                <p class="text-3xl mt-4">SSN: {{ ssn }}</p>
+                <p class="text-5xl mt-20 bg-blue-300">Doctor Panel</p>
+                <p class="text-3xl mt-4 bg-blue-300">SSN: {{ ssn }}</p>
             </div>
             <div class="flex flex-wrap items-center justify-center mt-48">
                 <div class="w-1/2">

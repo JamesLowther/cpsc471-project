@@ -10,8 +10,10 @@
             </router-link>
         </div>
         <div v-if="logged_in">
+            <div class="flex flex-col">
+                <p class="text-5xl mt-20 mb-24 bg-blue-300">Patient Report Records:</p>
+            </div>
             <div class="flex flex-col items-center">
-                <p class="text-5xl mt-20 mb-24">Patient Report Records:</p>
                 <div class="w-1/2">
                     <table class="table-fixed w-full mb-10">
                         <thead>
