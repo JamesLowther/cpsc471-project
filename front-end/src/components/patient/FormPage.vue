@@ -102,7 +102,7 @@
                                     <router-link
                                         :to="{
                                             name: 'edit-new-applicant',
-                                            params: { email: report.Email },
+                                            params: { ssn: report.P_SSN, isClerk: false },
                                         }"
                                     >
                                         <div
