@@ -11,7 +11,7 @@
         </div>
         <div v-if="logged_in">
             <div class="flex flex-col items-center">
-                <p class="text-5xl mt-20 mb-14">Reports, Forms and Screens</p>
+                <p class="text-5xl mt-20 mb-14">Reports, Forms, and Screens</p>
                 <div class="w-1/2 mb-10">
                     <p class="text-3xl mb-4">Reports</p>
                     <table class="table-fixed w-full">
@@ -43,7 +43,7 @@
                                     <router-link
                                         :to="{
                                             name: 'edit-report',
-                                            params: { id: report.Report_ID },
+                                            params: { id: report.Report_ID, isClerk: false },
                                         }"
                                     >
                                         <div
@@ -149,7 +149,7 @@
                                     <router-link
                                         :to="{
                                             name: 'edit-covid-screen',
-                                            params: { date: report.Date },
+                                            params: { date: report.Date, isClerk: false },
                                         }"
                                     >
                                         <div
@@ -197,7 +197,7 @@
                                     <router-link
                                         :to="{
                                             name: 'edit-medical-history',
-                                            params: { id: report.P_SSN },
+                                            params: { ssn: report.P_SSN, isClerk: false },
                                         }"
                                     >
                                         <div

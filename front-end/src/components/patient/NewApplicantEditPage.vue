@@ -213,6 +213,7 @@
                 <div v-if="create_mode">Create</div>
                 <div v-else>Save</div>
             </button>
+            <p class="text-xl text-center text-red-600">{{ post_error }}</p>
         </div>
         <div v-else class="flex flex-col">
             <p class="text-5xl mt-20">Forbidden</p>
@@ -255,6 +256,7 @@ export default {
             DoB_error: "",
             phone_error: "",
             HCN_error: "",
+            post_error: "",
         };
     },
 
@@ -273,7 +275,7 @@ export default {
                     {
                         action_type: "get_form",
                         form_type: "new_applicant_form",
-                        applicant_form_ssn: this.$route.params.ssn,
+                        p_ssn: this.$route.params.ssn,
                     },
                     {
                         headers: {
@@ -312,7 +314,7 @@ export default {
                     {
                         action_type: "submit_form",
                         form_type: "new_applicant_form",
-                        applicant_form_ssn: this.$route.params.ssn,
+                        p_ssn: this.$route.params.ssn,
                         form: {
                             email: this.form.Email,
                             fname: this.form.Fname,
@@ -334,32 +336,44 @@ export default {
                         },
                     }
                 )
-                .then(() => {
+                .then((response) => {
                     if (this.create_mode) {
                         this.$router.push("/patient-panel/forms");
                     }
+
+                    if (response.data.successful != 1) {
+                        this.post_error =
+                            "There was an issue with your request.";
+                    } else {
+                        this.post_error = "";
+                    }
+
+                    // Reload the data.
+                    this.getForm();
                 });
         },
         approveForm() {
             // This should be called by clerks.
             // Posting when logged in as a patient should not be permitted.
-            axios.post(
-                `http://localhost:5000/clerk/forms`,
-                {
-                    form_type: "new_application_form",
-                    action_type: "submit_form",
-                    P_SSN: this.$route.params.ssn,
-                },
-                {
-                    headers: {
-                        Authorization: "Bearer " + localStorage.getItem("jwt"),
+            axios
+                .post(
+                    `http://localhost:5000/clerk/forms`,
+                    {
+                        form_type: "new_application_form",
+                        action_type: "submit_form",
+                        P_SSN: this.$route.params.ssn,
                     },
-                }
-            ).then(() => {
-                // Reload the form data after the post.
-                this.getForm();}
-            );
-            
+                    {
+                        headers: {
+                            Authorization:
+                                "Bearer " + localStorage.getItem("jwt"),
+                        },
+                    }
+                )
+                .then(() => {
+                    // Reload the form data after the post.
+                    this.getForm();
+                });
         },
         checkEmail() {
             // I just found this regex from https://codepen.io/CSWApps/pen/MmpBjV
