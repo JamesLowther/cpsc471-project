@@ -1,20 +1,67 @@
 <template>
     <div id="form-edit">
-        <div class="flex justify-end w-full fixed">
-            <router-link to="/patient-panel/forms">
+        <div class="grid grid-cols-2 w-full fixed">
+            <button
+                v-if="isClerk"
+                class="justify-self-start"
+                @click="approveForm()"
+            >
+                <div
+                    class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-yellow-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
+                >
+                    Approve
+                </div>
+            </button>
+            <div v-else></div>
+            <button class="justify-self-end" @click="$router.go(-1)">
                 <div
                     class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
                 >
                     Back
                 </div>
-            </router-link>
+            </button>
         </div>
         <div v-if="logged_in" class="flex flex-col items-center mx-auto">
             <div class="flex flex-col">
                 <p v-if="create_mode" class="text-5xl mt-20">
                     Create New Applicant Form
                 </p>
-                <p v-else class="text-5xl mt-20">Edit New Applicant Form</p>
+                <div v-else>
+                    <p class="text-5xl mt-20 mb-2">Edit New Applicant Form</p>
+                    <div class="flex flex-row justify-center items-center h-16">
+                        <p class="text-3xl">Approved:</p>
+                        <svg
+                            v-if="form.Is_approved"
+                            class="h-4/5"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="green"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                        </svg>
+                        <svg
+                            v-else
+                            class="h-4/5"
+                            xmlns="http://www.w3.org/2000/svg"
+                            fill="none"
+                            viewBox="0 0 24 24"
+                            stroke="red"
+                        >
+                            <path
+                                stroke-linecap="round"
+                                stroke-linejoin="round"
+                                stroke-width="2"
+                                d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                            />
+                        </svg>
+                    </div>
+                </div>
             </div>
             <div class="flex flex-col items-start mt-10 mx-auto">
                 <div class="flex flex-col items-start mb-6">
@@ -180,6 +227,10 @@ import axios from "axios";
 export default {
     name: "NewApplicantEditPage",
 
+    props: {
+        isClerk: Boolean,
+    },
+
     data() {
         return {
             logged_in: true,
@@ -196,6 +247,7 @@ export default {
                 Healthcare_no: "",
                 HCN_expiry: "",
                 HCN_province: "",
+                Is_approved: "",
             },
             email_error: "",
             name_error: "",
@@ -207,7 +259,7 @@ export default {
     },
 
     created() {
-        if (typeof this.$route.params.email != "undefined") {
+        if (typeof this.$route.params.ssn != "undefined") {
             this.create_mode = false;
             this.getForm();
         }
@@ -221,7 +273,7 @@ export default {
                     {
                         action_type: "get_form",
                         form_type: "new_applicant_form",
-                        applicant_form: this.$route.params.email,
+                        applicant_form_ssn: this.$route.params.ssn,
                     },
                     {
                         headers: {
@@ -254,24 +306,15 @@ export default {
             )
                 return;
 
-            let email_data = this.$route.params.email;
-            console.log(email_data);
-
-            if (this.create_mode) {
-                email_data = this.form.Email;
-            }
-
-            console.log(this.create_mode);
-            console.log(email_data);
-
             axios
                 .post(
                     `http://localhost:5000/patient/forms`,
                     {
                         action_type: "submit_form",
                         form_type: "new_applicant_form",
+                        applicant_form_ssn: this.$route.params.ssn,
                         form: {
-                            email: email_data,
+                            email: this.form.Email,
                             fname: this.form.Fname,
                             initial: this.form.Initial,
                             lname: this.form.Lname,
@@ -296,6 +339,27 @@ export default {
                         this.$router.push("/patient-panel/forms");
                     }
                 });
+        },
+        approveForm() {
+            // This should be called by clerks.
+            // Posting when logged in as a patient should not be permitted.
+            axios.post(
+                `http://localhost:5000/clerk/forms`,
+                {
+                    form_type: "new_application_form",
+                    action_type: "submit_form",
+                    P_SSN: this.$route.params.ssn,
+                },
+                {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("jwt"),
+                    },
+                }
+            ).then(() => {
+                // Reload the form data after the post.
+                this.getForm();}
+            );
+            
         },
         checkEmail() {
             // I just found this regex from https://codepen.io/CSWApps/pen/MmpBjV

@@ -24,22 +24,18 @@ class ClerkForms(Resource):
     """
     Initialize arguments for a post request. Specifies the keys for the json object to be exchanged.
     Keys are for getting forms and submitting data. 
-    Forms are either New_Applicant_Form or Covid_Screen.
     """
     parser = reqparse.RequestParser()
-    parser.add_argument("form_type", type=str, required=True, choices=("new_applicant_form","covid_screen"),
+    parser.add_argument("form_type", type=str, required=True, choices=("new_application_form","covid_screen"),
                        help="Bad choice: {error_msg}")
     parser.add_argument("action_type", type=str, required=True, choices=("get_form", "submit_form"),
                        help="Bad choice: {error_msg}")
-    parser.add_argument("new_form", type=int)
-    parser.add_argument("applicant_form", type=str, required=False)
-    parser.add_argument("screen_date", type=str, required=False)
-    parser.add_argument("form", type=dict)
+    parser.add_argument("P_SSN", type=int, required=False)
 
 
     def get(self):
         """
-        A GET request returns all New_Applicant_Forms and Covid_Screens.
+        A GET request returns all Patient's SSN's and the keys of their existing forms.
         """
 
         # Verify the request is sent from logged in user
@@ -51,11 +47,11 @@ class ClerkForms(Resource):
        
         # Get Patients and keys of all their forms. Null if no report of that kind exists
         cursor.execute(
-            "SELECT p.P_SSN, n.Is_approved, c.Date, r.Report_ID \
+            "SELECT p.P_SSN, n.Fname, n.Lname, n.Email, n.Is_approved, c.Date, r.Report_ID \
             FROM Patient as p \
             LEFT JOIN New_Applicant_Form as n ON p.P_SSN=n.P_SSN\
             LEFT JOIN Covid_Screen as c ON p.P_SSN=c.P_SSN\
-            LEFT JOIN Report as r ON p.P_SSN=r.P_SSN ")
+            LEFT JOIN Report as r ON p.P_SSN=r.P_SSN;")
         forms = cursor.fetchall()
 
         con.close()
@@ -67,19 +63,28 @@ class ClerkForms(Resource):
 
 
     def post(self):
+        """
+        A POST request takes parameters to decide on the action type
+        and perform the specified action, using the given data.
+        """
         if verify_jwt_in_request():
             current = get_jwt_identity()
 
         args = self.parser.parse_args()
 
+        if(args["action_type"] == "submit_form"):
+            if(args["form_type"]== "new_application_form"):
+                self.approve_applicant(args["P_SSN"])
+
+
+
+    def approve_applicant(self,ssn):
+        # Set a new_applicant_form specified by ssn, to approved
+
         con, cursor = db.connect_db()
 
-        #get all existing patients who have not submitted an applicant form
-        cursor.execute(
-            "SELECT p.P_SSN FROM Patient as p WHERE NOT EXISTS (SELECT n.P_SSN FROM New_Applicant_Form as n WHERE n.P_SSN=p.P_SSN)")
-        existing_ps = cursor.fetchall()
+        # update the form corresponding to the patients ssn to 'approved' (1)
+        cursor.execute("UPDATE New_Applicant_Form SET Is_approved = ? WHERE P_SSN = ?;", (1,ssn))
 
-        return jsonify (
-            logged_in=1,
-            existingPatients = [dict(p) for p in existing_ps]
-            )
+        con.commit()
+        con.close()
