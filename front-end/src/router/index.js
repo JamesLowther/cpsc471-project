@@ -11,7 +11,7 @@ import DoctorFormPage from "../components/doctor/DoctorFormPage.vue";
 import DoctorReportEditPage from "../components/doctor/DoctorReportEditPage.vue";
 
 import EntitiesPanel from "../components/entities/EntitiesPanel.vue";
-import EntitiesFormPage from "../components/entities/EntitiesFormPage.vue";
+//import EntitiesFormPage from "../components/entities/EntitiesFormPage.vue";
 
 import PatientPanelPage from "../components/patient/PatientPanelPage.vue";
 import FormPage from "../components/patient/FormPage.vue";
@@ -54,11 +54,12 @@ const routes = [
             },
             {
                 path: "forms",
+                name: "clerk-form-home-page",
                 component: ClerkForms
             },
             {
                 path: "forms/edit-new-applicant/:ssn?",
-                name: "edit-new-applicant",
+                name: "approve-applicant",
                 props: true,
                 component: NewApplicantEditPage,
             }
@@ -119,7 +120,7 @@ const routes = [
             },
             {
                 path: "forms",
-                name: "view-reports",
+                name: "doctor-edit-report",
                 component: DoctorReportEditPage
             }
         ]
@@ -128,29 +129,9 @@ const routes = [
     {
         path: "/entities-panel",
         name: "entities-panel",
+        props: true,
         component: EntitiesPanel,
-        children: [
-            {
-                path: "medications",
-                name: "search-medications",
-                component: EntitiesFormPage
-            },
-            {
-                path: "medications/:name?",
-                name: "edit-medications",
-                component: EntitiesFormPage
-            },
-            {
-                path: "illnesses",
-                name: "search-illnesses",
-                component: EntitiesFormPage
-            },
-            {
-                path: "illnesses/:illness_name?",
-                name: "edit-illnesses",
-                component: EntitiesFormPage
-            },
-        ]
+        
     }
 ];
 

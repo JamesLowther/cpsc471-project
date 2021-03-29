@@ -16,8 +16,8 @@
                     <table class="table-fixed w-full mb-10">
                         <thead>
                             <tr>
-                                <th class="w-3/4 border-black border-2">
-                                    Search Patients: 
+                                <th class="w-2/4 border-black border-2">
+                                    Search Patient Reports: 
                                     <input
                                         class="border border-black mb-2 mt-2 p-1 rounded-lg"
                                         type="text"
@@ -25,6 +25,8 @@
                                         v-model="form.patientName"
                                         v-on:keyup="searchPatients()"
                                     />
+                                </th>
+                                <th class="w-1/4 border-black border-2">
                                 </th>
                                 <th class="w-1/4 border-black border-2">
                                     <p class="text-3xl mb-4">Reports</p>
@@ -38,6 +40,9 @@
                             >
                                 <td class="border-black border-2">
                                     {{ patient.Lname }}, {{ patient.Fname }}
+                                </td>
+                                <td class="border-black border-2">
+                                    Report #: {{ patient.Report_ID }}
                                 </td>
                                 <td class="border-black border-2">
 
@@ -69,8 +74,8 @@
 
                                     <router-link
                                         :to="{
-                                            name: 'view-reports',
-                                            params: { id: patient.P_SSN },
+                                            name: 'doctor-edit-report',
+                                            params: { p_ssn: patient.P_SSN, id: patient.Report_ID },
                                         }"
                                     >
                                         <div
@@ -119,7 +124,8 @@ export default {
                 {
                     action_type: "get_form",
                     form_type: "patient_search",
-                    thePatientName: this.form.patientName
+                    p_ssn: -1,
+                    thePatientName: this.form.patientName,
                 },
                 {
                     headers: {

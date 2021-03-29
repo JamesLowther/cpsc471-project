@@ -1,11 +1,11 @@
 <template>
     <div id="forms">
         <div class="flex justify-end w-full fixed">
-            <router-link to="/clerk-panel">
+            <button class="justify-self-end" @click="$router.go(-1)">
                 <div class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
                     Back
                 </div>
-            </router-link>
+            </button>
         </div>
         <div v-if="logged_in">
             <div class="flex flex-col items-center">
@@ -47,7 +47,7 @@
                                     <!--Applicant is Approved: link to existing form-->
                                     <div v-if="patient.Is_approved==1"> 
                                         <p class="bg-green-300 w-1/3 inline-block m-2 rounded">Approved</p>
-                                        <router-link :to="{name: 'edit-new-applicant',params: { ssn: patient.P_SSN, isClerk: true }}">
+                                        <router-link :to="{name: 'approve-applicant',params: { ssn: patient.P_SSN, isClerk: true }}">
                                             <div class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-blue-500 rounded-lg py-1 px-1 mx-6 my-1">
                                                 View/Edit
                                             </div>
@@ -57,7 +57,7 @@
                                     <!--Applicant is Pending: link to existing form-->
                                     <div v-else-if="patient.Is_approved==0"> 
                                         <p class="bg-yellow-300 w-1/3 inline-block m-2 rounded">Pending</p>
-                                        <router-link :to="{name: 'edit-new-applicant',params: { ssn: patient.P_SSN, isClerk: true }}">
+                                        <router-link :to="{name: 'approve-applicant',params: { ssn: patient.P_SSN, isClerk: true }}">
                                             <div class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-yellow-500 rounded-lg py-1 px-1 mx-6 my-1">
                                                 View & Approve
                                             </div>
@@ -67,7 +67,7 @@
                                     <!--Applicant has not submitted: link to create new form-->
                                     <div v-else>
                                     <p class="bg-red-300 w-1/3 inline-block m-2 rounded">Not Submitted</p>
-                                        <router-link :to="{name: 'edit-new-applicant',params: { ssn: patient.P_SSN, isClerk: true }}">
+                                        <router-link :to="{name: 'approve-applicant',params: { ssn: patient.P_SSN, isClerk: true }}">
                                             <div class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-green-500 rounded-lg py-1 px-1 mx-6 my-1">
                                                 Create New
                                             </div>
@@ -100,7 +100,7 @@
 <script>
 import axios from "axios";
 export default {
-    name: "FormPage",
+    name: "ClerkFormPage",
 
     data() {
         return {
