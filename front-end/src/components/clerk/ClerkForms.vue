@@ -16,19 +16,19 @@
                     <table class="table-fixed w-full h-full mb-10 border-black">
                         <thead>
                             <tr class="h-14">
-                                <th class="w-1/6 border-black border-2">
+                                <th class="w-1/12 border-black border-2">
                                     Patient SSN
                                 </th>
-                                <th class="w-1/6 border-black border-2">
+                                <th class="w-1/12 border-black border-2">
                                     Patient Name
                                 </th>
-                                <th class="w-2/6 border-black border-2">
+                                <th class="w-3/12 border-black border-2">
                                     New Application Status
                                 </th>
-                                <th class="w-2/6 border-black border-2">
+                                <th class="w-3/12 border-black border-2">
                                     Covid Screen Date
                                 </th>
-                                <th class="w-2/6 border-black border-2">
+                                <th class="w-3/12 border-black border-2">
                                     Report ID
                                 </th>
                             </tr>
@@ -40,7 +40,7 @@
                                 </td>
                                 <td class="border-black border-2">
                                     <div v-if="patient.Lname">{{ patient.Lname}}, {{ patient.Fname}}</div>
-                                    <div v-else class="bg-red-300 w-1/3 inline-block m-2 rounded">N/A</div>    
+                                    <div v-else class="bg-red-200 w-1/3 inline-block m-2 rounded">N/A</div>    
                                 </td>
                                 
                                 <td class="border-black border-2">
@@ -76,12 +76,13 @@
                                     
                                 </td>
                                 <td class="border-black border-2">
-                                    <div v-if="patient.Date">{{ patient.Date}}</div>
-                                    <div v-else>Not Submitted</div>
+                                    <div v-if="patient.Date" class="bg-green-300 w-1/3 inline-block m-2 rounded">{{ patient.Date}}</div>
+                                    <div v-else class="bg-red-200 w-1/3 inline-block m-2 rounded">N/A</div>
                                     
                                 </td>
                                 <td class="border-black border-2">
-                                    {{ patient.Report_ID}}
+                                    <div v-if="patient.Report_ID" class="bg-green-300 w-1/3 inline-block m-2 rounded">{{ patient.Report_ID}}</div>
+                                    <div v-else class="bg-red-200 w-1/3 inline-block m-2 rounded">N/A</div>
                                 </td>
                             </tr>
                         </tbody>
