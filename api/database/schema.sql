@@ -75,7 +75,7 @@ CREATE TABLE New_Applicant_Form (
     Sex             TEXT,
     Phone           TEXT,
     Fname           TEXT NOT NULL,
-    Initial          TEXT,
+    Initial         TEXT,
     Lname           TEXT NOT NULL,
     Healthcare_no   TEXT NOT NULL,
     HCN_expiry      TEXT NOT NULL,

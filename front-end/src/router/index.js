@@ -117,7 +117,7 @@ const routes = [
             },
             {
                 path: "forms",
-                name: "view-reports",
+                name: "doctor-edit-report",
                 component: DoctorReportEditPage
             }
         ]
