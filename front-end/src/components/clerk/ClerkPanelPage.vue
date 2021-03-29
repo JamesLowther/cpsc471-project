@@ -15,10 +15,13 @@
                 <p class="text-3xl mt-4">SSN: {{ ssn }}</p>
             </div>
             <div class="flex flex-wrap items-center justify-center mt-48">
+                <router-link :to="{name: 'ClerkFormPage'}">
+                    <div class="text-white shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-8 px-4">
+                        Forms
+                    </div>
+                </router-link>
                 <router-link to="/clerk-panel/forms">
-                    <div
-                        class="text-white shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-8 px-4"
-                    >
+                    <div class="text-white shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-8 px-4">
                         Forms
                     </div>
                 </router-link>

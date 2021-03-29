@@ -58,7 +58,7 @@ const routes = [
             },
             {
                 path: "forms/edit-new-applicant/:ssn?",
-                name: "edit-new-applicant",
+                name: "approve-applicant",
                 props: true,
                 component: NewApplicantEditPage,
             }
