@@ -39,6 +39,11 @@ class PatientForms(Resource):
         if not (current["user_type"] in self.authorized_types):
             return "You don't have permission to use this endpoint."
 
+        # Set the ssn depending on the accessing user.
+        p_ssn = current["ssn"]
+        if current["user_type"] == "clerk":
+            p_ssn = args["p_ssn"]
+
         con, cursor = db.connect_db()
 
         # Get all reports.
