@@ -46,6 +46,8 @@ class PatientForms(Resource):
 
         con, cursor = db.connect_db()
 
+        p_ssn = current["ssn"]
+
         # Get all reports.
         cursor.execute(
             "SELECT Report_ID FROM Report WHERE P_SSN = ?;", (p_ssn,))
