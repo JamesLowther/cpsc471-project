@@ -94,3 +94,27 @@ INSERT INTO Prescribes (Med_Name, Report_ID, P_SSN) VALUES ('Lisinopril', 	3, 10
 INSERT INTO Treatment_Done (P_SSN, Med_Name, Illness_Name, Date) VALUES (100000001, 'Advil', 		'Common Cold', 			'2021-03-07');
 INSERT INTO Treatment_Done (P_SSN, Med_Name, Illness_Name, Date) VALUES (100000000, 'Lisinopril', 'High Blood Pressure', 	'2021-03-07');
 
+INSERT INTO Illness (Name, Organ_system) VALUES ('Common Cold',             'Respiratory');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Asthma',                  'Respiratory');
+INSERT INTO Illness (Name, Organ_system) VALUES ('COPD',                    'Respiratory');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Congestive Heart Failure', 'Circulatory');
+INSERT INTO Illness (Name, Organ_system) VALUES ('High Blood Pressure',     'Circulatory');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Pneumonia',               'Respiratory');
+
+INSERT INTO Medication (Name, Is_prescription) VALUES ('Advil',         0);
+INSERT INTO Medication (Name, Is_prescription) VALUES ('Tramadol',      1);
+INSERT INTO Medication (Name, Is_prescription) VALUES ('Lisinopril',    1);
+
+INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Advil', 'Nausea');
+INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Lisinopril', 'Tiredness');
+INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Lisinopril', 'Headache');
+
+INSERT INTO Treats (Med_Name, Illness_Name) VALUES ('Advil',        'Common Cold');
+INSERT INTO Treats (Med_Name, Illness_Name) VALUES ('Lisinopril',   'High Blood Pressure');
+
+INSERT INTO Symptoms (Illness_Name, Symptom_name) VALUES ('Common Cold', 'Fever');
+INSERT INTO Symptoms (Illness_Name, Symptom_name) VALUES ('Common Cold', 'Cough');
+INSERT INTO Symptoms (Illness_Name, Symptom_name) VALUES ('Common Cold', 'Sore Throat');
+INSERT INTO Symptoms (Illness_Name, Symptom_name) VALUES ('Common Cold', 'Congestion');
+INSERT INTO Symptoms (Illness_Name, Symptom_name) VALUES ('Common Cold', 'Sneezing');
+
