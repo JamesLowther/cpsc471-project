@@ -208,13 +208,16 @@ export default {
                 }
             )
             .then((response) => {
-                this.$router.push("/patient-panel/forms");
-
                 if (response.data.successful != 1) {
                     this.error =
                         "There was an issue with your request.";
                 } else {
-                    this.error = "";
+                    if (this.isClerk) {
+                        this.$router.push("/clerk-panel/forms");
+                    } else {
+                        this.$router.push("/patient-panel/forms");
+                    }
+
                 }
             })
         },
