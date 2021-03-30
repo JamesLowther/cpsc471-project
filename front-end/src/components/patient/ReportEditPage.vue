@@ -155,6 +155,7 @@
             >
                 Save
             </button>
+            <p class="text-xl text-center text-red-600">{{ post_error }}</p>
         </div>
         <div v-else class="flex flex-col">
             <p class="text-5xl mt-20">Forbidden</p>
@@ -168,6 +169,10 @@ import axios from "axios";
 
 export default {
     name: "FormEditPage",
+    props: {
+        isClerk: Boolean,
+        pssn: Number,
+    },
 
     data() {
         return {
@@ -186,6 +191,7 @@ export default {
             },
             complaint_error: "",
             medical_centre_error: "",
+            post_error: "",
         };
     },
 
@@ -206,7 +212,8 @@ export default {
                     {
                         action_type: "get_form",
                         form_type: "report",
-                        report_id: this.$route.params.id
+                        report_id: this.$route.params.id,
+                        p_ssn: this.pssn,
                     },
                     {
                         headers: {
@@ -234,6 +241,7 @@ export default {
                     action_type: "submit_form",
                     form_type: "report",
                     new_form: 1,
+                    p_ssn: this.pssn,
                     form: {
                         Complaint: this.form.Complaint,
                         medical_centre: this.medical_centre
@@ -245,8 +253,15 @@ export default {
                     }
                 }
             )
-            .then(() => {
-                this.$router.push("/patient-panel/forms");
+            .then((response) => {
+                if (response.data.successful != 1) {
+                    this.post_error =
+                        "There was an issue with your request.";
+                } else {
+                    this.post_error = "";
+                    this.$router.push("/patient-panel/forms");
+                }
+
             })
         },
         postReportForm() {
@@ -260,6 +275,7 @@ export default {
                     action_type: "submit_form",
                     form_type: "report",
                     report_id: this.$route.params.id,
+                    p_ssn: this.pssn,
                     form: {
                         Complaint: this.form.Complaint
                     }
@@ -269,7 +285,14 @@ export default {
                         Authorization: "Bearer " + localStorage.getItem("jwt")
                     }
                 }
-            );
+            ).then((response) => {
+                if (response.data.successful != 1) {
+                    this.post_error =
+                        "There was an issue with your request.";
+                } else {
+                    this.post_error = "";
+                }
+            });
         },
         getNewFormData() {
             axios

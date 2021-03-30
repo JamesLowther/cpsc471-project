@@ -94,11 +94,13 @@ const routes = [
             {
                 path: "forms/edit-covid-screen/:date?",
                 name: "edit-covid-screen",
+                props: true,
                 component: CovidScreenEditPage
             },
             {
-                path: "forms/edit-medical-history/:id?",
+                path: "forms/edit-medical-history/:ssn?",
                 name: "edit-medical-history",
+                props: true,
                 component: MedicalHistoryEditPage
             }
         ]

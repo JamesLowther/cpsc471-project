@@ -130,6 +130,10 @@ import axios from "axios";
 
 export default {
     name: "CovidScreenEditPage",
+    props: {
+        isClerk: Boolean,
+        pssn: Number,
+    },
 
     data() {
         return {
@@ -161,7 +165,8 @@ export default {
                     {
                         action_type: "get_form",
                         form_type: "covid_screen",
-                        screen_date: this.$route.params.date
+                        screen_date: this.$route.params.date,
+                        p_ssn: this.pssn,
                     },
                     {
                         headers: {
@@ -189,6 +194,7 @@ export default {
                     action_type: "submit_form",
                     form_type: "covid_screen",
                     new_form: 1,
+                    p_ssn: this.pssn,
                     form: {
                         Shortness_breath: parseInt(this.form.Shortness_breath),
                         New_cough: parseInt(this.form.New_cough),
@@ -203,8 +209,15 @@ export default {
                     }
                 }
             )
-            .then(() => {
+            .then((response) => {
                 this.$router.push("/patient-panel/forms");
+
+                if (response.data.successful != 1) {
+                    this.error =
+                        "There was an issue with your request.";
+                } else {
+                    this.error = "";
+                }
             })
         },
         checkInput() {
@@ -226,6 +239,7 @@ export default {
                     action_type: "submit_form",
                     form_type: "covid_screen",
                     screen_date: this.$route.params.date,
+                    p_ssn: this.pssn,
                     form: {
                         Shortness_breath: parseInt(this.form.Shortness_breath),
                         New_cough: parseInt(this.form.New_cough),
@@ -239,7 +253,14 @@ export default {
                         Authorization: "Bearer " + localStorage.getItem("jwt")
                     }
                 }
-            );
+            ).then((response) => {
+                if (response.data.successful != 1) {
+                    this.error =
+                        "There was an issue with your request.";
+                } else {
+                    this.error = "";
+                }
+            });
         },
     }
 };

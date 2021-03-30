@@ -272,12 +272,13 @@
                 </div>
             </div>
             <button
-                class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-green-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
+                class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-green-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 mb-2"
                 @click="postForm()"
             >
                 <div v-if="create_mode">Create</div>
                 <div v-else>Save</div>
             </button>
+            <p class="text-xl text-center text-red-600 mb-2">{{ post_error }}</p>
         </div>
         <div v-else class="flex flex-col">
             <p class="text-5xl mt-20">Forbidden</p>
@@ -291,6 +292,9 @@ import axios from "axios";
 
 export default {
     name: "MedicalHistoryEditPage",
+    props: {
+        isClerk: Boolean,
+    },
 
     data() {
         return {
@@ -316,11 +320,12 @@ export default {
             past_illnesses_error: "",
             allergies_error: "",
             immunization_error: "",
+            post_error: "",
         };
     },
 
     created() {
-        if (typeof this.$route.params.id != "undefined") {
+        if (typeof this.$route.params.ssn != "undefined") {
             this.create_mode = false;
             this.getForm();
         }
@@ -334,7 +339,7 @@ export default {
                     {
                         action_type: "get_form",
                         form_type: "medical_history",
-                        history_id: this.$route.params.id,
+                        p_ssn: this.$route.params.ssn,
                     },
                     {
                         headers: {
@@ -369,7 +374,14 @@ export default {
                         Authorization: "Bearer " + localStorage.getItem("jwt"),
                     },
                 }
-            );
+            ).then((response) => {
+                if (response.data.successful != 1) {
+                    this.post_error =
+                        "There was an issue with your request.";
+                } else {
+                    this.post_error = "";
+                }
+            });
         },
         checkTPAL() {
             if (
