@@ -62,7 +62,12 @@ const routes = [
                 name: "approve-applicant",
                 props: true,
                 component: NewApplicantEditPage,
-            }
+            },
+            {   path: "forms/view-patient-covid-screen/:date?",
+                name: "view-patient-covid-screen",
+                props: true,
+                component: CovidScreenEditPage
+        }
         ]
     },
 
