@@ -51,7 +51,7 @@
                                 <td>
                                 </td>
                                 <td>
-                                    <router-link :to="{name: 'entities-panel',params: { entity_type: 'Medications' }}">
+                                    <router-link :to="{name: 'entities-panel',params: { entity_type: 'medication', user_type:'doctor' }}">
                                         <div class="text-white shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-8 px-4 m-2">
                                             Medications
                                         </div>
@@ -64,7 +64,7 @@
                                 <td>
                                 </td>
                                 <td>
-                                    <router-link :to="{name: 'entities-panel',params: { entity_type: 'Illnesses' }}">
+                                    <router-link :to="{name: 'entities-panel',params: { entity_type: 'illness', user_type:'doctor' }}">
                                         <div class="text-white shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-8 px-4 m-2">
                                             Illnesses
                                         </div>
@@ -77,7 +77,7 @@
                                 <td>
                                 </td>
                                 <td>
-                                    <router-link :to="{name: 'entities-panel',params: { entity_type: 'Symptoms' }}">
+                                    <router-link :to="{name: 'entities-panel',params: { entity_type: 'symptom', user_type:'doctor' }}">
                                         <div class="text-white shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-8 px-4 m-2">
                                             Symptoms
                                         </div>

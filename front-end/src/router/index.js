@@ -5,13 +5,15 @@ import Login from "../views/Login.vue";
 import NewAccount from "../views/NewAccount.vue";
 import PatientPanel from "../views/PatientPanel.vue";
 import DoctorPanel from "../views/DoctorPanel.vue";
+import ClerkPanel from "../views/ClerkPanel.vue";
+import EntitiesPanel from "../views/EntitiesPanel.vue";
 
 import DoctorPanelPage from "../components/doctor/DoctorPanelPage.vue";
 import DoctorFormPage from "../components/doctor/DoctorFormPage.vue";
 import DoctorReportEditPage from "../components/doctor/DoctorReportEditPage.vue";
 
-import EntitiesPanel from "../components/entities/EntitiesPanel.vue";
-//import EntitiesFormPage from "../components/entities/EntitiesFormPage.vue";
+import EntitiesPanelPage from "../components/entities/EntitiesPanelPage.vue";
+import AddNewEntity from "../components/entities/AddNewEntity.vue";
 
 import PatientPanelPage from "../components/patient/PatientPanelPage.vue";
 import FormPage from "../components/patient/FormPage.vue";
@@ -20,7 +22,6 @@ import NewApplicantEditPage from "../components/patient/NewApplicantEditPage.vue
 import CovidScreenEditPage from "../components/patient/CovidScreenEditPage.vue";
 import MedicalHistoryEditPage from "../components/patient/MedicalHistoryEditPage.vue";
 
-import ClerkPanel from "../views/ClerkPanel.vue";
 import ClerkPanelPage from '../components/clerk/ClerkPanelPage.vue'
 import ClerkForms from '../components/clerk/ClerkForms.vue'
 
@@ -135,9 +136,22 @@ const routes = [
 
     {
         path: "/entities-panel",
-        name: "entities-panel",
         props: true,
         component: EntitiesPanel,
+        children: [
+            {
+                path: "/",
+                props: true,
+                name: "entities-panel",
+                component: EntitiesPanelPage
+            },
+            {
+                path: "add-new-entity",
+                name: "add-new-entity",
+                props: true,
+                component: AddNewEntity
+            }
+        ]
         
     }
 ];

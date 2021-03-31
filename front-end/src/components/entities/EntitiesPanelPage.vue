@@ -1,8 +1,25 @@
 <template>
     <div id="Entities_forms">
-        <button @click="$router.go(-1)" class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
-            <span >Back</span>
-        </button>
+        <div v-if="user_type == 'doctor'" class="flex justify-end w-full fixed">
+            <router-link to="/doctor-panel">
+                <div
+                    class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
+                >
+                    Back
+                </div>
+            </router-link>
+        </div>
+        <div v-else-if="user_type == 'clerk'" class="flex justify-end w-full fixed">
+            <router-link to="/clerk-panel">
+                <div
+                    class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
+                >
+                    Back
+                </div>
+            </router-link>
+        </div>
+
+
         <div v-if="logged_in">
             <div class="flex flex-col items-center">
                 <p class="text-5xl mt-20 mb-24">{{ entity_type }}</p>
@@ -21,9 +38,12 @@
                                     />
                                 </th>
                                 <th class="width: 25% border-black border-2">
-                                    <button class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-green-700 hover:bg-green-500 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
+
+                                    <router-link :to="{name: 'add-new-entity',params: { entity_type: entity_type, user_type:user_type }}"
+                                    class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-green-700 hover:bg-green-500 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
                                         <span >Add New {{entity_type}}</span>
-                                    </button>
+                                    </router-link>
+                                    
                                 </th>
                                 
                                 <th class="width: 25% border-black border-2">
@@ -49,7 +69,7 @@
                             <tr v-for="entity in entity_list" :key="entity">
 
                                 <!-- Medications -->
-                                <template v-if="entity_type == 'Medications'">
+                                <template v-if="entity_type == 'medication'">
                                     <td class="border-black border-2">
                                         {{entity.Name}}
                                     </td>
@@ -63,7 +83,7 @@
                                 </template>
 
                                 <!-- Illnesses -->
-                                <template v-else-if="entity_type == 'Illnesses'">
+                                <template v-else-if="entity_type == 'illness'">
                                     <td class="border-black border-2">
                                         {{entity.Name}}
                                     </td>
@@ -78,7 +98,7 @@
                                 </template>
 
                                 <!-- Symptoms -->
-                                <template v-else-if="entity_type == 'Symptoms'">
+                                <template v-else-if="entity_type == 'symptom'">
                                     <td class="border-black border-2">
                                         {{entity.Symptom_name}}
                                     </td>
@@ -111,38 +131,49 @@
 <script>
 import axios from "axios";
 export default {
-    name: "EntitiesPanel",
+    name: "EntitiesPanelPage",
 
     data() {
         return {
             logged_in: true,
-            entity_type: "",
+            entity_type: "", // Medication, illness or symptom
+            entity_post: "", //the formatted string to send in POST
             entity_list: [],
-            entity_name: "",
-            entity_attr: ""
+            entity_name: "", //name of tuple/row
+            entity_attr: "", //attribute specific to that entity
+
+            user_type:"",
         };
     },
 
     created() {
         this.entity_type = this.$route.params.entity_type;
-
-        if (this.entity_type == "Medications") this.entity_attr = "Side Effects";
-        else if (this.entity_type == "Illnesses") this.entity_attr = "Organ Type and Symptoms";
-        else this.entity_attr = "Illness";
+        this.user_type = this.$route.params.user_type;
+        this.init_entity();
     },
 
     methods: {
+        init_entity() {
+            if (this.entity_type == "medication") {
+                this.entity_attr = "Side Effects";
+                this.entity_post = "medication";
+            }
+            else if (this.entity_type == "illness") {
+                this.entity_attr = "Organ Type and Symptoms";
+                this.entity_post = "illness";
+            }
+            else {
+                this.entity_attr = "Illness";
+                this.entity_post = "symptom";
+            }
+            
+        },
+
+
         search_entities() {
-
-            // POST either medication, illness or symptom
-            let e_type = "";
-            if (this.entity_type == "Medications") e_type = "medication";
-            else if (this.entity_type == "Illnesses") e_type = "illness";
-            else e_type = "symptom";
-
             axios.post(`http://localhost:5000/entities/forms`,
                 {
-                    entity_type: e_type,
+                    entity_type: this.entity_post,
                     method: "query",
                     query_string: this.entity_name
                 },
