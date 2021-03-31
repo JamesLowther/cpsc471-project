@@ -122,7 +122,15 @@ class EntitiesForms(Resource):
         return results
 
     def add_new_entity(self, args):
-        print(args["med_name"])
-        print(args["is_pres"])
-        print(args["org_sys"])
-        print(args["symptoms"])
+
+        con, cursor = db.connect_db()
+
+        if(args["entity_type"] == "medication"):
+            print(args["med_name"])
+            print(args["is_pres"])
+
+        
+        elif (args["entity_type"] == "illness"):
+            print(args["ill_name"])
+            print(args["org_sys"])
+            print(args["symptoms"])

@@ -1,8 +1,10 @@
 <template>
     <div id="Entities_forms">
-        <button @click="$router.go(-1)" class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
+        <router-link :to="{name: 'entities-panel',params: { entity_type: entity_type }}">
+        <button class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
             <span >Back</span>
         </button>
+        </router-link>
         <div v-if="logged_in">
             <div class="flex flex-col items-center ">
                 <p class="text-5xl mt-20 mb-24">Add New {{ entity_type }}</p>
@@ -149,7 +151,7 @@ export default {
                 {
                     entity_type: this.entity_post,
                     method: "add",
-                    med_name: this.entity_name,
+                    ill_name: this.entity_name,
                     org_sys: this.Organ_system,
                     symptoms: this.symptoms
                 },

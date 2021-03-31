@@ -1,8 +1,25 @@
 <template>
     <div id="Entities_forms">
-        <button @click="$router.go(-1)" class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
-            <span >Back</span>
-        </button>
+        <div v-if="user_type == 'doctor'" class="flex justify-end w-full fixed">
+            <router-link to="/doctor-panel">
+                <div
+                    class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
+                >
+                    Back
+                </div>
+            </router-link>
+        </div>
+        <div v-else-if="user_type == 'clerk'" class="flex justify-end w-full fixed">
+            <router-link to="/clerk-panel">
+                <div
+                    class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
+                >
+                    Back
+                </div>
+            </router-link>
+        </div>
+
+
         <div v-if="logged_in">
             <div class="flex flex-col items-center">
                 <p class="text-5xl mt-20 mb-24">{{ entity_type }}</p>
@@ -123,35 +140,19 @@ export default {
             entity_post: "", //the formatted string to send in POST
             entity_list: [],
             entity_name: "", //name of tuple/row
-            entity_attr: "" //attribute specific to that entity
+            entity_attr: "", //attribute specific to that entity
+
+            user_type:"",
         };
     },
 
     created() {
         this.entity_type = this.$route.params.entity_type;
+        this.user_type = this.$route.params.user_type;
         this.init_entity();
     },
 
     methods: {
-
-        add_new() {
-            axios.post(`http://localhost:5000/entities/forms`,
-                {
-                    entity_type: this.entity_post,
-                    method: "add",
-                    med_name: "test",
-                },
-                {
-                    headers: {
-                        Authorization: "Bearer " + localStorage.getItem("jwt"),
-                    },
-                }
-            );
-            
-
-
-        },
-
         init_entity() {
             if (this.entity_type == "medication") {
                 this.entity_attr = "Side Effects";

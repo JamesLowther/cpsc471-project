@@ -21,17 +21,17 @@
                         Forms
                     </div>
                 </router-link>
-                <router-link :to="{name: 'entities-panel',params: { entity_type: 'medication' }}">
+                <router-link :to="{name: 'entities-panel',params: { entity_type: 'medication', user_type:'clerk' }}">
                     <div class="text-white shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-8 px-4">
                         Medications
                     </div>
                 </router-link>
-                <router-link :to="{name: 'entities-panel',params: { entity_type: 'illness' }}">
+                <router-link :to="{name: 'entities-panel',params: { entity_type: 'illness', user_type:'clerk' }}">
                     <div class="text-white shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-8 px-4">
                         Illnesses
                     </div>
                 </router-link>
-                <router-link :to="{name: 'entities-panel',params: { entity_type: 'symptom' }}">
+                <router-link :to="{name: 'entities-panel',params: { entity_type: 'symptom', user_type:'clerk' }}">
                     <div class="text-white shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-8 px-4">
                         Symptoms
                     </div>
