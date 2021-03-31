@@ -14,8 +14,11 @@
                 >Back</router-link
             >
         </div>
-        <p class="text-center text-5xl mt-10">Login</p>
-        <div class="flex justify-center my-64">
+        <p class="text-center text-5xl mt-10 my-2">Login</p>
+        <div class="bg-rose-300">
+            <img class="object-contain md:object-scale-down h-96 w-full ..." src="@/assets/Gregor_Mendel_login.jpeg">
+        </div>
+        <div class="flex justify-center my-4">
             <div class="text-xl">
                 <label class="mr-3" for="select">Type:</label>
                 <select
