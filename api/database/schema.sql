@@ -102,6 +102,7 @@ CREATE TABLE Covid_Screen (
     Fever               INTEGER NOT NULL,
     Sore_throat         INTEGER NOT NULL,
     Runny_nose          INTEGER NOT NULL,
+    Has_passed          INTEGER DEFAULT 0,
     PRIMARY KEY (Date, P_SSN),
     FOREIGN KEY (P_SSN) REFERENCES Patient(P_SSN)
 );
@@ -221,26 +222,108 @@ CREATE TABLE Past_Illnesses (
     FOREIGN KEY (Illness_name) REFERENCES Illness(Name)
 );
 
-
-
+INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('UofC Clinic',                     '2500 University Dr NW',    'Clinic');
+INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('Foothills',                       '1403 29 St NW',            'Hospital');
+INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('Bowmont Medical Clinic',          '6535 Bowness Rd NW',       'Clinic');
+INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('Wellness Medical Clinic',         '4625 Varsity Dr NW',       'Clinic');
+INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('Brentwood Family Medical Centre', '810-3630 Brentwood Rd NW', 'Clinic');
+INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('Alberta Childrens Hospital',      '28 Oki Dr NW',             'Hospital');
+INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('Peter Lougheed Centre',           '3500 26 Ave NE',           'Hospital');
+INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('Rockyview General Hospital',      '7007 14 St SW',            'Hospital');
 
 INSERT INTO Illness (Name, Organ_system) VALUES ('Common Cold',             'Respiratory');
 INSERT INTO Illness (Name, Organ_system) VALUES ('Asthma',                  'Respiratory');
 INSERT INTO Illness (Name, Organ_system) VALUES ('COPD',                    'Respiratory');
-INSERT INTO Illness (Name, Organ_system) VALUES ('Congestive Heart Failure', 'Circulatory');
-INSERT INTO Illness (Name, Organ_system) VALUES ('High Blood Pressure',     'Circulatory');
 INSERT INTO Illness (Name, Organ_system) VALUES ('Pneumonia',               'Respiratory');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Pneumothorax',               'Respiratory');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Pleuriis',               'Respiratory');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Pleural Effusion',               'Respiratory');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Malignant Mesothelioma',               'Respiratory');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Sarcoidosis',               'Respiratory');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Acute Chest Syndrome',               'Respiratory');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Rib Fractures',               'Respiratory');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Diaphragm Injury',               'Respiratory');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Valve disease',               'Cardiovascular');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Cardiomyopathy',               'Cardiovascular');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Ectopic foci',               'Cardiovascular');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Scar tissue (previous MI)',               'Cardiovascular');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Accessory pathway',               'Cardiovascular');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Hypoglycemia',               'Cardiovascular');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Thyrotoxicosis',               'Cardiovascular');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Congestive Heart Failure', 'Cardiovascular');
+INSERT INTO Illness (Name, Organ_system) VALUES ('High Blood Pressure',     'Cardiovascular');
+INSERT INTO Illness (Name, Organ_system) VALUES ('High Cholesterol',     'Cardiovascular');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Paranoid',               'Psychiatric');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Schizoid',               'Psychiatric');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Schizotypal',               'Psychiatric');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Narcissistic',               'Psychiatric');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Obsessive-Compulsive',               'Psychiatric');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Cirrhosis',               'Gastrointestinal');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Alcoholic Hepatitis',               'Gastrointestinal');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Portal vein thrombus',               'Gastrointestinal');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Budd-Chiari Syndrome',               'Gastrointestinal');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Constrictive Pericarditis',               'Gastrointestinal');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Carcinomatosis',               'Gastrointestinal');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Infection',               'Gastrointestinal');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Pancreatitis',               'Gastrointestinal');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Serositis',               'Gastrointestinal');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Heartburn',               'Gastrointestinal');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Nephrotic Syndrome',               'Gastrointestinal');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Hypothyroidism',               'Endocrine');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Diabetes',               'Endocrine');
 
 INSERT INTO Medication (Name, Is_prescription) VALUES ('Advil',         0);
+INSERT INTO Medication (Name, Is_prescription) VALUES ('Ibuprofen',         0);
+INSERT INTO Medication (Name, Is_prescription) VALUES ('Naproxen',         0);
+INSERT INTO Medication (Name, Is_prescription) VALUES ('Tylenol',         0);
+INSERT INTO Medication (Name, Is_prescription) VALUES ('Nicoderm',         0);
+INSERT INTO Medication (Name, Is_prescription) VALUES ('Desitin',         0);
 INSERT INTO Medication (Name, Is_prescription) VALUES ('Tramadol',      1);
 INSERT INTO Medication (Name, Is_prescription) VALUES ('Lisinopril',    1);
+INSERT INTO Medication (Name, Is_prescription) VALUES ('Levothyroxine',    1);
+INSERT INTO Medication (Name, Is_prescription) VALUES ('Atorvastatin',    1);
+INSERT INTO Medication (Name, Is_prescription) VALUES ('Metformin',    1);
+INSERT INTO Medication (Name, Is_prescription) VALUES ('Amlodipine',    1);
+INSERT INTO Medication (Name, Is_prescription) VALUES ('Metoprolol',    1);
+INSERT INTO Medication (Name, Is_prescription) VALUES ('Omeprazole',    1);
+INSERT INTO Medication (Name, Is_prescription) VALUES ('Simvastatin',    1);
 
 INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Advil', 'Nausea');
+INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Advil', 'Heartburn');
+INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Advil', 'Stomach Pain');
+INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Naproxen', 'Nausea');
+INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Naproxen', 'Heartburn');
+INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Naproxen', 'Stomach Pain');
+INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Tylenol', 'Nausea');
+INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Tylenol', 'Heartburn');
+INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Tylenol', 'Stomach Pain');
+INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Tylenol', 'Dark Urine');
+INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Tylenol', 'Itching');
+INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Tylenol', 'Rash');
+INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Ibuprofen', 'Nausea');
+INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Ibuprofen', 'Heartburn');
+INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Ibuprofen', 'Stomach Pain');
 INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Lisinopril', 'Tiredness');
 INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Lisinopril', 'Headache');
+INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Amlodipine', 'Swelling');
+INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Amlodipine', 'Headache');
+INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Amlodipine', 'Palpitations');
+INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Amlodipine', 'Dizziness');
 
 INSERT INTO Treats (Med_Name, Illness_Name) VALUES ('Advil',        'Common Cold');
+INSERT INTO Treats (Med_Name, Illness_Name) VALUES ('Advil',        'Pleuriis');
+INSERT INTO Treats (Med_Name, Illness_Name) VALUES ('Naproxen',        'Common Cold');
+INSERT INTO Treats (Med_Name, Illness_Name) VALUES ('Naproxen',        'Pleuriis');
+INSERT INTO Treats (Med_Name, Illness_Name) VALUES ('Tylenol',        'Common Cold');
+INSERT INTO Treats (Med_Name, Illness_Name) VALUES ('Tylenol',        'Pleuriis');
+INSERT INTO Treats (Med_Name, Illness_Name) VALUES ('Ibuprofen',        'Common Cold');
+INSERT INTO Treats (Med_Name, Illness_Name) VALUES ('Ibuprofen',        'Pleuriis');
 INSERT INTO Treats (Med_Name, Illness_Name) VALUES ('Lisinopril',   'High Blood Pressure');
+INSERT INTO Treats (Med_Name, Illness_Name) VALUES ('Levothyroxine',        'Hypothyroidism');
+INSERT INTO Treats (Med_Name, Illness_Name) VALUES ('Atorvastatin',        'High Cholesterol');
+INSERT INTO Treats (Med_Name, Illness_Name) VALUES ('Metformin',        'Diabetes');
+INSERT INTO Treats (Med_Name, Illness_Name) VALUES ('Amlodipine',        'High Blood Pressure');
+INSERT INTO Treats (Med_Name, Illness_Name) VALUES ('Omeprazole',        'Heartburn');
 
 INSERT INTO Symptoms (Illness_Name, Symptom_name) VALUES ('Common Cold', 'Fever');
 INSERT INTO Symptoms (Illness_Name, Symptom_name) VALUES ('Common Cold', 'Cough');
