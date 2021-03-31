@@ -1,6 +1,6 @@
 <template>
     <div id="forms">
-        <div class="flex justify-end w-full fixed">
+        <div class="flex justify-end w-full fixed z-50">
             <router-link to="/patient-panel">
                 <div
                     class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
@@ -10,20 +10,20 @@
             </router-link>
         </div>
         <div v-if="logged_in">
-            <div class="flex flex-col items-center">
-                <p class="text-5xl mt-20 mb-14">Reports, Forms, and Screens</p>
-                <div class="w-1/2 mb-10">
+            <div class="flex flex-col items-center px-8">
+                <p class="text-4xl lg:text-5xl mt-20 mb-14">Reports, Forms, and Screens</p>
+                <div class="w-full lg:w-1/2 mb-10">
                     <p class="text-3xl mb-4">Reports</p>
                     <table class="table-fixed w-full">
                         <thead>
                             <tr class="text-lg">
-                                <th class="w-3/4 border-black border-2">
+                                <th class="w-3/5 border-black border-2">
                                     Report ID
                                 </th>
-                                <th class="w-1/4 border-black border-2">
+                                <th class="w-2/5 border-black border-2">
                                     <router-link :to="{ name: 'edit-report' }">
                                         <div
-                                            class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1"
+                                            class="w-3/4 mx-auto text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1"
                                         >
                                             New
                                         </div>
@@ -47,7 +47,7 @@
                                         }"
                                     >
                                         <div
-                                            class="text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-blue-600 rounded-lg py-2 px-1 mx-6 my-1"
+                                            class="w-3/4 mx-auto text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-blue-600 rounded-lg py-2 px-1 mx-6 my-1"
                                         >
                                             View
                                         </div>
@@ -57,24 +57,24 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="w-1/2 mb-10">
+                <div class="w-full lg:w-1/2 mb-10">
                     <p class="text-3xl mb-4">New Applicant Forms</p>
                     <table class="table-fixed w-full">
                         <thead>
                             <tr class="text-lg">
-                                <th class="w-3/5 border-black border-2">
+                                <th class="w-2/6 border-black border-2">
                                     Email
                                 </th>
-                                <th class="w-1/5 border-black border-2">
+                                <th class="w-2/6 border-black border-2">
                                     Approved
                                 </th>
-                                <th class="w-1/5 border-black border-2">
+                                <th class="w-2/6 border-black border-2">
                                     <router-link
                                         :to="{ name: 'edit-new-applicant' }"
                                         v-if="new_applicant.length == 0"
                                     >
                                         <div
-                                            class="text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1"
+                                            class="w-3/4 mx-auto text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1"
                                         >
                                             New
                                         </div>
@@ -106,7 +106,7 @@
                                         }"
                                     >
                                         <div
-                                            class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-blue-600 rounded-lg py-2 px-1 mx-6 my-1"
+                                            class="w-3/4 mx-auto text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-blue-600 rounded-lg py-2 px-1 mx-6 my-1"
                                         >
                                             Edit
                                         </div>
@@ -116,20 +116,20 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="w-1/2 mb-10">
+                <div class="w-full lg:w-1/2 mb-10">
                     <p class="text-3xl mb-4">Covid Screens</p>
                     <table class="table-fixed w-full">
                         <thead>
                             <tr class="text-lg">
-                                <th class="w-3/4 border-black border-2">
+                                <th class="w-3/5 border-black border-2">
                                     Date
                                 </th>
-                                <th class="w-1/4 border-black border-2">
+                                <th class="w-2/5 border-black border-2">
                                     <router-link
                                         :to="{ name: 'edit-covid-screen' }"
                                     >
                                         <div
-                                            class="text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1"
+                                            class="w-3/4 mx-auto text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1"
                                         >
                                             New
                                         </div>
@@ -153,7 +153,7 @@
                                         }"
                                     >
                                         <div
-                                            class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-blue-600 rounded-lg py-2 px-1 mx-6 my-1"
+                                            class="w-3/4 mx-auto text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-blue-600 rounded-lg py-2 px-1 mx-6 my-1"
                                         >
                                             Edit
                                         </div>
@@ -163,21 +163,21 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="w-1/2 mb-10">
+                <div class="w-full lg:w-1/2 mb-10">
                     <p class="text-3xl mb-4">Medical History</p>
                     <table class="table-fixed w-full">
                         <thead>
                             <tr class="text-lg">
-                                <th class="w-3/4 border-black border-2">
+                                <th class="w-3/5 border-black border-2">
                                     SSN
                                 </th>
-                                 <th class="w-1/4 border-black border-2">
+                                 <th class="w-2/5 border-black border-2">
                                     <router-link
                                         :to="{ name: 'edit-medical-history' }"
                                         v-if="medical_history.length == 0"
                                     >
                                         <div
-                                            class="text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1"
+                                            class="w-3/4 mx-auto text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1"
                                         >
                                             New
                                         </div>
@@ -201,7 +201,7 @@
                                         }"
                                     >
                                         <div
-                                            class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-blue-600 rounded-lg py-2 px-1 mx-6 my-1"
+                                            class="w-3/4 mx-auto text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-blue-600 rounded-lg py-2 px-1 mx-6 my-1"
                                         >
                                             Edit
                                         </div>
