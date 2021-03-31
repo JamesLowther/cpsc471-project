@@ -84,7 +84,7 @@
                                         {{ medication.Is_prescription }}
                                     </td>
                                     <td class="border-black border-2">
-                                        <ul class="list-disc">
+                                        <ul class="pl-5 list-disc text-left">
                                             <li v-for="effect in medication.Effects" :key="effect">
                                                 {{ effect }}
                                             </li>

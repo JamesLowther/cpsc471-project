@@ -22,15 +22,15 @@
                                     }}
                 </p>
             </div>
-            <div class="flex flex-col items-start mt-10 w-1/3 mx-auto">
+            <div class="flex flex-col items-start mt-10 w-1/2 mx-auto">
                 <div class="w-full">
 
 
                     <p class="text-xl"><b><i>COVID SCREEN STATUS:</i></b></p>
-                        <svg v-if="this.form.Has_passed" class="w-1/4 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="green">
+                        <svg v-if="this.form.Has_passed" class="w-20 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="green">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
-                        <svg v-else class="w-1/4 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="red">
+                        <svg v-else class="w-20 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="red">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
 
@@ -126,7 +126,7 @@
                                     </td>
                                     <td class="border-black border-2">
                                         <button
-                                            class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-2 w-1/4 m-3"
+                                            class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-2 w-1/2 m-3"
                                             v-on:click="addNewIllness(illness.Name, illness.Organ_system)"
                                         >
                                             Add
@@ -143,10 +143,10 @@
                         <p class="text-xl mb-1 bg-green-300"><b>Medications</b></p>
                         <table class="table-fixed w-full mb-10">
                             <thead>
-                                <th class="w-2/4 border-black border-2 bg-gray-300">Name</th>
-                                <th class="w-1/4 border-black border-2 bg-gray-300">Prescription</th>
-                                <th class="w-2/4 border-black border-2 bg-gray-300">Side Effects</th>
-                                <th class="w-2/4 border-black border-2 bg-gray-300"></th>
+                                <th class="w-2/6 border-black border-2 bg-gray-300">Name</th>
+                                <th class="w-1/6 border-black border-2 bg-gray-300">Prescription</th>
+                                <th class="w-2/6 border-black border-2 bg-gray-300">Side Effects</th>
+                                <th class="w-1/6 border-black border-2 bg-gray-300"></th>
                             </thead>
                             <tbody>
                                 <tr
@@ -211,15 +211,15 @@
                                         NO
                                     </td>
                                         <td class="border-black border-2">
-                                            <ul class="list-disc">
-                                                <li v-for="effect in medication.Effect" :key="effect">
+                                            <ul class="list-disc text-left pl-5">
+                                                <li v-for="effect in medication.Effects" :key="effect">
                                                     {{ effect }}
                                                 </li>
                                             </ul>
                                         </td>
                                     <td class="border-black border-2">
                                         <button
-                                            class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-2 w-1/4 m-3"
+                                            class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-2 w-1/2 m-3"
                                             v-on:click="addNewMedication(medication.Name, medication.Is_prescription, medication.Effect)"
                                         >
                                             Add

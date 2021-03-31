@@ -45,7 +45,11 @@
                                     {{ entity.Name }}
                                 </td>
                                 <td class="border-black border-2">
-                                    {{ entity.Effect}}
+                                    <ul class="list-disc text-left pl-5">
+                                        <li v-for="effect in entity.Effects" :key="effect">
+                                            {{ effect }}
+                                        </li>
+                                    </ul>
                                 </td>
                                 <td class="border-black border-2">
                                 <!-- to change -->
