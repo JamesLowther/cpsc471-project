@@ -1,8 +1,17 @@
 <template>
     <div id="index">
         <div class="flex flex-col h-screen">
+            <div class="flex w-full justify-end opacity-25">
+                <button v-if="creepy_mode" @click="creepy_mode = false" class="text-sm w-16 border border-yellow-200 bg-yellow-200 hover:bg-transparent text-white hover:text-gray-300 m-4 rounded-lg">
+                    Creepy Mode
+                </button>
+                <button v-else @click="creepy_mode = true" class="text-sm w-16 border border-yellow-200 hover:bg-yellow-200 text-gray-300 hover:text-white m-4 rounded-lg">
+                    Creepy Mode
+                </button>
+
+            </div>
             <p class="text-5xl mt-20">Remote Patient - Doctor Symptom Analyser</p>
-            <div class="bg-rose-300">
+            <div v-if="creepy_mode" class="bg-rose-300">
                 <img class="object-contain md:object-scale-down h-96 w-full ..." src="@/assets/aamc_doctors_trace.jpeg">
             </div>
             <div
@@ -23,7 +32,7 @@
                     </div>
                 </router-link>
             </div>
-                <p class="text-2xl mt-20">
+                <p class="text-2xl mt-20 mb-10">
                     CPSC 471 - Database Management Systems
                     <br />Winter 2021 March 25
                     <br />
@@ -42,5 +51,11 @@
 <script>
 export default {
     name: "IndexPage",
+    data() {
+        return {
+            creepy_mode: true,
+        }
+    }
+
 };
 </script>
