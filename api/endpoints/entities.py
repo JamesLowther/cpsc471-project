@@ -1,5 +1,6 @@
 from flask import jsonify
 from flask_restful import Resource, reqparse
+import sqlite3
 
 from flask_jwt_extended import get_jwt_identity, verify_jwt_in_request
 
@@ -27,7 +28,8 @@ class EntitiesForms(Resource):
     parser.add_argument("ill_name", type=str, required=False)
     parser.add_argument("org_sys", type=str, required=False)
     
-    parser.add_argument("symptoms", action='append', type=str, required=False)
+    # either side-effects or symptoms for newly added med or illness
+    parser.add_argument("effects", action='append', type=str, required=False)
     
     parser.add_argument("form", type=dict, required=False)
     parser.add_argument("query_string", type=str)
@@ -66,7 +68,7 @@ class EntitiesForms(Resource):
         # Only doctors and clerks can accses add/delete functions.
         elif current["user_type"] in {"doctor", "clerk"}:
             if args["method"] == "add":
-                self.add_new_entity(args)
+                return self.add_new_entity(args)
 
             if args["method"] == "delete":
                 # Write code to delete illness/medication.
@@ -121,16 +123,50 @@ class EntitiesForms(Resource):
 
         return results
 
+
+
+
     def add_new_entity(self, args):
+        """
+        Add a new entity to the database and its corresponding
+        effects or symptoms.
+        """
 
         con, cursor = db.connect_db()
 
+        # Add a new medication, and its specified side-effects
+        # catch any SQL errors eg key or unique name constraints
         if(args["entity_type"] == "medication"):
-            print(args["med_name"])
-            print(args["is_pres"])
+            try:
+                cursor.execute("INSERT INTO Medication VALUES (?, ?);", (args["med_name"], args["is_pres"]) )
 
+                # if users included side-effects, insert into database
+                if(args["effects"]):
+                    for effect in args["effects"]:
+                        cursor.execute("INSERT INTO Side_Effects VALUES (?,?);", (args["med_name"], effect) )
+
+            except sqlite3.Error as er:
+                print(er)
+                con.close()
+                return jsonify(status=0)
         
+        # Add a new illness, and its specified symptoms. Catch any SQL errors
         elif (args["entity_type"] == "illness"):
-            print(args["ill_name"])
-            print(args["org_sys"])
-            print(args["symptoms"])
+            try:
+                cursor.execute("INSERT INTO Illness VALUES (?, ?);", (args["ill_name"], args["org_sys"]) )
+
+                # if users included symptoms, insert into database
+                if(args["effects"]):
+                    for symptom in args["effects"]:
+                        cursor.execute("INSERT INTO Symptoms VALUES (?,?);", (args["ill_name"], symptom) )
+
+            except sqlite3.Error as er:
+                print(er)
+                con.close()
+                return jsonify(status=0)
+
+
+        con.commit()
+        con.close()
+
+        return jsonify(status=1)

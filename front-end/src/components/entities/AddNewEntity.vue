@@ -27,6 +27,7 @@
                             <input type="radio" name="pre-no" value="0" v-model="Is_prescription" class="mx-2">
                             <label for="pre-no">No</label>
                         </div>
+                        
                     </template>
 
                     <!-- Add a new illness, choosing an organ system and a set of symptoms -->
@@ -66,33 +67,39 @@
                             </div>
 
                         </div>
-                        <div class="bg-gray-300 rounded-lg p-2 m-4">
+                        
+                    </template>
+
+                    
+                    <div class="bg-gray-300 rounded-lg p-2 m-4">
                             <input
                                 class="border border-black mb-2 mt-2 p-1 rounded-lg"
                                 type="text"
-                                name="symptom"
-                                v-model="symptom"
+                                name="effect"
+                                v-model="effect"
                             />
-                            <label for="symptom" class="m-2">Add Symptom(s) (optional)</label>
+                            <label v-if="entity_type == 'medication'" for="effect" class="m-2">Add Symptom(s) (optional)</label>
+                            <label v-if="entity_type == 'illness'" for="effect" class="m-2">Add Symptom(s) (optional)</label>
                             
 
                             <ul class="list-disc text-left pl-5">
-                                <li v-for="symptom in symptoms" :key="symptom">{{ symptom }}
-                                
-                                
+                                <li v-for="effect in effects" :key="effect">
+                                    {{ effect }}
                                 </li>
                             </ul>
-                            <button v-if="symptom" @click="rm_symp()" class="rounded-lg text-white px-1 mx-4 bg-gray-700">remove</button>
-                            <button @click="add_symp()" class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
+                            <button @click="rm_effect()" class="rounded-lg text-white px-1 mx-4 bg-gray-700">remove</button>
+                            <button @click="add_effect()" class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
                                 <span >add</span>
                             </button>
                         </div>
-                    </template>
 
                     <button @click="add_new()" class="text-white text-xl mt-5 shadow-lg transition duration-300 ease-in-out bg-blue-600 hover:bg-green-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
                         <span>Submit</span>
                     </button>
-                
+
+                    <b v-if="status=='0'">error</b>
+                    <b v-if="status=='1'">success</b>
+
             </div>
         </div>
         <div v-else class="flex flex-col">
@@ -110,6 +117,7 @@ export default {
         return {
             logged_in: true,
             user_type: "",
+            status: null,
 
             entity_type: "", // Medication, illness or symptom
             entity_post: "", //the formatted string to send in POST
@@ -118,8 +126,8 @@ export default {
             Is_prescription: null,
             Organ_system: null,
 
-            symptom: "",
-            symptoms: [],
+            effect: "", // Either a symptom (illness) or side-effect (medication)
+            effects: [],
         };
     },
 
@@ -131,8 +139,8 @@ export default {
 
     methods: {
         
-        rm_symp() {this.symptoms.pop(this.symptom);},
-        add_symp() {this.symptoms.push(this.symptom);},
+        rm_effect() {this.effects.pop(this.effect);},
+        add_effect() {this.effects.push(this.effect);},
 
         add_med() {
             axios.post(`http://localhost:5000/entities/forms`,
@@ -140,12 +148,19 @@ export default {
                     entity_type: this.entity_post,
                     method: "add",
                     med_name: this.entity_name,
-                    is_pres: parseInt(this.Is_prescription)
+                    is_pres: parseInt(this.Is_prescription),
+                    effects: this.effects
                 },
                 {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("jwt"),
                     },
+                }
+            ).then((response) => {
+                    this.status = response.data.status;
+                })
+                .catch((e) => {
+                    console.log(e);
                 }
             );
         },
@@ -156,14 +171,20 @@ export default {
                     method: "add",
                     ill_name: this.entity_name,
                     org_sys: this.Organ_system,
-                    symptoms: this.symptoms
+                    effects: this.effects
                 },
                 {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("jwt"),
                     },
                 }
-            );
+            ).then((response) => {
+                    this.status = response.data.status;
+
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
         },
 
 
