@@ -1,6 +1,3 @@
-INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('UofC Clinic', 	'2500 University Dr NW', 	'Clinic');
-INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('Foothills', 		'1403 29 St NW', 			'Hospital');
-
 INSERT INTO Doctor (SSN, Specialization, Fname, Lname, Initial, DoB, Password) VALUES (200000000, 'GP', 			'Brody', 	'Wells', 'W', 		'1990-01-01', 'pass123');
 INSERT INTO Doctor (SSN, Specialization, Fname, Lname, Initial, DoB, Password) VALUES (200000001, 'Oncology', 	'James', 	'Lowther', 'L', 	'1990-01-01', 'pass123');
 INSERT INTO Doctor (SSN, Specialization, Fname, Lname, Initial, DoB, Password) VALUES (200000002, 'Nephrology', 	'Logan', 	'Perry-Din', 'P', 	'1990-01-01', 'pass123');
@@ -71,8 +68,9 @@ INSERT INTO Past_Illnesses (P_SSN, Illness_Name, Age_of_onset) VALUES (100000000
 INSERT INTO Past_Illnesses (P_SSN, Illness_Name, Age_of_onset) VALUES (100000001, 'Common Cold', 	35);
 INSERT INTO Past_Illnesses (P_SSN, Illness_Name, Age_of_onset) VALUES (100000002, 'Pneumonia', 	30);
 
-INSERT INTO Covid_Screen (Date, P_SSN, Shortness_breath, New_cough, Fever, Sore_throat, Runny_nose) VALUES ('2021-03-07', 100000000, 0, 0, 0, 0, 0);
-INSERT INTO Covid_Screen (Date, P_SSN, Shortness_breath, New_cough, Fever, Sore_throat, Runny_nose) VALUES ('2021-03-06', 100000001, 1, 1, 1, 1, 1);
+INSERT INTO Covid_Screen (Date, P_SSN, Shortness_breath, New_cough, Fever, Sore_throat, Runny_nose, Has_passed) VALUES ('2021-03-07', 100000000, 0, 0, 0, 0, 0, 0);
+INSERT INTO Covid_Screen (Date, P_SSN, Shortness_breath, New_cough, Fever, Sore_throat, Runny_nose, Has_passed) VALUES ('2021-02-06', 100000001, 1, 1, 1, 1, 0, 0);
+INSERT INTO Covid_Screen (Date, P_SSN, Shortness_breath, New_cough, Fever, Sore_throat, Runny_nose, Has_passed) VALUES ('2021-03-06', 100000001, 1, 1, 1, 1, 1, 1);
 
 INSERT INTO Report (Report_ID, P_SSN, SSN, Complaint) VALUES (0, 100000001, 200000000, "Test 1");
 INSERT INTO Report (Report_ID, P_SSN, SSN, Complaint) VALUES (1, 100000002, 200000001, "Test 2");

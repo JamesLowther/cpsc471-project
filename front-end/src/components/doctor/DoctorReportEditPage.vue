@@ -24,7 +24,17 @@
             </div>
             <div class="flex flex-col items-start mt-10 w-1/3 mx-auto">
                 <div class="w-full">
-                    <p class="text-xl">Chief Complaint</p>
+
+
+                    <p class="text-xl"><b><i>COVID SCREEN STATUS:</i></b></p>
+                        <svg v-if="this.form.Has_passed" class="w-1/4 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="green">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+                        <svg v-else class="w-1/4 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="red">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                        </svg>
+
+                    <p class="text-xl"><b><i>Chief Complaint</i></b></p>
                     <textarea
                         class="border border-black mb-6 p-1 rounded-lg w-full text-xl"
                         type="text"
@@ -52,26 +62,7 @@
                         </p>
                     </div>
                     <div class="w-full mb-6">
-                        <p class="text-xl mb-1">Diagnosis</p>
-                        <!-- <table class="table-fixed w-full mb-10">
-                            <thead>
-                                <th class="w-1/4 border-black border-2">Illness</th>
-                                <th class="w-1/4 border-black border-2">Organ System</th>
-                            </thead>
-                            <tbody>
-                                <tr
-                                    v-for="illness in form.Diagnosis"
-                                    :key="illness.Name"
-                                >
-                                    <td class="border-black border-2">
-                                        {{ illness.Name }}
-                                    </td>
-                                    <td class="border-black border-2">
-                                        {{ illness.Organ_system }}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table> -->
+                        <p class="text-xl mb-1 bg-green-300"><b>Diagnosis</b></p>
                         <table class="table-fixed w-full mb-3">
                             <thead>
                                 <tr>
@@ -149,19 +140,7 @@
                         </p>
                     </div>
                     <div class="w-full mb-6">
-                        <p class="text-xl mb-1">Medications</p>
-                        <!-- <router-link
-                                        :to="{
-                                            name: 'add-med-to-reports',
-                                            params: { id: report.ReportID },
-                                        }"
-                                    >
-                                        <div
-                                            class="text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 rounded-lg py-2 px-1 mx-6 my-1"
-                                        >
-                                            Add
-                                        </div>
-                                    </router-link> -->
+                        <p class="text-xl mb-1 bg-green-300"><b>Medications</b></p>
                         <table class="table-fixed w-full mb-10">
                             <thead>
                                 <th class="w-2/4 border-black border-2 bg-gray-300">Name</th>
@@ -254,7 +233,7 @@
                         </p>
                     </div>
                     <div class="w-full mb-6">
-                        <p class="text-xl mb-1">Medical Centres</p>
+                        <p class="text-xl mb-1 bg-green-300"><b>Medical Centres</b></p>
                         <table class="table-fixed w-full mb-10">
                             <thead>
                                 <th class="w-1/4 border-black border-2 bg-gray-300">Name</th>
@@ -331,6 +310,81 @@
                         </p>
                     </div>
                 </div>
+                <div class="w-full mb-6">
+                    <p class="text-xl mb-1 bg-green-300"><b>Patients Medical History</b></p>
+                    <table class="table-fixed w-full mb-3">
+                        <tbody>
+                            <tr>
+                                <td class="border-black border-2 bg-gray-300">
+                                    <b>Age:</b> {{ this.form.Age }}
+                                </td>
+                                <td class="border-black border-2 bg-gray-300">
+                                    <b>Gender:</b> {{ this.form.Gender }}
+                                </td>
+                                <td class="border-black border-2 bg-gray-300">
+                                    <b>Sex:</b> {{ this.form.Sex }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table-fixed w-full mb-3">
+                        <thead>
+                            <tr>
+                                <th class="text-lg w-1/3 border-black border-2 bg-gray-300">
+                                    Allergies:
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                v-for="allergy in form.allergies"
+                                :key="allergy.Allergy"
+                            >
+                                <td class="border-black border-2">
+                                    {{ allergy.Allergy }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table-fixed w-full mb-3">
+                        <thead>
+                            <tr>
+                                <th class="text-lg w-1/3 border-black border-2 bg-gray-300">
+                                    Immunizations:
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                v-for="immunization in form.immunizations"
+                                :key="immunization.Immunization"
+                            >
+                                <td class="border-black border-2">
+                                    {{ immunization.Immunization }}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table-fixed w-full mb-3">
+                        <thead>
+                            <tr>
+                                <th class="text-lg w-1/3 border-black border-2 bg-gray-300">
+                                    Past Illnesses:
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr
+                                v-for="past_illness in form.past_illnesses"
+                                :key="past_illness.Illness_name"
+                            >
+                                <td class="border-black border-2">
+                                    <b>{{ past_illness.Illness_name }}</b> [Age of Onset: {{ past_illness.Age_of_onset }}]
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
         <div v-else class="flex flex-col">
@@ -355,6 +409,9 @@ export default {
                 Fname: "",
                 Initial: "",
                 Lname: "",
+                Gender: "",
+                Sex: "",
+                Age: "",
                 Complaint: "",
                 Doc_Fname: "",
                 Doc_Initial: "",
@@ -362,6 +419,11 @@ export default {
                 Illnesses: [],
                 Medications: [],
                 Medical_centres: [],
+                TPAL: "",
+                past_illnesses: [],
+                allergies: [],
+                immunizations: [],
+                Has_passed: "",
             },
             illness_query: "",
             illness_results: [],
