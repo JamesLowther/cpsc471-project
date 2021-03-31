@@ -21,9 +21,12 @@
                                     />
                                 </th>
                                 <th class="width: 25% border-black border-2">
-                                    <button class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-green-700 hover:bg-green-500 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
+
+                                    <router-link :to="{name: 'add-new-entity',params: { entity_type: entity_type }}"
+                                    class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-green-700 hover:bg-green-500 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
                                         <span >Add New {{entity_type}}</span>
-                                    </button>
+                                    </router-link>
+                                    
                                 </th>
                                 
                                 <th class="width: 25% border-black border-2">
@@ -111,38 +114,65 @@
 <script>
 import axios from "axios";
 export default {
-    name: "EntitiesPanel",
+    name: "EntitiesPanelPage",
 
     data() {
         return {
             logged_in: true,
-            entity_type: "",
+            entity_type: "", // Medication, illness or symptom
+            entity_post: "", //the formatted string to send in POST
             entity_list: [],
-            entity_name: "",
-            entity_attr: ""
+            entity_name: "", //name of tuple/row
+            entity_attr: "" //attribute specific to that entity
         };
     },
 
     created() {
         this.entity_type = this.$route.params.entity_type;
-
-        if (this.entity_type == "Medications") this.entity_attr = "Side Effects";
-        else if (this.entity_type == "Illnesses") this.entity_attr = "Organ Type and Symptoms";
-        else this.entity_attr = "Illness";
+        this.init_entity();
     },
 
     methods: {
-        search_entities() {
 
-            // POST either medication, illness or symptom
-            let e_type = "";
-            if (this.entity_type == "Medications") e_type = "medication";
-            else if (this.entity_type == "Illnesses") e_type = "illness";
-            else e_type = "symptom";
-
+        add_new() {
             axios.post(`http://localhost:5000/entities/forms`,
                 {
-                    entity_type: e_type,
+                    entity_type: this.entity_post,
+                    method: "add",
+                    med_name: "test",
+                },
+                {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("jwt"),
+                    },
+                }
+            );
+            
+
+
+        },
+
+        init_entity() {
+            if (this.entity_type == "Medications") {
+                this.entity_attr = "Side Effects";
+                this.entity_post = "medication";
+            }
+            else if (this.entity_type == "Illnesses") {
+                this.entity_attr = "Organ Type and Symptoms";
+                this.entity_post = "illness";
+            }
+            else {
+                this.entity_attr = "Illness";
+                this.entity_post = "symptom";
+            }
+            
+        },
+
+
+        search_entities() {
+            axios.post(`http://localhost:5000/entities/forms`,
+                {
+                    entity_type: this.entity_post,
                     method: "query",
                     query_string: this.entity_name
                 },

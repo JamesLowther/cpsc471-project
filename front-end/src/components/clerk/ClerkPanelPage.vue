@@ -50,7 +50,7 @@
 import axios from "axios";
 
 export default {
-    name: "ClerkPanel",
+    name: "ClerkPanelPage",
 
     data() {
         return {

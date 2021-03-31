@@ -20,8 +20,8 @@ class EntitiesForms(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument("entity_type", type=str, required=True, choices={"medication", "illness", "symptom"}, help="Bad choice: {error_msg}")
     parser.add_argument("method", type=str, required=True, choices={"add", "delete", "query"}, help="Bad choice: {error_msg}")
-    parser.add_argument("med_name", type=int, required=False)
-    parser.add_argument("ill_name", type=int, required=False)
+    parser.add_argument("med_name", type=str, required=False)
+    parser.add_argument("ill_name", type=str, required=False)
     parser.add_argument("symp_name", type=str, required=False)
     parser.add_argument("form", type=dict, required=False)
     parser.add_argument("query_string", type=str)
@@ -60,8 +60,7 @@ class EntitiesForms(Resource):
         # Only doctors and clerks can accses add/delete functions.
         elif current["user_type"] in {"doctor", "clerk"}:
             if args["method"] == "add":
-                # Write code to add illness/medication.
-                pass
+                print(args["med_name"])
 
             if args["method"] == "delete":
                 # Write code to delete illness/medication.
