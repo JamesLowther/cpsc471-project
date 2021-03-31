@@ -1,64 +1,64 @@
 <template>
     <div class="new-account">
-        <div class="flex fixed justify-end w-full">
+        <div class="grid grid-cols-2 w-full fixed mt-5">
             <router-link
                 to="/login"
-                class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
+                class="justify-self-start text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-4 ml-6"
                 >Login Page</router-link
             >
-        </div>
-        <div class="flex fixed">
             <router-link
                 to="/"
-                class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
+                class="justify-self-end text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-4 mr-6"
                 >Back</router-link
             >
         </div>
-        <p class="text-center text-5xl mt-10">New Account</p>
-        <div class="flex justify-center my-64">
-            <div class="text-xl">
-                <label class="mr-3" for="select">Type:</label>
-                <select
-                    class="bg-gray-300 rounded py-1 px-10"
-                    id="select"
-                    v-model="user_type"
-                >
-                    <option value="patient">Patient</option>
-                    <option value="doctor">Doctor</option>
-                    <option value="clerk">Clerk</option></select
-                ><br />
-                <input
-                    class="border border-black my-4 p-1 rounded-lg"
-                    v-bind:class="[
-                        invalid_ssn ? 'border-red-700' : 'border-black',
-                    ]"
-                    type="text"
-                    pattern="[0-9]{9}"
-                    placeholder="SSN"
-                    id="ssn"
-                    name="ssn"
-                    v-model="ssn"
-                    ref="ssn"
-                /><br />
-                <input
-                    class="border border-black p-1 rounded-lg"
-                    v-bind:class="[
-                        empty_pass ? 'border-red-700' : 'border-black',
-                    ]"
-                    type="password"
-                    placeholder="Password"
-                    id="password"
-                    name="password"
-                    v-model="password"
-                    ref="pass"
-                /><br /><br />
-                <button
-                    class="text-white px-4 py-2 shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg"
-                    @click="loginPost()"
-                >
-                    Create Account
-                </button>
-                <p class="text-red-600 mt-3">{{ error }}</p>
+        <div class="flex flex-col">
+            <p class="text-center text-5xl mt-32">New Account</p>
+            <div class="flex justify-center my-64">
+                <div class="text-xl">
+                    <label class="mr-3" for="select">Type:</label>
+                    <select
+                        class="bg-gray-300 rounded py-1 px-10"
+                        id="select"
+                        v-model="user_type"
+                    >
+                        <option value="patient">Patient</option>
+                        <option value="doctor">Doctor</option>
+                        <option value="clerk">Clerk</option></select
+                    ><br />
+                    <input
+                        class="border border-black my-4 p-1 rounded-lg"
+                        v-bind:class="[
+                            invalid_ssn ? 'border-red-700' : 'border-black',
+                        ]"
+                        type="text"
+                        pattern="[0-9]{9}"
+                        placeholder="SSN"
+                        id="ssn"
+                        name="ssn"
+                        v-model="ssn"
+                        ref="ssn"
+                    /><br />
+                    <input
+                        class="border border-black p-1 rounded-lg"
+                        v-bind:class="[
+                            empty_pass ? 'border-red-700' : 'border-black',
+                        ]"
+                        type="password"
+                        placeholder="Password"
+                        id="password"
+                        name="password"
+                        v-model="password"
+                        ref="pass"
+                    /><br /><br />
+                    <button
+                        class="text-white px-4 py-2 shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg"
+                        @click="loginPost()"
+                    >
+                        Create Account
+                    </button>
+                    <p class="text-red-600 mt-3">{{ error }}</p>
+                </div>
             </div>
         </div>
     </div>
