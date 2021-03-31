@@ -10,13 +10,13 @@
             </router-link>
         </div>
         <div v-if="logged_in">
-            <div class="flex flex-col">
-                <p v-if="create_mode" class="text-5xl mt-20">
+            <div class="flex flex-col text-4xl lg:text-5xl">
+                <p v-if="create_mode" class="mt-20">
                     Create New Report
                 </p>
-                <p v-else class="text-5xl mt-20">Edit Report {{ this.$route.params.id }}</p>
+                <p v-else class="mt-20">Edit Report {{ this.$route.params.id }}</p>
             </div>
-            <div class="flex flex-col items-start mt-10 w-1/3 mx-auto">
+            <div class="flex flex-col items-start mt-10 w:4/5 lg:w-1/3 mx-auto px-8">
                 <div class="w-full mb-6">
                     <p class="text-xl">Chief Complaint</p>
                     <textarea

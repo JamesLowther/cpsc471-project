@@ -11,21 +11,21 @@
         </div>
         <div v-if="logged_in">
             <div class="flex flex-col">
-                <p v-if="create_mode" class="text-5xl mt-20">
+                <p v-if="create_mode" class="text-4xl lg:text-5xl mt-20">
                     Create Medical History Form
                 </p>
-                <p v-else class="text-5xl mt-20">Edit Medical History Form</p>
+                <p v-else class="text-4xl lg:text-5xl mt-20">Edit Medical History Form</p>
             </div>
-            <div class="flex flex-col items-start mt-10 w-1/2 mx-auto">
+            <div class="flex flex-col items-start mt-10 w-5/6 lg:w-1/2 mx-auto">
                 <div class="w-full mb-10">
                     <p class="font-bold text-3xl text-left">
                         Pregnancy Info:
                     </p>
                     <p class="text-left text-lg mb-2">Set values to 0 if not applicable</p>
                     <div
-                        class="flex flex-row justify-around items-center w-full mx-auto"
+                        class="flex flex-row justify-around items-center w-full h-36 mx-auto"
                     >
-                        <div class="w-1/4 p-3">
+                        <div class="w-1/4 p-3 flex flex-col justify-between h-full">
                             <p class="text-xl">Total births:</p>
                             <input
                                 class="border border-black mb-6 p-1 rounded-lg text-right w-full"
@@ -37,7 +37,7 @@
                                 v-model="form.TPAL_total"
                             />
                         </div>
-                        <div class="w-1/4 p-3">
+                        <div class="w-1/4 p-3 flex flex-col justify-between h-full">
                             <p class="text-xl">Preterm births:</p>
                             <input
                                 class="border border-black mb-6 p-1 rounded-lg text-right w-full"
@@ -49,7 +49,7 @@
                                 v-model="form.TPAL_preterm"
                             />
                         </div>
-                        <div class="w-1/4 p-3">
+                        <div class="w-1/4 p-3 flex flex-col justify-between h-full">
                             <p class="text-xl">Aborted:</p>
                             <input
                                 class="border border-black mb-6 p-1 rounded-lg text-right w-full"
@@ -61,7 +61,7 @@
                                 v-model="form.TPAL_aborted"
                             />
                         </div>
-                        <div class="w-1/4 p-3">
+                        <div class="w-1/4 p-3 flex flex-col justify-between h-full">
                             <p class="text-xl">Living children:</p>
                             <input
                                 class="border border-black mb-6 p-1 rounded-lg text-right w-full"
@@ -107,7 +107,7 @@
                                 </td>
                                 <td class="border-black border-2">
                                     <button
-                                        class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:scale-105 rounded-lg py-2 px-8 m-3"
+                                        class="w-3/4 text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:scale-105 rounded-lg py-2 px-2 m-3"
                                         v-on:click="
                                             removeIllness(illness.Illness_name)
                                         "
@@ -147,7 +147,7 @@
                                 </td>
                                 <td class="border-black border-2">
                                     <button
-                                        class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-2 w-1/4 m-3"
+                                        class="w-3/4 text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-2 px-2 w-1/4 m-3"
                                         v-on:click="addNewIllness(illness.Name)"
                                     >
                                         Add
@@ -181,7 +181,7 @@
                                 </td>
                                 <td class="border-black border-2">
                                     <button
-                                        class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:scale-105 rounded-lg py-2 w-1/4 m-3"
+                                        class="w-3/4 text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:scale-105 rounded-lg py-2 px-2 w-1/4 m-3"
                                         v-on:click="removeAllergy(allergy)"
                                     >
                                         Remove
@@ -200,7 +200,7 @@
                                 </td>
                                 <td class="border-black border-2">
                                     <button
-                                        class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:scale-105 rounded-lg py-2 w-1/4 m-3"
+                                        class="w-3/4 text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:scale-105 rounded-lg py-2 px-2 w-1/4 m-3"
                                         v-on:click="addNewAllergy()"
                                     >
                                         Add
@@ -236,7 +236,7 @@
                                 </td>
                                 <td class="border-black border-2">
                                     <button
-                                        class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:scale-105 rounded-lg py-2 w-1/4 m-3"
+                                        class="w-3/4 text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:scale-105 rounded-lg py-2 px-2 w-1/4 m-3"
                                         v-on:click="
                                             removeImmunization(immunization)
                                         "
@@ -257,7 +257,7 @@
                                 </td>
                                 <td class="border-black border-2">
                                     <button
-                                        class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:scale-105 rounded-lg py-2 w-1/4 m-3"
+                                        class="w-3/4 text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:scale-105 rounded-lg py-2 px-2 w-1/4 m-3"
                                         v-on:click="addNewImmunization()"
                                     >
                                         Add
