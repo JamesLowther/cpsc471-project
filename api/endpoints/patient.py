@@ -203,20 +203,12 @@ class PatientForms(Resource):
         medications = cursor.fetchall()
         medications = [dict(x) for x in medications]
 
-        # Get side-effects
-        cursor.execute(
-            "SELECT m.Name, s.Effect FROM Medication m, Prescribes p, Side_Effects s WHERE s.Med_Name = m.Name AND m.Name = p.Med_Name AND p.Report_ID = ? AND p.P_SSN = ?;",
-            (id, ssn)
-        )
-        side_effects = cursor.fetchall()
-        side_effects = [dict(x) for x in side_effects]
-
-        # Add the effects to the medications.
+        # Join side effects to medications.
         for medication in medications:
-            medication["Effects"] = []
-            for side_effect in side_effects:
-                if medication["Name"] == side_effect["Name"]:
-                    medication["Effects"].append(side_effect["Effect"])
+            cursor.execute("SELECT s.Effect FROM Side_Effects s WHERE s.Med_Name = ?;", (medication["Name"],))
+            side_effects = cursor.fetchall()
+
+            medication["Effects"] = [x["Effect"] for x in side_effects]
 
         # Get assigned medical centres.
         cursor.execute(

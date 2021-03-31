@@ -84,11 +84,30 @@ class EntitiesForms(Resource):
         entity_type = args["entity_type"]
 
         if (entity_type == "medication"):
-            cursor.execute("SELECT DISTINCT m.Name, m.Is_prescription, s.Effect FROM Medication AS m LEFT OUTER JOIN Side_Effects AS s ON m.Name = s.Med_Name WHERE m.name LIKE ?;", ("%" + args["query_string"] + "%",))
+            # Select all medications that match the query string.
+            cursor.execute("SELECT m.Name, m.Is_prescription FROM Medication AS m WHERE m.name LIKE ?;", ("%" + args["query_string"] + "%",))
             results = cursor.fetchall()
+            results = [dict(x) for x in results]
+            
+            # Add side effects as a list to the with the key "Effects".
+            # We have to build this list manually afaik.
+            for medication in results:
+                cursor.execute("SELECT s.Effect FROM Side_Effects AS s WHERE s.Med_Name = ?;", (medication["Name"],))
+                side_effects = cursor.fetchall()
+
+                medication["Effects"] = [x["Effect"] for x in side_effects]
+            
         elif (entity_type == "illness"):
             cursor.execute("SELECT Name, Organ_system FROM Illness WHERE Name LIKE ?;", ("%" + args["query_string"] + "%",))
-            results = cursor.fetchall()  
+            results = cursor.fetchall()
+            results = [dict(x) for x in results]
+
+            for illness in results:
+                cursor.execute("SELECT s.Symptom_name FROM Symptoms AS s WHERE s.Illness_Name = ?;", (illness["Name"],))
+                symptoms = cursor.fetchall()
+
+                illness["Effects"] = [x["Symptom_name"] for x in symptoms]
+
         elif (entity_type == "symptom"):
             cursor.execute("SELECT Symptom_name FROM Symptoms WHERE Name LIKE ?;", ("%" + args["query_string"] + "%",))
             results = cursor.fetchall() 
