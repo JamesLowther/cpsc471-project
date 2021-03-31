@@ -52,7 +52,7 @@
                             <tr v-for="entity in entity_list" :key="entity">
 
                                 <!-- Medications -->
-                                <template v-if="entity_type == 'Medications'">
+                                <template v-if="entity_type == 'medication'">
                                     <td class="border-black border-2">
                                         {{entity.Name}}
                                     </td>
@@ -66,7 +66,7 @@
                                 </template>
 
                                 <!-- Illnesses -->
-                                <template v-else-if="entity_type == 'Illnesses'">
+                                <template v-else-if="entity_type == 'illness'">
                                     <td class="border-black border-2">
                                         {{entity.Name}}
                                     </td>
@@ -81,7 +81,7 @@
                                 </template>
 
                                 <!-- Symptoms -->
-                                <template v-else-if="entity_type == 'Symptoms'">
+                                <template v-else-if="entity_type == 'symptom'">
                                     <td class="border-black border-2">
                                         {{entity.Symptom_name}}
                                     </td>
@@ -153,11 +153,11 @@ export default {
         },
 
         init_entity() {
-            if (this.entity_type == "Medications") {
+            if (this.entity_type == "medication") {
                 this.entity_attr = "Side Effects";
                 this.entity_post = "medication";
             }
-            else if (this.entity_type == "Illnesses") {
+            else if (this.entity_type == "illness") {
                 this.entity_attr = "Organ Type and Symptoms";
                 this.entity_post = "illness";
             }
