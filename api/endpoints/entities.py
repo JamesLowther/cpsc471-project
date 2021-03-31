@@ -109,7 +109,7 @@ class EntitiesForms(Resource):
                 illness["Effects"] = [x["Symptom_name"] for x in symptoms]
 
         elif (entity_type == "symptom"):
-            cursor.execute("SELECT Symptom_name FROM Symptoms WHERE Name LIKE ?;", ("%" + args["query_string"] + "%",))
+            cursor.execute("SELECT Symptom_name, Illness_Name FROM Symptoms WHERE Symptom_name LIKE ?;", ("%" + args["query_string"] + "%",))
             results = cursor.fetchall() 
 
         con.close()
