@@ -1,6 +1,6 @@
 <template>
     <div id="Entities_forms">
-        <router-link :to="{name: 'entities-panel',params: { entity_type: entity_type }}">
+        <router-link :to="{name: 'entities-panel',params: { entity_type: entity_type, user_type: user_type }}">
         <button class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
             <span >Back</span>
         </button>
@@ -109,6 +109,8 @@ export default {
     data() {
         return {
             logged_in: true,
+            user_type: "",
+
             entity_type: "", // Medication, illness or symptom
             entity_post: "", //the formatted string to send in POST
             entity_name: "", //name of added entity
@@ -123,6 +125,7 @@ export default {
 
     created() {
         this.entity_type = this.$route.params.entity_type;
+        this.user_type = this.$route.params.user_type;
         this.init_entity();
     },
 

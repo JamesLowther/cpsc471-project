@@ -39,7 +39,7 @@
                                 </th>
                                 <th class="width: 25% border-black border-2">
 
-                                    <router-link :to="{name: 'add-new-entity',params: { entity_type: entity_type }}"
+                                    <router-link :to="{name: 'add-new-entity',params: { entity_type: entity_type, user_type:user_type }}"
                                     class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-green-700 hover:bg-green-500 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
                                         <span >Add New {{entity_type}}</span>
                                     </router-link>
