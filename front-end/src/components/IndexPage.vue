@@ -53,7 +53,7 @@ export default {
     name: "IndexPage",
     data() {
         return {
-            creepy_mode: true,
+            creepy_mode: false,
         }
     }
 
