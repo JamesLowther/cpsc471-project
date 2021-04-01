@@ -9,9 +9,7 @@
         </div>
         <div v-else-if="user_type == 'clerk'" class="flex justify-end w-full fixed">
             <router-link to="/clerk-panel">
-                <div
-                    class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
-                >
+                <div class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
                     Back
                 </div>
             </router-link>
@@ -35,14 +33,15 @@
                                         v-on:keyup="search_entities()"
                                     />
                                 </th>
-                                <th class="width: 25% border-black border-2">
-
+                                <!-- include "add new" button only for med and ill -->
+                                <th v-if="entity_type == 'medication' || entity_type == 'illness'" 
+                                class="width: 25% border-black border-2">
                                     <router-link :to="{name: 'add-new-entity',params: { entity_type: entity_type, user_type:user_type }}"
                                     class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-green-700 hover:bg-green-500 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
                                         <span >Add New {{entity_type}}</span>
                                     </router-link>
-                                    
                                 </th>
+                                <th v-else></th>
                                 
                                 <th class="width: 25% border-black border-2">
                                     <p class="text-3xl mb-4">Modify</p>
