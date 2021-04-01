@@ -11,86 +11,63 @@
         </div>
         <div v-if="logged_in">
             <div class="flex flex-col">
-                <p class="text-5xl mt-20 mb-24 bg-blue-300">Patient Report Records:</p>
+                <p class="text-3xl md:text-4xl lg:text-5xl mt-20 bg-blue-300">Doctor Panel</p>
+                <p class="text-2xl md:text-3xl lg:text-4xl mt-4 bg-blue-300">Patient Reports</p>
             </div>
-            <div class="flex flex-col items-center">
-                <div class="w-1/2">
-                    <table class="table-fixed w-full mb-10">
-                        <thead>
-                            <tr>
-                                <th class="w-2/4 border-black border-2">
-                                    Search Patient Reports: 
-                                    <input
-                                        class="border border-black mb-2 mt-2 p-1 rounded-lg"
-                                        type="text"
-                                        name="PatientName"
-                                        v-model="form.patientName"
-                                        v-on:keyup="searchPatients()"
-                                    />
-                                </th>
-                                <th class="w-1/4 border-black border-2">
-                                </th>
-                                <th class="w-1/4 border-black border-2">
-                                    <p class="text-3xl mb-4">Reports</p>
-                                </th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr
-                                v-for="(patient, i) in patientList"
-                                :key="`${i}-${patient}`"
-                            >
-                                <td class="border-black border-2">
-                                    {{ patient.Lname }}, {{ patient.Fname }}
-                                </td>
-                                <td class="border-black border-2">
-                                    Report #: {{ patient.Report_ID }}
-                                </td>
-                                <td class="border-black border-2">
-
-                                    <!-- Dropdown selector for Reports ordered by date -->
-                                    <!-- <div class="relative inline-block text-left">
-                                        <div>
-                                            <button type="button" class="inline-flex justify-center w-full rounded-md border border-gray-300 shadow-sm px-4 py-2 bg-white text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-100 focus:ring-indigo-500" id="options-menu" aria-expanded="true" aria-haspopup="true" @click="dropdown = !dropdown">
-                                              Options -->
-                                              <!-- Heroicon name: solid/chevron-down -->
-                                  <!--             <svg class="-mr-1 ml-2 h-5 w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true">
-                                                <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
-                                              </svg>
-                                            </button>
-                                        </div>
-
-                                        <div :class="`origin-top-right absolute right-0 mt-2 w-56 rounded-md shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none transition ease-${dropdown ? 'out' : 'in'} duration-${dropdown ? '100' : '75'} transform opacity-${dropdown ? '100' : '0'} scale-${dropdown ? '100' : '95'}`" role="menu" aria-orientation="vertical" aria-labelledby="options-menu" >
-                                            <div class="py-1" role="none">
-                                              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Account settings</a>
-                                              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">Support</a>
-                                              <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">License</a>
-                                              <form method="POST" action="#" role="none">
-                                                <button type="submit" class="block w-full text-left px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900" role="menuitem">
-                                                  Sign out
-                                                </button>
-                                              </form>
-                                            </div>
-                                        </div>
-                                    </div> -->
-
-                                    <router-link
-                                        :to="{
-                                            name: 'doctor-edit-report',
-                                            params: { p_ssn: patient.P_SSN, id: patient.Report_ID },
-                                        }"
+            <div class="flex flex-col items-center pt-10 w-full mt-16 mb-4">
+                <table class="w-full ml-auto md: mr-auto md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg">
+                    <thead>
+                        <tr>
+                            <th class="text-lg text-white w-full bg-blue-500 rounded-tl-2xl border-teal border-r-2"> 
+                                <input
+                                    class="border border-blue-700 mb-2 mt-2 p-1 rounded-lg"
+                                    type="text"
+                                    name="PatientName"
+                                    placeholder="Search Reports"
+                                    v-model="form.patientName"
+                                    v-on:keyup="searchPatients()"
+                                />
+                            </th>
+                            <th class="text-lg text-white bg-blue-500 p-2 pb-0">
+                                <p class="text-3xl mb-4">Report-#</p>
+                            </th>
+                            <th class="text-lg text-white bg-blue-500 rounded-tr-2xl border-teal border-l-2">
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr
+                            v-for="(patient, i) in patientList"
+                            :key="`${i}-${patient}`"
+                        >
+                            <td class="border-blue-300 border-2">
+                                {{ patient.Lname }}, {{ patient.Fname }}
+                            </td>
+                            <td class="border-blue-300 border-2">
+                                {{ patient.Report_ID }}
+                            </td>
+                            <td class="border-blue-300 border-2">
+                                <router-link
+                                    :to="{
+                                        name: 'doctor-edit-report',
+                                        params: { p_ssn: patient.P_SSN, id: patient.Report_ID },
+                                    }"
+                                >
+                                    <div
+                                        class="text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 rounded-lg py-1 px-4 mx-6 my-1"
                                     >
-                                        <div
-                                            class="text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 rounded-lg py-2 px-1 mx-6 my-1"
-                                        >
-                                            View
-                                        </div>
-                                    </router-link>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </div>
+                                        View
+                                    </div>
+                                </router-link>
+                            </td>
+                        </tr>
+                        <tr class=" shadow-2xl">
+                            <td class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl" colspan="3">
+                                .
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
         </div>
         <div v-else class="flex flex-col">
