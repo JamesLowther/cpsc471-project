@@ -78,24 +78,55 @@
 
                                 <!-- Covid Screens -->
                                 <td class="border-black border-2">
+
                                     <!-- Patient has submitted a covid screen -->
-                                    <div v-if="patient.Date"> 
-                                    <p class="bg-green-300 w-1/3 inline-block m-2 rounded">{{ patient.Date}}</p>
-                                        <router-link :to="{name:'view-patient-covid-screen',params: { date: patient.Date, pssn:patient.P_SSN, isClerk: true }}"
-                                        class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-blue-500 rounded-lg py-1 px-1 mx-6 my-1">
-                                            View/Edit
-                                        </router-link>
-                                    </div>
+                                    <template v-if="patient.dates.length">
+                                        <!-- use drop down for multiple screens -->
+                                        <template v-if="patient.dates.length > 1">
+                                            <select
+                                                class="p-1 bg-green-300 w-1/3 inline-block m-2 rounded"
+                                                id="dates"
+                                                v-model="param_date"
+                                            >
+                                                <option disabled value="">select one</option>
+                                                <option v-for="date in patient.dates" 
+                                                        v-bind:key="date"
+                                                        v-bind:value="date">
+                                                    {{date}}
+                                                </option>
+                                            </select>
+                                            <button @click="go_to_covid(param_date,patient.P_SSN)"
+                                                    class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-blue-500 rounded-lg py-1 px-1 mx-6 my-1">
+                                                View/Edit
+                                            </button>
+                                            
+                                        </template>
+
+                                        <!-- for one screen, just display first (only) element-->
+                                        <template v-else>
+                                            <p class="bg-green-300 w-1/3 inline-block m-2 rounded">
+                                                {{patient.dates[0]}}
+                                            </p>
+                                            <button @click="go_to_covid(patient.dates[0],patient.P_SSN)"
+                                                    class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-blue-500 rounded-lg py-1 px-1 mx-6 my-1">
+                                                View/Edit
+                                            </button>
+                                            
+                                        </template>
+                                    </template>
+
                                     <!-- No covid screens exist -->
-                                    <div v-else> 
+                                    <template v-else>
                                         <p class="bg-red-200 w-1/3 inline-block m-2 rounded">N/A</p>
                                         <router-link :to="{name:'view-patient-covid-screen',params: { pssn:patient.P_SSN, isClerk: true }}"
                                         class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-green-500 rounded-lg py-1 px-1 mx-6 my-1">
                                             Create New
                                         </router-link>
-                                    </div>
-                                    
+                                    </template>
+
                                 </td>
+
+                                <!-- Doctor Reports -->
                                 <td class="border-black border-2">
                                     <div v-if="patient.Report_ID" class="bg-green-300 w-1/3 inline-block m-2 rounded">{{ patient.Report_ID}}</div>
                                     <div v-else class="bg-red-200 w-1/3 inline-block m-2 rounded">N/A</div>
@@ -120,18 +151,36 @@ export default {
 
     data() {
         return {
+            param_date: "", // Covid Screen date to send as a parameter
+
             logged_in: false,
             forms: []
         };
     },
 
     created() {
-        this.getForms();
+        this.get_forms();
     },
 
     methods: {
 
-        getForms() {
+        // Go the edit covid screen page
+        go_to_covid(date, ssn) {
+            
+            // date is "" when no option is selected from the drop down list
+            if (date == "") return;
+
+            this.$router.push ({
+                name:'view-patient-covid-screen',
+                params: { 
+                    date: date, 
+                    pssn: ssn, 
+                    isClerk: true 
+                }
+            });
+        },
+
+        get_forms() {
             axios
                 .get(`http://localhost:5000/clerk/forms`, {
                     headers: {
@@ -143,6 +192,8 @@ export default {
 
                     this.logged_in = true;
                     this.forms = response.data.forms;
+
+                    console.log(this.forms);
                     
                 })
                 .catch((e) => {
