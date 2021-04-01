@@ -1,6 +1,7 @@
 <template>
     <div id="Entities_forms">
-        <router-link :to="{name: 'entities-panel',params: { entity_type: entity_type, user_type: user_type }}">
+        <router-link :to="{name: 'entities-panel',params: { entity_type: entity_type, user_type: user_type }}"
+        class="flex justify-end w-full fixed">
         <button class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
             <span >Back</span>
         </button>
@@ -70,7 +71,7 @@
                         
                     </template>
 
-                    
+                    <!-- select multiple effects: symptoms or side-effects -->
                     <div class="bg-gray-300 rounded-lg p-2 m-4">
                             <input
                                 class="border border-black mb-2 mt-2 p-1 rounded-lg"
@@ -78,7 +79,7 @@
                                 name="effect"
                                 v-model="effect"
                             />
-                            <label v-if="entity_type == 'medication'" for="effect" class="m-2">Add Symptom(s) (optional)</label>
+                            <label v-if="entity_type == 'medication'" for="effect" class="m-2">Add Side-effect(s) (optional)</label>
                             <label v-if="entity_type == 'illness'" for="effect" class="m-2">Add Symptom(s) (optional)</label>
                             
 
@@ -87,21 +88,27 @@
                                     {{ effect }}
                                 </li>
                             </ul>
-                            <button @click="rm_effect()" class="rounded-lg text-white px-1 mx-4 bg-gray-700">remove</button>
-                            <button @click="add_effect()" class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
-                                <span >add</span>
+                            <button @click="rm_effect()" class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-pink-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
+                                remove
+                            </button>
+                            <button @click="add_effect()" class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-blue-500 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
+                                add
                             </button>
                         </div>
 
-                    <button @click="add_new()" class="text-white text-xl mt-5 shadow-lg transition duration-300 ease-in-out bg-blue-600 hover:bg-green-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
-                        <span>Submit</span>
+                    <button @click="add_new()" class="text-white text-xl mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-600 hover:bg-green-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
+                        Submit
                     </button>
 
-                    <b v-if="status=='0'">error</b>
-                    <b v-if="status=='1'">success</b>
+                    <!-- Display error or success, depending on response from server -->
+                    <p v-if="status=='0'" class="text-red-600 text-xl">Error: {{entity_type}} may already exist</p>
+                    <p v-else-if="status=='1'" class="text-green-600 text-xl">Success</p>
+                    <!-- error for bad input -->
+                    <p class="text-red-600 text-xl">{{error}}</p>
 
             </div>
         </div>
+
         <div v-else class="flex flex-col">
             <p class="text-5xl mt-20">Forbidden</p>
             <p class="text-3xl mt-4">You're not logged in</p>
@@ -117,7 +124,8 @@ export default {
         return {
             logged_in: true,
             user_type: "",
-            status: null,
+            status: null, // reponse from server: 0 or 1
+            error: "", // Error message for invalid input
 
             entity_type: "", // Medication, illness or symptom
             entity_post: "", //the formatted string to send in POST
@@ -132,6 +140,7 @@ export default {
     },
 
     created() {
+        // Get parameters from route, and initialize data()
         this.entity_type = this.$route.params.entity_type;
         this.user_type = this.$route.params.user_type;
         this.init_entity();
@@ -139,8 +148,28 @@ export default {
 
     methods: {
         
+        // Push and Pop effects listed on screen before sending to server
         rm_effect() {this.effects.pop(this.effect);},
         add_effect() {this.effects.push(this.effect);},
+
+        add_new() {
+            if(!this.check_input()) return;
+
+            if (this.entity_type == 'medication') this.add_med();
+            else if (this.entity_type == 'illness') this.add_ill();
+        },
+
+        check_input() {
+        // Only the input text box for entity name must be non-null
+            if (this.entity_name == "") {
+                this.error = "Name is Blank";
+                return false;
+            }
+            else{
+                this.error = "";
+                return true;
+            }
+        },
 
         add_med() {
             axios.post(`http://localhost:5000/entities/forms`,
@@ -180,19 +209,10 @@ export default {
                 }
             ).then((response) => {
                     this.status = response.data.status;
-
                 })
                 .catch((e) => {
                     console.log(e);
                 });
-        },
-
-
-        add_new() {
-
-            if (this.entity_type == 'medication') this.add_med();
-            else if (this.entity_type == 'illness') this.add_ill();
-            
         },
 
         init_entity() {
