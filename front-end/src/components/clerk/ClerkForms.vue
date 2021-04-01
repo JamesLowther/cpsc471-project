@@ -43,11 +43,13 @@
                                     <div v-else class="bg-red-200 w-1/3 inline-block m-2 rounded">N/A</div>    
                                 </td>
                                 
+                                <!-- New Applicant Forms -->
                                 <td class="border-black border-2">
+
                                     <!--Applicant is Approved: link to existing form-->
                                     <div v-if="patient.Is_approved==1"> 
                                         <p class="bg-green-300 w-1/3 inline-block m-2 rounded">Approved</p>
-                                        <router-link :to="{name: 'approve-applicant',params: { ssn: patient.P_SSN, isClerk: true }}">
+                                        <router-link :to="{name: 'approve-applicant',params: { ssn: patient.P_SSN, isClerk: true, isEdit: true }}">
                                             <div class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-blue-500 rounded-lg py-1 px-1 mx-6 my-1">
                                                 View/Edit
                                             </div>
@@ -57,7 +59,7 @@
                                     <!--Applicant is Pending: link to existing form-->
                                     <div v-else-if="patient.Is_approved==0"> 
                                         <p class="bg-yellow-300 w-1/3 inline-block m-2 rounded">Pending</p>
-                                        <router-link :to="{name: 'approve-applicant',params: { ssn: patient.P_SSN, isClerk: true }}">
+                                        <router-link :to="{name: 'approve-applicant',params: { ssn: patient.P_SSN, isClerk: true, isEdit: true }}">
                                             <div class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-yellow-500 rounded-lg py-1 px-1 mx-6 my-1">
                                                 View & Approve
                                             </div>
@@ -67,13 +69,13 @@
                                     <!--Applicant has not submitted: link to create new form-->
                                     <div v-else>
                                     <p class="bg-red-300 w-1/3 inline-block m-2 rounded">Not Submitted</p>
-                                        <router-link :to="{name: 'approve-applicant',params: { ssn: patient.P_SSN, isClerk: true }}">
+                                        <router-link :to="{name: 'approve-applicant',params: { ssn: patient.P_SSN, isClerk: true, isEdit: false }}">
                                             <div class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-green-500 rounded-lg py-1 px-1 mx-6 my-1">
                                                 Create New
                                             </div>
                                         </router-link>
                                     </div>
-                                    
+
                                 </td>
 
                                 <!-- Covid Screens -->
@@ -82,13 +84,13 @@
                                     <!-- Patient has submitted a covid screen -->
                                     <template v-if="patient.dates.length">
                                         <!-- use drop down for multiple screens -->
-                                        <template v-if="patient.dates.length > 1">
                                             <select
                                                 class="p-1 bg-green-300 w-1/3 inline-block m-2 rounded"
                                                 id="dates"
                                                 v-model="param_date"
                                             >
                                                 <option disabled value="">select one</option>
+                                                <option value="New">New</option>
                                                 <option v-for="date in patient.dates" 
                                                         v-bind:key="date"
                                                         v-bind:value="date">
@@ -97,22 +99,9 @@
                                             </select>
                                             <button @click="go_to_covid(param_date,patient.P_SSN)"
                                                     class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-blue-500 rounded-lg py-1 px-1 mx-6 my-1">
-                                                View/Edit
+                                                <p v-if="param_date == 'New'">Create New</p>
+                                                <p v-else>View/Edit</p>
                                             </button>
-                                            
-                                        </template>
-
-                                        <!-- for one screen, just display first (only) element-->
-                                        <template v-else>
-                                            <p class="bg-green-300 w-1/3 inline-block m-2 rounded">
-                                                {{patient.dates[0]}}
-                                            </p>
-                                            <button @click="go_to_covid(patient.dates[0],patient.P_SSN)"
-                                                    class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-blue-500 rounded-lg py-1 px-1 mx-6 my-1">
-                                                View/Edit
-                                            </button>
-                                            
-                                        </template>
                                     </template>
 
                                     <!-- No covid screens exist -->
@@ -168,16 +157,29 @@ export default {
         go_to_covid(date, ssn) {
             
             // date is "" when no option is selected from the drop down list
-            if (date == "") return;
-
-            this.$router.push ({
-                name:'view-patient-covid-screen',
-                params: { 
-                    date: date, 
-                    pssn: ssn, 
-                    isClerk: true 
-                }
-            });
+            if (date == "") {return;}
+            
+            // Create a new covid screen
+            else if (date == "New") {
+                this.$router.push ({
+                    name:'view-patient-covid-screen',
+                    params: { 
+                        pssn: ssn, 
+                        isClerk: true 
+                    }
+                });
+            }
+            // View existing covid Screen
+            else {
+                this.$router.push ({
+                    name:'view-patient-covid-screen',
+                    params: { 
+                        date: date, 
+                        pssn: ssn, 
+                        isClerk: true 
+                    }
+                });
+            }
         },
 
         get_forms() {
