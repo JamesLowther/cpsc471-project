@@ -230,6 +230,7 @@ export default {
 
     props: {
         isClerk: Boolean,
+        isEdit: Boolean,
     },
 
     data() {
@@ -261,7 +262,7 @@ export default {
     },
 
     created() {
-        if (typeof this.$route.params.ssn != "undefined") {
+        if (!this.isEdit) {
             this.create_mode = false;
             this.getForm();
         }
