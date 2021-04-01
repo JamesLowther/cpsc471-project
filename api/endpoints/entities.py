@@ -92,7 +92,7 @@ class EntitiesForms(Resource):
 
         if (entity_type == "medication"):
             # Select all medications that match the query string.
-            cursor.execute("SELECT m.Name, m.Is_prescription FROM Medication AS m WHERE m.name LIKE ?;", ("%" + args["query_string"] + "%",))
+            cursor.execute("SELECT m.Name, m.Is_prescription FROM Medication AS m WHERE m.name LIKE ? ORDER BY m.Name;", ("%" + args["query_string"] + "%",))
             results = cursor.fetchall()
             results = [dict(x) for x in results]
             
@@ -105,7 +105,7 @@ class EntitiesForms(Resource):
                 medication["Effects"] = [x["Effect"] for x in side_effects]
             
         elif (entity_type == "illness"):
-            cursor.execute("SELECT Name, Organ_system FROM Illness WHERE Name LIKE ?;", ("%" + args["query_string"] + "%",))
+            cursor.execute("SELECT Name, Organ_system FROM Illness WHERE Name LIKE ? ORDER BY Name;", ("%" + args["query_string"] + "%",))
             results = cursor.fetchall()
             results = [dict(x) for x in results]
 
