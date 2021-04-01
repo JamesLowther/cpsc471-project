@@ -262,7 +262,8 @@ export default {
     },
 
     created() {
-        if (!this.isEdit) {
+        console.log(this.isEdit)
+        if (this.isEdit) {
             this.create_mode = false;
             this.getForm();
         }

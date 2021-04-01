@@ -79,7 +79,7 @@
                                             name: 'edit-new-applicant',
                                             params: {
                                                 isClerk: false,
-                                                isEdit: true,
+                                                isEdit: false,
                                             },
                                         }"
                                         v-if="new_applicant.length == 0"
@@ -140,7 +140,7 @@
                                             params: {
                                                 ssn: report.P_SSN,
                                                 isClerk: false,
-                                                isEdit: false,
+                                                isEdit: true,
                                             },
                                         }"
                                     >
