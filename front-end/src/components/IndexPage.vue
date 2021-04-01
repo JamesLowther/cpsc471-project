@@ -21,14 +21,14 @@
                     <div
                         class="shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-8 px-1"
                     >
-                        Account Login
+                        Login
                     </div>
                 </router-link>
                 <router-link class="w-1/4" to="new-account">
                     <div
                         class="shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-8 px-1"
                     >
-                        Create an Account
+                        Register
                     </div>
                 </router-link>
             </div>

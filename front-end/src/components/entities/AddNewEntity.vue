@@ -60,12 +60,50 @@
                             <input type="radio" name="gas" value="Gastrointestinal" v-model="Organ_system" class="mx-2">
                             <label for="gas">Gastrointestinal</label>
                             </div>
+                        </div>
 
+                        <div class="flex">
                             <div class="bg-purple-200 rounded-lg p-2">   
                             <input type="radio" name="endo" value="Endocrine" v-model="Organ_system" class="mx-2">
                             <label for="endo">Endocrine</label>
                             </div>
 
+                            <div class="bg-green-200 rounded-lg p-2">   
+                            <input type="radio" name="skel" value="Skeletal" v-model="Organ_system" class="mx-2">
+                            <label for="endo">Skeletal</label>
+                            </div>
+
+                            <div class="bg-blue-200 rounded-lg p-2">   
+                            <input type="radio" name="musc" value="Muscular" v-model="Organ_system" class="mx-2">
+                            <label for="endo">Muscular</label>
+                            </div>
+
+                            <div class="bg-gray-200 rounded-lg p-2">   
+                            <input type="radio" name="nerv" value="Nervous" v-model="Organ_system" class="mx-2">
+                            <label for="endo">Nervous</label>
+                            </div>
+                        </div>
+
+                        <div class="flex">
+                            <div class="bg-pink-200 rounded-lg p-2">   
+                            <input type="radio" name="skin" value="Integumentary" v-model="Organ_system" class="mx-2">
+                            <label for="endo">Integumentary</label>
+                            </div>
+
+                            <div class="bg-yellow-400 rounded-lg p-2">   
+                            <input type="radio" name="lymp" value="Lymphatic" v-model="Organ_system" class="mx-2">
+                            <label for="endo">Lymphatic</label>
+                            </div>
+
+                            <div class="bg-red-300 rounded-lg p-2">   
+                            <input type="radio" name="urin" value="Urinary" v-model="Organ_system" class="mx-2">
+                            <label for="endo">Urinary</label>
+                            </div>
+
+                            <div class="bg-green-200 rounded-lg p-2">   
+                            <input type="radio" name="repo" value="Reproductive" v-model="Organ_system" class="mx-2">
+                            <label for="endo">Reproductive</label>
+                            </div>
                         </div>
                         
                     </template>
