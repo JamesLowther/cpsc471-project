@@ -29,14 +29,14 @@
                                 />
                             </th>
                             <th class="text-lg text-white bg-blue-500 p-2 pb-0">
-                                <p class="text-3xl mb-4">Report-#</p>
+                                Report-#
                             </th>
                             <th class="text-lg text-white bg-blue-500 rounded-tr-2xl border-teal border-l-2">
                             </th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr
+                        <tr class="bg-blue-100"
                             v-for="(patient, i) in patientList"
                             :key="`${i}-${patient}`"
                         >

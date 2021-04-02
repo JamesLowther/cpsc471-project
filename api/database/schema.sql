@@ -222,14 +222,14 @@ CREATE TABLE Past_Illnesses (
     FOREIGN KEY (Illness_name) REFERENCES Illness(Name)
 );
 
-INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('UofC Clinic',                     '2500 University Dr NW',    'Clinic');
-INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('Foothills',                       '1403 29 St NW',            'Hospital');
-INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('Bowmont Medical Clinic',          '6535 Bowness Rd NW',       'Clinic');
-INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('Wellness Medical Clinic',         '4625 Varsity Dr NW',       'Clinic');
-INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('Brentwood Family Medical Centre', '810-3630 Brentwood Rd NW', 'Clinic');
-INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('Alberta Childrens Hospital',      '28 Oki Dr NW',             'Hospital');
-INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('Peter Lougheed Centre',           '3500 26 Ave NE',           'Hospital');
-INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('Rockyview General Hospital',      '7007 14 St SW',            'Hospital');
+INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('UofC Clinic',                     '2500 University Dr NW, Calgary AB',    'Clinic');
+INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('Foothills',                       '1403 29 St NW, Calgary AB',            'Hospital');
+INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('Bowmont Medical Clinic',          '6535 Bowness Rd NW, Calgary AB',       'Clinic');
+INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('Wellness Medical Clinic',         '4625 Varsity Dr NW, Calgary AB',       'Clinic');
+INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('Brentwood Family Medical Centre', '810-3630 Brentwood Rd NW, Calgary AB', 'Clinic');
+INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('Alberta Childrens Hospital',      '28 Oki Dr NW, Calgary AB',             'Hospital');
+INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('Peter Lougheed Centre',           '3500 26 Ave NE, Calgary AB',           'Hospital');
+INSERT INTO Medical_Centre (Name, Address, Type) VALUES ('Rockyview General Hospital',      '7007 14 St SW, Calgary AB',            'Hospital');
 
 INSERT INTO Illness (Name, Organ_system) VALUES ('Common Cold',             'Respiratory');
 INSERT INTO Illness (Name, Organ_system) VALUES ('Asthma',                  'Respiratory');
