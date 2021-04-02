@@ -37,10 +37,10 @@
                 <table class="w-full ml-auto md: mr-auto md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg">
                     <thead>
                         <tr>
-                            <th class="text-lg text-white w-full bg-blue-500 rounded-t-2xl border-teal border-r-2"> 
+                            <th class="text-lg w-full text-white bg-blue-500 rounded-t-2xl border-teal border-r-0"> 
                                 Chief Complaint
                                 <textarea
-                                    class="border border-black mb-2 p-1 rounded-lg w-full text-xl"
+                                    class="border border-black text-black mb-2 p-1 rounded-lg w-full text-xl h-40 shadow-2xl"
                                     type="text"
                                     name="email"
                                     v-model="form.Complaint"
@@ -84,7 +84,7 @@
                                 <th class="text-lg text-white w-1/2 bg-blue-500 ">
                                     Organ System:
                                 </th>
-                                <th class="text-lg text-white bg-blue-500 rounded-tr-2xl border-teal border-l-2"></th>
+                                <th class="text-lg text-white bg-blue-500 rounded-tr-2xl border-teal border-l-2 px-8"></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -109,10 +109,10 @@
                                     </button>
                                 </td>
                             </tr>
-                            <tr>
+                            <tr class="border-t-2">
                                 <td class="border-teal-500 border-0 border-b-2 bg-blue-400 " colspan="1">
                                     <input
-                                        class="border border-blue-400 mb-2 mt-2 p-1 rounded-lg w-4/5"
+                                        class="border border-blue-700 mb-2 mt-2 p-1 rounded-lg w-4/5"
                                         type="text"
                                         name="illness-search"
                                         placeholder="Search Illnesses"
@@ -154,35 +154,35 @@
                 </div>
                 <br />
                 <div class="w-full mb-6">
-                    <table class="w-full mb-10 rounded-lg">
+                <table class="w-full ml-auto md: mr-auto md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg">
                         <thead>
-                            <th class="text-lg w-1/2 bg-green-300 rounded-l-lg border-teal border-r-2">Treatment</th>
-                            <th class="text-lg bg-green-300 border-teal border-r-2">Prescription</th>
-                            <th class="text-lg w-1/2 bg-green-300 border-teal border-r-2">Side Effects</th>
-                            <th class="text-lg bg-green-300 rounded-r-lg border-teal border-l-2"></th>
+                            <th class="text-lg text-white w-full bg-blue-500 rounded-tl-2xl border-teal border-r-2 p-2 pb-0">Treatment</th>
+                            <th class="text-lg text-white bg-blue-500 p-2 pb-0 border-r-2">Prescription</th>
+                            <th class="text-lg text-white bg-blue-500 p-2 pb-0">Side_Effects</th>
+                            <th class="text-lg text-white bg-blue-500 rounded-tr-2xl border-teal border-l-2 px-8"></th>
                         </thead>
                         <tbody>
-                            <tr
+                            <tr class="bg-blue-100"
                                 v-for="medication in form.Medications"
                                 :key="medication.Name"
                             >
-                                <td class="border-teal-500 border-2">
+                                <td class="border-blue-300 border-2">
                                     {{ medication.Name }}
                                 </td>
                                 <td v-if="medication.Is_prescription == 1" class="border-teal-500 border-2 bg-green-300">
                                     YES
                                 </td>
-                                <td v-else class="border-teal-500 border-2 bg-red-300">
+                                <td v-else class="border-teal-300 border-2 bg-red-300">
                                     NO
                                 </td>
-                                <td class="border-teal-500 border-2">
+                                <td class="border-blue-300 border-2">
                                     <ul class="list-disc text-left pl-5">
                                         <li v-for="effect in medication.Effects" :key="effect">
                                             {{ effect }}
                                         </li>
                                     </ul>
                                 </td>
-                                <td class="border-teal-500 border-2">
+                                <td class="border-blue-300 border-2">
                                     <button
                                         class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:scale-105 rounded-lg py-2 px-8 m-3"
                                         v-on:click="
@@ -193,10 +193,10 @@
                                     </button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="border-teal-500 border-2 bg-green-200" colspan="1">
+                            <tr class="border-t-2">
+                                <td class="border-teal-500 border-b-2 bg-blue-400" colspan="1">
                                     <input
-                                        class="border border-black mb-2 mt-2 p-1 rounded-lg w-4/5"
+                                        class="border border-blue-700 mb-2 mt-2 p-1 rounded-lg w-4/5"
                                         type="text"
                                         name="medication-search"
                                         placeholder="Search Medications"
@@ -204,14 +204,14 @@
                                         v-on:keyup="queryMedications()"
                                     />
                                 </td>
-                                <td class="border-teal-500 border-2 bg-green-200" colspan="3">
+                                <td class="border-teal-500 border-b-2 bg-blue-400" colspan="3">
                                 </td>
                             </tr>
-                            <tr
+                            <tr class="bg-blue-100"
                                 v-for="medication in medication_results"
                                 :key="medication.Name"
                             >
-                                <td class="border-teal-500 border-2">
+                                <td class="border-blue-300 border-2">
                                     {{ medication.Name }}
                                 </td>
                                 <td v-if="medication.Is_prescription == 1" class="border-teal-500 border-2 bg-green-300">
@@ -220,20 +220,25 @@
                                 <td v-else class="border-teal-500 border-2 bg-red-300">
                                     NO
                                 </td>
-                                    <td class="border-teal-500 border-2">
+                                    <td class="border-blue-300 border-2">
                                         <ul class="list-disc text-left pl-5">
                                             <li v-for="effect in medication.Effects" :key="effect">
                                                 {{ effect }}
                                             </li>
                                         </ul>
                                     </td>
-                                <td class="border-teal border-2">
+                                <td class="border-blue-300 border-2">
                                     <button
-                                        class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-1 w-1/2 m-2"
+                                        class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-1 px-5 m-2"
                                         v-on:click="addNewMedication(medication.Name, medication.Is_prescription, medication.Effects)"
                                     >
                                         Add
                                     </button>
+                                </td>
+                            </tr>
+                            <tr class=" shadow-2xl">
+                                <td class="border-teal-500 border-0 text-white bg-blue-400 rounded-b-2xl" colspan="4">
+                                    .
                                 </td>
                             </tr>
                         </tbody>
@@ -244,28 +249,28 @@
                 </div>
                 <br />
                 <div class="w-full mb-6">
-                    <table class="w-full mb-10">
+                    <table class="w-full ml-auto md: mr-auto md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg">
                         <thead>
-                            <th class="text-lg w-1/3 bg-green-300 rounded-l-lg border-teal border-r-2">Med. Center Name</th>
-                            <th class="text-lg w-1/3 bg-green-300 border-teal border-r-2">Type</th>
-                            <th class="text-lg w-1/3 bg-green-300 border-teal border-r-2">Address</th>
-                            <th class="text-lg w-1/3 bg-green-300 rounded-r-lg border-teal border-l-2"></th>
+                            <th class="text-lg text-white w-1/2 bg-blue-500 rounded-tl-2xl border-teal border-r-2">Med. Center Name</th>
+                            <th class="text-lg text-white bg-blue-500 p-2 pb-0 border-teal border-r-2">Type</th>
+                            <th class="text-lg text-white w-1/2 bg-blue-500 p-2 pb-0">Address</th>
+                            <th class="text-lg text-white bg-blue-500 rounded-tr-2xl border-teal border-l-2"></th>
                         </thead>
                         <tbody>
-                            <tr
+                            <tr class="bg-blue-100"
                                 v-for="medical_centre in form.Medical_centres"
                                 :key="medical_centre.Name"
                             >
-                                <td class="border-teal-500 border-2">
+                                <td class="border-blue-300 border-2">
                                     {{ medical_centre.Name }}
                                 </td>
-                                <td class="border-teal-500 border-2">
+                                <td class="border-blue-300 border-2">
                                     {{ medical_centre.Type }}
                                 </td>
-                                <td class="border-teal-500 border-2">
+                                <td class="border-blue-300 border-2">
                                     {{ medical_centre.Address }}
                                 </td>
-                                <td class="border-teal border-2">
+                                <td class="border-blue-300 border-2">
                                     <button
                                         class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:scale-105 rounded-lg py-2 px-8 m-3"
                                         v-on:click="
@@ -277,9 +282,9 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="border-teal-500 border-2 bg-green-200" colspan="2">
+                                <td class="border-teal-500 border-2 border-r-0 border-l-0 bg-blue-400" colspan="2">
                                     <input
-                                        class="border border-black mb-2 mt-2 p-1 rounded-lg w-4/5"
+                                        class="border border-blue-700 mb-2 mt-2 p-1 rounded-lg w-4/5"
                                         type="text"
                                         name="med-center-search"
                                         placeholder="Search Medical Centers"
@@ -287,29 +292,34 @@
                                         v-on:keyup="queryMedCenters()"
                                     />
                                 </td>
-                                <td class="border-teal-500 border-2 bg-green-200" colspan="2">
+                                <td class="border-teal-500 border-2 bg-blue-400 border-r-0 border-l-0 " colspan="2">
                                 </td>
                             </tr>
-                            <tr
+                            <tr class="bg-blue-100"
                                 v-for="(med_center, i) in Medical_Centers_results"
                                 :key="`${i}-${med_center}`"
                             >
-                                <td class="border-teal-500 border-2">
+                                <td class="border-blue-300 border-2">
                                     {{ med_center.Name }}
                                 </td>
-                                <td class="border-teal-500 border-2">
+                                <td class="border-blue-300 border-2 px-2">
                                     {{ med_center.Type }}
                                 </td>
-                                <td class="border-teal-500 border-2">
+                                <td class="border-blue-300 border-2">
                                     {{ med_center.Address }}
                                 </td>
-                                <td class="border-teal-500 border-2">
+                                <td class="border-blue-300 border-2">
                                     <button
-                                        class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-1 w-1/2   m-2"
+                                        class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-1 px-5 m-2"
                                         v-on:click="addMedCenter(med_center.Name, med_center.Type, med_center.Address)"
                                     >
                                         Add
                                     </button>
+                                </td>
+                            </tr>
+                            <tr class=" shadow-2xl">
+                                <td class="border-teal-500 border-0 text-white bg-blue-400 rounded-b-2xl" colspan="4">
+                                    .
                                 </td>
                             </tr>
                         </tbody>
@@ -319,76 +329,69 @@
                     </p>
                 </div>
             </div>
-            <div class="w-full mb-6">
-                <p class="text-xl mb-1 bg-green-300"><b>Patients Medical History</b></p>
-                <table class="table-fixed w-full mb-3">
-                    <tbody>
+            <div class="w-full mb-6 mt-12">
+                <table class="w-full ml-auto md: mr-auto md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg">
+                    <thead>
                         <tr>
-                            <td class="border-black border-2 bg-gray-300">
+                            <th class="text-lg text-white w-full bg-blue-500 rounded-t-2xl border-teal border-r-0" colspan="3">
+                                Patients Medical History
+                            </th>
+                            <th />
+                            <th />
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-blue-300">
+                            <td class="border-blue-300 border-0 border-l-0">
                                 <b>Age:</b> {{ this.form.Age }}
                             </td>
-                            <td class="border-black border-2 bg-gray-300">
+                            <td class="border-blue-300 border-0">
                                 <b>Gender:</b> {{ this.form.Gender }}
                             </td>
-                            <td class="border-black border-2 bg-gray-300">
+                            <td class="border-blue-300 border-2 border-l-0">
                                 <b>Sex:</b> {{ this.form.Sex }}
                             </td>
                         </tr>
-                    </tbody>
-                </table>
-                <table class="table-fixed w-full mb-3">
-                    <thead>
                         <tr>
-                            <th class="text-lg w-1/3 border-black border-2 bg-gray-300">
-                                Allergies:
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr
-                            v-for="allergy in form.allergies"
-                            :key="allergy.Allergy"
-                        >
-                            <td class="border-black border-2">
-                                {{ allergy.Allergy }}
+                            <td class="bg-blue-500 border-blue-300 border-2 border-r-0 border-l-0 text-white">
+                                <b>Allergies:</b>
+                            </td>
+                            <td class="border-blue-300 border-2 border-l-0 bg-blue-100" colspan="2">
+                                <ul class="list-disc text-left pl-5">
+                                    <li v-for="allergy in form.allergies" :key="allergy.Allergy">
+                                        {{ allergy.Allergy }}
+                                    </li>
+                                </ul>
                             </td>
                         </tr>
-                    </tbody>
-                </table>
-                <table class="table-fixed w-full mb-3">
-                    <thead>
                         <tr>
-                            <th class="text-lg w-1/3 border-black border-2 bg-gray-300">
-                                Immunizations:
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr
-                            v-for="immunization in form.immunizations"
-                            :key="immunization.Immunization"
-                        >
-                            <td class="border-black border-2">
-                                {{ immunization.Immunization }}
+                            <td class="bg-blue-500 border-blue-300 border-2 border-r-0 border-l-0 text-white">
+                                <b>Immunizations:</b>
+                            </td>
+                            <td class="border-blue-300 border-2 border-l-0 bg-blue-100" colspan="2">
+                                <ul class="list-disc text-left pl-5">
+                                    <li v-for="immunization in form.immunizations" :key="immunization.Immunization">
+                                        {{ immunization.Immunization }}
+                                    </li>
+                                </ul>
                             </td>
                         </tr>
-                    </tbody>
-                </table>
-                <table class="table-fixed w-full mb-3">
-                    <thead>
                         <tr>
-                            <th class="text-lg w-1/3 border-black border-2 bg-gray-300">
-                                Past Illnesses:
-                            </th>
+                            <td class="bg-blue-500 border-blue-300  border-b-0 border-r-0 border-l-0 border-2 text-white">
+                                <b>Past Illnesses:</b><br />[Age of Onset]
+                            </td>
+                            <td class="border-blue-300 border-2 border-b-0 border-l-0 bg-blue-100" colspan="2">
+                                <ul class="list-disc text-left pl-5">
+                                    <li v-for="past_illness in form.past_illnesses" :key="past_illness.Illness_name">
+                                        <b>{{ past_illness.Illness_name }}</b> [{{ past_illness.Age_of_onset }}]
+                                    </li>
+                                </ul>
+
+                            </td>
                         </tr>
-                    </thead>
-                    <tbody>
-                        <tr
-                            v-for="past_illness in form.past_illnesses"
-                            :key="past_illness.Illness_name"
-                        >
-                            <td class="border-black border-2">
-                                <b>{{ past_illness.Illness_name }}</b> [Age of Onset: {{ past_illness.Age_of_onset }}]
+                        <tr class=" shadow-2xl">
+                            <td class="border-teal-500 border-0 text-white bg-blue-300 rounded-b-2xl" colspan="4">
+                                .
                             </td>
                         </tr>
                     </tbody>
