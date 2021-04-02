@@ -47,19 +47,25 @@ class ClerkForms(Resource):
        
         # Get Patients and keys of all their forms. Null if no report of that kind exists
         cursor.execute(
-            "SELECT p.P_SSN, n.Fname, n.Lname, n.Email, n.Is_approved, c.Date, r.Report_ID \
+            "SELECT p.P_SSN, n.Fname, n.Lname, n.Email, n.Is_approved \
             FROM Patient as p \
-            LEFT JOIN New_Applicant_Form as n ON p.P_SSN=n.P_SSN\
-            LEFT JOIN Covid_Screen as c ON p.P_SSN=c.P_SSN\
-            LEFT JOIN Report as r ON p.P_SSN=r.P_SSN;")
+            LEFT JOIN New_Applicant_Form as n ON p.P_SSN=n.P_SSN;")
         forms = cursor.fetchall()
+        forms = [dict(f) for f in forms]
+
+        # Get all covid screens of each patient
+        for form in forms:
+            cursor.execute("SELECT Date FROM Covid_screen WHERE P_SSN = ?;", (form["P_SSN"],))
+            screens = cursor.fetchall()
+
+            form["dates"] = [f["Date"] for f in screens]
+
 
         con.close()
 
         return jsonify (
-            logged_in=1,
-            forms = [dict(f) for f in forms]
-        )
+            logged_in = 1,
+            forms = [dict(f) for f in forms] )
 
 
     def post(self):

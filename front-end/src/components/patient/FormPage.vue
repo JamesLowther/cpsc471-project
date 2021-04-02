@@ -11,7 +11,9 @@
         </div>
         <div v-if="logged_in">
             <div class="flex flex-col items-center px-8">
-                <p class="text-4xl lg:text-5xl mt-20 mb-14">Reports, Forms, and Screens</p>
+                <p class="text-4xl lg:text-5xl mt-20 mb-14">
+                    Reports, Forms, and Screens
+                </p>
                 <div class="w-full lg:w-1/2 mb-10">
                     <p class="text-3xl mb-4">Reports</p>
                     <table class="table-fixed w-full">
@@ -43,7 +45,10 @@
                                     <router-link
                                         :to="{
                                             name: 'edit-report',
-                                            params: { id: report.Report_ID, isClerk: false },
+                                            params: {
+                                                id: report.Report_ID,
+                                                isClerk: false,
+                                            },
                                         }"
                                     >
                                         <div
@@ -70,7 +75,13 @@
                                 </th>
                                 <th class="w-2/6 border-black border-2">
                                     <router-link
-                                        :to="{ name: 'edit-new-applicant' }"
+                                        :to="{
+                                            name: 'edit-new-applicant',
+                                            params: {
+                                                isClerk: false,
+                                                isEdit: false,
+                                            },
+                                        }"
                                         v-if="new_applicant.length == 0"
                                     >
                                         <div
@@ -91,18 +102,46 @@
                                     {{ report.Email }}
                                 </td>
                                 <td class="border-black border-2">
-                                    <svg v-if="report.Is_approved" class="w-1/4 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="green">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    <svg
+                                        v-if="report.Is_approved"
+                                        class="w-1/4 mx-auto"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="green"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                        />
                                     </svg>
-                                    <svg v-else class="w-1/4 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="red">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                                    <svg
+                                        v-else
+                                        class="w-1/4 mx-auto"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="red"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                        />
                                     </svg>
                                 </td>
                                 <td class="border-black border-2">
                                     <router-link
                                         :to="{
                                             name: 'edit-new-applicant',
-                                            params: { ssn: report.P_SSN, isClerk: false },
+                                            params: {
+                                                ssn: report.P_SSN,
+                                                isClerk: false,
+                                                isEdit: true,
+                                            },
                                         }"
                                     >
                                         <div
@@ -149,7 +188,10 @@
                                     <router-link
                                         :to="{
                                             name: 'edit-covid-screen',
-                                            params: { date: report.Date, isClerk: false },
+                                            params: {
+                                                date: report.Date,
+                                                isClerk: false,
+                                            },
                                         }"
                                     >
                                         <div
@@ -168,10 +210,8 @@
                     <table class="table-fixed w-full">
                         <thead>
                             <tr class="text-lg">
-                                <th class="w-3/5 border-black border-2">
-                                    SSN
-                                </th>
-                                 <th class="w-2/5 border-black border-2">
+                                <th class="w-3/5 border-black border-2">SSN</th>
+                                <th class="w-2/5 border-black border-2">
                                     <router-link
                                         :to="{ name: 'edit-medical-history' }"
                                         v-if="medical_history.length == 0"
@@ -197,7 +237,10 @@
                                     <router-link
                                         :to="{
                                             name: 'edit-medical-history',
-                                            params: { ssn: report.P_SSN, isClerk: false },
+                                            params: {
+                                                ssn: report.P_SSN,
+                                                isClerk: false,
+                                            },
                                         }"
                                     >
                                         <div

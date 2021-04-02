@@ -43,11 +43,13 @@
                                     <div v-else class="bg-red-200 w-1/3 inline-block m-2 rounded">N/A</div>    
                                 </td>
                                 
+                                <!-- New Applicant Forms -->
                                 <td class="border-black border-2">
+
                                     <!--Applicant is Approved: link to existing form-->
                                     <div v-if="patient.Is_approved==1"> 
                                         <p class="bg-green-300 w-1/3 inline-block m-2 rounded">Approved</p>
-                                        <router-link :to="{name: 'approve-applicant',params: { ssn: patient.P_SSN, isClerk: true }}">
+                                        <router-link :to="{name: 'approve-applicant',params: { ssn: patient.P_SSN, isClerk: true, isEdit: true }}">
                                             <div class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-blue-500 rounded-lg py-1 px-1 mx-6 my-1">
                                                 View/Edit
                                             </div>
@@ -57,7 +59,7 @@
                                     <!--Applicant is Pending: link to existing form-->
                                     <div v-else-if="patient.Is_approved==0"> 
                                         <p class="bg-yellow-300 w-1/3 inline-block m-2 rounded">Pending</p>
-                                        <router-link :to="{name: 'approve-applicant',params: { ssn: patient.P_SSN, isClerk: true }}">
+                                        <router-link :to="{name: 'approve-applicant',params: { ssn: patient.P_SSN, isClerk: true, isEdit: true }}">
                                             <div class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-yellow-500 rounded-lg py-1 px-1 mx-6 my-1">
                                                 View & Approve
                                             </div>
@@ -67,35 +69,53 @@
                                     <!--Applicant has not submitted: link to create new form-->
                                     <div v-else>
                                     <p class="bg-red-300 w-1/3 inline-block m-2 rounded">Not Submitted</p>
-                                        <router-link :to="{name: 'approve-applicant',params: { ssn: patient.P_SSN, isClerk: true }}">
+                                        <router-link :to="{name: 'approve-applicant',params: { ssn: patient.P_SSN, isClerk: true, isEdit: false }}">
                                             <div class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-green-500 rounded-lg py-1 px-1 mx-6 my-1">
                                                 Create New
                                             </div>
                                         </router-link>
                                     </div>
-                                    
+
                                 </td>
 
                                 <!-- Covid Screens -->
                                 <td class="border-black border-2">
+
                                     <!-- Patient has submitted a covid screen -->
-                                    <div v-if="patient.Date"> 
-                                    <p class="bg-green-300 w-1/3 inline-block m-2 rounded">{{ patient.Date}}</p>
-                                        <router-link :to="{name:'view-patient-covid-screen',params: { date: patient.Date, pssn:patient.P_SSN, isClerk: true }}"
-                                        class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-blue-500 rounded-lg py-1 px-1 mx-6 my-1">
-                                            View/Edit
-                                        </router-link>
-                                    </div>
+                                    <template v-if="patient.dates.length">
+                                        <!-- use drop down for multiple screens -->
+                                            <select
+                                                class="p-1 bg-green-300 w-1/3 inline-block m-2 rounded"
+                                                id="dates"
+                                                v-model="param_date"
+                                            >
+                                                <option disabled value="">select one</option>
+                                                <option value="New">New</option>
+                                                <option v-for="date in patient.dates" 
+                                                        v-bind:key="date"
+                                                        v-bind:value="date">
+                                                    {{date}}
+                                                </option>
+                                            </select>
+                                            <button @click="go_to_covid(param_date,patient.P_SSN)"
+                                                    class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-blue-500 rounded-lg py-1 px-1 mx-6 my-1">
+                                                <p v-if="param_date == 'New'">Create New</p>
+                                                <p v-else>View/Edit</p>
+                                            </button>
+                                    </template>
+
                                     <!-- No covid screens exist -->
-                                    <div v-else> 
+                                    <template v-else>
                                         <p class="bg-red-200 w-1/3 inline-block m-2 rounded">N/A</p>
                                         <router-link :to="{name:'view-patient-covid-screen',params: { pssn:patient.P_SSN, isClerk: true }}"
                                         class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-green-500 rounded-lg py-1 px-1 mx-6 my-1">
                                             Create New
                                         </router-link>
-                                    </div>
-                                    
+                                    </template>
+
                                 </td>
+
+                                <!-- Doctor Reports -->
                                 <td class="border-black border-2">
                                     <div v-if="patient.Report_ID" class="bg-green-300 w-1/3 inline-block m-2 rounded">{{ patient.Report_ID}}</div>
                                     <div v-else class="bg-red-200 w-1/3 inline-block m-2 rounded">N/A</div>
@@ -120,18 +140,49 @@ export default {
 
     data() {
         return {
+            param_date: "", // Covid Screen date to send as a parameter
+
             logged_in: false,
             forms: []
         };
     },
 
     created() {
-        this.getForms();
+        this.get_forms();
     },
 
     methods: {
 
-        getForms() {
+        // Go the edit covid screen page
+        go_to_covid(date, ssn) {
+            
+            // date is "" when no option is selected from the drop down list
+            if (date == "") {return;}
+            
+            // Create a new covid screen
+            else if (date == "New") {
+                this.$router.push ({
+                    name:'view-patient-covid-screen',
+                    params: { 
+                        pssn: ssn, 
+                        isClerk: true 
+                    }
+                });
+            }
+            // View existing covid Screen
+            else {
+                this.$router.push ({
+                    name:'view-patient-covid-screen',
+                    params: { 
+                        date: date, 
+                        pssn: ssn, 
+                        isClerk: true 
+                    }
+                });
+            }
+        },
+
+        get_forms() {
             axios
                 .get(`http://localhost:5000/clerk/forms`, {
                     headers: {
@@ -143,6 +194,8 @@ export default {
 
                     this.logged_in = true;
                     this.forms = response.data.forms;
+
+                    console.log(this.forms);
                     
                 })
                 .catch((e) => {
