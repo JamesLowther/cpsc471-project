@@ -285,7 +285,7 @@ export default {
     methods: {
         getForms() {
             axios
-                .get(`http://localhost:5000/patient/forms`, {
+                .get("patient/forms", {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("jwt"),
                     },

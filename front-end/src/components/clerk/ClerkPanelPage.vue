@@ -66,7 +66,7 @@ export default {
     methods: {
         clerkGet() {
             axios
-                .get(`http://localhost:5000/clerk`, {
+                .get("clerk", {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("jwt"),
                     },

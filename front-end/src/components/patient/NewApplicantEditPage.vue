@@ -273,7 +273,7 @@ export default {
         getForm() {
             axios
                 .post(
-                    `http://localhost:5000/patient/forms`,
+                    "patient/forms",
                     {
                         action_type: "get_form",
                         form_type: "new_applicant_form",
@@ -312,7 +312,7 @@ export default {
 
             axios
                 .post(
-                    `http://localhost:5000/patient/forms`,
+                    "patient/forms",
                     {
                         action_type: "submit_form",
                         form_type: "new_applicant_form",
@@ -359,7 +359,7 @@ export default {
             // Posting when logged in as a patient should not be permitted.
             axios
                 .post(
-                    `http://localhost:5000/clerk/forms`,
+                    "clerk/forms",
                     {
                         form_type: "new_application_form",
                         action_type: "submit_form",

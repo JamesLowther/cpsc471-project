@@ -80,7 +80,7 @@ export default {
     methods: {
         getExistingPatients() {
             axios.post(
-                `http://localhost:5000/clerk/forms`, 
+                "clerk/forms", 
                 {
                     form_type: "new_applicant_form",
                     action_type: "get_form"
