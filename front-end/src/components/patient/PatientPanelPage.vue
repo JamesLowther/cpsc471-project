@@ -51,7 +51,7 @@ export default {
     methods: {
         patientGet() {
             axios
-                .get(`http://localhost:5000/patient`, {
+                .get("patient", {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("jwt"),
                     },

@@ -126,7 +126,7 @@ export default {
             } else return;
 
             axios
-                .post(`http://localhost:5000/new-account`, {
+                .post("new-account", {
                     user_type: this.user_type,
                     ssn: this.ssn,
                     password: this.password,

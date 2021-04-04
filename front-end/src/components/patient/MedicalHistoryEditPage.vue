@@ -335,7 +335,7 @@ export default {
         getForm() {
             axios
                 .post(
-                    `http://localhost:5000/patient/forms`,
+                    "patient/forms",
                     {
                         action_type: "get_form",
                         form_type: "medical_history",
@@ -363,7 +363,7 @@ export default {
             }
 
             axios.post(
-                `http://localhost:5000/patient/forms`,
+                "patient/forms",
                 {
                     action_type: "submit_form",
                     form_type: "medical_history",
@@ -432,7 +432,7 @@ export default {
         queryIllness() {
             axios
                 .post(
-                    `http://localhost:5000/entities/forms`,
+                    "entities/forms",
                     {
                         entity_type: "illness",
                         method: "query",

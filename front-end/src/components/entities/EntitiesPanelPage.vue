@@ -168,7 +168,7 @@ export default {
 
 
         search_entities() {
-            axios.post(`http://localhost:5000/entities/forms`,
+            axios.post("entities/forms",
                 {
                     entity_type: this.entity_post,
                     method: "query",
