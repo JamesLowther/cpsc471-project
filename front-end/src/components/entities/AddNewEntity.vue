@@ -1,151 +1,225 @@
 <template>
     <div id="Entities_forms">
-        <router-link :to="{name: 'entities-panel',params: { entity_type: entity_type, user_type: user_type }}"
+        <router-link :to="{name: 'entities-panel',params: { entity_type: entity_type, user_type: user_type, query_string: query_string }}"
         class="flex justify-end w-full fixed">
         <button class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
             <span >Back</span>
         </button>
         </router-link>
         <div v-if="logged_in">
-            <div class="flex flex-col items-center ">
-                <p class="text-5xl mt-20 mb-24">Add New {{ entity_type }}</p>
 
-                    <!-- Add a new medication, specifying prescription/non -->
-                    <template v-if="entity_type == 'medication'" class="m-4">
-                        <b class="text-xl">{{ entity_type }} Name</b>
-                        <input
-                            class="border border-black m-4 p-1 rounded-lg"
-                            type="text"
-                            name="entity_name"
-                            v-model="entity_name"
-                        />
-                        <div class="flex">
-                            <b class="text-lg">Is it a prescription drug?</b>
-
-                            <input type="radio" name="pre-yes" value="1" v-model="Is_prescription" class="mx-2">
-                            <label for="pre-yes">Yes</label>
-
-                            <input type="radio" name="pre-no" value="0" v-model="Is_prescription" class="mx-2">
-                            <label for="pre-no">No</label>
-                        </div>
-                        
-                    </template>
-
-                    <!-- Add a new illness, choosing an organ system and a set of symptoms -->
-                    <template v-if="entity_type == 'illness'">
-                        <b class="text-xl">{{ entity_type }} Name</b>
-                        <input
-                            class="border border-black mb-2 mt-2 p-1 rounded-lg"
-                            type="text"
-                            name="entity_name"
-                            v-model="entity_name"
-                        />
-                        <div class="flex">
-                            <b class="text-lg mx-4">Organ System:</b>
-                            <div class="bg-red-200 rounded-lg p-2">
-                                <input type="radio" name="resp" value="Respiratory" v-model="Organ_system" class="mx-2">
-                                <label for="resp">Respiratory</label>
-                            </div>
-
-                            <div class="bg-yellow-200 rounded-lg p-2">
-                            <input type="radio" name="card" value="Cardiovascular" v-model="Organ_system" class="mx-2">
-                            <label for="card">Cardiovascular</label>
-                            </div>       
-                            
-                            <div class="bg-green-300 rounded-lg p-2">
-                            <input type="radio" name="psych" value="Psychiatric" v-model="Organ_system" class="mx-2">
-                            <label for="psych">Psychiatric</label>
-                            </div>
-
-                            <div class="bg-blue-200 rounded-lg p-2">
-                            <input type="radio" name="gas" value="Gastrointestinal" v-model="Organ_system" class="mx-2">
-                            <label for="gas">Gastrointestinal</label>
-                            </div>
-                        </div>
-
-                        <div class="flex">
-                            <div class="bg-purple-200 rounded-lg p-2">   
-                            <input type="radio" name="endo" value="Endocrine" v-model="Organ_system" class="mx-2">
-                            <label for="endo">Endocrine</label>
-                            </div>
-
-                            <div class="bg-green-200 rounded-lg p-2">   
-                            <input type="radio" name="skel" value="Skeletal" v-model="Organ_system" class="mx-2">
-                            <label for="endo">Skeletal</label>
-                            </div>
-
-                            <div class="bg-blue-200 rounded-lg p-2">   
-                            <input type="radio" name="musc" value="Muscular" v-model="Organ_system" class="mx-2">
-                            <label for="endo">Muscular</label>
-                            </div>
-
-                            <div class="bg-gray-200 rounded-lg p-2">   
-                            <input type="radio" name="nerv" value="Nervous" v-model="Organ_system" class="mx-2">
-                            <label for="endo">Nervous</label>
-                            </div>
-                        </div>
-
-                        <div class="flex">
-                            <div class="bg-pink-200 rounded-lg p-2">   
-                            <input type="radio" name="skin" value="Integumentary" v-model="Organ_system" class="mx-2">
-                            <label for="endo">Integumentary</label>
-                            </div>
-
-                            <div class="bg-yellow-400 rounded-lg p-2">   
-                            <input type="radio" name="lymp" value="Lymphatic" v-model="Organ_system" class="mx-2">
-                            <label for="endo">Lymphatic</label>
-                            </div>
-
-                            <div class="bg-red-300 rounded-lg p-2">   
-                            <input type="radio" name="urin" value="Urinary" v-model="Organ_system" class="mx-2">
-                            <label for="endo">Urinary</label>
-                            </div>
-
-                            <div class="bg-green-200 rounded-lg p-2">   
-                            <input type="radio" name="repo" value="Reproductive" v-model="Organ_system" class="mx-2">
-                            <label for="endo">Reproductive</label>
-                            </div>
-                        </div>
-                        
-                    </template>
-
-                    <!-- select multiple effects: symptoms or side-effects -->
-                    <div class="bg-gray-300 rounded-lg p-2 m-4">
-                            <input
-                                class="border border-black mb-2 mt-2 p-1 rounded-lg"
-                                type="text"
-                                name="effect"
-                                v-model="effect"
-                            />
-                            <label v-if="entity_type == 'medication'" for="effect" class="m-2">Add Side-effect(s) (optional)</label>
-                            <label v-if="entity_type == 'illness'" for="effect" class="m-2">Add Symptom(s) (optional)</label>
-                            
-
-                            <ul class="list-disc text-left pl-5">
-                                <li v-for="effect in effects" :key="effect">
-                                    {{ effect }}
-                                </li>
-                            </ul>
-                            <button @click="rm_effect()" class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-pink-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
-                                remove
-                            </button>
-                            <button @click="add_effect()" class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-blue-500 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
-                                add
-                            </button>
-                        </div>
-
-                    <button @click="add_new()" class="text-white text-xl mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-600 hover:bg-green-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
-                        Submit
-                    </button>
-
-                    <!-- Display error or success, depending on response from server -->
-                    <p v-if="status=='0'" class="text-red-600 text-xl">Error: {{entity_type}} may already exist</p>
-                    <p v-else-if="status=='1'" class="text-green-600 text-xl">Success</p>
-                    <!-- error for bad input -->
-                    <p class="text-red-600 text-xl">{{error}}</p>
-
+            <!-- If the entity being modified is an Medication, load this table view -->
+            <div v-if="entity_type == 'medication'" class="flex flex-col items-center ml-auto mr-auto pt-24 mt-3 mb-4">
+                <table class="w-full md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg">
+                    <thead>
+                        <tr>
+                            <th v-if="create_mode" class="text-lg text-white text-2xl w-full bg-blue-500 rounded-t-2xl border-teal border-b-2 border-r-2" colspan="2"> 
+                                <b>Add new {{ entity_type }}</b>
+                            </th>
+                            <th v-else class="text-lg text-white text-2xl w-full bg-blue-500 rounded-t-2xl border-teal border-b-2 border-r-2" colspan="2"> 
+                                <b>Modify {{ entity_type }}</b>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-blue-100">
+                            <td class="border-blue-300 border-2 py-2">
+                                <b class="text-xl">{{ entity_type }} Name</b>
+                            </td>
+                            <td v-if="create_mode == true" class="border-blue-300 border-2 py-2">
+                                <input
+                                    class="border border-black mb-1 mt-1 p-1 rounded-lg"
+                                    type="text"
+                                    name="entity_name"
+                                    placeholder="Name"
+                                    v-model="entity_name"/>
+                            </td>
+                            <td v-else class="border-blue-300 border-2 py-2">
+                                <input
+                                    class="border border-black text-gray-400 mb-1 mt-2 p-1 rounded-lg"
+                                    type="text"
+                                    name="entity_name"
+                                    placeholder="entity_name"
+                                    v-model="entity_name"
+                                    readonly/>
+                            </td>
+                        <tr class="bg-blue-100">
+                            <td class="border-blue-300 border-2 py-3">
+                                <b>Is it a prescription drug?</b>
+                            </td>
+                            <td class="border-blue-300 border-2 py-1">
+                                <input type="radio" name="pre-yes" value="1" v-model="Is_prescription" class="mx-2">
+                                <label for="pre-yes">Yes</label>
+                                <br />
+                                <input type="radio" name="pre-no" value="0" v-model="Is_prescription" class="mx-2">
+                                <label for="pre-no">No</label>
+                            </td>
+                        </tr>
+                        <tr class="bg-blue-100">
+                            <td class="border-blue-300 border-2 py-2">
+                                <label v-if="entity_type == 'medication'" for="effect" class="m-2">
+                                    <b>Add Side-effect(s)</b> <i class="text-gray-400">(optional)</i></label>
+                                <br />
+                                <input
+                                    class="border border-black mb-2 mt-2 p-1 rounded-lg"
+                                    type="text"
+                                    name="effect"
+                                    v-model="effect"
+                                />
+                                <br />
+                                <button @click="rm_effect()" class="text-white shadow-lg transition duration-300 ease-in-out bg-pink-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-1 px-4 m-1">
+                                    remove
+                                </button>
+                                <button @click="add_effect()" class="text-white shadow-lg transition duration-300 ease-in-out bg-blue-500 hover:bg-blue-700 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-1 px-4 m-1">
+                                    add
+                                </button>
+                            </td>
+                            <td class="border-blue-300 border-2 py-2">
+                                <ul class="list-disc text-left pl-5">
+                                    <li v-for="(effect, i) in effects" :key="`${i}-${effect}`">
+                                        {{ effect }}
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr class=" shadow-2xl">
+                            <td class="border-teal-500 border-0 text-pink-300 bg-blue-500 rounded-b-2xl" colspan="3">
+                                <button v-if="create_mode"
+                                        @click="add_med()" class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-green-500 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
+                                    <b>Add Medication</b>
+                                </button>
+                                <button v-else
+                                        @click="update_med()" class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-green-500 hover:bg-green-800 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
+                                    <b>Update Medication</b>
+                                </button>
+                                <template v-if="sys_msg.length != 0">
+                                    <!-- Display error or success, depending on response from server -->
+                                    <p v-if="status=='0'" class="text-red-600 text-xl">Error updating {{entity_type}}</p>
+                                    <p v-else-if="status=='1'" class="text-white text-xl"><b>Success</b></p>
+                                </template>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
+
+
+            <!-- If the entity being modified is an Illness, load this table view -->
+            <div v-if="entity_type == 'illness'" class="flex flex-col items-center ml-auto mr-auto pt-24 mt-3 mb-4">
+                <table class="w-full md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg">
+                    <thead>
+                        <tr>
+                            <th v-if="create_mode" class="text-lg text-white text-2xl w-full bg-blue-500 rounded-t-2xl border-teal border-b-2 border-r-2" colspan="2"> 
+                                <b>Add new {{ entity_type }}</b>
+                            </th>
+                            <th v-else class="text-lg text-white text-2xl w-full bg-blue-500 rounded-t-2xl border-teal border-b-2 border-r-2" colspan="2"> 
+                                <b>Modify {{ entity_type }}</b>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-blue-100">
+                            <td class="border-blue-300 border-2 py-3">
+                                <b>Name of {{ entity_type }}:</b>
+                            </td>
+                            <td v-if="create_mode == true" class="border-blue-300 border-2 py-2">
+                                <input
+                                    class="border border-black mb-1 mt-1 p-1 rounded-lg"
+                                    type="text"
+                                    name="entity_name"
+                                    placeholder="Name"
+                                    v-model="entity_name"/>
+                            </td>
+                            <td v-else class="border-blue-300 border-2 py-2">
+                                <input
+                                    class="border border-black text-gray-400 mb-1 mt-2 p-1 rounded-lg"
+                                    type="text"
+                                    name="entity_name"
+                                    placeholder="entity_name"
+                                    v-model="entity_name"
+                                    readonly/>
+                            </td>
+                        </tr>
+                        <tr class="bg-blue-100">
+                            <td class="border-blue-300 border-2 py-3">
+                                <label class="mr-3" for="select"><b>Organ System:</b></label>
+                            </td>
+                            <td class="border-blue-300 border-2 py-1">
+                                <select class="bg-blue-400 text-white rounded-md py-1 px-10"
+                                        id="select"
+                                        v-model="organ_system">
+
+                                    <option name="none" value="None"><i>None</i></option>
+                                    <option name="resp" value="Respiratory">Respiratory</option>
+                                    <option name="card" value="Cardiovascular">Cardiovascular</option>
+                                    <option name="psych" value="Psychiatric">Psychiatric</option>
+                                    <option name="gas" value="Gastrointestinal">Gastrointestinal</option>
+                                    <option name="endo" value="Endocrine">Endocrine</option>
+                                    <option name="skel" value="Skeletal">Respiratory</option>
+                                    <option name="musc" value="Muscular">Muscular</option>
+                                    <option name="nerv" value="Nervous">Nervous</option>
+                                    <option name="skin" value="Integumentary">Integumentary</option>
+                                    <option name="lymp" value="Lymphatic">Lymphatic</option>
+                                    <option name="urin" value="Urinary">Urinary</option>
+                                    <option name="repo" value="Reproductive">Reproductive</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr class="bg-blue-100">
+                            <td class="border-blue-300 border-2 py-4">
+                                <label v-if="entity_type == 'illness'" for="effect" class="m-2">
+                                    <b>Add Symptom(s)</b> <i class="text-gray-400">(optional)</i>
+                                </label>
+                                <br />
+                                <input
+                                    class="border border-black mb-2 mt-2 p-1 rounded-lg"
+                                    type="text"
+                                    name="effect"
+                                    v-model="effect"
+                                />
+                                <br />
+                                <button @click="rm_effect()" class="text-white shadow-lg transition duration-300 ease-in-out bg-pink-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-1 px-4 m-1">
+                                    remove
+                                </button>
+                                <button @click="add_effect()" class="text-white shadow-lg transition duration-300 ease-in-out bg-blue-500 hover:bg-blue-700 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-1 px-4 m-1">
+                                    add
+                                </button>
+                            </td>
+                            <td class="border-blue-300 border-2 py-2">
+                                <ul class="list-disc text-left pl-5">
+                                    <li v-for="(effect, i) in effects" :key="`${i}-${effect}`">
+                                        {{ effect }}
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr class=" shadow-2xl">
+                            <td class="border-teal-500 border-0 text-pink-300 bg-blue-500 rounded-b-2xl" colspan="3">
+                                <button v-if="create_mode"
+                                        @click="add_ill()" class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-green-500 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
+                                    <b>Add Illness</b>
+                                </button>
+                                <button v-else
+                                        @click="update_ill()" class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-green-500 hover:bg-green-800 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
+                                    <b>Update Illness</b>
+                                </button>
+                                <template v-if="sys_msg.length != 0">
+                                    <!-- Display error or success, depending on response from server -->
+                                    <p v-if="status=='0'" class="text-red-600 text-xl">Error updating {{entity_type}}</p>
+                                    <p v-else-if="status=='1'" class="text-white text-xl"><b>Success</b></p>
+                                </template>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
         </div>
+
+
+
+
+
 
         <div v-else class="flex flex-col">
             <p class="text-5xl mt-20">Forbidden</p>
@@ -161,9 +235,11 @@ export default {
     data() {
         return {
             logged_in: true,
+            organ_system: "None",
             user_type: "",
+            query_string: "",
             status: null, // reponse from server: 0 or 1
-            error: "", // Error message for invalid input
+            sys_msg: "", // Succes or Error message
 
             entity_type: "", // Medication, illness or symptom
             entity_post: "", //the formatted string to send in POST
@@ -174,6 +250,8 @@ export default {
 
             effect: "", // Either a symptom (illness) or side-effect (medication)
             effects: [],
+
+            create_mode: true,
         };
     },
 
@@ -181,14 +259,35 @@ export default {
         // Get parameters from route, and initialize data()
         this.entity_type = this.$route.params.entity_type;
         this.user_type = this.$route.params.user_type;
+        this.create_mode = this.$route.params.create_mode;
+        this.entity_name = this.$route.params.entity_name;
+        this.query_string = this.$route.params.query_string;
+        if (typeof this.entity_type == 'undefined' || typeof this.user_type == 'undefined' ) {
+            console.log(this.entity_type);
+            this.$router.go(-1);
+        }
+        if (this.entity_type == 'medication' & !this.create_mode) {
+            this.Is_prescription = this.$route.params.is_presc;
+            this.effects = this.$route.params.effects;
+        }
+        else if (this.entity_type == 'illness' && !this.create_mode) {
+            this.organ_system = this.$route.params.Organ_system;
+            this.effects = this.$route.params.effects;
+        }
         this.init_entity();
     },
 
     methods: {
         
         // Push and Pop effects listed on screen before sending to server
-        rm_effect() {this.effects.pop(this.effect);},
-        add_effect() {this.effects.push(this.effect);},
+        rm_effect() {
+            this.effects.pop(this.effect);
+            this.sys_msg = "";
+        },
+        add_effect() {
+            this.effects.push(this.effect);
+            this.sys_msg = "";
+        },
 
         add_new() {
             if(!this.check_input()) return;
@@ -200,11 +299,11 @@ export default {
         check_input() {
         // Only the input text box for entity name must be non-null
             if (this.entity_name == "") {
-                this.error = "Name is Blank";
+                this.sys_msg = "Name is Blank";
                 return false;
             }
             else{
-                this.error = "";
+                this.sys_msg = "";
                 return true;
             }
         },
@@ -231,13 +330,13 @@ export default {
                 }
             );
         },
-        add_ill() {
+        update_med() {
             axios.post(`http://localhost:5000/entities/forms`,
                 {
                     entity_type: this.entity_post,
-                    method: "add",
-                    ill_name: this.entity_name,
-                    org_sys: this.Organ_system,
+                    method: "update",
+                    med_name: this.entity_name,
+                    is_pres: this.Is_prescription,
                     effects: this.effects
                 },
                 {
@@ -247,6 +346,50 @@ export default {
                 }
             ).then((response) => {
                     this.status = response.data.status;
+                    this.sys_msg = response.data.sys_msg;
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        },
+        add_ill() {
+            axios.post(`http://localhost:5000/entities/forms`,
+                {
+                    entity_type: this.entity_post,
+                    method: "add",
+                    ill_name: this.entity_name,
+                    org_sys: this.organ_system,
+                    effects: this.effects
+                },
+                {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("jwt"),
+                    },
+                }
+            ).then((response) => {
+                    this.status = response.data.status;
+                })
+                .catch((e) => {
+                    console.log(e);
+                });
+        },
+        update_ill() {
+            axios.post(`http://localhost:5000/entities/forms`,
+                {
+                    entity_type: this.entity_post,
+                    method: "update",
+                    ill_name: this.entity_name,
+                    org_sys: this.organ_system,
+                    effects: this.effects
+                },
+                {
+                    headers: {
+                        Authorization: "Bearer " + localStorage.getItem("jwt"),
+                    },
+                }
+            ).then((response) => {
+                    this.status = response.data.status;
+                    this.sys_msg = response.data.sys_msg;
                 })
                 .catch((e) => {
                     console.log(e);

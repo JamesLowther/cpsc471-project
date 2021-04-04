@@ -61,6 +61,74 @@
                         </tr>
                     </tbody>
                 </table>
+            <div class="w-full mb-6 mt-12">
+                <table class="w-full ml-auto md: mr-auto md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg">
+                    <thead>
+                        <tr>
+                            <th class="text-lg text-white w-full bg-blue-500 rounded-t-2xl border-teal border-r-0" colspan="3">
+                                Patients Medical History
+                            </th>
+                            <th />
+                            <th />
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="bg-blue-300">
+                            <td class="border-blue-300 border-0 border-l-0">
+                                <b>Age:</b> {{ this.form.Age }}
+                            </td>
+                            <td class="border-blue-300 border-0">
+                                <b>Gender:</b> {{ this.form.Gender }}
+                            </td>
+                            <td class="border-blue-300 border-2 border-l-0">
+                                <b>Sex:</b> {{ this.form.Sex }}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="bg-blue-500 border-blue-300 border-2 border-r-0 border-l-0 text-white">
+                                <b>Allergies:</b>
+                            </td>
+                            <td class="border-blue-300 border-2 border-l-0 bg-blue-100" colspan="2">
+                                <ul class="list-disc text-left pl-5">
+                                    <li v-for="allergy in form.allergies" :key="allergy.Allergy">
+                                        {{ allergy.Allergy }}
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="bg-blue-500 border-blue-300 border-2 border-r-0 border-l-0 text-white">
+                                <b>Immunizations:</b>
+                            </td>
+                            <td class="border-blue-300 border-2 border-l-0 bg-blue-100" colspan="2">
+                                <ul class="list-disc text-left pl-5">
+                                    <li v-for="immunization in form.immunizations" :key="immunization.Immunization">
+                                        {{ immunization.Immunization }}
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="bg-blue-500 border-blue-300  border-b-0 border-r-0 border-l-0 border-2 text-white">
+                                <b>Past Illnesses:</b><br />[Age of Onset]
+                            </td>
+                            <td class="border-blue-300 border-2 border-b-0 border-l-0 bg-blue-100" colspan="2">
+                                <ul class="list-disc text-left pl-5">
+                                    <li v-for="past_illness in form.past_illnesses" :key="past_illness.Illness_name">
+                                        <b>{{ past_illness.Illness_name }}</b> [{{ past_illness.Age_of_onset }}]
+                                    </li>
+                                </ul>
+
+                            </td>
+                        </tr>
+                        <tr class=" shadow-2xl">
+                            <td class="border-teal-500 border-0 text-white bg-blue-300 rounded-b-2xl" colspan="4">
+                                .
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
             <div class="w-full">
                 <div class="w-full mb-6">
                     <p class="text-xl">Assigned Doctor</p>
@@ -254,7 +322,7 @@
                             <th class="text-lg text-white w-1/2 bg-blue-500 rounded-tl-2xl border-teal border-r-2">Med. Center Name</th>
                             <th class="text-lg text-white bg-blue-500 p-2 pb-0 border-teal border-r-2">Type</th>
                             <th class="text-lg text-white w-1/2 bg-blue-500 p-2 pb-0">Address</th>
-                            <th class="text-lg text-white bg-blue-500 rounded-tr-2xl border-teal border-l-2"></th>
+                            <th class="text-lg text-white bg-blue-500 rounded-tr-2xl border-teal border-l-2 px-8"></th>
                         </thead>
                         <tbody>
                             <tr class="bg-blue-100"
@@ -328,74 +396,6 @@
                         {{ medCenter_error }}
                     </p>
                 </div>
-            </div>
-            <div class="w-full mb-6 mt-12">
-                <table class="w-full ml-auto md: mr-auto md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg">
-                    <thead>
-                        <tr>
-                            <th class="text-lg text-white w-full bg-blue-500 rounded-t-2xl border-teal border-r-0" colspan="3">
-                                Patients Medical History
-                            </th>
-                            <th />
-                            <th />
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr class="bg-blue-300">
-                            <td class="border-blue-300 border-0 border-l-0">
-                                <b>Age:</b> {{ this.form.Age }}
-                            </td>
-                            <td class="border-blue-300 border-0">
-                                <b>Gender:</b> {{ this.form.Gender }}
-                            </td>
-                            <td class="border-blue-300 border-2 border-l-0">
-                                <b>Sex:</b> {{ this.form.Sex }}
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="bg-blue-500 border-blue-300 border-2 border-r-0 border-l-0 text-white">
-                                <b>Allergies:</b>
-                            </td>
-                            <td class="border-blue-300 border-2 border-l-0 bg-blue-100" colspan="2">
-                                <ul class="list-disc text-left pl-5">
-                                    <li v-for="allergy in form.allergies" :key="allergy.Allergy">
-                                        {{ allergy.Allergy }}
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="bg-blue-500 border-blue-300 border-2 border-r-0 border-l-0 text-white">
-                                <b>Immunizations:</b>
-                            </td>
-                            <td class="border-blue-300 border-2 border-l-0 bg-blue-100" colspan="2">
-                                <ul class="list-disc text-left pl-5">
-                                    <li v-for="immunization in form.immunizations" :key="immunization.Immunization">
-                                        {{ immunization.Immunization }}
-                                    </li>
-                                </ul>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td class="bg-blue-500 border-blue-300  border-b-0 border-r-0 border-l-0 border-2 text-white">
-                                <b>Past Illnesses:</b><br />[Age of Onset]
-                            </td>
-                            <td class="border-blue-300 border-2 border-b-0 border-l-0 bg-blue-100" colspan="2">
-                                <ul class="list-disc text-left pl-5">
-                                    <li v-for="past_illness in form.past_illnesses" :key="past_illness.Illness_name">
-                                        <b>{{ past_illness.Illness_name }}</b> [{{ past_illness.Age_of_onset }}]
-                                    </li>
-                                </ul>
-
-                            </td>
-                        </tr>
-                        <tr class=" shadow-2xl">
-                            <td class="border-teal-500 border-0 text-white bg-blue-300 rounded-b-2xl" colspan="4">
-                                .
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
             </div>
         </div>
         <div v-else class="flex flex-col">

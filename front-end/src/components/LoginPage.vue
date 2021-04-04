@@ -12,58 +12,84 @@
                 >Back</router-link
             >
         </div>
-        <div class="flex flex-col">
-            <p class="text-center text-5xl mt-32 my-2">Login</p>
-            <div class="bg-rose-300">
-                <img class="object-contain md:object-scale-down h-96 w-full ..." src="@/assets/Gregor_Mendel_login.jpeg">
-            </div>
-            <div class="flex justify-center my-4">
-                <div class="text-xl">
-                    <label class="mr-3" for="select">Type:</label>
-                    <select
-                        class="bg-gray-300 rounded py-1 px-10"
-                        id="select"
-                        v-model="user_type"
-                    >
-                        <option value="patient">Patient</option>
-                        <option value="doctor">Doctor</option>
-                        <option value="clerk">Clerk</option></select
-                    ><br />
-                    <input
-                        class="border my-4 p-1 rounded-lg"
-                        v-bind:class="[
-                            invalid_ssn ? 'border-red-700' : 'border-black',
-                        ]"
-                        type="text"
-                        pattern="[0-9]{9}"
-                        placeholder="SSN"
-                        id="ssn"
-                        name="ssn"
-                        v-model="ssn"
-                        ref="ssn"
-                    /><br />
-                    <input
-                        class="border border-black p-1 rounded-lg"
-                        v-bind:class="[
-                            empty_pass ? 'border-red-700' : 'border-black',
-                        ]"
-                        type="password"
-                        placeholder="Password"
-                        id="password"
-                        name="password"
-                        v-model="password"
-                        ref="pass"
-                    /><br /><br />
-                    <button
-                        class="text-white px-4 py-2 shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg"
-                        type="submit"
-                        @click="loginPost()"
-                    >
-                        Login
-                    </button>
-                    <p class="text-red-600 mt-3">{{ error }}</p>
-                </div>
-            </div>
+        <div class="bg-rose-300">
+            <img class="object-contain md:object-scale-down pt-10 h-96 w-full ..." src="@/assets/Gregor_Mendel_login.jpeg">
+        </div>
+        <div class="flex flex-col items-center ml-auto mr-auto pt-2 w-1/12 mt-3 mb-4">
+            <table class="w-full md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg">
+                <thead>
+                    <tr>
+                        <th class="text-lg text-white w-full bg-blue-500 rounded-t-2xl border-teal border-b-2 border-r-2"> 
+                            Login
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="bg-blue-100">
+                        <td class="border-blue-300 border-2 py-4">
+                            <label class="mr-3" for="select">Type:</label>
+                            <select
+                                class="bg-blue-400 text-white rounded-md py-1 px-10"
+                                id="select"
+                                v-model="user_type"
+                            >
+                                <option value="patient">Patient</option>
+                                <option value="doctor">Doctor</option>
+                                <option value="clerk">Clerk</option></select
+                            >
+                        </td>
+                    </tr>
+                    <tr class="bg-blue-100">
+                        <td class="border-blue-300 border-2 px-8 py-2">
+                            <input
+                                class="border p-1 rounded-lg"
+                                v-bind:class="[
+                                    invalid_ssn ? 'border-red-700' : 'border-black',
+                                ]"
+                                type="text"
+                                pattern="[0-9]{9}"
+                                placeholder="SSN"
+                                id="ssn"
+                                name="ssn"
+                                v-model="ssn"
+                                ref="ssn"
+                            />
+                        </td>
+                    </tr>
+                    <tr class="bg-blue-100">
+                        <td class="border-blue-300 border-2 px-8 py-2">
+                            <input
+                                class="border border-black p-1 rounded-lg"
+                                v-bind:class="[
+                                    empty_pass ? 'border-red-700' : 'border-black',
+                                ]"
+                                type="password"
+                                placeholder="Password"
+                                id="password"
+                                name="password"
+                                v-model="password"
+                                ref="pass"
+                            />
+                        </td>
+                    </tr>
+                    <tr class="bg-blue-100">
+                        <td class="border-blue-300 border-2 py-2">
+                            <button
+                                class="text-white px-4 py-2 shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg"
+                                type="submit"
+                                @click="loginPost()"
+                            >
+                                Login
+                            </button>
+                        </td>
+                    </tr>
+                    <tr class=" shadow-2xl">
+                        <td class="border-teal-500 border-0 text-pink-300 bg-blue-500 rounded-b-2xl" colspan="3">
+                            {{ error }}.
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </div>
 </template>

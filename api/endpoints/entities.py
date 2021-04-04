@@ -19,8 +19,8 @@ class Entities(Resource):
 
 class EntitiesForms(Resource):
     parser = reqparse.RequestParser()
-    parser.add_argument("entity_type", type=str, required=True, choices={"medication", "illness", "symptom"}, help="Bad choice: {error_msg}")
-    parser.add_argument("method", type=str, required=True, choices={"add", "delete", "query"}, help="Bad choice: {error_msg}")
+    parser.add_argument("entity_type", type=str, required=True, choices={"medication", "illness"}, help="Bad choice: {error_msg}")
+    parser.add_argument("method", type=str, required=True, choices={"add", "update", "delete", "query"}, help="Bad choice: {error_msg}")
     
     parser.add_argument("med_name", type=str, required=False)
     parser.add_argument("is_pres", type=int, required=False)
@@ -70,7 +70,11 @@ class EntitiesForms(Resource):
             if args["method"] == "add":
                 return self.add_new_entity(args)
 
-            if args["method"] == "delete":
+            elif args["method"] == "update":
+                # Write code to delete illness/medication.
+                return self.update_entity(args)
+
+            elif args["method"] == "delete":
                 # Write code to delete illness/medication.
                 pass
 
@@ -92,7 +96,7 @@ class EntitiesForms(Resource):
 
         if (entity_type == "medication"):
             # Select all medications that match the query string.
-            cursor.execute("SELECT m.Name, m.Is_prescription FROM Medication AS m WHERE m.name LIKE ? ORDER BY m.Name;", ("%" + args["query_string"] + "%",))
+            cursor.execute("SELECT Name, Is_prescription FROM Medication WHERE Name LIKE ? ORDER BY Name;", ("%" + args["query_string"] + "%",))
             results = cursor.fetchall()
             results = [dict(x) for x in results]
             
@@ -114,10 +118,6 @@ class EntitiesForms(Resource):
                 symptoms = cursor.fetchall()
 
                 illness["Effects"] = [x["Symptom_name"] for x in symptoms]
-
-        elif (entity_type == "symptom"):
-            cursor.execute("SELECT Symptom_name, Illness_Name FROM Symptoms WHERE Symptom_name LIKE ?;", ("%" + args["query_string"] + "%",))
-            results = cursor.fetchall() 
 
         con.close()
 
@@ -148,12 +148,17 @@ class EntitiesForms(Resource):
             except sqlite3.Error as er:
                 print(er)
                 con.close()
-                return jsonify(status=0)
+                return jsonify(
+                    status=0,
+                    error_msg=er,
+                    sys_msg="Error: Could not Add",
+                    )
         
         # Add a new illness, and its specified symptoms. Catch any SQL errors
         elif (args["entity_type"] == "illness"):
             try:
-                cursor.execute("INSERT INTO Illness VALUES (?, ?);", (args["ill_name"], args["org_sys"]) )
+                #cursor.execute("DELETE FROM Illness WHERE  (?);", (args["ill_name"],),)
+                cursor.execute("INSERT INTO Illness VALUES (?, ?);", (args["ill_name"], args["org_sys"],),)
 
                 # if users included symptoms, insert into database
                 if(args["effects"]):
@@ -163,10 +168,77 @@ class EntitiesForms(Resource):
             except sqlite3.Error as er:
                 print(er)
                 con.close()
-                return jsonify(status=0)
+                return jsonify(
+                    status=0,
+                    error_msg=er,
+                    sys_msg="Error: Could not Add",
+                    )
+
+        con.commit()
+        con.close()
+
+        return jsonify(
+            status=1,
+            sys_msg="Successfully Added",
+            )
+
+
+    def update_entity(self, args):
+        """
+        Update an existing entity in the database and its corresponding
+        effects or symptoms.
+        """
+
+        con, cursor = db.connect_db()
+
+        # Update an existing medication, and its specified side-effects
+        # catch any SQL errors eg key or unique name constraints
+        if(args["entity_type"] == "medication"):
+            try:
+                cursor.execute("DELETE FROM Medication WHERE Name = ?;", (args["med_name"],),)
+                cursor.execute("INSERT INTO Medication VALUES (?, ?);", (args["med_name"], args["is_pres"]) )
+
+                # if users included side-effects, insert into database
+                cursor.execute("DELETE FROM Side_Effects WHERE Med_Name = (?);", (args["med_name"],),)
+                if(args["effects"]):
+                    for effect in args["effects"]:
+                        cursor.execute("INSERT INTO Side_Effects VALUES (?,?);", (args["med_name"], effect) )
+
+            except sqlite3.Error as er:
+                print(er)
+                con.close()
+                return jsonify(
+                    status=0,
+                    error_msg=er,
+                    sys_msg="Error: Could not update",
+                    )
+        
+        # Update an existing illness, and its specified symptoms. Catch any SQL errors
+        elif (args["entity_type"] == "illness"):
+            try:
+                cursor.execute("DELETE FROM Illness WHERE Name = ?;", (args["ill_name"],),)
+                cursor.execute("INSERT INTO Illness VALUES (?, ?);", (args["ill_name"], args["org_sys"],),)
+
+                # if users included symptoms, insert into database
+                cursor.execute("DELETE FROM Symptoms WHERE Illness_name = (?);", (args["ill_name"],),)
+                if(args["effects"]):
+                    for symptom in args["effects"]:
+                        cursor.execute("INSERT INTO Symptoms VALUES (?,?);", (args["ill_name"], symptom) )
+
+            except sqlite3.Error as er:
+                print(er)
+                con.close()
+                return jsonify(
+                    status=0,
+                    error_msg=er,
+                    sys_msg="Error: Could not update",
+                    )
 
 
         con.commit()
         con.close()
 
-        return jsonify(status=1)
+        return jsonify(
+            status=1,
+            sys_msg="Successfully Updated",
+            )

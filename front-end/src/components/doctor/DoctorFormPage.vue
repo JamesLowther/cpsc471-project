@@ -18,9 +18,9 @@
                 <table class="w-full ml-auto md: mr-auto md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg">
                     <thead>
                         <tr>
-                            <th class="text-lg text-white w-full bg-blue-500 rounded-tl-2xl border-teal border-r-2"> 
+                            <th class="text-lg text-black w-full bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2"> 
                                 <input
-                                    class="border border-blue-700 mb-2 mt-2 p-1 rounded-lg"
+                                    class="border border-blue-700 w-3/4 mb-2 mt-2 p-1 rounded-lg"
                                     type="text"
                                     name="PatientName"
                                     placeholder="Search Reports"
@@ -28,10 +28,10 @@
                                     v-on:keyup="searchPatients()"
                                 />
                             </th>
-                            <th class="text-lg text-white bg-blue-500 p-2 pb-0">
+                            <th class="text-lg text-white bg-blue-500 border-b-2 p-2 pb-0">
                                 Report-#
                             </th>
-                            <th class="text-lg text-white bg-blue-500 rounded-tr-2xl border-teal border-l-2">
+                            <th class="text-lg text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2 px-8">
                             </th>
                         </tr>
                     </thead>
