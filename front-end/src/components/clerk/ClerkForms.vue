@@ -184,7 +184,7 @@ export default {
 
         get_forms() {
             axios
-                .get(`http://localhost:5000/clerk/forms`, {
+                .get("clerk/forms", {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("jwt"),
                     },

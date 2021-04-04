@@ -208,7 +208,7 @@ export default {
         getForm() {
             axios
                 .post(
-                    `http://localhost:5000/patient/forms`,
+                    "patient/forms",
                     {
                         action_type: "get_form",
                         form_type: "report",
@@ -236,7 +236,7 @@ export default {
             if (![this.checkComplaint(), this.checkMedicalCentre()].every((x) => {return x === true})) return
 
             axios.post(
-                `http://localhost:5000/patient/forms`,
+                "patient/forms",
                 {
                     action_type: "submit_form",
                     form_type: "report",
@@ -270,7 +270,7 @@ export default {
             } 
 
             axios.post(
-                `http://localhost:5000/patient/forms`,
+                "patient/forms",
                 {
                     action_type: "submit_form",
                     form_type: "report",
@@ -297,7 +297,7 @@ export default {
         getNewFormData() {
             axios
                 .post(
-                    `http://localhost:5000/keys`,
+                    "keys",
                     { entity: "medical_centre" },
                     {
                         headers: {

@@ -309,7 +309,7 @@ export default {
         },
 
         add_med() {
-            axios.post(`http://localhost:5000/entities/forms`,
+            axios.post("entities/forms",
                 {
                     entity_type: this.entity_post,
                     method: "add",
@@ -353,7 +353,7 @@ export default {
                 });
         },
         add_ill() {
-            axios.post(`http://localhost:5000/entities/forms`,
+            axios.post("entities/forms",
                 {
                     entity_type: this.entity_post,
                     method: "add",

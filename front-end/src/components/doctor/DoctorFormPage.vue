@@ -99,7 +99,7 @@ export default {
 
     methods: {
         searchPatients() {
-            axios.post(`http://localhost:5000/doctor/forms`,
+            axios.post("doctor/forms",
                 {
                     action_type: "get_form",
                     form_type: "patient_search",
@@ -125,7 +125,7 @@ export default {
 
         getForms() {
             axios
-                .get(`http://localhost:5000/doctor/forms`, {
+                .get("doctor/forms", {
                     headers: {
                         Authorization: "Bearer " + localStorage.getItem("jwt"),
                     },

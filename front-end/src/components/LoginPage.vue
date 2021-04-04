@@ -149,7 +149,7 @@ export default {
 
             axios
                 .post(
-                    `http://localhost:5000/login`,
+                    "login",
                     {
                         user_type: this.user_type,
                         ssn: this.ssn,

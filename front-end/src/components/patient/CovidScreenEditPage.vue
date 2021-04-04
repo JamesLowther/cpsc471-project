@@ -159,7 +159,7 @@ export default {
         getForm() {
             axios
                 .post(
-                    `http://localhost:5000/patient/forms`,
+                    "patient/forms",
                     {
                         action_type: "get_form",
                         form_type: "covid_screen",
@@ -187,7 +187,7 @@ export default {
             if (!this.checkInput()) return;
 
             axios.post(
-                `http://localhost:5000/patient/forms`,
+                "patient/forms",
                 {
                     action_type: "submit_form",
                     form_type: "covid_screen",
@@ -235,7 +235,7 @@ export default {
             if (!this.checkInput()) return;
 
             axios.post(
-                `http://localhost:5000/patient/forms`,
+                "patient/forms",
                 {
                     action_type: "submit_form",
                     form_type: "covid_screen",

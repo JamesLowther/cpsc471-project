@@ -461,7 +461,7 @@ export default {
         getForm() {
             axios
                 .post(
-                    `http://localhost:5000/doctor/forms`,
+                    "doctor/forms",
                     {
                         action_type: "get_form",
                         form_type: "report",
@@ -488,7 +488,7 @@ export default {
         },
         updateComplaint() {
             axios.post(
-                `http://localhost:5000/doctor/forms`,
+                "doctor/forms",
                 {
                     action_type: "update_complaint",
                     form_type: "report",
@@ -506,7 +506,7 @@ export default {
         getNewFormData() {
             axios
                 .post(
-                    `http://localhost:5000/keys`,
+                    "keys",
                     { entity: "medical_centre" },
                     {
                         headers: {
@@ -523,7 +523,7 @@ export default {
         queryIllness() {
             axios
                 .post(
-                    `http://localhost:5000/entities/forms`,
+                    "entities/forms",
                     {
                         entity_type: "illness",
                         method: "query",
@@ -557,7 +557,7 @@ export default {
             }
 
             axios.post(
-                `http://localhost:5000/doctor/forms`,
+                "doctor/forms",
                 {
                     action_type: "add_illness",
                     form_type: "report",
@@ -594,7 +594,7 @@ export default {
         removeIllness(illness) {
 
             axios.post(
-                `http://localhost:5000/doctor/forms`,
+                "doctor/forms",
                 {
                     action_type: "remove_illness",
                     form_type: "report",
@@ -631,7 +631,7 @@ export default {
         queryMedications() {
             axios
                 .post(
-                    `http://localhost:5000/entities/forms`,
+                    "entities/forms",
                     {
                         entity_type: "medication",
                         method: "query",
@@ -665,7 +665,7 @@ export default {
             }
 
             axios.post(
-                `http://localhost:5000/doctor/forms`,
+                "doctor/forms",
                 {
                     action_type: "add_medication",
                     form_type: "report",
@@ -703,7 +703,7 @@ export default {
         removeMedication(medication) {
 
             axios.post(
-                `http://localhost:5000/doctor/forms`,
+                "doctor/forms",
                 {
                     action_type: "remove_medication",
                     form_type: "report",
@@ -740,7 +740,7 @@ export default {
         queryMedCenters() {
             axios
                 .post(
-                    `http://localhost:5000/keys`,
+                    "keys",
                     {
                         entity: "medical_centre",
                         query_string: this.med_center_query,
@@ -773,7 +773,7 @@ export default {
             }
 
             axios.post(
-                `http://localhost:5000/doctor/forms`,
+                "doctor/forms",
                 {
                     action_type: "add_medCenter",
                     form_type: "report",
@@ -811,7 +811,7 @@ export default {
         removeMedCenter(MedCenter_Name) {
 
             axios.post(
-                `http://localhost:5000/doctor/forms`,
+                "doctor/forms",
                 {
                     action_type: "remove_medCenter",
                     form_type: "report",
