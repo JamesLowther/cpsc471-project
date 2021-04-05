@@ -14,21 +14,25 @@
                 <p v-if="create_mode" class="text-4xl lg:text-5xl mt-20">
                     Create Medical History Form
                 </p>
-                <p v-else class="text-4xl lg:text-5xl mt-20">Edit Medical History Form</p>
+                <p v-else class="text-4xl lg:text-5xl mt-20">
+                    Edit Medical History Form
+                </p>
             </div>
             <div class="flex flex-col items-start mt-10 w-5/6 lg:w-1/2 mx-auto">
                 <div class="w-full mb-10">
-                    <p class="font-bold text-3xl text-left">
-                        Pregnancy Info:
+                    <p class="font-bold text-3xl text-left">Pregnancy Info:</p>
+                    <p class="text-left text-lg mb-2">
+                        Set values to 0 if not applicable
                     </p>
-                    <p class="text-left text-lg mb-2">Set values to 0 if not applicable</p>
                     <div
-                        class="flex flex-row justify-around items-center w-full h-36 mx-auto"
+                        class="flex flex-row justify-around items-center w-full h-36 mx-auto bg-blue-500 rounded-2xl border-teal border-2"
                     >
-                        <div class="w-1/4 p-3 flex flex-col justify-between h-full">
-                            <p class="text-xl">Total births:</p>
+                        <div
+                            class="w-1/4 p-3 flex flex-col justify-between h-full"
+                        >
+                            <p class="text-xl text-white">Total births:</p>
                             <input
-                                class="border border-black mb-6 p-1 rounded-lg text-right w-full"
+                                class="border border-blue-700 mb-6 p-1 rounded-lg text-right w-full shadow-2xl"
                                 type="number"
                                 min="0"
                                 value="0"
@@ -37,10 +41,12 @@
                                 v-model="form.TPAL_total"
                             />
                         </div>
-                        <div class="w-1/4 p-3 flex flex-col justify-between h-full">
-                            <p class="text-xl">Preterm births:</p>
+                        <div
+                            class="w-1/4 p-3 flex flex-col justify-between h-full"
+                        >
+                            <p class="text-xl text-white">Preterm births:</p>
                             <input
-                                class="border border-black mb-6 p-1 rounded-lg text-right w-full"
+                                class="border border-blue-700 mb-6 p-1 rounded-lg text-right w-full shadow-2xl"
                                 type="number"
                                 min="0"
                                 value="0"
@@ -49,10 +55,12 @@
                                 v-model="form.TPAL_preterm"
                             />
                         </div>
-                        <div class="w-1/4 p-3 flex flex-col justify-between h-full">
-                            <p class="text-xl">Aborted:</p>
+                        <div
+                            class="w-1/4 p-3 flex flex-col justify-between h-full"
+                        >
+                            <p class="text-xl text-white">Aborted:</p>
                             <input
-                                class="border border-black mb-6 p-1 rounded-lg text-right w-full"
+                                class="border border-blue-700 mb-6 p-1 rounded-lg text-right w-full shadow-2xl"
                                 type="number"
                                 min="0"
                                 value="0"
@@ -61,10 +69,12 @@
                                 v-model="form.TPAL_aborted"
                             />
                         </div>
-                        <div class="w-1/4 p-3 flex flex-col justify-between h-full">
-                            <p class="text-xl">Living children:</p>
+                        <div
+                            class="w-1/4 p-3 flex flex-col justify-between h-full"
+                        >
+                            <p class="text-xl text-white">Living children:</p>
                             <input
-                                class="border border-black mb-6 p-1 rounded-lg text-right w-full"
+                                class="border border-blue-700 mb-6 p-1 rounded-lg text-right w-full shadow-2xl"
                                 type="number"
                                 min="0"
                                 value="0"
@@ -85,27 +95,34 @@
                     <table class="table-fixed w-full mb-3">
                         <thead>
                             <tr>
-                                <th class="text-lg w-1/3 border-black border-2">
+                                <th
+                                    class="text-lg w-1/3 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2"
+                                >
                                     Past Illnesses:
                                 </th>
-                                <th class="text-lg w-1/3 border-black border-2">
+                                <th
+                                    class="text-lg w-1/3 text-white bg-blue-500 border-teal border-b-2"
+                                >
                                     Age of Onset:
                                 </th>
-                                <th class="w-1/3 border-black border-2"></th>
+                                <th
+                                    class="w-1/3 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2"
+                                ></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr
                                 v-for="illness in form.Past_illnesses"
                                 :key="illness.Illness_name"
+                                class="bg-blue-100"
                             >
-                                <td class="border-black border-2">
+                                <td class="border-blue-300 border-2">
                                     {{ illness.Illness_name }}
                                 </td>
-                                <td class="border-black border-2">
+                                <td class="border-blue-300 border-2">
                                     {{ illness.Age_of_onset }}
                                 </td>
-                                <td class="border-black border-2">
+                                <td class="border-blue-300 border-2">
                                     <button
                                         class="w-3/4 text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:scale-105 rounded-lg py-2 px-2 m-3"
                                         v-on:click="
@@ -116,10 +133,10 @@
                                     </button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="border-black border-2">
+                            <tr class="bg-blue-100">
+                                <td class="border-blue-300 border-2">
                                     <input
-                                        class="border border-black mb-2 mt-2 p-1 rounded-lg w-4/5"
+                                        class="border border-blue-700 mb-2 mt-2 p-1 rounded-lg w-4/5"
                                         type="text"
                                         name="illness-search"
                                         placeholder="Search"
@@ -127,9 +144,9 @@
                                         v-on:keyup="queryIllness()"
                                     />
                                 </td>
-                                <td class="border-black border-2">
+                                <td class="border-blue-300 border-2">
                                     <input
-                                        class="border border-black mb-2 mt-2 p-1 rounded-lg w-4/5 text-right"
+                                        class="border border-blue-700 mb-2 mt-2 p-1 rounded-lg w-4/5 text-right"
                                         type="number"
                                         min="0"
                                         value="0"
@@ -141,11 +158,12 @@
                             <tr
                                 v-for="illness in illness_results"
                                 :key="illness.Name"
+                                class="bg-blue-100"
                             >
-                                <td class="border-black border-2">
+                                <td class="border-blue-300 border-2">
                                     {{ illness.Name }}
                                 </td>
-                                <td class="border-black border-2">
+                                <td class="border-blue-300 border-2">
                                     <button
                                         class="w-3/4 text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-2 px-2 w-1/4 m-3"
                                         v-on:click="addNewIllness(illness.Name)"
@@ -153,6 +171,12 @@
                                         Add
                                     </button>
                                 </td>
+                            </tr>
+                            <tr class="shadow-2xl">
+                                <td
+                                    class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl h-7 "
+                                    colspan="2"
+                                ></td>
                             </tr>
                         </tbody>
                     </table>
@@ -165,21 +189,22 @@
                     <table class="table-fixed w-full mb-3">
                         <thead>
                             <tr>
-                                <th class="text-lg w-1/3 border-black border-2">
+                                <th class="text-lg w-1/3 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2">
                                     Allergy:
                                 </th>
-                                <th class="w-1/3 border-black border-2"></th>
+                                <th class="w-1/3 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2"></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr
                                 v-for="allergy in form.Allergies"
                                 :key="allergy"
+                                class="bg-blue-100"
                             >
-                                <td class="border-black border-2">
+                                <td class="border-blue-300 border-2">
                                     {{ allergy }}
                                 </td>
-                                <td class="border-black border-2">
+                                <td class="border-blue-300 border-2">
                                     <button
                                         class="w-3/4 text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:scale-105 rounded-lg py-2 px-2 w-1/4 m-3"
                                         v-on:click="removeAllergy(allergy)"
@@ -188,17 +213,17 @@
                                     </button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="border-black border-2">
+                            <tr class="bg-blue-100">
+                                <td class="border-blue-300 border-2">
                                     <input
-                                        class="border border-black mb-2 mt-2 p-1 rounded-lg w-4/5"
+                                        class="border border-blue-700 mb-2 mt-2 p-1 rounded-lg w-4/5"
                                         type="text"
                                         name="new-allergy"
                                         placeholder="Allergy name"
                                         v-model="new_allergy"
                                     />
                                 </td>
-                                <td class="border-black border-2">
+                                <td class="border-blue-300 border-2">
                                     <button
                                         class="w-3/4 text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:scale-105 rounded-lg py-2 px-2 w-1/4 m-3"
                                         v-on:click="addNewAllergy()"
@@ -206,6 +231,12 @@
                                         Add
                                     </button>
                                 </td>
+                            </tr>
+                            <tr class="shadow-2xl">
+                                <td
+                                    class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl h-7 "
+                                    colspan="2"
+                                ></td>
                             </tr>
                         </tbody>
                     </table>
@@ -220,21 +251,22 @@
                     <table class="table-fixed w-full mb-3">
                         <thead>
                             <tr>
-                                <th class="text-lg w-1/3 border-black border-2">
+                                <th class="text-lg w-1/3 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2">
                                     Immunization:
                                 </th>
-                                <th class="w-1/3 border-black border-2"></th>
+                                <th class="w-1/3 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2"></th>
                             </tr>
                         </thead>
                         <tbody>
                             <tr
                                 v-for="immunization in form.Immunizations"
                                 :key="immunization"
+                                class="bg-blue-100"
                             >
-                                <td class="border-black border-2">
+                                <td class="border-blue-300 border-2">
                                     {{ immunization }}
                                 </td>
-                                <td class="border-black border-2">
+                                <td class="border-blue-300 border-2">
                                     <button
                                         class="w-3/4 text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:scale-105 rounded-lg py-2 px-2 w-1/4 m-3"
                                         v-on:click="
@@ -245,17 +277,17 @@
                                     </button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td class="border-black border-2">
+                            <tr class="bg-blue-100">
+                                <td class="border-blue-300 border-2">
                                     <input
-                                        class="border border-black mb-2 mt-2 p-1 rounded-lg w-4/5"
+                                        class="border border-blue-700 mb-2 mt-2 p-1 rounded-lg w-4/5"
                                         type="text"
                                         name="new-immunization"
                                         placeholder="Immunization name"
                                         v-model="new_immunization"
                                     />
                                 </td>
-                                <td class="border-black border-2">
+                                <td class="border-blue-300 border-2">
                                     <button
                                         class="w-3/4 text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:scale-105 rounded-lg py-2 px-2 w-1/4 m-3"
                                         v-on:click="addNewImmunization()"
@@ -263,6 +295,12 @@
                                         Add
                                     </button>
                                 </td>
+                            </tr>
+                            <tr class="shadow-2xl">
+                                <td
+                                    class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl h-7 "
+                                    colspan="2"
+                                ></td>
                             </tr>
                         </tbody>
                     </table>
@@ -278,7 +316,9 @@
                 <div v-if="create_mode">Create</div>
                 <div v-else>Save</div>
             </button>
-            <p class="text-xl text-center text-red-600 mb-2">{{ post_error }}</p>
+            <p class="text-xl text-center text-red-600 mb-2">
+                {{ post_error }}
+            </p>
         </div>
         <div v-else class="flex flex-col">
             <p class="text-5xl mt-20">Forbidden</p>
@@ -362,26 +402,29 @@ export default {
                 return;
             }
 
-            axios.post(
-                "patient/forms",
-                {
-                    action_type: "submit_form",
-                    form_type: "medical_history",
-                    form: this.form,
-                },
-                {
-                    headers: {
-                        Authorization: "Bearer " + localStorage.getItem("jwt"),
+            axios
+                .post(
+                    "patient/forms",
+                    {
+                        action_type: "submit_form",
+                        form_type: "medical_history",
+                        form: this.form,
                     },
-                }
-            ).then((response) => {
-                if (response.data.successful != 1) {
-                    this.post_error =
-                        "There was an issue with your request.";
-                } else {
-                    this.post_error = "";
-                }
-            });
+                    {
+                        headers: {
+                            Authorization:
+                                "Bearer " + localStorage.getItem("jwt"),
+                        },
+                    }
+                )
+                .then((response) => {
+                    if (response.data.successful != 1) {
+                        this.post_error =
+                            "There was an issue with your request.";
+                    } else {
+                        this.post_error = "";
+                    }
+                });
         },
         checkTPAL() {
             if (

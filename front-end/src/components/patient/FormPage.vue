@@ -16,16 +16,16 @@
                 </p>
                 <div class="w-full lg:w-1/2 mb-10">
                     <p class="text-3xl mb-4">Reports</p>
-                    <table class="table-fixed w-full">
+                    <table class="table-fixed w-full rounded-b-none shadow-lg">
                         <thead>
                             <tr class="text-lg">
-                                <th class="w-3/5 border-black border-2">
+                                <th class="w-3/5 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2">
                                     Report ID
                                 </th>
-                                <th class="w-2/5 border-black border-2">
+                                <th class="w-2/5 bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2">
                                     <router-link :to="{ name: 'edit-report' }">
                                         <div
-                                            class="w-3/4 mx-auto text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1"
+                                            class="w-3/4 mx-auto text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-green-400 rounded-lg py-1 px-1 mx-6 my-1"
                                         >
                                             New
                                         </div>
@@ -37,11 +37,12 @@
                             <tr
                                 v-for="report in reports"
                                 :key="report.Report_ID"
+                                class="bg-blue-100"
                             >
-                                <td class="border-black border-2">
+                                <td class="border-blue-300 border-2">
                                     {{ report.Report_ID }}
                                 </td>
-                                <td class="border-black border-2">
+                                <td class="border-blue-300 border-2">
                                     <router-link
                                         :to="{
                                             name: 'edit-report',
@@ -59,6 +60,9 @@
                                     </router-link>
                                 </td>
                             </tr>
+                            <tr class=" shadow-2xl">
+                                <td class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl h-7" colspan="2"></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -67,13 +71,13 @@
                     <table class="table-fixed w-full">
                         <thead>
                             <tr class="text-lg">
-                                <th class="w-2/6 border-black border-2">
+                                <th class="w-2/6 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2">
                                     Email
                                 </th>
-                                <th class="w-2/6 border-black border-2">
+                                <th class="w-2/6 text-white bg-blue-500 border-teal border-b-2">
                                     Approved
                                 </th>
-                                <th class="w-2/6 border-black border-2">
+                                <th class="w-2/6 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2">
                                     <router-link
                                         :to="{
                                             name: 'edit-new-applicant',
@@ -85,7 +89,7 @@
                                         v-if="new_applicant.length == 0"
                                     >
                                         <div
-                                            class="w-3/4 mx-auto text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1"
+                                            class="w-3/4 mx-auto text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-green-400 rounded-lg py-1 px-1 mx-6 my-1"
                                         >
                                             New
                                         </div>
@@ -97,11 +101,12 @@
                             <tr
                                 v-for="report in new_applicant"
                                 :key="report.Email"
+                                class="bg-blue-100"
                             >
-                                <td class="border-black border-2">
+                                <td class="border-blue-300 border-2">
                                     {{ report.Email }}
                                 </td>
-                                <td class="border-black border-2">
+                                <td class="border-blue-300 border-2">
                                     <svg
                                         v-if="report.Is_approved"
                                         class="w-1/4 mx-auto"
@@ -133,7 +138,7 @@
                                         />
                                     </svg>
                                 </td>
-                                <td class="border-black border-2">
+                                <td class="border-blue-300 border-2">
                                     <router-link
                                         :to="{
                                             name: 'edit-new-applicant',
@@ -152,6 +157,9 @@
                                     </router-link>
                                 </td>
                             </tr>
+                            <tr class=" shadow-2xl">
+                                <td class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl h-7" colspan="3"></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -160,15 +168,15 @@
                     <table class="table-fixed w-full">
                         <thead>
                             <tr class="text-lg">
-                                <th class="w-3/5 border-black border-2">
+                                <th class="w-3/5 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2">
                                     Date
                                 </th>
-                                <th class="w-2/5 border-black border-2">
+                                <th class="w-2/5 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2">
                                     <router-link
                                         :to="{ name: 'edit-covid-screen' }"
                                     >
                                         <div
-                                            class="w-3/4 mx-auto text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1"
+                                            class="w-3/4 mx-auto text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-green-400 rounded-lg py-1 px-1 mx-6 my-1"
                                         >
                                             New
                                         </div>
@@ -180,11 +188,12 @@
                             <tr
                                 v-for="report in covid_screen"
                                 :key="report.date"
+                                class="bg-blue-100"
                             >
-                                <td class="border-black border-2">
+                                <td class="border-blue-300 border-2">
                                     {{ report.Date }}
                                 </td>
-                                <td class="border-black border-2">
+                                <td class="border-blue-300 border-2">
                                     <router-link
                                         :to="{
                                             name: 'edit-covid-screen',
@@ -202,6 +211,9 @@
                                     </router-link>
                                 </td>
                             </tr>
+                            <tr class=" shadow-2xl">
+                                <td class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl h-7" colspan="2"></td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -210,14 +222,14 @@
                     <table class="table-fixed w-full">
                         <thead>
                             <tr class="text-lg">
-                                <th class="w-3/5 border-black border-2">SSN</th>
-                                <th class="w-2/5 border-black border-2">
+                                <th class="w-3/5 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2">SSN</th>
+                                <th class="w-2/5 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2">
                                     <router-link
                                         :to="{ name: 'edit-medical-history' }"
                                         v-if="medical_history.length == 0"
                                     >
                                         <div
-                                            class="w-3/4 mx-auto text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-green-600 rounded-lg py-1 px-1 mx-6 my-1"
+                                            class="w-3/4 mx-auto text-white my-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-green-400 rounded-lg py-1 px-1 mx-6 my-1"
                                         >
                                             New
                                         </div>
@@ -229,11 +241,12 @@
                             <tr
                                 v-for="report in medical_history"
                                 :key="report.P_SSN"
+                                class="bg-blue-100"
                             >
-                                <td class="border-black border-2">
+                                <td class="border-blue-300 border-2">
                                     {{ report.P_SSN }}
                                 </td>
-                                <td class="border-black border-2">
+                                <td class="border-blue-300 border-2">
                                     <router-link
                                         :to="{
                                             name: 'edit-medical-history',
@@ -250,6 +263,9 @@
                                         </div>
                                     </router-link>
                                 </td>
+                            </tr>
+                            <tr class=" shadow-2xl">
+                                <td class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl h-7" colspan="2"></td>
                             </tr>
                         </tbody>
                     </table>
