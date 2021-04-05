@@ -19,10 +19,14 @@
                     <table class="table-fixed w-full rounded-b-none shadow-lg">
                         <thead>
                             <tr class="text-lg">
-                                <th class="w-3/5 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2">
+                                <th
+                                    class="w-3/5 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2"
+                                >
                                     Report ID
                                 </th>
-                                <th class="w-2/5 bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2">
+                                <th
+                                    class="w-2/5 bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2"
+                                >
                                     <router-link :to="{ name: 'edit-report' }">
                                         <div
                                             class="w-3/4 mx-auto text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 transform hover:scale-105 hover:bg-green-400 rounded-lg py-1 px-1 mx-6 my-1"
@@ -60,8 +64,11 @@
                                     </router-link>
                                 </td>
                             </tr>
-                            <tr class=" shadow-2xl">
-                                <td class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl h-7" colspan="2"></td>
+                            <tr class="shadow-2xl">
+                                <td
+                                    class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl h-7"
+                                    colspan="2"
+                                ></td>
                             </tr>
                         </tbody>
                     </table>
@@ -71,13 +78,19 @@
                     <table class="table-fixed w-full">
                         <thead>
                             <tr class="text-lg">
-                                <th class="w-2/6 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2">
+                                <th
+                                    class="w-2/6 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2"
+                                >
                                     Email
                                 </th>
-                                <th class="w-2/6 text-white bg-blue-500 border-teal border-b-2">
+                                <th
+                                    class="w-2/6 text-white bg-blue-500 border-teal border-b-2"
+                                >
                                     Approved
                                 </th>
-                                <th class="w-2/6 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2">
+                                <th
+                                    class="w-2/6 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2"
+                                >
                                     <router-link
                                         :to="{
                                             name: 'edit-new-applicant',
@@ -109,7 +122,7 @@
                                 <td class="border-blue-300 border-2">
                                     <svg
                                         v-if="report.Is_approved"
-                                        class="w-1/4 mx-auto"
+                                        class="w-1/3 md:w-1/5 mx-auto"
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
                                         viewBox="0 0 24 24"
@@ -124,7 +137,7 @@
                                     </svg>
                                     <svg
                                         v-else
-                                        class="w-1/4 mx-auto"
+                                        class="w-1/3 md:w-1/5 mx-auto"
                                         xmlns="http://www.w3.org/2000/svg"
                                         fill="none"
                                         viewBox="0 0 24 24"
@@ -157,8 +170,11 @@
                                     </router-link>
                                 </td>
                             </tr>
-                            <tr class=" shadow-2xl">
-                                <td class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl h-7" colspan="3"></td>
+                            <tr class="shadow-2xl">
+                                <td
+                                    class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl h-7"
+                                    colspan="3"
+                                ></td>
                             </tr>
                         </tbody>
                     </table>
@@ -168,10 +184,19 @@
                     <table class="table-fixed w-full">
                         <thead>
                             <tr class="text-lg">
-                                <th class="w-3/5 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2">
+                                <th
+                                    class="w-1/3 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2"
+                                >
                                     Date
                                 </th>
-                                <th class="w-2/5 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2">
+                                <th
+                                    class="w-1/3 text-white bg-blue-500 border-teal border-b-2"
+                                >
+                                    Passed
+                                </th>
+                                <th
+                                    class="w-1/3 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2"
+                                >
                                     <router-link
                                         :to="{ name: 'edit-covid-screen' }"
                                     >
@@ -194,6 +219,38 @@
                                     {{ report.Date }}
                                 </td>
                                 <td class="border-blue-300 border-2">
+                                    <svg
+                                        v-if="report.Has_passed"
+                                        class="w-1/3 md:w-1/5 mx-auto"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="green"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                        />
+                                    </svg>
+                                    <svg
+                                        v-else
+                                        class="w-1/3 md:w-1/5 mx-auto"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                        fill="none"
+                                        viewBox="0 0 24 24"
+                                        stroke="red"
+                                    >
+                                        <path
+                                            stroke-linecap="round"
+                                            stroke-linejoin="round"
+                                            stroke-width="2"
+                                            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                                        />
+                                    </svg>
+                                </td>
+                                <td class="border-blue-300 border-2">
                                     <router-link
                                         :to="{
                                             name: 'edit-covid-screen',
@@ -211,8 +268,11 @@
                                     </router-link>
                                 </td>
                             </tr>
-                            <tr class=" shadow-2xl">
-                                <td class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl h-7" colspan="2"></td>
+                            <tr class="shadow-2xl">
+                                <td
+                                    class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl h-7"
+                                    colspan="3"
+                                ></td>
                             </tr>
                         </tbody>
                     </table>
@@ -222,8 +282,14 @@
                     <table class="table-fixed w-full">
                         <thead>
                             <tr class="text-lg">
-                                <th class="w-3/5 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2">SSN</th>
-                                <th class="w-2/5 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2">
+                                <th
+                                    class="w-3/5 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2"
+                                >
+                                    SSN
+                                </th>
+                                <th
+                                    class="w-2/5 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2"
+                                >
                                     <router-link
                                         :to="{ name: 'edit-medical-history' }"
                                         v-if="medical_history.length == 0"
@@ -264,8 +330,11 @@
                                     </router-link>
                                 </td>
                             </tr>
-                            <tr class=" shadow-2xl">
-                                <td class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl h-7" colspan="2"></td>
+                            <tr class="shadow-2xl">
+                                <td
+                                    class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl h-7"
+                                    colspan="2"
+                                ></td>
                             </tr>
                         </tbody>
                     </table>

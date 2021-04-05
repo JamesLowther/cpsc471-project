@@ -60,7 +60,7 @@ class PatientForms(Resource):
 
         # Get all covid screens.
         cursor.execute(
-            "SELECT Date FROM Covid_Screen WHERE P_SSN = ?;", (p_ssn,))
+            "SELECT Date, Has_passed FROM Covid_Screen WHERE P_SSN = ?;", (p_ssn,))
         covid_screen = cursor.fetchall()
 
         # Get medical history forms.
@@ -290,9 +290,17 @@ class PatientForms(Resource):
 
         date = str(datetime.date.today())
 
+        has_passed = 1;
+
+        # Check to see if the patient has passed
+        for x in list(form.values()):
+            if x == 1:
+                has_passed = 0
+                break
+
         # Create new covid screen.
         cursor.execute(
-            "INSERT OR REPLACE INTO Covid_Screen (Date, P_SSN, Shortness_breath, New_cough, Fever, Sore_throat, Runny_nose) VALUES (?, ?, ?, ?, ?, ?, ?);",
+            "INSERT OR REPLACE INTO Covid_Screen (Date, P_SSN, Shortness_breath, New_cough, Fever, Sore_throat, Runny_nose, Has_passed) VALUES (?, ?, ?, ?, ?, ?, ?, ?);",
             (
                 date,
                 ssn,
@@ -300,7 +308,8 @@ class PatientForms(Resource):
                 form["New_cough"],
                 form["Fever"],
                 form["Sore_throat"],
-                form["Runny_nose"]
+                form["Runny_nose"],
+                has_passed
             )
         )
 
@@ -310,13 +319,22 @@ class PatientForms(Resource):
     def update_covid_screen(self, ssn, date, form):
         con, cursor = db.connect_db()
 
-        cursor.execute("UPDATE Covid_Screen SET Shortness_breath = ?, New_cough = ?, Fever = ?, Sore_throat = ?, Runny_nose = ? WHERE Date = ? AND P_SSN = ?;",
+        has_passed = 1
+
+        # Check to see if the patient has passed
+        for x in list(form.values()):
+            if x == 1:
+                has_passed = 0
+                break
+
+        cursor.execute("UPDATE Covid_Screen SET Shortness_breath = ?, New_cough = ?, Fever = ?, Sore_throat = ?, Runny_nose = ?, Has_passed = ? WHERE Date = ? AND P_SSN = ?;",
                        (
                            form["Shortness_breath"],
                            form["New_cough"],
                            form["Fever"],
                            form["Sore_throat"],
                            form["Runny_nose"],
+                           has_passed,
                            date,
                            ssn
                        )

@@ -23,6 +23,7 @@
                     <ul class="list-disc ml-10 mt-4">
                         <li>Difficulty breathing</li>
                         <li>Shortness of breath</li>
+                        <li>Severe chest pain</li>
                     </ul>
                      <form class="ml-2 mt-2 flex justify-around bg-blue-100 py-1 text-black rounded-2xl">
                         <div class="flex flex-col items-center">
@@ -38,7 +39,8 @@
                 <div class="text-left text-xl w-full mb-10 text-white bg-blue-500 rounded-2xl border-teal border-2 p-5">
                     <p class="text-3xl">Are you experiencing:</p>
                     <ul class="list-disc ml-10 mt-4">
-                        <li>A new cough</li>
+                        <li>A new onset of cough</li>
+                        <li>Worsening of chronic cough</li>
                     </ul>
                      <form class="ml-2 mt-2 flex justify-around bg-blue-100 py-1 text-black rounded-2xl">
                         <div class="flex flex-col items-center">
@@ -55,6 +57,9 @@
                     <p class="text-3xl">Are you experiencing:</p>
                     <ul class="list-disc ml-10 mt-4">
                         <li>Symptoms of a fever</li>
+                        <li>Chills</li>
+                        <li>Headache</li>
+                        <li>Muscle or joint ache</li>
                     </ul>
                      <form class="ml-2 mt-2 flex justify-around bg-blue-100 py-1 text-black rounded-2xl">
                         <div class="flex flex-col items-center">
@@ -71,6 +76,8 @@
                     <p class="text-3xl">Are you experiencing:</p>
                     <ul class="list-disc ml-10 mt-4">
                         <li>A sore or scratchy throat</li>
+                        <li>Loss of sense of smell or taste</li>
+                        <li>Conjunctivitis (pink eye)</li>
                     </ul>
                      <form class="ml-2 mt-2 flex justify-around bg-blue-100 py-1 text-black rounded-2xl">
                         <div class="flex flex-col items-center">
@@ -87,6 +94,7 @@
                     <p class="text-3xl">Are you experiencing:</p>
                     <ul class="list-disc ml-10 mt-4">
                         <li>A runny nose</li>
+                        <li>Stuffy nose</li>
                     </ul>
                      <form class="ml-2 mt-2 flex justify-around bg-blue-100 py-1 text-black rounded-2xl">
                         <div class="flex flex-col items-center">

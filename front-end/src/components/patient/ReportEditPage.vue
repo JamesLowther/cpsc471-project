@@ -136,7 +136,7 @@
                 <div v-if="create_mode" class="w-full">
                     <p class="text-xl">Medical Centre</p>
                     <select
-                        class="bg-blue-400 text-white rounded py-1 px-10 mb-3"
+                        class="bg-blue-400 text-center text-white rounded py-1 px-10 mb-3"
                         id="select"
                         v-model="medical_centre"
                     >
