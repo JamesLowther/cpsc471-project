@@ -19,7 +19,7 @@ class Entities(Resource):
 
 class EntitiesForms(Resource):
     parser = reqparse.RequestParser()
-    parser.add_argument("entity_type", type=str, required=True, choices={"medication", "illness"}, help="Bad choice: {error_msg}")
+    parser.add_argument("entity_type", type=str, required=True, choices={"medication", "illness", "symptom"}, help="Bad choice: {error_msg}")
     parser.add_argument("method", type=str, required=True, choices={"add", "update", "delete", "query"}, help="Bad choice: {error_msg}")
     
     parser.add_argument("med_name", type=str, required=False)
@@ -84,6 +84,8 @@ class EntitiesForms(Resource):
         )
 
     def query(self, args):
+        limit = 8
+
         results = {}
 
         # This to to prevent returning all results (issue when lots of data).
@@ -96,25 +98,25 @@ class EntitiesForms(Resource):
 
         if (entity_type == "medication"):
             # Select all medications that match the query string.
-            cursor.execute("SELECT Name, Is_prescription FROM Medication WHERE Name LIKE ? ORDER BY Name;", ("%" + args["query_string"] + "%",))
+            cursor.execute("SELECT Name, Is_prescription FROM Medication WHERE Name LIKE ? ORDER BY Name LIMIT ?;", ("%" + args["query_string"] + "%", limit))
             results = cursor.fetchall()
             results = [dict(x) for x in results]
             
             # Add side effects as a list to the with the key "Effects".
             # We have to build this list manually afaik.
             for medication in results:
-                cursor.execute("SELECT s.Effect FROM Side_Effects AS s WHERE s.Med_Name = ?;", (medication["Name"],))
+                cursor.execute("SELECT s.Effect FROM Side_Effects AS s WHERE s.Med_Name = ? LIMIT ?;", (medication["Name"], limit))
                 side_effects = cursor.fetchall()
 
                 medication["Effects"] = [x["Effect"] for x in side_effects]
             
         elif (entity_type == "illness"):
-            cursor.execute("SELECT Name, Organ_system FROM Illness WHERE Name LIKE ? ORDER BY Name;", ("%" + args["query_string"] + "%",))
+            cursor.execute("SELECT Name, Organ_system FROM Illness WHERE Name LIKE ? ORDER BY Name LIMIT ?;", ("%" + args["query_string"] + "%", limit))
             results = cursor.fetchall()
             results = [dict(x) for x in results]
 
             for illness in results:
-                cursor.execute("SELECT s.Symptom_name FROM Symptoms AS s WHERE s.Illness_Name = ?;", (illness["Name"],))
+                cursor.execute("SELECT s.Symptom_name FROM Symptoms AS s WHERE s.Illness_Name = ? LIMIT ?;", (illness["Name"], limit))
                 symptoms = cursor.fetchall()
 
                 illness["Effects"] = [x["Symptom_name"] for x in symptoms]
