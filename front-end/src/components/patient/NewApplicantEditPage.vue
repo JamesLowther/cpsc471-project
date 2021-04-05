@@ -63,12 +63,12 @@
                     </div>
                 </div>
             </div>
-            <div class="flex flex-col mt-10 mx-auto">
-                <div class="flex flex-col items-center lg:items-start mb-6 w-full">
+            <div class="flex flex-col mt-10 mx-auto bg-blue-500 rounded-2xl border-teal border-2 p-5">
+                <div class="flex flex-col items-center lg:items-start mb-6 w-full bg-blue-100 py-1 text-black rounded-2xl">
                     <div class="mx-2">
                         <p class="text-xl">Email</p>
                         <input
-                            class="border border-black mb-2 p-1 rounded-lg"
+                            class="border border-blue-700 mb-2 p-1 rounded-lg"
                             type="text"
                             name="email"
                             v-model="form.Email"
@@ -79,12 +79,12 @@
                         {{ email_error }}
                     </p>
                 </div>
-                <div class="mb-6 w-full">
+                <div class="mb-6 w-full bg-blue-100 py-1 text-black rounded-2xl">
                     <div class="flex flex-col lg:flex-row">
                         <div class="mx-2">
                             <p class="text-xl">First Name</p>
                             <input
-                                class="border border-black mb-2 p-1 rounded-lg"
+                                class="border border-blue-700 mb-2 p-1 rounded-lg"
                                 type="text"
                                 name="fname"
                                 v-model="form.Fname"
@@ -94,7 +94,7 @@
                         <div class="mx-2">
                             <p class="text-xl">Initial</p>
                             <input
-                                class="border border-black mb-2 p-1 rounded-lg"
+                                class="border border-blue-700 mb-2 p-1 rounded-lg"
                                 type="text"
                                 name="initial"
                                 v-model="form.Initial"
@@ -104,7 +104,7 @@
                         <div class="mx-2">
                             <p class="text-xl">Last Name</p>
                             <input
-                                class="border border-black mb-2 p-1 rounded-lg"
+                                class="border border-blue-700 mb-2 p-1 rounded-lg"
                                 type="text"
                                 name="lname"
                                 v-model="form.Lname"
@@ -116,12 +116,12 @@
                         {{ name_error }}
                     </p>
                 </div>
-                <div class="mb-6">
+                <div class="mb-6 bg-blue-100 py-1 text-black rounded-2xl">
                     <div class="flex flex-col lg:flex-row">
                         <div class="mx-2">
                             <p class="text-xl">Gender</p>
                             <input
-                                class="border border-black mb-2 p-1 rounded-lg"
+                                class="border border-blue-700 mb-2 p-1 rounded-lg"
                                 type="text"
                                 name="gender"
                                 v-model="form.Gender"
@@ -130,7 +130,7 @@
                         <div class="mx-2">
                             <p class="text-xl">Sex</p>
                             <input
-                                class="border border-black mb-2 p-1 rounded-lg"
+                                class="border border-blue-700 mb-2 p-1 rounded-lg"
                                 type="text"
                                 name="sex"
                                 v-model="form.Sex"
@@ -141,11 +141,11 @@
                         {{ gender_error }}
                     </p>
                 </div>
-                <div class="flex flex-col items-center lg:items-start mb-6">
+                <div class="flex flex-col items-center lg:items-start mb-6 bg-blue-100 py-1 text-black rounded-2xl">
                     <div class="mx-2">
                         <p class="text-xl">Date of Birth</p>
                         <input
-                            class="border border-black mb-2 p-1 rounded-lg"
+                            class="border border-blue-700 mb-2 p-1 rounded-lg"
                             type="text"
                             name="dob"
                             v-model="form.DoB"
@@ -156,11 +156,11 @@
                         {{ DoB_error }}
                     </p>
                 </div>
-                <div class="flex flex-col items-center lg:items-start mb-6">
+                <div class="flex flex-col items-center lg:items-start mb-6 bg-blue-100 py-1 text-black rounded-2xl">
                     <div class="mx-2">
                         <p class="text-xl">Phone</p>
                         <input
-                            class="border border-black mb-2 p-1 rounded-lg"
+                            class="border border-blue-700 mb-2 p-1 rounded-lg"
                             type="text"
                             name="phone"
                             v-model="form.Phone"
@@ -171,12 +171,12 @@
                         {{ phone_error }}
                     </p>
                 </div>
-                <div class="mb-6">
+                <div class="mb-6 bg-blue-100 py-1 text-black rounded-2xl">
                     <div class="flex flex-col lg:flex-row">
                         <div class="mx-2">
                             <p class="text-xl">HCN</p>
                             <input
-                                class="border border-black mb-2 p-1 rounded-lg"
+                                class="border border-blue-700 mb-2 p-1 rounded-lg"
                                 type="text"
                                 name="healthcare_no"
                                 v-model="form.Healthcare_no"
@@ -185,7 +185,7 @@
                         <div class="mx-2">
                             <p class="text-xl">HCN Expiry</p>
                             <input
-                                class="border border-black mb-2 p-1 rounded-lg"
+                                class="border border-blue-700 mb-2 p-1 rounded-lg"
                                 type="text"
                                 name="hcn_expiry"
                                 v-model="form.HCN_expiry"
@@ -194,7 +194,7 @@
                         <div class="mx-2">
                             <p class="text-xl">HCN Province</p>
                             <input
-                                class="border border-black mb-2 p-1 rounded-lg"
+                                class="border border-blue-700 mb-2 p-1 rounded-lg"
                                 type="text"
                                 name="hcn_provice"
                                 v-model="form.HCN_province"

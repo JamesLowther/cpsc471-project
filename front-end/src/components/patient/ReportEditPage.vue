@@ -16,16 +16,16 @@
                 </p>
                 <p v-else class="mt-20">Edit Report {{ this.$route.params.id }}</p>
             </div>
-            <div class="flex flex-col items-start mt-10 w:4/5 lg:w-1/3 mx-auto px-8">
-                <div class="w-full mb-6">
+            <div class="flex flex-col items-start mt-10 w:4/5 lg:w-2/5 mx-auto px-8">
+                <div class="w-full mb-6 text-white bg-blue-500 rounded-t-2xl rounded-b-2xl border-teal border-r-0 pb-4 px-1">
                     <p class="text-xl">Chief Complaint</p>
                     <textarea
-                        class="border border-black mb-2 p-1 rounded-lg w-full text-xl"
+                        class="text-black border border-black mb-2 p-1 rounded-lg w-full text-xl shadow-2xl"
                         type="text"
                         name="email"
                         v-model="form.Complaint"
                     />
-                    <p class="text-xl mx-auto text-red-600">
+                    <p class="text-xl mx-auto text-red-300">
                         {{ complaint_error }}
                     </p>
                 </div>
@@ -46,20 +46,24 @@
                         <p class="text-xl mb-1">Diagnosis</p>
                         <table class="table-fixed w-full mb-10">
                             <thead>
-                                <th class="w-1/4 border-black border-2">Illness</th>
-                                <th class="w-1/4 border-black border-2">Organ System</th>
+                                <th class="w-1/4 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2">Illness</th>
+                                <th class="w-1/4 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2">Organ System</th>
                             </thead>
                             <tbody>
                                 <tr
                                     v-for="illness in form.Illness"
                                     :key="illness.Name"
+                                    class="bg-blue-100"
                                 >
-                                    <td class="border-black border-2">
+                                    <td class="border-blue-300 border-2">
                                         {{ illness.Name }}
                                     </td>
-                                    <td class="border-black border-2">
+                                    <td class="border-blue-300 border-2">
                                         {{ illness.Organ_system }}
                                     </td>
+                                </tr>
+                                <tr class=" shadow-2xl">
+                                    <td class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl h-6" colspan="2"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -68,28 +72,32 @@
                         <p class="text-xl mb-1">Medications</p>
                         <table class="table-fixed w-full mb-10">
                             <thead>
-                                <th class="w-1/4 border-black border-2">Name</th>
-                                <th class="w-1/4 border-black border-2">Prescription</th>
-                                <th class="w-2/4 border-black border-2">Side Effects</th>
+                                <th class="w-1/4 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2">Name</th>
+                                <th class="w-1/4 text-white bg-blue-500 border-teal border-b-2">Prescription</th>
+                                <th class="w-2/4 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2">Side Effects</th>
                             </thead>
                             <tbody>
                                 <tr
                                     v-for="medication in form.Medications"
                                     :key="medication.Name"
+                                    class="bg-blue-100"
                                 >
-                                    <td class="border-black border-2">
+                                    <td class="border-blue-300 border-2">
                                         {{ medication.Name }}
                                     </td>
-                                    <td class="border-black border-2">
+                                    <td class="border-blue-300 border-2">
                                         {{ medication.Is_prescription }}
                                     </td>
-                                    <td class="border-black border-2">
+                                    <td class="border-blue-300 border-2">
                                         <ul class="pl-5 list-disc text-left">
                                             <li v-for="effect in medication.Effects" :key="effect">
                                                 {{ effect }}
                                             </li>
                                         </ul>
                                     </td>
+                                </tr>
+                                <tr class=" shadow-2xl">
+                                    <td class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl h-6" colspan="3"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -98,24 +106,28 @@
                         <p class="text-xl mb-1">Medical Centres</p>
                         <table class="table-fixed w-full mb-10">
                             <thead>
-                                <th class="w-1/4 border-black border-2">Name</th>
-                                <th class="w-1/4 border-black border-2">Type</th>
-                                <th class="w-2/4 border-black border-2">Address</th>
+                                <th class="w-1/4 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2">Name</th>
+                                <th class="w-1/4 text-white bg-blue-500 border-teal border-b-2">Type</th>
+                                <th class="w-2/4 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2">Address</th>
                             </thead>
                             <tbody>
                                 <tr
                                     v-for="medical_centre in form.Medical_centres"
                                     :key="medical_centre.Name"
+                                    class="bg-blue-100"
                                 >
-                                    <td class="border-black border-2">
+                                    <td class="border-blue-300 border-2">
                                         {{ medical_centre.Name }}
                                     </td>
-                                    <td class="border-black border-2">
+                                    <td class="border-blue-300 border-2">
                                         {{ medical_centre.Type }}
                                     </td>
-                                    <td class="border-black border-2">
+                                    <td class="border-blue-300 border-2">
                                         {{ medical_centre.Address }}
                                     </td>
+                                </tr>
+                                <tr class=" shadow-2xl">
+                                    <td class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl h-6" colspan="3"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -124,7 +136,7 @@
                 <div v-if="create_mode" class="w-full">
                     <p class="text-xl">Medical Centre</p>
                     <select
-                        class="bg-gray-300 rounded py-1 px-10 mb-3"
+                        class="bg-blue-400 text-center text-white rounded py-1 px-10 mb-3"
                         id="select"
                         v-model="medical_centre"
                     >
