@@ -122,9 +122,7 @@
                             </td>
                         </tr>
                         <tr class=" shadow-2xl">
-                            <td class="border-teal-500 border-0 text-white bg-blue-300 rounded-b-2xl" colspan="4">
-                                .
-                            </td>
+                            <td class="border-teal-500 border-0 text-white bg-blue-300 rounded-b-2xl h-7" colspan="4" />
                         </tr>
                     </tbody>
                 </table>
@@ -210,9 +208,7 @@
                                 </td>
                             </tr>
                             <tr class=" shadow-2xl">
-                                <td class="border-teal-500 border-0 text-white bg-blue-400 rounded-b-2xl" colspan="3">
-                                    .
-                                </td>
+                                <td class="border-teal-500 border-0 text-white bg-blue-400 rounded-b-2xl h-7" colspan="3" />
                             </tr>
                         </tbody>
                     </table>
@@ -305,9 +301,7 @@
                                 </td>
                             </tr>
                             <tr class=" shadow-2xl">
-                                <td class="border-teal-500 border-0 text-white bg-blue-400 rounded-b-2xl" colspan="4">
-                                    .
-                                </td>
+                                <td class="border-teal-500 border-0 text-white bg-blue-400 rounded-b-2xl h-7" colspan="4"/>
                             </tr>
                         </tbody>
                     </table>
@@ -386,9 +380,7 @@
                                 </td>
                             </tr>
                             <tr class=" shadow-2xl">
-                                <td class="border-teal-500 border-0 text-white bg-blue-400 rounded-b-2xl" colspan="4">
-                                    .
-                                </td>
+                                <td class="border-teal-500 border-0 text-white bg-blue-400 rounded-b-2xl h-7" colspan="4" />
                             </tr>
                         </tbody>
                     </table>
