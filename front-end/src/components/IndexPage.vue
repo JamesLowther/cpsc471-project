@@ -2,17 +2,29 @@
     <div id="index">
         <div class="flex flex-col h-screen">
             <div class="flex w-full justify-end opacity-25">
-                <button v-if="creepy_mode" @click="creepy_mode = false" class="text-sm w-16 border border-yellow-200 bg-yellow-200 hover:bg-transparent text-white hover:text-gray-300 m-4 rounded-lg">
+                <button
+                    v-if="creepy_mode"
+                    @click="creepy_mode = false"
+                    class="text-sm w-16 border border-yellow-200 bg-yellow-200 hover:bg-transparent text-white hover:text-gray-300 m-4 rounded-lg"
+                >
                     Creepy Mode
                 </button>
-                <button v-else @click="creepy_mode = true" class="text-sm w-16 border border-yellow-200 hover:bg-yellow-200 text-gray-300 hover:text-white m-4 rounded-lg">
+                <button
+                    v-else
+                    @click="creepy_mode = true"
+                    class="text-sm w-16 border border-yellow-200 hover:bg-yellow-200 text-gray-300 hover:text-white m-4 rounded-lg"
+                >
                     Creepy Mode
                 </button>
-
             </div>
-            <p class="text-4xl lg:text-5xl mt-20 mb-12">Remote Patient - Doctor Symptom Analyser</p>
+            <p class="text-4xl lg:text-5xl mt-20 mb-12">
+                Remote Patient - Doctor Symptom Analyser
+            </p>
             <div v-if="creepy_mode" class="bg-rose-300 mb-10">
-                <img class="object-contain md:object-scale-down h-96 w-full ..." src="@/assets/aamc_doctors_trace.jpeg">
+                <img
+                    class="object-contain md:object-scale-down h-96 w-full ..."
+                    src="@/assets/aamc_doctors_trace.jpeg"
+                />
             </div>
             <div
                 class="flex flex-row w-full justify-around items-center text-white h-full text-2xl lg:text-3xl"
@@ -40,10 +52,20 @@
                 <br />
                 <br />Group No. 13
                 <br />
-                <br />James Lowther 
-                <br />Logan Perry-Din 
-                <br />Brody Wells
+                <br />James Lowther <br />Logan Perry-Din <br />Brody Wells
             </p>
+            <div class="opacity-75">
+                Icons made by
+                <a
+                    href="https://www.flaticon.com/authors/vectors-market"
+                    title="Vectors Market"
+                    >Vectors Market</a
+                >
+                from
+                <a href="https://www.flaticon.com/" title="Flaticon"
+                    >www.flaticon.com</a
+                >
+            </div>
         </div>
     </div>
 </template>
@@ -54,8 +76,7 @@ export default {
     data() {
         return {
             creepy_mode: false,
-        }
-    }
-
+        };
+    },
 };
 </script>

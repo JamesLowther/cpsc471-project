@@ -31,43 +31,67 @@ const routes = [
     {
         path: "/",
         name: "index",
-        component: Index
+        component: Index,
+        meta: {
+            title: 'Home - RPD Symptom Analyser',
+        },
     },
     {
         path: "/login",
         name: "login",
-        component: Login
+        component: Login,
+        meta: {
+            title: 'Login - RPD Symptom Analyser',
+        },
     },
     {
         path: "/new-account",
         name: "new-account",
-        component: NewAccount
+        component: NewAccount,
+        meta: {
+            title: 'Register - RPD Symptom Analyser',
+        },
     },
 
     {
         path: "/clerk-panel",
         name: "clerk-panel",
         component: ClerkPanel,
+        meta: {
+            title: 'Clerk - RPD Symptom Analyser',
+        },
         children: [
             {
                 path: "/",
-                component: ClerkPanelPage
+                component: ClerkPanelPage,
+                meta: {
+                    title: 'Clerk - RPD Symptom Analyser',
+                },
             },
             {
                 path: "forms",
                 name: "clerk-form-home-page",
-                component: ClerkForms
+                component: ClerkForms,
+                meta: {
+                    title: 'Clerk - RPD Symptom Analyser',
+                },
             },
             {
                 path: "forms/edit-new-applicant/:ssn?",
                 name: "approve-applicant",
                 props: true,
                 component: NewApplicantEditPage,
+                meta: {
+                    title: 'Clerk - RPD Symptom Analyser',
+                },
             },
             {   path: "forms/view-patient-covid-screen/:date?",
                 name: "view-patient-covid-screen",
                 props: true,
-                component: CovidScreenEditPage
+                component: CovidScreenEditPage,
+                meta: {
+                    title: 'Clerk - RPD Symptom Analyser',
+                },
         }
         ]
     },
@@ -79,35 +103,53 @@ const routes = [
         children: [
             {
                 path: "/",
-                component: PatientPanelPage
+                component: PatientPanelPage,
+                meta: {
+                    title: 'Patient - RPD Symptom Analyser',
+                },
             },
             {
                 path: "forms",
-                component: FormPage
+                component: FormPage,
+                meta: {
+                    title: 'Patient - RPD Symptom Analyser',
+                },
             },
             {
                 path: "forms/edit-report/:id?",
                 name: "edit-report",
                 props: true,
-                component: ReportEditPage
+                component: ReportEditPage,
+                meta: {
+                    title: 'Patient - RPD Symptom Analyser',
+                },
             },
             {
                 path: "forms/edit-new-applicant/:ssn?",
                 name: "edit-new-applicant",
                 props: true,
                 component: NewApplicantEditPage,
+                meta: {
+                    title: 'Patient - RPD Symptom Analyser',
+                },
             },
             {
                 path: "forms/edit-covid-screen/:date?",
                 name: "edit-covid-screen",
                 props: true,
-                component: CovidScreenEditPage
+                component: CovidScreenEditPage,
+                meta: {
+                    title: 'Patient - RPD Symptom Analyser',
+                },
             },
             {
                 path: "forms/edit-medical-history/:ssn?",
                 name: "edit-medical-history",
                 props: true,
-                component: MedicalHistoryEditPage
+                component: MedicalHistoryEditPage,
+                meta: {
+                    title: 'Patient - RPD Symptom Analyser',
+                },
             }
         ]
     },
@@ -119,17 +161,26 @@ const routes = [
         children: [
             {
                 path: "/",
-                component: DoctorPanelPage
+                component: DoctorPanelPage,
+                meta: {
+                    title: 'Doctor - RPD Symptom Analyser',
+                },
             },
             {
                 path: "forms",
                 name: "view-patients",
-                component: DoctorFormPage
+                component: DoctorFormPage,
+                meta: {
+                    title: 'Doctor - RPD Symptom Analyser',
+                },
             },
             {
                 path: "forms",
                 name: "doctor-edit-report",
-                component: DoctorReportEditPage
+                component: DoctorReportEditPage,
+                meta: {
+                    title: 'Doctor - RPD Symptom Analyser',
+                },
             }
         ]
     },
@@ -143,13 +194,19 @@ const routes = [
                 path: "/",
                 props: true,
                 name: "entities-panel",
-                component: EntitiesPanelPage
+                component: EntitiesPanelPage,
+                meta: {
+                    title: 'Entities - RPD Symptom Analyser',
+                },
             },
             {
                 path: "add-new-entity",
                 name: "add-new-entity",
                 props: true,
-                component: AddNewEntity
+                component: AddNewEntity,
+                meta: {
+                    title: 'Entities - RPD Symptom Analyser',
+                },
             }
         ]
         
@@ -161,5 +218,13 @@ const router = new VueRouter({
     base: process.env.BASE_URL,
     routes
 });
+
+// Allows page titles to properly update.
+// Taken from https://stackoverflow.com/questions/45462687/how-to-change-page-title-according-to-route-links-vuejs
+router.beforeEach((to, from, next) => {
+    document.title = to.meta.title
+
+    next()
+})
 
 export default router;

@@ -23,3 +23,8 @@ Contains source code for CPSC 471 term project.
 * James Lowther
 * ID: 30087821
 * Tutorial 06
+
+***
+### Credits
+
+Favicon taken from [Freepik](https://www.freepik.com).
