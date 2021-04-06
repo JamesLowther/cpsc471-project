@@ -538,7 +538,7 @@ export default {
             }
         },
         addNewAllergy() {
-            if (this.new_allergy == "") return;
+            if (!this.new_allergy.trim()) return;
 
             for (let i = 0; i < this.form.Allergies.length; i++) {
                 if (this.form.Allergies[i] == this.new_allergy) {
@@ -564,7 +564,7 @@ export default {
             }
         },
         addNewImmunization() {
-            if (this.new_immunization == "") return;
+            if (!this.new_immunization.trim()) return;
 
             for (let i = 0; i < this.form.Immunizations.length; i++) {
                 if (this.form.Immunizations[i] == this.new_immunization) {
