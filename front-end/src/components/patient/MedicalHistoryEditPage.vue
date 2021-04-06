@@ -92,7 +92,7 @@
                     <p class="font-bold text-3xl mb-1 text-left">
                         Past Illnesses:
                     </p>
-                    <table class="table-fixed w-full mb-3">
+                    <table class="table-auto w-full mb-3">
                         <thead>
                             <tr>
                                 <th
@@ -186,7 +186,7 @@
                 </div>
                 <div class="w-full mb-10">
                     <p class="font-bold text-3xl mb-1 text-left">Allergies:</p>
-                    <table class="table-fixed w-full mb-3">
+                    <table class="table-auto w-full mb-3">
                         <thead>
                             <tr>
                                 <th class="text-lg w-1/3 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2">
@@ -248,7 +248,7 @@
                     <p class="font-bold text-3xl mb-1 text-left">
                         Immunizations:
                     </p>
-                    <table class="table-fixed w-full mb-3">
+                    <table class="table-auto w-full mb-3">
                         <thead>
                             <tr>
                                 <th class="text-lg w-1/3 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2">

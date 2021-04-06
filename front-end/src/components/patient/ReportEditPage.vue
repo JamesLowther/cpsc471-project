@@ -16,7 +16,7 @@
                 </p>
                 <p v-else class="mt-20">Edit Report {{ this.$route.params.id }}</p>
             </div>
-            <div class="flex flex-col items-start mt-10 w:4/5 lg:w-2/5 mx-auto px-8">
+            <div class="flex flex-col items-start mt-10 w:4/5 lg:w-1/2 mx-auto px-8">
                 <div class="w-full mb-6 text-white bg-blue-500 rounded-t-2xl rounded-b-2xl border-teal border-r-0 pb-4 px-1">
                     <p class="text-xl">Chief Complaint</p>
                     <textarea
@@ -44,7 +44,7 @@
                     </div>
                     <div class="w-full mb-6">
                         <p class="text-xl mb-1">Diagnosis</p>
-                        <table class="table-fixed w-full mb-10">
+                        <table class="table-auto w-full mb-10">
                             <thead>
                                 <th class="w-1/4 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2">Illness</th>
                                 <th class="w-1/4 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2">Organ System</th>
@@ -70,7 +70,7 @@
                     </div>
                     <div class="w-full mb-6">
                         <p class="text-xl mb-1">Medications</p>
-                        <table class="table-fixed w-full mb-10">
+                        <table class="table-auto w-full mb-10">
                             <thead>
                                 <th class="w-1/4 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2">Name</th>
                                 <th class="w-1/4 text-white bg-blue-500 border-teal border-b-2">Prescription</th>
@@ -104,7 +104,7 @@
                     </div>
                     <div class="w-full mb-6">
                         <p class="text-xl mb-1">Medical Centres</p>
-                        <table class="table-fixed w-full mb-10">
+                        <table class="table-auto w-full mb-10">
                             <thead>
                                 <th class="w-1/4 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2">Name</th>
                                 <th class="w-1/4 text-white bg-blue-500 border-teal border-b-2">Type</th>
@@ -271,7 +271,7 @@ export default {
                         "There was an issue with your request.";
                 } else {
                     this.post_error = "";
-                    
+
                     if (this.isClerk) {
                         this.$router.push("/clerk-panel/forms");
                     } else {
