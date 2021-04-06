@@ -16,7 +16,7 @@
                 </p>
                 <div class="w-full lg:w-1/2 mb-10">
                     <p class="text-3xl mb-4">Reports</p>
-                    <table class="table-fixed w-full rounded-b-none shadow-lg">
+                    <table class="table-auto w-full rounded-b-none shadow-lg">
                         <thead>
                             <tr class="text-lg">
                                 <th
@@ -75,7 +75,7 @@
                 </div>
                 <div class="w-full lg:w-1/2 mb-10">
                     <p class="text-3xl mb-4">New Applicant Forms</p>
-                    <table class="table-fixed w-full">
+                    <table class="table-auto w-full">
                         <thead>
                             <tr class="text-lg">
                                 <th
@@ -116,7 +116,7 @@
                                 :key="report.Email"
                                 class="bg-blue-100"
                             >
-                                <td class="border-blue-300 border-2">
+                                <td class="border-blue-300 border-2 px-2">
                                     {{ report.Email }}
                                 </td>
                                 <td class="border-blue-300 border-2">
@@ -181,7 +181,7 @@
                 </div>
                 <div class="w-full lg:w-1/2 mb-10">
                     <p class="text-3xl mb-4">Covid Screens</p>
-                    <table class="table-fixed w-full">
+                    <table class="table-auto w-full">
                         <thead>
                             <tr class="text-lg">
                                 <th
@@ -215,7 +215,7 @@
                                 :key="report.date"
                                 class="bg-blue-100"
                             >
-                                <td class="border-blue-300 border-2">
+                                <td class="border-blue-300 border-2 px-2">
                                     {{ report.Date }}
                                 </td>
                                 <td class="border-blue-300 border-2">
@@ -279,7 +279,7 @@
                 </div>
                 <div class="w-full lg:w-1/2 mb-10">
                     <p class="text-3xl mb-4">Medical History</p>
-                    <table class="table-fixed w-full">
+                    <table class="table-auto w-full">
                         <thead>
                             <tr class="text-lg">
                                 <th
