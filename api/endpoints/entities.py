@@ -121,6 +121,17 @@ class EntitiesForms(Resource):
 
                 illness["Effects"] = [x["Symptom_name"] for x in symptoms]
 
+        elif (entity_type == "symptom"):
+            cursor.execute("SELECT DISTINCT Symptom_name FROM Symptoms WHERE Symptom_name LIKE ? ORDER BY Symptom_name LIMIT ?;", ("%" + args["query_string"] + "%", limit))
+            results = cursor.fetchall()
+            results = [dict(x) for x in results]
+
+            for symptom in results:
+                cursor.execute("SELECT s.Illness_name FROM Symptoms AS s WHERE s.Symptom_name = ? LIMIT ?;", (symptom["Symptom_name"], limit))
+                illnesses = cursor.fetchall()
+
+                symptom["Effects"] = [x["Illness_name"] for x in illnesses]
+
         con.close()
 
         return results

@@ -66,6 +66,12 @@
                                         <b>Symptoms</b>
                                     </td>
                                 </template>
+                                <!-- Symptoms -->
+                                <template v-if="entity_type == 'symptom'">
+                                    <td class="border-teal border-2 bg-blue-500 text-white" colspan="2">
+                                        <b>Illnesses</b>
+                                    </td>
+                                </template>
                                 <td class="border-teal border-2 bg-blue-500 text-white">
                                     <b></b>
                                 </td>
@@ -104,6 +110,20 @@
                                         {{entity.Organ_system}}
                                     </td>
                                     <td class="border-blue-400 border-2">
+                                        <ul class="list-disc text-left pl-5">
+                                            <li v-for="(effect, i) in entity.Effects" :key="`${i}-${effect}`">
+                                                {{ effect }}
+                                            </li>
+                                        </ul>
+                                    </td>
+                                </template>
+
+                                <!-- Symptoms -->
+                                <template v-else-if="entity_type == 'symptom'">
+                                    <td class="border-blue-400 border-2">
+                                        {{entity.Symptom_name}}
+                                    </td>
+                                    <td class="border-blue-400 border-2" colspan="2">
                                         <ul class="list-disc text-left pl-5">
                                             <li v-for="(effect, i) in entity.Effects" :key="`${i}-${effect}`">
                                                 {{ effect }}
