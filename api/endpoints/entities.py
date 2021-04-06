@@ -89,7 +89,7 @@ class EntitiesForms(Resource):
         results = {}
 
         # This to to prevent returning all results (issue when lots of data).
-        if args["query_string"] == "":
+        if not args["query_string"]:
             return {}
 
         con, cursor = db.connect_db()

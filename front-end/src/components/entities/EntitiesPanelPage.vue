@@ -24,7 +24,7 @@
 
         <div v-if="logged_in">
             <div class="flex flex-col items-center">
-                <p class="text-5xl mt-20 md-10">Update {{ title }}</p>
+                <p class="text-5xl mt-20 md-10">{{ title }}</p>
                 <div class="flex flex-col items-center pt-10 w-full mt-10 mb-4">
                     <table
                         class="w-full ml-auto md: mr-auto md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg"
@@ -33,6 +33,11 @@
                             <tr>
                                 <th
                                     class="text-lg text-black bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2 px-4"
+                                    :class="
+                                        entity_type == 'symptom'
+                                            ? 'rounded-t-2xl'
+                                            : 'rounded-tl-2xl'
+                                    "
                                     colspan="3"
                                 >
                                     <input
@@ -45,6 +50,7 @@
                                     />
                                 </th>
                                 <th
+                                    v-if="entity_type != 'symptom'"
                                     class="text-lg text-white w-1/12 bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2"
                                 >
                                     <router-link
@@ -102,12 +108,12 @@
                                 <template v-if="entity_type == 'symptom'">
                                     <td
                                         class="border-teal border-2 bg-blue-500 text-white"
-                                        colspan="2"
                                     >
                                         <b>Illnesses</b>
                                     </td>
                                 </template>
                                 <td
+                                    v-if="entity_type != 'symptom'"
                                     class="border-teal border-2 bg-blue-500 text-white"
                                 >
                                     <b></b>
@@ -177,10 +183,7 @@
                                     <td class="border-blue-400 border-2">
                                         {{ entity.Symptom_name }}
                                     </td>
-                                    <td
-                                        class="border-blue-400 border-2"
-                                        colspan="2"
-                                    >
+                                    <td class="border-blue-400 border-2">
                                         <ul class="list-disc text-left pl-5">
                                             <li
                                                 v-for="(
@@ -194,7 +197,10 @@
                                     </td>
                                 </template>
 
-                                <td class="border-blue-400 border-2 p-2">
+                                <td
+                                    v-if="entity_type != 'symptom'"
+                                    class="border-blue-400 border-2 p-2"
+                                >
                                     <router-link
                                         :to="{
                                             name: 'add-new-entity',
@@ -274,15 +280,15 @@ export default {
             if (this.entity_type == "medication") {
                 this.entity_attr = "Side Effects";
                 this.entity_post = "medication";
-                this.title = "Medications";
+                this.title = "Update Medications";
             } else if (this.entity_type == "illness") {
                 this.entity_attr = "Organ Type and Symptoms";
                 this.entity_post = "illness";
-                this.title = "Illnesses";
+                this.title = "Update Illnesses";
             } else {
                 this.entity_attr = "Illness";
                 this.entity_post = "symptom";
-                this.title = "Symptoms";
+                this.title = "Search Symptoms";
             }
         },
 
