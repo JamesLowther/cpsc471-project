@@ -423,6 +423,14 @@ export default {
                             "There was an issue with your request.";
                     } else {
                         this.post_error = "";
+
+                        if (this.create_mode) {
+                            if (this.isClerk) {
+                                this.$router.push("/clerk-panel/forms");
+                            } else {
+                                this.$router.push("/patient-panel/forms");
+                            }
+                        }
                     }
                 });
         },

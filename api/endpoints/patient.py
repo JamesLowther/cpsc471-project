@@ -158,6 +158,7 @@ class PatientForms(Resource):
         cursor.execute(
             "SELECT Report_ID FROM Report WHERE P_SSN = ? ORDER BY Report_ID DESC LIMIT 1;", (ssn,))
         report_id = cursor.fetchone()
+
         if not report_id:
             new_id = 0
         else:

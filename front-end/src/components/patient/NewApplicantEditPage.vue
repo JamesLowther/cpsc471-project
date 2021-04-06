@@ -339,15 +339,19 @@ export default {
                     }
                 )
                 .then((response) => {
-                    if (this.create_mode) {
-                        this.$router.push("/patient-panel/forms");
-                    }
-
                     if (response.data.successful != 1) {
                         this.post_error =
                             "There was an issue with your request.";
                     } else {
                         this.post_error = "";
+                        
+                        if (this.create_mode) {
+                            if (this.isClerk) {
+                                this.$router.push("/clerk-panel/forms");
+                            } else {
+                                this.$router.push("/patient-panel/forms");
+                            }
+                        }
                     }
 
                     // Reload the data.

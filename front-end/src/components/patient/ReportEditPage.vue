@@ -271,7 +271,12 @@ export default {
                         "There was an issue with your request.";
                 } else {
                     this.post_error = "";
-                    this.$router.push("/patient-panel/forms");
+                    
+                    if (this.isClerk) {
+                        this.$router.push("/clerk-panel/forms");
+                    } else {
+                        this.$router.push("/patient-panel/forms");
+                    }
                 }
 
             })
