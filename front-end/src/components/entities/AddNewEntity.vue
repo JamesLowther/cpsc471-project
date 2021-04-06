@@ -24,7 +24,7 @@
                     <tbody>
                         <tr class="bg-blue-100">
                             <td class="border-blue-300 border-2 py-2">
-                                <b class="text-xl">{{ entity_type }} Name</b>
+                                <b class="text-xl">Name of {{ entity_type }}</b>
                             </td>
                             <td v-if="create_mode == true" class="border-blue-300 border-2 py-2">
                                 <input
