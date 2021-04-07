@@ -565,7 +565,7 @@ export default {
         update_med() {
             axios
                 .post(
-                    `http://localhost:5000/entities/forms`,
+                    `entities/forms`,
                     {
                         entity_type: this.entity_post,
                         method: "update",
@@ -616,7 +616,7 @@ export default {
         update_ill() {
             axios
                 .post(
-                    `http://localhost:5000/entities/forms`,
+                    `entities/forms`,
                     {
                         entity_type: this.entity_post,
                         method: "update",
