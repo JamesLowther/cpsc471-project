@@ -60,6 +60,13 @@ class ClerkForms(Resource):
 
             form["dates"] = [f["Date"] for f in screens]
 
+        # Get all reports of each patient
+        for form in forms:
+            cursor.execute("SELECT Report_ID FROM Report WHERE P_SSN = ?;", (form["P_SSN"],))
+            reports = cursor.fetchall()
+
+            form["reports"] = [f["Report_ID"] for f in reports]
+
 
         con.close()
 

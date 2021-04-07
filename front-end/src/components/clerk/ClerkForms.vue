@@ -107,18 +107,49 @@
                                     <!-- No covid screens exist -->
                                     <template v-else>
                                         <p class="bg-red-200 w-1/3 inline-block m-2 rounded">N/A</p>
-                                        <router-link :to="{name:'view-patient-covid-screen',params: { pssn:patient.P_SSN, isClerk: true }}"
+                                        <button @click="go_to_covid('New',patient.P_SSN)"
                                         class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-green-500 rounded-lg py-1 px-1 mx-6 my-1">
                                             Create New
-                                        </router-link>
+                                        </button>
                                     </template>
 
                                 </td>
 
                                 <!-- Doctor Reports -->
                                 <td class="border-black border-2">
-                                    <div v-if="patient.Report_ID" class="bg-green-300 w-1/3 inline-block m-2 rounded">{{ patient.Report_ID}}</div>
-                                    <div v-else class="bg-red-200 w-1/3 inline-block m-2 rounded">N/A</div>
+
+                                    <!-- Patient has submitted a report -->
+                                    <template v-if="patient.dates.length">
+                                        <!-- use drop down for multiple reports -->
+                                            <select
+                                                class="p-1 bg-green-300 w-1/3 inline-block m-2 rounded"
+                                                id="reports"
+                                                v-model="report_id"
+                                            >
+                                                <option disabled value="">select one</option>
+                                                <option value="New">New</option>
+                                                <option v-for="r_id in patient.reports" 
+                                                        v-bind:key="r_id"
+                                                        v-bind:value="r_id">
+                                                    {{r_id}}
+                                                </option>
+                                            </select>
+                                            <button @click="go_to_report(report_id,patient.P_SSN)"
+                                                    class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-blue-500 rounded-lg py-1 px-1 mx-6 my-1">
+                                                <p v-if="report_id == 'New'">Create New</p>
+                                                <p v-else>View/Edit</p>
+                                            </button>
+                                    </template>
+
+                                    <!-- No reports exist -->
+                                    <template v-else>
+                                        <p class="bg-red-200 w-1/3 inline-block m-2 rounded">N/A</p>
+                                        <button @click="go_to_report('New',patient.P_SSN)"
+                                        class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-300 hover:bg-green-500 rounded-lg py-1 px-1 mx-6 my-1">
+                                            Create New
+                                        </button>
+                                    </template>
+
                                 </td>
                             </tr>
                         </tbody>
@@ -140,7 +171,8 @@ export default {
 
     data() {
         return {
-            param_date: "", // Covid Screen date to send as a parameter
+            param_date: null, // Covid Screen date to send as a parameter
+            report_id: null,
 
             logged_in: false,
             forms: []
@@ -153,11 +185,50 @@ export default {
 
     methods: {
 
+        go_to_report(r_id,ssn){
+
+            // r_id is null when no option is selected from the drop down list
+            if (r_id == null) {console.log("00000\n\n");return;}
+            
+            // Create a new covid screen
+            else if (r_id == "New") {
+                this.$router.push ({
+                    name:'view-patient-report',
+                    params: { 
+                        pssn: ssn, 
+                        isClerk: true 
+                    }
+                });
+            }
+            // View existing covid Screen
+            else {
+                this.$router.push ({
+                    name:'view-patient-report',
+                    params: { 
+                        id: r_id,
+                        pssn: ssn, 
+                        isClerk: true 
+                    }
+                });
+            }
+
+
+            this.$router.push ({
+                name:'view-patient-report',
+                params: { 
+                    id: r_id,
+                    pssn: ssn, 
+                    isClerk: true 
+                }
+            });
+
+        },
+
         // Go the edit covid screen page
         go_to_covid(date, ssn) {
             
-            // date is "" when no option is selected from the drop down list
-            if (date == "") {return;}
+            // date is null when no option is selected from the drop down list
+            if (date == null) {return;}
             
             // Create a new covid screen
             else if (date == "New") {
