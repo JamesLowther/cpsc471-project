@@ -26,6 +26,9 @@
                                     New Application Status
                                 </th>
                                 <th class="w-3/12 border-black border-2">
+                                    Medical History
+                                </th>
+                                <th class="w-3/12 border-black border-2">
                                     Covid Screen Date
                                 </th>
                                 <th class="w-3/12 border-black border-2">
@@ -78,6 +81,31 @@
 
                                 </td>
 
+
+                                <!-- Medical Histories -->
+                                <td class="border-black border-2">
+
+                                <!-- Medical history has been submitted, link to view-->
+                                    <div v-if="patient.TPAL_total != null"> 
+                                        <router-link :to="{name: 'view-patient-history',params: { ssn: patient.P_SSN, isClerk: true}}">
+                                            <div class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-green-300 hover:bg-blue-500 rounded-lg py-1 px-1 mx-6 my-1">
+                                                View/Edit
+                                            </div>
+                                        </router-link>
+                                    </div>
+
+                                    <!--Applicant has not submitted: link to create new form-->
+                                    <div v-else>
+                                        <router-link :to="{name: 'view-patient-history',params: { isClerk: true }}">
+                                            <div class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-red-200 hover:bg-green-500 rounded-lg py-1 px-1 mx-6 my-1">
+                                                Create New
+                                            </div>
+                                        </router-link>
+                                    </div>
+                                
+                                </td>
+
+
                                 <!-- Covid Screens -->
                                 <td class="border-black border-2">
 
@@ -89,7 +117,7 @@
                                                 id="dates"
                                                 v-model="param_date"
                                             >
-                                                <option disabled value="">select one</option>
+                                                <option disabled value=null>select one</option>
                                                 <option value="New">New</option>
                                                 <option v-for="date in patient.dates" 
                                                         v-bind:key="date"
@@ -126,7 +154,7 @@
                                                 id="reports"
                                                 v-model="report_id"
                                             >
-                                                <option disabled value="">select one</option>
+                                                <option disabled value=null>select one</option>
                                                 <option value="New">New</option>
                                                 <option v-for="r_id in patient.reports" 
                                                         v-bind:key="r_id"

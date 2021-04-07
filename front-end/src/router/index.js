@@ -95,10 +95,19 @@ const routes = [
                 },
             },
             {
-                path: "forms/view-patient-report/:r_id?",
+                path: "forms/view-patient-report/:id?",
                 name: "view-patient-report",
                 props: true,
                 component: ReportEditPage,
+                meta: {
+                    title: 'Clerk - RPD Symptom Analyser',
+                },
+            },
+            {
+                path: "forms/view-patient-history/:ssn?",
+                name: "view-patient-history",
+                props: true,
+                component: MedicalHistoryEditPage,
                 meta: {
                     title: 'Clerk - RPD Symptom Analyser',
                 },
