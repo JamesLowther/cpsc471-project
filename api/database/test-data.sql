@@ -91,4 +91,3 @@ INSERT INTO Prescribes (Med_Name, Report_ID, P_SSN) VALUES ('Lisinopril', 	3, 10
 
 INSERT INTO Treatment_Done (P_SSN, Med_Name, Illness_Name, Date) VALUES (100000001, 'Advil', 		'Common Cold', 			'2021-03-07');
 INSERT INTO Treatment_Done (P_SSN, Med_Name, Illness_Name, Date) VALUES (100000000, 'Lisinopril', 'High Blood Pressure', 	'2021-03-07');
-
