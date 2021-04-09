@@ -287,8 +287,6 @@ export default {
 
                     this.logged_in = true;
                     this.forms = response.data.forms;
-
-                    console.log(this.forms[4].reports);
                     
                 })
                 .catch((e) => {
