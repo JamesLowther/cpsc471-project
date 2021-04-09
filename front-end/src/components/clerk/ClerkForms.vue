@@ -87,7 +87,7 @@
 
                                 <!-- Medical history has been submitted, link to view-->
                                     <div v-if="patient.TPAL_total != null"> 
-                                        <router-link :to="{name: 'view-patient-history',params: { ssn: patient.P_SSN, isClerk: true}}">
+                                        <router-link :to="{name: 'view-patient-history',params: { ssn: patient.P_SSN, isClerk: true, isEdit: true }}">
                                             <div class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-green-300 hover:bg-blue-500 rounded-lg py-1 px-1 mx-6 my-1">
                                                 View/Edit
                                             </div>
@@ -96,7 +96,7 @@
 
                                     <!--Applicant has not submitted: link to create new form-->
                                     <div v-else>
-                                        <router-link :to="{name: 'view-patient-history',params: { isClerk: true }}">
+                                        <router-link :to="{name: 'view-patient-history',params: { ssn: patient.P_SSN, isClerk: true, isEdit: false }}">
                                             <div class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-red-200 hover:bg-green-500 rounded-lg py-1 px-1 mx-6 my-1">
                                                 Create New
                                             </div>
