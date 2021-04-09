@@ -10,6 +10,12 @@ INSERT INTO Clerk (SSN, Fname, Lname, Initial, DoB, Password) VALUES (300000001,
 INSERT INTO Works_At (Loc_Name, SSN) VALUES ('UofC Clinic', 200000000);
 INSERT INTO Works_At (Loc_Name, SSN) VALUES ('Foothills', 200000001);
 INSERT INTO Works_At (Loc_Name, SSN) VALUES ('Foothills', 200000002);
+INSERT INTO Works_At (Loc_Name, SSN) VALUES ('Bowmont Medical Clinic', 200000004);
+INSERT INTO Works_At (Loc_Name, SSN) VALUES ('Wellness Medical Clinic', 200000004);
+INSERT INTO Works_At (Loc_Name, SSN) VALUES ('Brentwood Family Medical Centre', 200000004);
+INSERT INTO Works_At (Loc_Name, SSN) VALUES ('Alberta Childrens Hospital', 200000004);
+INSERT INTO Works_At (Loc_Name, SSN) VALUES ('Peter Lougheed Centre', 200000004);
+INSERT INTO Works_At (Loc_Name, SSN) VALUES ('Rockyview General Hospital', 200000004);
 
 INSERT INTO Patient (P_SSN, Password) VALUES (100000000, 'pass');
 INSERT INTO Patient (P_SSN, Password) VALUES (100000001, 'pass');
