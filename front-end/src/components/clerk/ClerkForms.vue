@@ -11,9 +11,9 @@
             <div class="flex flex-col items-center">
                 <p class="text-5xl mt-20 mb-24">Clerk Workstation</p>
                 
-                <div class="mx-36">
+                <div class="w-full lg:w-4/5">
                     <p class="text-3xl mb-4"></p>
-                    <table class="shadow-2xl table-fixed w-full h-full mb-10 border-black">
+                    <table class="shadow-2xl table-auto w-full h-full mb-10 border-black">
                         <thead>
                             <tr class="h-14">
                                 <th class="w-1/12 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-l-2">
@@ -50,30 +50,30 @@
                                 <td class="bg-blue-100 border-blue-300 border-2">
 
                                     <!--Applicant is Approved: link to existing form-->
-                                    <div v-if="patient.Is_approved==1"> 
-                                        <p class="bg-green-300 w-1/3 inline-block m-2 rounded">Approved</p>
+                                    <div v-if="patient.Is_approved==1" class="flex flex-wrap justify-around"> 
+                                        <p class="bg-green-300 px-3 py-1 inline-block m-2 rounded">Approved</p>
                                         <router-link :to="{name: 'approve-applicant',params: { ssn: patient.P_SSN, isClerk: true, isEdit: true }}">
-                                            <div class="text-white inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-600 hover:bg-blue-500 rounded-lg py-1 px-1 mx-6 my-1">
+                                            <div class="text-white px-3 py-1 inline-block my-2 shadow-lg transition duration-300 ease-in-out bg-gray-600 hover:bg-blue-500 rounded-lg py-1 px-1">
                                                 View/Edit
                                             </div>
                                         </router-link>
                                     </div>
                                     
                                     <!--Applicant is Pending: link to existing form-->
-                                    <div v-else-if="patient.Is_approved==0"> 
-                                        <p class="bg-yellow-300 w-1/3 inline-block m-2 rounded">Pending</p>
+                                    <div v-else-if="patient.Is_approved==0" class="flex flex-wrap justify-around"> 
+                                        <p class="bg-yellow-300 px-3 py-1 inline-block m-2 rounded">Pending</p>
                                         <router-link :to="{name: 'approve-applicant',params: { ssn: patient.P_SSN, isClerk: true, isEdit: true }}">
-                                            <div class="text-white inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-600 hover:bg-yellow-500 rounded-lg py-1 px-1 mx-6 my-1">
+                                            <div class="text-white inline-block px-3 py-1 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-600 hover:bg-yellow-500 rounded-lg py-1 px-1">
                                                 View & Approve
                                             </div>
                                         </router-link>
                                     </div>
 
                                     <!--Applicant has not submitted: link to create new form-->
-                                    <div v-else>
-                                    <p class="bg-red-300 w-1/3 inline-block m-2 rounded">Not Submitted</p>
+                                    <div v-else class="flex flex-wrap justify-around">
+                                    <p class="bg-red-300 px-3 py-1 inline-block m-2 rounded">Not Submitted</p>
                                         <router-link :to="{name: 'approve-applicant',params: { ssn: patient.P_SSN, isClerk: true, isEdit: false }}">
-                                            <div class="text-white inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-600 hover:bg-green-500 rounded-lg py-1 px-1 mx-6 my-1">
+                                            <div class="text-white inline-block px-3 py-1 my-2 shadow-lg transition duration-300 ease-in-out bg-gray-600 hover:bg-green-500 rounded-lg py-1 px-1">
                                                 Create New
                                             </div>
                                         </router-link>
@@ -88,7 +88,7 @@
                                 <!-- Medical history has been submitted, link to view-->
                                     <div v-if="patient.TPAL_total != null"> 
                                         <router-link :to="{name: 'view-patient-history',params: { ssn: patient.P_SSN, isClerk: true, isEdit: true }}">
-                                            <div class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-green-300 hover:bg-blue-500 rounded-lg py-1 px-1 mx-6 my-1">
+                                            <div class="inline-block my-2 mx-1 shadow-lg transition duration-300 ease-in-out bg-green-300 hover:bg-blue-500 rounded-lg py-1 px-1 my-1">
                                                 View/Edit
                                             </div>
                                         </router-link>
@@ -97,7 +97,7 @@
                                     <!--Applicant has not submitted: link to create new form-->
                                     <div v-else>
                                         <router-link :to="{name: 'view-patient-history',params: { ssn: patient.P_SSN, isClerk: true, isEdit: false }}">
-                                            <div class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out bg-red-200 hover:bg-green-500 rounded-lg py-1 px-1 mx-6 my-1">
+                                            <div class="inline-block my-2 mx-1 shadow-lg transition duration-300 ease-in-out bg-red-200 hover:bg-green-500 rounded-lg py-1 px-1 my-1">
                                                 Create New
                                             </div>
                                         </router-link>
@@ -110,10 +110,10 @@
                                 <td class="bg-blue-100 border-blue-300 border-2">
 
                                     <!-- Patient has submitted a covid screen -->
-                                    <template v-if="patient.dates.length">
+                                    <div v-if="patient.dates.length" class="flex flex-wrap justify-around">
                                         <!-- use drop down for multiple screens -->
                                             <select
-                                                class="p-1 bg-green-300 w-1/3 inline-block m-2 rounded"
+                                                class="p-1 bg-green-300 px-1 py-1 inline-block m-2 rounded"
                                                 id="dates"
                                                 v-model="param_date"
                                             >
@@ -126,20 +126,20 @@
                                                 </option>
                                             </select>
                                             <button @click="go_to_covid(param_date,patient.P_SSN)"
-                                                    class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out text-white bg-gray-600 hover:bg-blue-500 rounded-lg py-1 px-1 mx-6 my-1">
+                                                    class="inline-block px-3 py-1 my-2 shadow-lg transition duration-300 ease-in-out text-white bg-gray-600 hover:bg-blue-500 rounded-lg py-1 px-1 my-1">
                                                 <p v-if="param_date == 'New'">Create New</p>
                                                 <p v-else>View/Edit</p>
                                             </button>
-                                    </template>
+                                    </div>
 
                                     <!-- No covid screens exist -->
-                                    <template v-else>
-                                        <p class="bg-red-200 w-1/3 inline-block m-2 rounded">N/A</p>
+                                    <div v-else class="flex flex-wrap justify-around">
+                                        <p class="bg-red-200 px-3 py-1 inline-block m-2 rounded">N/A</p>
                                         <button @click="go_to_covid('New',patient.P_SSN)"
-                                        class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out text-white bg-gray-600 hover:bg-green-500 rounded-lg py-1 px-1 mx-6 my-1">
+                                        class="inline-block px-3 py-1 my-2 shadow-lg transition duration-300 ease-in-out text-white bg-gray-600 hover:bg-green-500 rounded-lg py-1 px-1 my-1">
                                             Create New
                                         </button>
-                                    </template>
+                                    </div>
 
                                 </td>
 
@@ -147,10 +147,10 @@
                                 <td class="bg-blue-100 border-blue-300 border-2">
 
                                     <!-- Patient has submitted a report -->
-                                    <template v-if="patient.dates.length">
+                                    <div v-if="patient.dates.length" class="flex flex-wrap justify-around">
                                         <!-- use drop down for multiple reports -->
                                             <select
-                                                class="p-1 bg-green-300 w-1/3 inline-block m-2 rounded"
+                                                class="p-1 bg-green-300 px-1 py-1 inline-block m-2 rounded"
                                                 id="reports"
                                                 v-model="report_id"
                                             >
@@ -163,20 +163,20 @@
                                                 </option>
                                             </select>
                                             <button @click="go_to_report(report_id,patient.P_SSN)"
-                                                    class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out text-white bg-gray-600 hover:bg-blue-500 rounded-lg py-1 px-1 mx-6 my-1">
+                                                    class="inline-block px-3 py-1 my-2 shadow-lg transition duration-300 ease-in-out text-white bg-gray-600 hover:bg-blue-500 rounded-lg py-1 px-1 my-1">
                                                 <p v-if="report_id == 'New'">Create New</p>
                                                 <p v-else>View/Edit</p>
                                             </button>
-                                    </template>
+                                    </div>
 
                                     <!-- No reports exist -->
-                                    <template v-else>
-                                        <p class="bg-red-200 w-1/3 inline-block m-2 rounded">N/A</p>
+                                    <div v-else class="flex flex-wrap justify-around">
+                                        <p class="bg-red-200 px-3 py-1 inline-block m-2 rounded">N/A</p>
                                         <button @click="go_to_report('New',patient.P_SSN)"
-                                        class="inline-block w-1/3 my-2 shadow-lg transition duration-300 ease-in-out text-white bg-gray-600 hover:bg-green-500 rounded-lg py-1 px-1 mx-6 my-1">
+                                        class="inline-block px-3 py-1 my-2 shadow-lg transition duration-300 ease-in-out text-white bg-gray-600 hover:bg-green-500 rounded-lg py-1 px-1 my-1">
                                             Create New
                                         </button>
-                                    </template>
+                                    </div>
 
                                 </td>
                             </tr>
