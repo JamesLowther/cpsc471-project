@@ -220,7 +220,6 @@ export default {
     methods: {
 
         go_to_report(r_id,ssn){
-
             // r_id is null when no option is selected from the drop down list
             if (r_id == null) {console.log("00000\n\n");return;}
             
@@ -245,17 +244,6 @@ export default {
                     }
                 });
             }
-
-
-            this.$router.push ({
-                name:'view-patient-report',
-                params: { 
-                    id: r_id,
-                    pssn: ssn, 
-                    isClerk: true 
-                }
-            });
-
         },
 
         // Go the edit covid screen page
