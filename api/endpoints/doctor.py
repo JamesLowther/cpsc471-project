@@ -47,7 +47,7 @@ class DoctorForms(Resource):
 
         # Get all reports.
         cursor.execute(
-            "SELECT * FROM New_Applicant_Form AS a LEFT OUTER JOIN  Report AS r ON r.P_SSN = a.P_SSN WHERE r.Report_ID NOT NULL ORDER BY Fname DESC LIMIT 10;")
+            "SELECT * FROM New_Applicant_Form AS a LEFT OUTER JOIN  Report AS r ON r.P_SSN = a.P_SSN WHERE r.Report_ID NOT NULL ORDER BY Fname ASC, Report_ID DESC LIMIT 10;")
         patients = cursor.fetchall()
 
         con.close()
@@ -69,7 +69,7 @@ class DoctorForms(Resource):
 
                 # Get form.
                 cursor.execute(
-                    "SELECT * FROM New_Applicant_Form AS a LEFT OUTER JOIN  Report AS r ON r.P_SSN = a.P_SSN WHERE r.Report_ID NOT NULL AND Fname ||' '|| Lname  LIKE ? ORDER BY Fname DESC LIMIT 10;", ("%" + args["thePatientName"] + "%",)
+                    "SELECT * FROM New_Applicant_Form AS a LEFT OUTER JOIN  Report AS r ON r.P_SSN = a.P_SSN WHERE r.Report_ID NOT NULL AND Fname ||' '|| Lname  LIKE ? ORDER BY Fname ASC, Report_ID DESC LIMIT 10;", ("%" + args["thePatientName"] + "%",)
                 )
                 patients = cursor.fetchall()
 
