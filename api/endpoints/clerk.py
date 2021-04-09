@@ -47,9 +47,11 @@ class ClerkForms(Resource):
        
         # Get Patients and keys of all their forms. Null if no report of that kind exists
         cursor.execute(
-            "SELECT p.P_SSN, n.Fname, n.Lname, n.Email, n.Is_approved \
+            "SELECT p.P_SSN, n.Fname, n.Lname, n.Is_approved, m.TPAL_total \
             FROM Patient as p \
-            LEFT JOIN New_Applicant_Form as n ON p.P_SSN=n.P_SSN;")
+            LEFT JOIN New_Applicant_Form as n ON p.P_SSN=n.P_SSN \
+            LEFT JOIN Medical_History as m ON p.P_SSN=m.P_SSN;")
+            
         forms = cursor.fetchall()
         forms = [dict(f) for f in forms]
 
@@ -59,6 +61,13 @@ class ClerkForms(Resource):
             screens = cursor.fetchall()
 
             form["dates"] = [f["Date"] for f in screens]
+
+        # Get all reports of each patient
+        for form in forms:
+            cursor.execute("SELECT Report_ID FROM Report WHERE P_SSN = ?;", (form["P_SSN"],))
+            reports = cursor.fetchall()
+
+            form["reports"] = [f["Report_ID"] for f in reports]
 
 
         con.close()

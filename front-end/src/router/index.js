@@ -85,14 +85,33 @@ const routes = [
                     title: 'Clerk - RPD Symptom Analyser',
                 },
             },
-            {   path: "forms/view-patient-covid-screen/:date?",
+            {
+                path: "forms/view-patient-covid-screen/:date?",
                 name: "view-patient-covid-screen",
                 props: true,
                 component: CovidScreenEditPage,
                 meta: {
                     title: 'Clerk - RPD Symptom Analyser',
                 },
-        }
+            },
+            {
+                path: "forms/view-patient-report/:id?",
+                name: "view-patient-report",
+                props: true,
+                component: ReportEditPage,
+                meta: {
+                    title: 'Clerk - RPD Symptom Analyser',
+                },
+            },
+            {
+                path: "forms/view-patient-history/:ssn?",
+                name: "view-patient-history",
+                props: true,
+                component: MedicalHistoryEditPage,
+                meta: {
+                    title: 'Clerk - RPD Symptom Analyser',
+                },
+            }
         ]
     },
 
