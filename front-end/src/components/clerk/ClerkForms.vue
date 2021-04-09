@@ -1,7 +1,7 @@
 <template>
     <div id="forms">
         <div class="flex justify-end w-full fixed">
-            <button class="justify-self-end" @click="$router.go(-1)">
+            <button class="justify-self-end" @click="$router.push('/clerk-panel')">
                 <div class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
                     Back
                 </div>
@@ -115,7 +115,7 @@
                                             <select
                                                 class="bg-green-300 lg:w-2/5 px-1 py-1 rounded"
                                                 id="dates"
-                                                v-model="param_date"
+                                                v-model="param_dates[patient.P_SSN]"
                                             >
                                                 <option disabled value=null>select one</option>
                                                 <option value="New">New</option>
@@ -125,9 +125,9 @@
                                                     {{date}}
                                                 </option>
                                             </select>
-                                            <button @click="go_to_covid(param_date,patient.P_SSN)"
+                                            <button @click="go_to_covid(param_dates[patient.P_SSN],patient.P_SSN)"
                                                     class="lg:w-2/5 px-1 py-1 my-2 shadow-lg transition duration-300 ease-in-out text-white bg-gray-600 hover:bg-blue-500 rounded-lg">
-                                                <p v-if="param_date == 'New'">Create New</p>
+                                                <p v-if="param_dates[patient.P_SSN] == 'New'">Create New</p>
                                                 <p v-else>View/Edit</p>
                                             </button>
                                     </div>
@@ -152,7 +152,7 @@
                                             <select
                                                 class="bg-green-300 lg:w-2/5 px-1 py-1 rounded"
                                                 id="reports"
-                                                v-model="report_id"
+                                                v-model="report_ids[patient.P_SSN]"
                                             >
                                                 <option disabled value=null>select one</option>
                                                 <option value="New">New</option>
@@ -162,9 +162,9 @@
                                                     {{r_id}}
                                                 </option>
                                             </select>
-                                            <button @click="go_to_report(report_id,patient.P_SSN)"
+                                            <button @click="go_to_report(report_ids[patient.P_SSN],patient.P_SSN)"
                                                     class="lg:w-2/5 px-1 py-1 my-2 shadow-lg transition duration-300 ease-in-out text-white bg-gray-600 hover:bg-blue-500 rounded-lg">
-                                                <p v-if="report_id == 'New'">Create New</p>
+                                                <p v-if="report_ids[patient.P_SSN] == 'New'">Create New</p>
                                                 <p v-else>View/Edit</p>
                                             </button>
                                     </div>
@@ -205,8 +205,8 @@ export default {
 
     data() {
         return {
-            param_date: null, // Covid Screen date to send as a parameter
-            report_id: null,
+            param_dates: {},
+            report_ids: {},
 
             logged_in: false,
             forms: []
