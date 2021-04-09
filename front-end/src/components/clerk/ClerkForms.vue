@@ -147,7 +147,7 @@
                                 <td class="bg-blue-100 border-blue-300 border-2">
 
                                     <!-- Patient has submitted a report -->
-                                    <div v-if="patient.dates.length" class="flex flex-wrap items-center justify-around">
+                                    <div v-if="patient.reports.length" class="flex flex-wrap items-center justify-around">
                                         <!-- use drop down for multiple reports -->
                                             <select
                                                 class="bg-green-300 lg:w-2/5 px-1 py-1 rounded"
@@ -288,7 +288,7 @@ export default {
                     this.logged_in = true;
                     this.forms = response.data.forms;
 
-                    console.log(this.forms);
+                    console.log(this.forms[4].reports);
                     
                 })
                 .catch((e) => {
