@@ -331,6 +331,7 @@ export default {
     name: "MedicalHistoryEditPage",
     props: {
         isClerk: Boolean,
+        isEdit: Boolean,
     },
 
     data() {
@@ -362,7 +363,7 @@ export default {
     },
 
     created() {
-        if (typeof this.$route.params.ssn != "undefined") {
+        if (this.isEdit) {
             this.create_mode = false;
             this.getForm();
         }
@@ -405,6 +406,7 @@ export default {
                     {
                         action_type: "submit_form",
                         form_type: "medical_history",
+                        p_ssn: this.$route.params.ssn,
                         form: this.form,
                     },
                     {
