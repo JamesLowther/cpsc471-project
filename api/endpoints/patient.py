@@ -164,7 +164,7 @@ class PatientForms(Resource):
 
         # Add report to the database.
         cursor.execute("INSERT INTO Report (Report_ID, P_SSN, SSN, Complaint) VALUES (?, ?, ?, ?);",
-                       (new_id, ssn, doctor["SSN"], form["Complaint"]))
+                       (new_id, ssn, doctor["SSN"] if doctor else None, form["Complaint"]))
         con.commit()
         con.close()
 
@@ -185,6 +185,9 @@ class PatientForms(Resource):
             (id, ssn)
         )
         doctor = cursor.fetchone()
+
+        if not doctor:
+            doctor = {"Fname": "", "Initial": "", "Lname": ""}
 
         # Get diagnosed illnesses.
         cursor.execute(
