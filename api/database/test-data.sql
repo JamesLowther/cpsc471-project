@@ -77,6 +77,9 @@ INSERT INTO Report (Report_ID, P_SSN, SSN, Complaint) VALUES (1, 100000002, 2000
 INSERT INTO Report (Report_ID, P_SSN, SSN, Complaint) VALUES (2, 100000003, 200000002, "Test 3");
 INSERT INTO Report (Report_ID, P_SSN, SSN, Complaint) VALUES (3, 100000000, 200000000, "Test 4");
 
+INSERT INTO Report (Report_ID, P_SSN, SSN, Complaint) VALUES (4, 100000000, 200000000, "dup 1");
+INSERT INTO Report (Report_ID, P_SSN, SSN, Complaint) VALUES (5, 100000000, 200000000, "dup 2");
+
 INSERT INTO Diagnoses (Illness_Name, Report_ID, P_SSN) VALUES ('Common Cold', 			0, 100000001);
 INSERT INTO Diagnoses (Illness_Name, Report_ID, P_SSN) VALUES ('High Blood Pressure', 	3, 100000000);
 INSERT INTO Diagnoses (Illness_Name, Report_ID, P_SSN) VALUES ('Common Cold', 	3, 100000000);

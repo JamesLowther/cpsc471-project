@@ -1,13 +1,10 @@
 <template>
     <div id="form-edit">
         <div class="flex justify-end w-full fixed">
-            <router-link to="/patient-panel/forms">
-                <div
-                    class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
-                >
-                    Back
-                </div>
-            </router-link>
+            <button @click="$router.go(-1)"
+            class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
+                Back
+            </button>
         </div>
         <div v-if="logged_in">
             <div class="flex flex-col">
@@ -334,6 +331,7 @@ export default {
     name: "MedicalHistoryEditPage",
     props: {
         isClerk: Boolean,
+        isEdit: Boolean,
     },
 
     data() {
@@ -365,7 +363,7 @@ export default {
     },
 
     created() {
-        if (typeof this.$route.params.ssn != "undefined") {
+        if (this.isEdit) {
             this.create_mode = false;
             this.getForm();
         }
@@ -408,6 +406,7 @@ export default {
                     {
                         action_type: "submit_form",
                         form_type: "medical_history",
+                        p_ssn: this.$route.params.ssn,
                         form: this.form,
                     },
                     {

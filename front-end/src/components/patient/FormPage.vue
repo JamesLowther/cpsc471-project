@@ -291,7 +291,13 @@
                                     class="w-2/5 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2"
                                 >
                                     <router-link
-                                        :to="{ name: 'edit-medical-history' }"
+                                        :to="{
+                                            name: 'edit-medical-history',
+                                            params: {
+                                                isClerk: false,
+                                                isEdit: false,
+                                            }    
+                                        }"
                                         v-if="medical_history.length == 0"
                                     >
                                         <div
@@ -319,6 +325,7 @@
                                             params: {
                                                 ssn: report.P_SSN,
                                                 isClerk: false,
+                                                isEdit: true,
                                             },
                                         }"
                                     >
