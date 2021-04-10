@@ -84,6 +84,39 @@
                                 <b>Sex:</b> {{ this.form.Sex }}
                             </td>
                         </tr>
+                        <tr v-if="this.form.Sex == 'F'">
+                            <td class="bg-blue-500 border-blue-300 border-2 border-r-0 border-l-0 text-white">
+                                <b>Pregnancy Info:</b>
+                            </td>
+                            <td class="border-blue-300 border-2 border-l-0 bg-blue-100" colspan="2">
+                                <ul class="list-disc text-left pl-5">
+                                    <li v-if="this.form.TPAL_total != undefined">
+                                        <b>{{ this.form.TPAL_total }}</b> : Total
+                                    </li>
+                                    <li v-else>
+                                        Total: N/A
+                                    </li>
+                                    <li v-if="this.form.TPAL_preterm != undefined">
+                                        <b>{{ this.form.TPAL_preterm }}</b> : Preterm
+                                    </li>
+                                    <li v-else>
+                                        Preterm: N/A
+                                    </li>
+                                    <li v-if="this.form.TPAL_aborted != undefined">
+                                        <b>{{ this.form.TPAL_aborted }}</b> : Aborted
+                                    </li>
+                                    <li v-else>
+                                        Aborted: N/A
+                                    </li>
+                                    <li v-if="this.form.TPAL_living != undefined">
+                                        <b>{{ this.form.TPAL_living }}</b> : Living
+                                    </li>
+                                    <li v-else>
+                                        Living: N/A
+                                    </li>
+                                </ul>
+                            </td>
+                        </tr>
                         <tr>
                             <td class="bg-blue-500 border-blue-300 border-2 border-r-0 border-l-0 text-white">
                                 <b>Allergies:</b>
@@ -91,7 +124,7 @@
                             <td class="border-blue-300 border-2 border-l-0 bg-blue-100" colspan="2">
                                 <ul class="list-disc text-left pl-5">
                                     <li v-for="allergy in form.allergies" :key="allergy.Allergy">
-                                        {{ allergy.Allergy }}
+                                        <b>{{ allergy.Allergy }}</b>
                                     </li>
                                 </ul>
                             </td>
@@ -103,7 +136,7 @@
                             <td class="border-blue-300 border-2 border-l-0 bg-blue-100" colspan="2">
                                 <ul class="list-disc text-left pl-5">
                                     <li v-for="immunization in form.immunizations" :key="immunization.Immunization">
-                                        {{ immunization.Immunization }}
+                                        <b>{{ immunization.Immunization }}</b>
                                     </li>
                                 </ul>
                             </td>
@@ -438,7 +471,10 @@ export default {
                 Illnesses: [],
                 Medications: [],
                 Medical_centres: [],
-                TPAL: "",
+                TPAL_total: "",
+                TPAL_preterm: "",
+                TPAL_aborted: "",
+                TPAL_living: "",
                 past_illnesses: [],
                 allergies: [],
                 immunizations: [],

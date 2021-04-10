@@ -38,6 +38,7 @@ INSERT INTO Patient (P_SSN, Password) VALUES (100000017, 'pass');
 INSERT INTO Patient (P_SSN, Password) VALUES (101000018, 'pass');
 INSERT INTO Patient (P_SSN, Password) VALUES (101000019, 'pass');
 
+INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB, Is_approved) VALUES (100000000, 'BestDressed_2020@goomail.com', 'M', 'M', '4031110002', 'Simon', 'S', 'Cowell', 	'1111111112', '2025-01-01', 'AB', '2002-01-01', 0);
 INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB, Is_approved) VALUES (100000001, 'Greg.man@goomail.com', 	'M', 'M', '4031110000', 'Greg', 'M', 'Man', 	'1111111110', '2025-01-01', 'AB', '1960-01-01', 1);
 INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB, Is_approved) VALUES (100000002, 'Brenda.boo@goomail.com', 'F', 'F', '4031110001', 'Brenda', 'B', 'Boo', 	'1111111111', '2025-01-01', 'AB', '1975-01-01', 0);
 INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB, Is_approved) VALUES (100000003, 'Jenny.girl@goomail.com', 'F', 'F', '4031110002', 'Jenny', 'G', 'Girl', 	'1111111112', '2025-01-01', 'AB', '2002-01-01', 1);
@@ -58,45 +59,68 @@ INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial
 
 INSERT INTO Authorizes (P_SSN, SSN) VALUES (100000001, 300000000);
 
-INSERT INTO Medical_History (P_SSN, TPAL_total, TPAL_preterm, TPAL_aborted, TPAL_living) VALUES (100000001, 0, 0, 0, 0);
-INSERT INTO Medical_History (P_SSN, TPAL_total, TPAL_preterm, TPAL_aborted, TPAL_living) VALUES (100000002, 2, 0, 0, 2);
-INSERT INTO Medical_History (P_SSN, TPAL_total, TPAL_preterm, TPAL_aborted, TPAL_living) VALUES (100000000, 0, 0, 0, 0);
-
-INSERT INTO Allergies (P_SSN, Allergy) VALUES (100000000, 'Peanuts');
-INSERT INTO Allergies (P_SSN, Allergy) VALUES (100000001, 'Peanuts');
-INSERT INTO Allergies (P_SSN, Allergy) VALUES (100000002, 'Peanuts');
-
-INSERT INTO Immunization (P_SSN, Immunization) VALUES (100000000, 'Measles');
-INSERT INTO Immunization (P_SSN, Immunization) VALUES (100000001, 'Measles');
-INSERT INTO Immunization (P_SSN, Immunization) VALUES (100000002, 'Measles');
-
-INSERT INTO Past_Illnesses (P_SSN, Illness_Name, Age_of_onset) VALUES (100000000, 'Common Cold', 	35);
-INSERT INTO Past_Illnesses (P_SSN, Illness_Name, Age_of_onset) VALUES (100000001, 'Common Cold', 	35);
-INSERT INTO Past_Illnesses (P_SSN, Illness_Name, Age_of_onset) VALUES (100000002, 'Pneumonia', 	30);
-
+ -- MEDICAL HISORY AND APPLICANT FORM INFORMATION for Greg - SSN [100000000]
 INSERT INTO Covid_Screen (Date, P_SSN, Shortness_breath, New_cough, Fever, Sore_throat, Runny_nose, Has_passed) VALUES ('2021-03-07', 100000000, 0, 0, 0, 0, 0, 0);
-INSERT INTO Covid_Screen (Date, P_SSN, Shortness_breath, New_cough, Fever, Sore_throat, Runny_nose, Has_passed) VALUES ('2021-02-06', 100000001, 1, 1, 1, 1, 0, 0);
-INSERT INTO Covid_Screen (Date, P_SSN, Shortness_breath, New_cough, Fever, Sore_throat, Runny_nose, Has_passed) VALUES ('2021-03-06', 100000001, 1, 1, 1, 1, 1, 1);
-
-INSERT INTO Report (Report_ID, P_SSN, SSN, Complaint) VALUES (0, 100000001, 200000000, "Test 1");
-INSERT INTO Report (Report_ID, P_SSN, SSN, Complaint) VALUES (1, 100000002, 200000001, "Test 2");
-INSERT INTO Report (Report_ID, P_SSN, SSN, Complaint) VALUES (2, 100000003, 200000002, "Test 3");
-INSERT INTO Report (Report_ID, P_SSN, SSN, Complaint) VALUES (3, 100000000, 200000000, "Test 4");
-
-INSERT INTO Report (Report_ID, P_SSN, SSN, Complaint) VALUES (4, 100000000, 200000000, "dup 1");
-INSERT INTO Report (Report_ID, P_SSN, SSN, Complaint) VALUES (5, 100000000, 200000000, "dup 2");
-
-INSERT INTO Diagnoses (Illness_Name, Report_ID, P_SSN) VALUES ('Common Cold', 			0, 100000001);
+INSERT INTO Medical_History (P_SSN, TPAL_total, TPAL_preterm, TPAL_aborted, TPAL_living) VALUES (100000000, 0, 0, 0, 0);
+INSERT INTO Allergies (P_SSN, Allergy) VALUES (100000000, 'Peanuts');
+INSERT INTO Immunization (P_SSN, Immunization) VALUES (100000000, 'Measles');
+INSERT INTO Past_Illnesses (P_SSN, Illness_Name, Age_of_onset) VALUES (100000000, 'Common Cold', 	35);
+ -- Report #3 for Simon - SSN [100000000]
+INSERT INTO Report (Report_ID, P_SSN, SSN, Complaint) VALUES (3, 100000000, 200000000, "Just feel horrible and been sweating. Chest sometimes hurts");
 INSERT INTO Diagnoses (Illness_Name, Report_ID, P_SSN) VALUES ('High Blood Pressure', 	3, 100000000);
 INSERT INTO Diagnoses (Illness_Name, Report_ID, P_SSN) VALUES ('Common Cold', 	3, 100000000);
-
+INSERT INTO Prescribes (Med_Name, Report_ID, P_SSN) VALUES ('Lisinopril', 	3, 100000000);
+INSERT INTO Prescribes (Med_Name, Report_ID, P_SSN) VALUES ('Advil', 	3, 100000000);
 INSERT INTO Assigned (Report_ID, P_SSN, MedCenter_Name) VALUES (3, 100000000, 'UofC Clinic');
+ -- Report #4 for Simon - SSN [100000000]
+INSERT INTO Report (Report_ID, P_SSN, SSN, Complaint) VALUES (4, 100000000, 200000000, "My chest is hurting worse then before now");
+
+
+ -- MEDICAL HISORY AND APPLICANT FORM INFORMATION for Greg - SSN [100000001]
+INSERT INTO Covid_Screen (Date, P_SSN, Shortness_breath, New_cough, Fever, Sore_throat, Runny_nose, Has_passed) VALUES ('2021-02-06', 100000001, 1, 1, 1, 1, 0, 0);
+INSERT INTO Covid_Screen (Date, P_SSN, Shortness_breath, New_cough, Fever, Sore_throat, Runny_nose, Has_passed) VALUES ('2021-03-06', 100000001, 1, 1, 1, 1, 1, 1);
+INSERT INTO Medical_History (P_SSN, TPAL_total, TPAL_preterm, TPAL_aborted, TPAL_living) VALUES (100000001, 0, 0, 0, 0);
+INSERT INTO Immunization (P_SSN, Immunization) VALUES (100000001, 'Measles');
+INSERT INTO Immunization (P_SSN, Immunization) VALUES (100000001, 'Tetanus');
+INSERT INTO Immunization (P_SSN, Immunization) VALUES (100000001, 'Covid-19');
+INSERT INTO Past_Illnesses (P_SSN, Illness_Name, Age_of_onset) VALUES (100000001, 'Common Cold',58);
+INSERT INTO Past_Illnesses (P_SSN, Illness_Name, Age_of_onset) VALUES (100000001, 'Diabetes',60);
+ -- Report #0 for Greg - SSN [100000001]
+INSERT INTO Report (Report_ID, P_SSN, SSN, Complaint) VALUES (0, 100000001, 200000000, "I've had a cough for a few months but lately I've been waking up and coughing blood");
+INSERT INTO Diagnoses (Illness_Name, Report_ID, P_SSN) VALUES ('Pneumonia', 0, 100000001);
+INSERT INTO Prescribes (Med_Name, Report_ID, P_SSN) VALUES ('Azithromycin', 0, 100000001);
 INSERT INTO Assigned (Report_ID, P_SSN, MedCenter_Name) VALUES (0, 100000001, 'UofC Clinic');
+
+
+ -- MEDICAL HISORY AND APPLICANT FORM INFORMATION for Brenda - SSN [100000002]
+INSERT INTO Medical_History (P_SSN, TPAL_total, TPAL_preterm, TPAL_aborted, TPAL_living) VALUES (100000002, 6, 1, 1, 4);
+INSERT INTO Allergies (P_SSN, Allergy) VALUES (100000002, 'Peanuts');
+INSERT INTO Immunization (P_SSN, Immunization) VALUES (100000002, 'Measles');
+INSERT INTO Past_Illnesses (P_SSN, Illness_Name, Age_of_onset) VALUES (100000002, 'Pneumonia', 	30);
+ -- Report #1 for Brenda - SSN [100000002]
+INSERT INTO Report (Report_ID, P_SSN, SSN, Complaint) VALUES (1, 100000002, 200000001, "I've had lower back pain for several years but after vaccuming last week it's been unbareable. The pain goes all the way down my leg. I need an x-ray.");
+INSERT INTO Diagnoses (Illness_Name, Report_ID, P_SSN) VALUES ('Low Back Pain', 1, 100000002);
+INSERT INTO Prescribes (Med_Name, Report_ID, P_SSN) VALUES ('Ibuprofen', 1, 100000002);
 INSERT INTO Assigned (Report_ID, P_SSN, MedCenter_Name) VALUES (1, 100000002, 'Foothills');
+
+
+ -- MEDICAL HISORY AND APPLICANT FORM INFORMATION for Jenny - SSN [100000003]INSERT INTO Allergies (P_SSN, Allergy) VALUES (100000001, 'Peanuts');
+INSERT INTO Medical_History (P_SSN) VALUES (100000003);
+INSERT INTO Allergies (P_SSN, Allergy) VALUES (100000003, 'Shrimp');
+INSERT INTO Allergies (P_SSN, Allergy) VALUES (100000003, 'Penicillin');
+INSERT INTO Immunization (P_SSN, Immunization) VALUES (100000003, 'Measles');
+INSERT INTO Immunization (P_SSN, Immunization) VALUES (100000003, 'Tetanus');
+INSERT INTO Immunization (P_SSN, Immunization) VALUES (100000003, 'GARDASIL9');
+INSERT INTO Past_Illnesses (P_SSN, Illness_Name, Age_of_onset) VALUES (100000003, 'Asthma',7);
+ -- Report #2 for Jenny - SSN [100000003]
+INSERT INTO Report (Report_ID, P_SSN, SSN, Complaint) VALUES (2, 100000003, 200000002, "I'm considering dating but want to discuss birth control");
+INSERT INTO Prescribes (Med_Name, Report_ID, P_SSN) VALUES ('Alesse', 2, 100000003);
 INSERT INTO Assigned (Report_ID, P_SSN, MedCenter_Name) VALUES (2, 100000003, 'Foothills');
 
-INSERT INTO Prescribes (Med_Name, Report_ID, P_SSN) VALUES ('Advil', 		0, 100000001);
-INSERT INTO Prescribes (Med_Name, Report_ID, P_SSN) VALUES ('Lisinopril', 	3, 100000000);
 
-INSERT INTO Treatment_Done (P_SSN, Med_Name, Illness_Name, Date) VALUES (100000001, 'Advil', 		'Common Cold', 			'2021-03-07');
-INSERT INTO Treatment_Done (P_SSN, Med_Name, Illness_Name, Date) VALUES (100000000, 'Lisinopril', 'High Blood Pressure', 	'2021-03-07');
+
+
+
+
+
+
