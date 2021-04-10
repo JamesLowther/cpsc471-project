@@ -186,7 +186,16 @@
                                         v-on:keyup="queryIllness()"
                                     />
                                 </td>
-                                <td class="border-teal-500 border-0 border-b-2 text-white bg-blue-400 " colspan="2" />
+                                <td v-if="diagnosed_illnesses_error == ''" class="border-teal-500 border-0 border-b-2 text-white bg-blue-400 " colspan="2">
+                                    <p class="text-xl mx-auto text-red-600">
+                                        {{ diagnosed_illnesses_error }}
+                                    </p>
+                                </td>
+                                <td v-else class="border-teal-500 border-0 border-b-2 text-white bg-red-100 " colspan="2">
+                                    <p class="text-xl mx-auto text-red-600">
+                                        {{ diagnosed_illnesses_error }}
+                                    </p>
+                                </td>
                             </tr>
                             <tr class="bg-blue-100"
                                 v-for="illness in illness_results"
@@ -212,9 +221,6 @@
                             </tr>
                         </tbody>
                     </table>
-                    <p class="text-xl mx-auto text-red-600">
-                        {{ diagnosed_illnesses_error }}
-                    </p>
                 </div>
                 <br />
                 <div class="w-full mb-6">
@@ -268,7 +274,15 @@
                                         v-on:keyup="queryMedications()"
                                     />
                                 </td>
-                                <td class="border-teal-500 border-b-2 bg-blue-400" colspan="3">
+                                <td v-if="add_medication_error == ''" class="border-teal-500 border-b-2 bg-blue-400" colspan="3">
+                                    <p class="text-xl mx-auto text-red-600">
+                                        {{ add_medication_error }}
+                                    </p>
+                                </td>
+                                <td v-else class="border-teal-500 border-b-2 bg-red-100" colspan="3">
+                                    <p class="text-xl mx-auto text-red-600">
+                                        {{ add_medication_error }}
+                                    </p>
                                 </td>
                             </tr>
                             <tr class="bg-blue-100"
@@ -305,9 +319,6 @@
                             </tr>
                         </tbody>
                     </table>
-                    <p class="text-xl mx-auto text-red-600">
-                        {{ add_medication_error }}
-                    </p>
                 </div>
                 <br />
                 <div class="w-full mb-6">
@@ -354,7 +365,15 @@
                                         v-on:keyup="queryMedCenters()"
                                     />
                                 </td>
-                                <td class="border-teal-500 border-2 bg-blue-400 border-r-0 border-l-0 " colspan="2">
+                                <td v-if="medCenter_error == ''" class="border-teal-500 border-2 bg-blue-400 border-r-0 border-l-0 " colspan="2">
+                                    <p class="text-xl mx-auto text-red-600">
+                                        {{ medCenter_error }}
+                                    </p>
+                                </td>
+                                <td v-else class="border-teal-500 border-2 bg-red-100 border-r-0 border-l-0 " colspan="2">
+                                    <p class="text-xl mx-auto text-red-600">
+                                        {{ medCenter_error }}
+                                    </p>
                                 </td>
                             </tr>
                             <tr class="bg-blue-100"
@@ -384,9 +403,6 @@
                             </tr>
                         </tbody>
                     </table>
-                    <p class="text-xl mx-auto text-red-600">
-                        {{ medCenter_error }}
-                    </p>
                 </div>
             </div>
         </div>
@@ -531,6 +547,9 @@ export default {
                 .then((response) => {
                     if (response.data.logged_in != "1") return;
 
+                    // Clear any error meesage
+                    this.diagnosed_illnesses_error = "";
+
                     this.logged_in = true;
                     this.illness_results = response.data.results;
                 })
@@ -604,6 +623,10 @@ export default {
                     .then(response => {
                         if (response.data.logged_in != "1") return;
 
+
+                    // Clear any error meesage
+                    this.diagnosed_illnesses_error = "";
+
                     //If successful then update the html form to reflect the removal
                     let temp_array = this.form.Diagnosis;
                     this.form.Diagnosis = [];
@@ -638,6 +661,9 @@ export default {
                 )
                 .then((response) => {
                     if (response.data.logged_in != "1") return;
+            
+                    // Clear any error meesage
+                    this.add_medication_error = "";
 
                     this.logged_in = true;
                     this.medication_results = response.data.results;
@@ -718,7 +744,9 @@ export default {
                         console.log(e);
                     }
             );
-
+            
+            // Clear any error meesage
+            this.add_medication_error = "";
 
             let temp_array = this.form.Medications;
             this.form.Medications = [];
@@ -746,6 +774,9 @@ export default {
                 )
                 .then((response) => {
                     if (response.data.logged_in != "1") return;
+            
+                    // Clear any error meesage
+                    this.medCenter_error = "";
 
                     this.logged_in = true;
                     this.Medical_Centers_results = response.data.result;
@@ -820,6 +851,9 @@ export default {
                     )
                     .then(response => {
                         if (response.data.logged_in != "1") return;
+            
+                    // Clear any error meesage
+                    this.medCenter_error = "";
 
                     //If successful then update the html form to reflect the removal
                     let temp_array = this.form.Medical_centres;

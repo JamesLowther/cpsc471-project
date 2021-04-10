@@ -29,14 +29,14 @@
             <div
                 class="flex flex-row w-full justify-around items-center text-white h-full text-2xl lg:text-3xl"
             >
-                <router-link class="w-1/4" to="login">
+                <router-link class="w-4/12" to="login">
                     <div
                         class="shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-8 px-1"
                     >
                         Login
                     </div>
                 </router-link>
-                <router-link class="w-1/4" to="new-account">
+                <router-link class="w-4/12" to="new-account">
                     <div
                         class="shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-8 px-1"
                     >
