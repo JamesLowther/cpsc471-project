@@ -21,7 +21,6 @@ DROP TABLE IF EXISTS Diagnoses;
 DROP TABLE IF EXISTS Medical_History;
 DROP TABLE IF EXISTS Allergies;
 DROP TABLE IF EXISTS Immunization;
-DROP TABLE IF EXISTS Treatment_Done;
 DROP TABLE IF EXISTS Past_Illnesses;
 
 -- Create new tables
@@ -202,17 +201,6 @@ CREATE TABLE Immunization (
     FOREIGN KEY (P_SSN) REFERENCES Medical_History(P_SSN)
 );
 
-CREATE TABLE Treatment_Done (
-    P_SSN           INTEGER,
-    Med_Name        TEXT,
-    Illness_name    TEXT,
-    Date            TEXT,
-    PRIMARY KEY (P_SSN, Med_Name, Illness_name),
-    FOREIGN KEY (P_SSN) REFERENCES Medical_History(P_SSN),
-    FOREIGN KEY (Med_Name) REFERENCES Medication(Name),
-    FOREIGN KEY (Illness_name) REFERENCES Illness(Name)
-);
-
 CREATE TABLE Past_Illnesses (
     P_SSN           INTEGER,
     Illness_name    TEXT,
@@ -271,6 +259,7 @@ INSERT INTO Illness (Name, Organ_system) VALUES ('Heartburn',               'Gas
 INSERT INTO Illness (Name, Organ_system) VALUES ('Nephrotic Syndrome',               'Gastrointestinal');
 INSERT INTO Illness (Name, Organ_system) VALUES ('Hypothyroidism',               'Endocrine');
 INSERT INTO Illness (Name, Organ_system) VALUES ('Diabetes',               'Endocrine');
+INSERT INTO Illness (Name, Organ_system) VALUES ('Low Back Pain',               'Muscular');
 
 INSERT INTO Medication (Name, Is_prescription) VALUES ('Advil',         0);
 INSERT INTO Medication (Name, Is_prescription) VALUES ('Ibuprofen',         0);
@@ -287,6 +276,8 @@ INSERT INTO Medication (Name, Is_prescription) VALUES ('Amlodipine',    1);
 INSERT INTO Medication (Name, Is_prescription) VALUES ('Metoprolol',    1);
 INSERT INTO Medication (Name, Is_prescription) VALUES ('Omeprazole',    1);
 INSERT INTO Medication (Name, Is_prescription) VALUES ('Simvastatin',    1);
+INSERT INTO Medication (Name, Is_prescription) VALUES ('Azithromycin',    1);
+INSERT INTO Medication (Name, Is_prescription) VALUES ('Alesse',    1);
 
 INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Advil', 'Nausea');
 INSERT INTO Side_Effects (Med_Name, Effect) VALUES ('Advil', 'Heartburn');

@@ -324,39 +324,55 @@ class DoctorForms(Resource):
         medical_centres = cursor.fetchall()
         medical_centres = [dict(x) for x in medical_centres]
 
-        # RETRIEVE ALL MEDICAL HISORY INFORMTATION :
+        # RETRIEVE ALL MEDICAL HISORY INFORMTATION *If it exists
         # -----------------------------------------
 
+        # Check if patient has a medical history filled out
+
+        # initialize dict() variables in case the if statement can't
+        TPAL = {}
+        past_illnesses = {}
+        allergies = {}
+        immunizations = {}
+        #to check is theres a medical history tuple
+        has_row = 0;
+
         # retrieve TPAL info
-        cursor.execute(
-            "SELECT TPAL_total, TPAL_preterm, TPAL_aborted, TPAL_living FROM Medical_History WHERE P_SSN = ?;",
-            (ssn,)
-        )
-        tpal = cursor.fetchone()
+        for row in cursor.execute("SELECT * FROM Medical_History WHERE P_SSN = ?;", (ssn,)):
+            has_row = 1
+        
+        #if history exists:
+        if (has_row == 1):
+            # retrieve TPAL info
+            cursor.execute(
+                "SELECT TPAL_total, TPAL_preterm, TPAL_aborted, TPAL_living FROM Medical_History WHERE P_SSN = ?;",
+                (ssn,)
+            )
+            TPAL = cursor.fetchone()
 
-        # retrieve Past_Illnesses
-        cursor.execute(
-            "SELECT Illness_name, Age_of_onset FROM Past_Illnesses WHERE P_SSN = ?;",
-            (ssn,)
-        )
-        past_illnesses = cursor.fetchall()
-        past_illnesses = [dict(x) for x in past_illnesses]
+            # retrieve Past_Illnesses
+            cursor.execute(
+                "SELECT Illness_name, Age_of_onset FROM Past_Illnesses WHERE P_SSN = ?;",
+                (ssn,)
+            )
+            past_illnesses = cursor.fetchall()
+            past_illnesses = [dict(x) for x in past_illnesses]
 
-        # retrieve Allergies
-        cursor.execute(
-            "SELECT Allergy FROM Allergies WHERE P_SSN = ?;",
-            (ssn,)
-        )
-        allergies = cursor.fetchall()
-        allergies = [dict(x) for x in allergies]
+            # retrieve Allergies
+            cursor.execute(
+                "SELECT Allergy FROM Allergies WHERE P_SSN = ?;",
+                (ssn,)
+            )
+            allergies = cursor.fetchall()
+            allergies = [dict(x) for x in allergies]
 
-        # retrieve Immunizations
-        cursor.execute(
-            "SELECT Immunization FROM Immunization WHERE P_SSN = ?;",
-            (ssn,)
-        )
-        immunizations = cursor.fetchall()
-        immunizations = [dict(x) for x in immunizations]
+            # retrieve Immunizations
+            cursor.execute(
+                "SELECT Immunization FROM Immunization WHERE P_SSN = ?;",
+                (ssn,)
+            )
+            immunizations = cursor.fetchall()
+            immunizations = [dict(x) for x in immunizations]
 
         # retrieve If they've passed their covid screen
         cursor.execute(
@@ -376,7 +392,7 @@ class DoctorForms(Resource):
             "Diagnosis": list(illnesses),
             "Medications": list(medications),
             "Medical_centres": list(medical_centres),
-            **dict(tpal),
+            **dict(TPAL),
             "past_illnesses": list(past_illnesses),
             "allergies": list(allergies),
             "immunizations": list(immunizations),
