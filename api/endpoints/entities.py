@@ -163,9 +163,8 @@ class EntitiesForms(Resource):
                 print(er)
                 con.close()
                 return jsonify(
-                    status=1,
-                    error_msg=er,
-                    sys_msg="Error: Could not Add",
+                    status=0,
+                    sys_msg="Error: Could not Add. Entity may already exist.",
                     )
         
         # Add a new illness, and its specified symptoms. Catch any SQL errors
@@ -183,8 +182,7 @@ class EntitiesForms(Resource):
                 con.close()
                 return jsonify(
                     status=0,
-                    error_msg=er,
-                    sys_msg="Error: Could not Add",
+                    sys_msg="Error: Could not Add. Entity may already exist.",
                     )
 
         con.commit()
@@ -222,7 +220,6 @@ class EntitiesForms(Resource):
                 con.close()
                 return jsonify(
                     status=0,
-                    error_msg=er,
                     sys_msg="Error: Could not update",
                     )
         
@@ -243,7 +240,6 @@ class EntitiesForms(Resource):
                 con.close()
                 return jsonify(
                     status=0,
-                    error_msg=er,
                     sys_msg="Error: Could not update",
                     )
 
@@ -275,7 +271,6 @@ class EntitiesForms(Resource):
                 con.close()
                 return jsonify(
                     status=0,
-                    error_msg=er,
                     sys_msg="Error: Could not delete",
                     )
         
@@ -289,7 +284,6 @@ class EntitiesForms(Resource):
                 con.close()
                 return jsonify(
                     status=0,
-                    error_msg=er,
                     sys_msg="Error: Could not delete",
                     )
 

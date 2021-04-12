@@ -556,7 +556,7 @@ export default {
 
         add_entity() {
             if (this.entity_type == "medication") {
-                this.organ_system = "";
+                this.organ_system = null;
             } else {
                 this.Is_prescription = 0;
             }
