@@ -39,6 +39,87 @@
                             >
                         </td>
                     </tr>
+                    <tr v-if="user_type != 'patient'" class="bg-blue-100">
+                        <td class="border-blue-300 border-2 px-8 py-2">
+                            <input
+                                class="border p-1 rounded-lg"
+                                v-bind:class="[
+                                    invalid_fname ? 'border-red-700' : 'border-black',
+                                ]"
+                                type="text"
+                                placeholder="First Name"
+                                id="fname"
+                                name="fname"
+                                v-model="Fname"
+                                ref="fname"
+                            />
+                        </td>
+                    </tr>
+                    <tr v-if="user_type != 'patient'" class="bg-blue-100">
+                        <td class="border-blue-300 border-2 px-8 py-2">
+                            <input
+                                class="border p-1 rounded-lg"
+                                v-bind:class="[
+                                    invalid_initial ? 'border-red-700' : 'border-black',
+                                ]"
+                                type="text"
+                                placeholder="Initial"
+                                id="initial"
+                                name="initial"
+                                v-model="Initial"
+                                ref="initial"
+                            />
+                        </td>
+                    </tr>
+                    <tr v-if="user_type != 'patient'" class="bg-blue-100">
+                        <td class="border-blue-300 border-2 px-8 py-2">
+                            <input
+                                class="border p-1 rounded-lg"
+                                v-bind:class="[
+                                    invalid_lname ? 'border-red-700' : 'border-black',
+                                ]"
+                                type="text"
+                                placeholder="Last Name"
+                                id="lname"
+                                name="lname"
+                                v-model="Lname"
+                                ref="lname"
+                            />
+                        </td>
+                    </tr>
+                    <tr v-if="user_type != 'patient'" class="bg-blue-100">
+                        <td class="border-blue-300 border-2 px-8 py-2">
+                            <input
+                                class="border border-black p-1 rounded-lg"
+                                type="text"
+                                v-bind:class="[
+                                    invalid_DoB ? 'border-red-700' : 'border-black',
+                                ]"
+                                placeholder="Date of Birth (YYYY-MM-DD)"
+                                id="dob"
+                                name="dob"
+                                v-model="DoB"
+                                ref="dob"
+                            />
+                        </td>
+                    </tr>
+                    <tr v-if="user_type == 'doctor'" class="bg-blue-100">
+                        <td class="border-blue-300 border-2 px-8 py-2">
+                            <input
+                                class="border p-1 rounded-lg"
+                                v-bind:class="[
+                                    invalid_spec ? 'border-red-700' : 'border-black',
+                                ]"
+                                type="text"
+                                pattern="[0-9]{9}"
+                                placeholder="Specialization"
+                                id="specialization"
+                                name="specialization"
+                                v-model="Specialization"
+                                ref="specialization"
+                            />
+                        </td>
+                    </tr>
                     <tr class="bg-blue-100">
                         <td class="border-blue-300 border-2 px-8 py-2">
                             <input
@@ -104,8 +185,18 @@ export default {
             user_type: "patient",
             ssn: "",
             password: "",
+            Fname: "",
+            Lname: "",
+            Initial: "",
+            DoB: "",
+            Specialization: "",
             error: "",
             invalid_ssn: false,
+            invalid_DoB: false,
+            invalid_fname: false,
+            invalid_lname: false,
+            invalid_initial: false,
+            invalid_spec: false,
             empty_pass: false,
         };
     },
@@ -131,7 +222,7 @@ export default {
         invalidPass() {
             let pass = this.$refs.pass.value;
             if (!pass) {
-                if (!this.empty_pass) this.empty_pass = !this.empty_pass;
+                this.invalidDoB = true;
                 console.log("Password is empty");
                 this.error = "Password cannot be empty.";
                 return true;
@@ -139,8 +230,91 @@ export default {
             return false;
         },
 
+        invalidDoB() {
+            // test if the ssn matches 9 digit number
+            let dob = this.$refs.dob.value;
+            if (!/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(dob)) {
+                //change to red border, if black
+                if (!this.invalid_DoB) this.invalid_DoB = !this.invalid_DoB;
+                this.error = "Please enter your date of birth in the form yyyy-mm-dd";
+                return true;
+            }
+            return false;
+        },
+
+        invalidFname() {
+            let fname = this.$refs.fname.value;
+            if (!fname) {
+                this.invalidFname = true;
+                this.error = "First name cannot be empty.";
+                return true;
+            }
+            return false;
+        },
+
+
+        invalidLname() {
+            let lname = this.$refs.lname.value;
+            if (!lname) {
+                this.invalidLname = true;
+                this.error = "Last name cannot be empty.";
+                return true;
+            }
+            return false;
+        },
+
+
+        invalidInitial() {
+            let initial = this.$refs.initial.value;
+            if (!initial) {
+                this.invalidInitial = true;
+                this.error = "Initial cannot be empty.";
+                return true;
+            }
+            return false;
+        },
+
+        invalidSpec() {
+            let spec = this.$refs.specialization.value;
+            if (!spec) {
+                this.invalidSpec = true;
+                this.error = "Specialization cannot be empty.";
+                return true;
+            }
+            return false;
+        },
+
         loginPost() {
             // check for proper input
+            if (this.user_type != 'patient') {
+                if (!this.invalidFname()) {
+                    this.invalidFname = false;
+                    this.error = "";
+                } else return;
+
+                if (!this.invalidInitial()) {
+                    this.invalidInitial = false;
+                    this.error = "";
+                } else return;
+
+                if (!this.invalidLname()) {
+                    this.invalidLname = false;
+                    this.error = "";
+                } else return;
+
+                if (!this.invalidDoB()) {
+                    this.invalidDoB = false;
+                    this.error = "";
+                } else return;
+            }
+
+            if (this.user_type == 'doctor') {
+                if (!this.invalidSpec()) {
+                    this.invalidSpec = false;
+                    this.error = "";
+                } else return;
+            }
+
             if (!this.invalidSSN()) {
                 this.invalid_ssn = false;
                 this.error = "";
@@ -151,11 +325,17 @@ export default {
                 this.error = "";
             } else return;
 
+
             axios
                 .post("new-account", {
                     user_type: this.user_type,
                     ssn: this.ssn,
                     password: this.password,
+                    Fname: this.Fname,
+                    Lname: this.Lname,
+                    Initial: this.Initial,
+                    DoB: this.DoB,
+                    Specialization: this.Specialization
                 })
                 .then((response) => {
                     if (response.data.successful == "1") {
