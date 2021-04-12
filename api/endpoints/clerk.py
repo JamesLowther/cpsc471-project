@@ -89,17 +89,21 @@ class ClerkForms(Resource):
 
         if(args["action_type"] == "submit_form"):
             if(args["form_type"]== "new_application_form"):
-                self.approve_applicant(args["P_SSN"])
+                self.approve_applicant(current["ssn"], args["P_SSN"])
 
 
 
-    def approve_applicant(self,ssn):
-        # Set a new_applicant_form specified by ssn, to approved
+    def approve_applicant(self,cssn,pssn):
+        # Set a new_applicant_form specified by ssn to approved
 
         con, cursor = db.connect_db()
 
         # update the form corresponding to the patients ssn to 'approved' (1)
-        cursor.execute("UPDATE New_Applicant_Form SET Is_approved = ? WHERE P_SSN = ?;", (1,ssn))
-
+        cursor.execute("UPDATE New_Applicant_Form SET Is_approved = ? WHERE P_SSN = ?;", (1,pssn))
         con.commit()
+
+        # add the authorizes tuple. Acts as log
+        cursor.execute("INSERT OR REPLACE INTO Authorizes VALUES (?,?);", (cssn,pssn))
+        con.commit()
+
         con.close()
