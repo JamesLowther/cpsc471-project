@@ -334,15 +334,15 @@ class DoctorForms(Resource):
         past_illnesses = {}
         allergies = {}
         immunizations = {}
+
         #to check is theres a medical history tuple
         has_row = 0;
-
-        # retrieve TPAL info
-        for row in cursor.execute("SELECT * FROM Medical_History WHERE P_SSN = ?;", (ssn,)):
-            has_row = 1
+        cursor.execute("SELECT * FROM Medical_History WHERE P_SSN = ?;", (ssn,))
+        has_row = cursor.fetchone()
         
         #if history exists:
-        if (has_row == 1):
+        # retrieve TPAL info
+        if has_row:
             # retrieve TPAL info
             cursor.execute(
                 "SELECT TPAL_total, TPAL_preterm, TPAL_aborted, TPAL_living FROM Medical_History WHERE P_SSN = ?;",
