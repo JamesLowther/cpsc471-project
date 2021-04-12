@@ -8,14 +8,6 @@ from database import db
 
 import json
 
-class Entities(Resource):
-    def get(self):
-        if verify_jwt_in_request():
-            current = get_jwt_identity()
-            if current["user_type"] == "doctor" or current["user_type"] == "clerk":
-                return jsonify({**current, "logged_in": 1, "user_type": current["user_type"]})
-            else:
-                return jsonify({**current, "logged_in": 0})
 
 class EntitiesForms(Resource):
     parser = reqparse.RequestParser()
@@ -35,22 +27,6 @@ class EntitiesForms(Resource):
     parser.add_argument("form", type=dict, required=False)
     parser.add_argument("query_string", type=str)
 
-    def get(self):
-        if verify_jwt_in_request():
-            current = get_jwt_identity()
-
-        con, cursor = db.connect_db()
-
-        # Get all medications.
-        cursor.execute("SELECT m.Name, s.Effect FROM Medication AS m LEFT OUTER JOIN Side_Effects AS s ON m.Name = s.Med_Name WHERE m.name LIKE ?;", ("%" + args["theMedicationName"] + "%",))
-        medications = cursor.fetchall()
-
-        con.close()
-
-        return jsonify(
-            logged_in=1,
-            medications=[dict(x) for x in medications]
-        )
 
     def post(self):
         """Returns the primary keys from certain tables in our database.
