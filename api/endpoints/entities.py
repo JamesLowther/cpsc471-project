@@ -206,10 +206,10 @@ class EntitiesForms(Resource):
         # catch any SQL errors eg key or unique name constraints
         if(args["entity_type"] == "medication"):
             try:
-                cursor.execute("DELETE FROM Medication WHERE Name = ?;", (args["entity_name"],),)
-                cursor.execute("INSERT INTO Medication VALUES (?, ?);", (args["entity_name"], args["is_pres"]) )
+                cursor.execute("UPDATE Medication SET Is_prescription = ? WHERE Name = ?;", (args["is_pres"], args["entity_name"]))
 
                 # if users included side-effects, insert into database
+                # delete the all side-effects first, then insert to avoid distinguishing between new and existing tuples
                 cursor.execute("DELETE FROM Side_Effects WHERE Med_Name = (?);", (args["entity_name"],),)
                 if(args["effects"]):
                     for effect in args["effects"]:
@@ -226,8 +226,7 @@ class EntitiesForms(Resource):
         # Update an existing illness, and its specified symptoms. Catch any SQL errors
         elif (args["entity_type"] == "illness"):
             try:
-                cursor.execute("DELETE FROM Illness WHERE Name = ?;", (args["entity_name"],),)
-                cursor.execute("INSERT INTO Illness VALUES (?, ?);", (args["entity_name"], args["org_sys"],),)
+                cursor.execute("UPDATE Illness SET Organ_system = ? WHERE Name = ?;",(args["org_sys"], args["entity_name"]))
 
                 # if users included symptoms, insert into database
                 cursor.execute("DELETE FROM Symptoms WHERE Illness_name = (?);", (args["entity_name"],),)
@@ -264,7 +263,9 @@ class EntitiesForms(Resource):
         # catch any SQL errors eg key or unique name constraints
         if(args["entity_type"] == "medication"):
             try:
+                # Delete from Medication table and all side effects
                 cursor.execute("DELETE FROM Medication WHERE Name = ?;", (args["entity_name"],),)
+                cursor.execute("DELETE FROM Side_Effects WHERE Med_Name = ?;", (args["entity_name"],))
 
             except sqlite3.Error as er:
                 print(er)
@@ -277,7 +278,9 @@ class EntitiesForms(Resource):
         # Update an existing illness, and its specified symptoms. Catch any SQL errors
         elif (args["entity_type"] == "illness"):
             try:
+                # Delete illness and all Symptoms
                 cursor.execute("DELETE FROM Illness WHERE Name = ?;", (args["entity_name"],),)
+                cursor.execute("DELETE FROM Symptoms WHERE Illness_Name = ?;", (args["entity_name"],))
 
             except sqlite3.Error as er:
                 print(er)
