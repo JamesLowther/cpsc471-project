@@ -89,7 +89,7 @@ class ClerkForms(Resource):
 
         if(args["action_type"] == "submit_form"):
             if(args["form_type"]== "new_application_form"):
-                self.approve_applicant(current["ssn"], args["P_SSN"])
+                return self.approve_applicant(current["ssn"], args["P_SSN"])
 
 
 
@@ -107,3 +107,6 @@ class ClerkForms(Resource):
         con.commit()
 
         con.close()
+
+        # return as confirmation who has been approved and by who 
+        return jsonify(logged_in=1,approved=pssn,approver=cssn)
