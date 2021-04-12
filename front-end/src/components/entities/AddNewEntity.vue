@@ -176,17 +176,24 @@
                             >
                                 <button
                                     v-if="create_mode"
-                                    @click="add_med()"
+                                    @click="add_entity()"
                                     class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-green-500 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
                                 >
                                     <b>Add Medication</b>
                                 </button>
                                 <button
                                     v-else
-                                    @click="update_med()"
+                                    @click="update_entity()"
                                     class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-green-500 hover:bg-green-800 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
                                 >
                                     <b>Update Medication</b>
+                                </button>
+                                <button
+                                    v-if="!create_mode"
+                                    @click="delete_entity()"
+                                    class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-pink-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
+                                >
+                                    <b>Delete Medication</b>
                                 </button>
                                 <template v-if="sys_msg.length != 0">
                                     <!-- Display error or success, depending on response from server -->
@@ -200,7 +207,7 @@
                                         v-else-if="status == '1'"
                                         class="text-white text-xl"
                                     >
-                                        <b>Success</b>
+                                        <b>{{ sys_msg }}</b>
                                     </p>
                                 </template>
                             </td>
@@ -394,17 +401,24 @@
                             >
                                 <button
                                     v-if="create_mode"
-                                    @click="add_ill()"
+                                    @click="add_entity()"
                                     class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-green-500 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
                                 >
                                     <b>Add Illness</b>
                                 </button>
                                 <button
                                     v-else
-                                    @click="update_ill()"
+                                    @click="update_entity()"
                                     class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-green-500 hover:bg-green-800 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
                                 >
                                     <b>Update Illness</b>
+                                </button>
+                                <button
+                                    v-if="!create_mode"
+                                    @click="delete_entity()"
+                                    class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-pink-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
+                                >
+                                    <b>Delete Illness</b>
                                 </button>
                                 <template v-if="sys_msg.length != 0">
                                     <!-- Display error or success, depending on response from server -->
@@ -418,7 +432,7 @@
                                         v-else-if="status == '1'"
                                         class="text-white text-xl"
                                     >
-                                        <b>Success</b>
+                                        <b>{{ sys_msg }}</b>
                                     </p>
                                 </template>
                             </td>
@@ -482,6 +496,9 @@ export default {
             this.organ_system = this.$route.params.Organ_system;
             this.effects = this.$route.params.effects;
         }
+        if (this.create_mode) {
+            this.entity_name = this.query_string;
+        }
         this.init_entity();
     },
 
@@ -537,15 +554,22 @@ export default {
             }
         },
 
-        add_med() {
+        add_entity() {
+            if (this.entity_type == "medication") {
+                this.organ_system = "";
+            } else {
+                this.Is_prescription = 0;
+            }
+
             axios
                 .post(
                     "entities/forms",
                     {
                         entity_type: this.entity_post,
                         method: "add",
-                        med_name: this.entity_name,
+                        entity_name: this.entity_name,
                         is_pres: parseInt(this.Is_prescription),
+                        org_sys: this.organ_system,
                         effects: this.effects,
                     },
                     {
@@ -557,20 +581,22 @@ export default {
                 )
                 .then((response) => {
                     this.status = response.data.status;
+                    this.sys_msg = response.data.sys_msg;
                 })
                 .catch((e) => {
                     console.log(e);
                 });
         },
-        update_med() {
+        update_entity() {
             axios
                 .post(
                     `entities/forms`,
                     {
                         entity_type: this.entity_post,
                         method: "update",
-                        med_name: this.entity_name,
+                        entity_name: this.entity_name,
                         is_pres: this.Is_prescription,
+                        org_sys: this.organ_system,
                         effects: this.effects,
                     },
                     {
@@ -588,41 +614,14 @@ export default {
                     console.log(e);
                 });
         },
-        add_ill() {
-            axios
-                .post(
-                    "entities/forms",
-                    {
-                        entity_type: this.entity_post,
-                        method: "add",
-                        ill_name: this.entity_name,
-                        org_sys: this.organ_system,
-                        effects: this.effects,
-                    },
-                    {
-                        headers: {
-                            Authorization:
-                                "Bearer " + localStorage.getItem("jwt"),
-                        },
-                    }
-                )
-                .then((response) => {
-                    this.status = response.data.status;
-                })
-                .catch((e) => {
-                    console.log(e);
-                });
-        },
-        update_ill() {
+        delete_entity() {
             axios
                 .post(
                     `entities/forms`,
                     {
                         entity_type: this.entity_post,
-                        method: "update",
-                        ill_name: this.entity_name,
-                        org_sys: this.organ_system,
-                        effects: this.effects,
+                        method: "delete",
+                        entity_name: this.entity_name,
                     },
                     {
                         headers: {
@@ -638,6 +637,14 @@ export default {
                 .catch((e) => {
                     console.log(e);
                 });
+
+                //Redirect back to the entities panel is not working right
+                // this.$router.go("entities-panel/", {
+                //                     params: {
+                //                         entity_type: this.entity_post,
+                //                         user_type: this.user_type,
+                //                     }, 
+                //                 });
         },
 
         init_entity() {
