@@ -38,7 +38,7 @@ INSERT INTO Patient (P_SSN, Password) VALUES (100000017, 'pass');
 INSERT INTO Patient (P_SSN, Password) VALUES (101000018, 'pass');
 INSERT INTO Patient (P_SSN, Password) VALUES (101000019, 'pass');
 
-INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB, Is_approved) VALUES (100000000, 'BestDressed_2020@goomail.com', 'M', 'M', '403-111-0002', 'Simon', 'S', 'Cowell', 	'1111111112', '2025-01-01', 'AB', '2002-01-01', 0);
+INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB, Is_approved) VALUES (100000000, 'BestDressed_2020@goomail.com', 'M', 'M', '403-111-0002', 'Simon', 'S', 'Cowell', 	'1111111112', '2025-01-01', 'AB', '1959-10-07', 0);
 INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB, Is_approved) VALUES (100000001, 'Greg.man@goomail.com', 	'M', 'M', '403-111-0000', 'Greg', 'M', 'Man', 	'1111111110', '2025-01-01', 'AB', '1960-01-01', 1);
 INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB, Is_approved) VALUES (100000002, 'Brenda.boo@goomail.com', 'F', 'F', '403-111-0001', 'Brenda', 'B', 'Boo', 	'1111111111', '2025-01-01', 'AB', '1975-01-01', 0);
 INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial, Lname, Healthcare_no, HCN_expiry, HCN_province, DoB, Is_approved) VALUES (100000003, 'Jenny.girl@goomail.com', 'F', 'F', '403-111-0002', 'Jenny', 'G', 'Girl', 	'1111111112', '2025-01-01', 'AB', '2002-01-01', 1);
@@ -60,11 +60,12 @@ INSERT INTO New_Applicant_Form (P_SSN, Email, Gender, Sex, Phone, Fname, Initial
 
 INSERT INTO Authorizes (P_SSN, SSN) VALUES (100000001, 300000000);
 
- -- MEDICAL HISORY AND APPLICANT FORM INFORMATION for Greg - SSN [100000000]
+ -- MEDICAL HISORY AND APPLICANT FORM INFORMATION for Simon - SSN [100000000]
 INSERT INTO Covid_Screen (Date, P_SSN, Shortness_breath, New_cough, Fever, Sore_throat, Runny_nose, Has_passed) VALUES ('2021-03-07', 100000000, 0, 0, 0, 0, 0, 0);
 INSERT INTO Medical_History (P_SSN, TPAL_total, TPAL_preterm, TPAL_aborted, TPAL_living) VALUES (100000000, 0, 0, 0, 0);
 INSERT INTO Allergies (P_SSN, Allergy) VALUES (100000000, 'Peanuts');
 INSERT INTO Immunization (P_SSN, Immunization) VALUES (100000000, 'Measles');
+INSERT INTO Past_Illnesses (P_SSN, Illness_Name, Age_of_onset) VALUES (100000000, 'High Blood Pressure', 	61);
 INSERT INTO Past_Illnesses (P_SSN, Illness_Name, Age_of_onset) VALUES (100000000, 'Common Cold', 	35);
  -- Report #3 for Simon - SSN [100000000]
 INSERT INTO Report (Report_ID, P_SSN, SSN, Complaint) VALUES (3, 100000000, 200000000, "Just feel horrible and been sweating. Chest sometimes hurts");
@@ -94,6 +95,7 @@ INSERT INTO Assigned (Report_ID, P_SSN, MedCenter_Name) VALUES (0, 100000001, 'U
 
 
  -- MEDICAL HISORY AND APPLICANT FORM INFORMATION for Brenda - SSN [100000002]
+INSERT INTO Covid_Screen (Date, P_SSN, Shortness_breath, New_cough, Fever, Sore_throat, Runny_nose, Has_passed) VALUES ('2021-02-06', 100000002, 1, 1, 1, 1, 1, 1);
 INSERT INTO Medical_History (P_SSN, TPAL_total, TPAL_preterm, TPAL_aborted, TPAL_living) VALUES (100000002, 6, 1, 1, 4);
 INSERT INTO Allergies (P_SSN, Allergy) VALUES (100000002, 'Peanuts');
 INSERT INTO Immunization (P_SSN, Immunization) VALUES (100000002, 'Measles');
@@ -106,6 +108,7 @@ INSERT INTO Assigned (Report_ID, P_SSN, MedCenter_Name) VALUES (1, 100000002, 'F
 
 
  -- MEDICAL HISORY AND APPLICANT FORM INFORMATION for Jenny - SSN [100000003]INSERT INTO Allergies (P_SSN, Allergy) VALUES (100000001, 'Peanuts');
+INSERT INTO Covid_Screen (Date, P_SSN, Shortness_breath, New_cough, Fever, Sore_throat, Runny_nose, Has_passed) VALUES ('2021-02-06', 100000003, 1, 1, 1, 1, 1, 1);
 INSERT INTO Medical_History (P_SSN) VALUES (100000003);
 INSERT INTO Allergies (P_SSN, Allergy) VALUES (100000003, 'Shrimp');
 INSERT INTO Allergies (P_SSN, Allergy) VALUES (100000003, 'Penicillin');
