@@ -9,6 +9,16 @@ parser.add_argument("ssn", type=str, required=True,
                     help="SSN for new account.")
 parser.add_argument("password", type=str, required=True,
                     help="Password for new account.")
+parser.add_argument("Fname", type=str, required=False,
+                    help="Doctor/Clerk first name.")
+parser.add_argument("Lname", type=str, required=False,
+                    help="Doctor/Clerk last name.")
+parser.add_argument("Initial", type=str, required=False,
+                    help="Doctor/Clerk initial.")
+parser.add_argument("DoB", type=str, required=False,
+                    help="Doctor/Clerk date of birth.")
+parser.add_argument("Specialization", type=str, required=False,
+                    help="Doctor specialization.")
 
 
 class NewAccount(Resource):
@@ -30,10 +40,10 @@ class NewAccount(Resource):
 
         return {"successful": 1}
 
+
 def create_patient(args):
     """Handle the account logic for patients.
     """
-    
     con, cursor = db.connect_db()
 
     cursor.execute("SELECT * FROM Patient WHERE P_SSN = ?;", (args["ssn"],))
@@ -42,20 +52,49 @@ def create_patient(args):
     if cursor.fetchone():
         return False
 
-    cursor.execute("INSERT INTO Patient VALUES (?, ?);", (args["ssn"], args["password"]))
+    cursor.execute("INSERT INTO Patient VALUES (?, ?);",
+                   (args["ssn"], args["password"]))
     con.commit()
     con.close()
 
     return True
 
-    
+
 def create_doctor(args):
     """Handle the account logic for doctors.
     """
-    pass
+    con, cursor = db.connect_db()
+
+    cursor.execute("SELECT * FROM Doctor WHERE SSN = ?;", (args["ssn"],))
+
+    # User already exists in database
+    if cursor.fetchone():
+        return False
+
+    cursor.execute("INSERT INTO Doctor VALUES (?, ?, ?, ?, ?, ?, ?);",
+                   (args["ssn"], args["Specialization"], args["Fname"], args["Lname"], args["Initial"], args["DoB"], args["password"]))
+
+    con.commit()
+    con.close()
+
+    return True
 
 
 def create_clerk(args):
     """Handle the account logic for clerks.
     """
-    pass
+    con, cursor = db.connect_db()
+
+    cursor.execute("SELECT * FROM Clerk WHERE SSN = ?;", (args["ssn"],))
+
+    # User already exists in database
+    if cursor.fetchone():
+        return False
+
+    cursor.execute("INSERT INTO Clerk VALUES (?, ?, ?, ?, ?, ?);",
+                   (args["ssn"], args["Fname"], args["Lname"], args["Initial"], args["DoB"], args["password"]))
+
+    con.commit()
+    con.close()
+
+    return True
