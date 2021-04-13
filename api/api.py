@@ -81,7 +81,6 @@ def add_api_endpoints():
     api.add_resource(DoctorForms, '/doctor/forms')
 
     # Entity
-    #api.add_resource(Entities, '/entities')
     api.add_resource(EntitiesForms, '/entities/forms')
 
 
