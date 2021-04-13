@@ -41,8 +41,6 @@ class PatientForms(Resource):
 
         # Set the ssn depending on the accessing user.
         p_ssn = current["ssn"]
-        if current["user_type"] == "clerk":
-            p_ssn = args["p_ssn"]
 
         con, cursor = db.connect_db()
 

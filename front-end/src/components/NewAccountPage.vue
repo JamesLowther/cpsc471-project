@@ -95,7 +95,7 @@
                                 v-bind:class="[
                                     invalid_DoB ? 'border-red-700' : 'border-black',
                                 ]"
-                                placeholder="Date of Birth (YYYY-MM-DD)"
+                                placeholder="Date of Birth (yyyy-mm-dd)"
                                 id="dob"
                                 name="dob"
                                 v-model="DoB"
@@ -164,8 +164,8 @@
                         </td>
                     </tr>
                     <tr class=" shadow-2xl">
-                        <td class="border-teal-500 border-0 text-pink-300 bg-blue-500 rounded-b-2xl" colspan="3">
-                            {{ error }}.
+                        <td class="border-teal-500 border-0 text-pink-300 bg-blue-500 rounded-b-2xl h-7" colspan="3">
+                            {{ error }}
                         </td>
                     </tr>
                 </tbody>
@@ -209,7 +209,7 @@ export default {
             let ssnStr = this.$refs.ssn.value;
             if (!/^[0-9]{9}$/.test(ssnStr)) {
                 //change to red border, if black
-                if (!this.invalid_ssn) this.invalid_ssn = !this.invalid_ssn;
+                this.invalid_ssn = true;
                 console.log("input ssn is not 9 digit number: " + ssnStr);
                 this.error = "Invalid ssn: must be 9 digits";
                 return true;
@@ -222,7 +222,7 @@ export default {
         invalidPass() {
             let pass = this.$refs.pass.value;
             if (!pass) {
-                this.invalidDoB = true;
+                this.empty_pass = true;
                 console.log("Password is empty");
                 this.error = "Password cannot be empty.";
                 return true;
@@ -235,7 +235,7 @@ export default {
             let dob = this.$refs.dob.value;
             if (!/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(dob)) {
                 //change to red border, if black
-                if (!this.invalid_DoB) this.invalid_DoB = !this.invalid_DoB;
+                this.invalid_DoB = true;
                 this.error = "Please enter your date of birth in the form yyyy-mm-dd";
                 return true;
             }
@@ -245,7 +245,7 @@ export default {
         invalidFname() {
             let fname = this.$refs.fname.value;
             if (!fname) {
-                this.invalidFname = true;
+                this.invalid_fname = true;
                 this.error = "First name cannot be empty.";
                 return true;
             }
@@ -256,7 +256,7 @@ export default {
         invalidLname() {
             let lname = this.$refs.lname.value;
             if (!lname) {
-                this.invalidLname = true;
+                this.invalid_lname = true;
                 this.error = "Last name cannot be empty.";
                 return true;
             }
@@ -267,7 +267,7 @@ export default {
         invalidInitial() {
             let initial = this.$refs.initial.value;
             if (!initial) {
-                this.invalidInitial = true;
+                this.invalid_initial = true;
                 this.error = "Initial cannot be empty.";
                 return true;
             }
@@ -277,7 +277,7 @@ export default {
         invalidSpec() {
             let spec = this.$refs.specialization.value;
             if (!spec) {
-                this.invalidSpec = true;
+                this.invalid_spec = true;
                 this.error = "Specialization cannot be empty.";
                 return true;
             }
@@ -288,29 +288,29 @@ export default {
             // check for proper input
             if (this.user_type != 'patient') {
                 if (!this.invalidFname()) {
-                    this.invalidFname = false;
+                    this.invalid_fname = false;
                     this.error = "";
                 } else return;
 
                 if (!this.invalidInitial()) {
-                    this.invalidInitial = false;
+                    this.invalid_initial = false;
                     this.error = "";
                 } else return;
 
                 if (!this.invalidLname()) {
-                    this.invalidLname = false;
+                    this.invalid_lname = false;
                     this.error = "";
                 } else return;
 
                 if (!this.invalidDoB()) {
-                    this.invalidDoB = false;
+                    this.invalid_DoB = false;
                     this.error = "";
                 } else return;
             }
 
             if (this.user_type == 'doctor') {
                 if (!this.invalidSpec()) {
-                    this.invalidSpec = false;
+                    this.invalid_spec = false;
                     this.error = "";
                 } else return;
             }
