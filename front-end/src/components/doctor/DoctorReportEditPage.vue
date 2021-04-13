@@ -521,7 +521,12 @@ export default {
                     }
                 )
                 .then(response => {
-                    if (response.data.logged_in != "1") return;
+                    if (response.data.logged_in != "1") {
+                        this.logged_in = false;
+                        return;
+                    }
+
+                    this.logged_in = true;
 
                     this.id = this.$route.params.id;
                     this.form = response.data.form;
@@ -581,7 +586,10 @@ export default {
                     }
                 )
                 .then((response) => {
-                    if (response.data.logged_in != "1") return;
+                    if (response.data.logged_in != "1") {
+                        this.logged_in = false;
+                        return;
+                    }
 
                     // Clear any error meesage
                     this.diagnosed_illnesses_error = "";
@@ -620,7 +628,12 @@ export default {
                     }
                     )
                     .then(response => {
-                        if (response.data.logged_in != "1") return;
+                        if (response.data.logged_in != "1") {
+                        this.logged_in = false;
+                        return;
+                    }
+
+                    this.logged_in = true;
 
 
                     // Update the html list of Diagnosed illnesses
@@ -657,7 +670,12 @@ export default {
                     }
                     )
                     .then(response => {
-                        if (response.data.logged_in != "1") return;
+                        if (response.data.logged_in != "1") {
+                        this.logged_in = false;
+                        return;
+                    }
+
+                    this.logged_in = true;
 
 
                     // Clear any error meesage
@@ -696,7 +714,10 @@ export default {
                     }
                 )
                 .then((response) => {
-                    if (response.data.logged_in != "1") return;
+                    if (response.data.logged_in != "1") {
+                        this.logged_in = false;
+                        return;
+                    }
             
                     // Clear any error meesage
                     this.add_medication_error = "";
@@ -735,7 +756,12 @@ export default {
                     }
                     )
                     .then(response => {
-                        if (response.data.logged_in != "1") return;
+                        if (response.data.logged_in != "1") {
+                        this.logged_in = false;
+                        return;
+                    }
+
+                    this.logged_in = true;
 
 
                     // Update the html list of Diagnosed illnesses
@@ -773,7 +799,12 @@ export default {
                     }
                     )
                     .then(response => {
-                        if (response.data.logged_in != "1") return;
+                        if (response.data.logged_in != "1") {
+                            this.logged_in = false;
+                            return;
+                        }
+
+                        this.logged_in = true;
 
                     })
                     .catch(e => {
@@ -809,7 +840,10 @@ export default {
                     }
                 )
                 .then((response) => {
-                    if (response.data.logged_in != "1") return;
+                    if (response.data.logged_in != "1") {
+                        this.logged_in = false;
+                        return;
+                    }
             
                     // Clear any error meesage
                     this.medCenter_error = "";
@@ -848,7 +882,12 @@ export default {
                     }
                     )
                     .then(response => {
-                        if (response.data.logged_in != "1") return;
+                        if (response.data.logged_in != "1") {
+                        this.logged_in = false;
+                        return;
+                    }
+
+                    this.logged_in = true;
 
 
                     // Update the html list of Diagnosed illnesses
@@ -886,7 +925,12 @@ export default {
                     }
                     )
                     .then(response => {
-                        if (response.data.logged_in != "1") return;
+                        if (response.data.logged_in != "1") {
+                        this.logged_in = false;
+                        return;
+                    }
+
+                    this.logged_in = true;
             
                     // Clear any error meesage
                     this.medCenter_error = "";
