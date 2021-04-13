@@ -103,10 +103,7 @@ class DoctorForms(Resource):
             #If the doctor is requesting to remove a Diagnosised Illness from the patients report
             elif (args["action_type"] == "remove_illness"):
 
-                    #first remove the diagnosis from the database
                     self.remove_diagnosis(args["p_ssn"], args["id"], args["illness_to_remove"])
-                    #then return updated report information
-                    # form = self.get_report(args["p_ssn"], args["id"])
 
                     return jsonify(
                         logged_in=1,
@@ -116,22 +113,17 @@ class DoctorForms(Resource):
             #If the doctor is requesting to add a Diagnosised Illness from the patients report
             elif (args["action_type"] == "add_illness"):
 
-                    #first remove the diagnosis from the database
                     self.add_diagnosis(args["p_ssn"], args["id"], args["illness_to_add"])
-                    #then return updated report information
-                    # form = self.get_report(args["p_ssn"], args["id"])
 
                     return jsonify(
                         logged_in=1,
                         p_ssn=args["p_ssn"],
                     )
+
             #If the doctor is requesting to remove a Medication from the patients report
             elif (args["action_type"] == "remove_medication"):
 
-                    #first remove the diagnosis from the database
                     self.remove_medication(args["p_ssn"], args["id"], args["medication_to_remove"])
-                    #then return updated report information
-                    # form = self.get_report(args["p_ssn"], args["id"])
 
                     return jsonify(
                         logged_in=1,
@@ -141,10 +133,7 @@ class DoctorForms(Resource):
             #If the doctor is requesting to add a Medication from the patients report
             elif (args["action_type"] == "add_medication"):
 
-                    #first remove the diagnosis from the database
                     self.add_medication(args["p_ssn"], args["id"], args["medication_to_add"])
-                    #then return updated report information
-                    # form = self.get_report(args["p_ssn"], args["id"])
 
                     return jsonify(
                         logged_in=1,
@@ -153,10 +142,7 @@ class DoctorForms(Resource):
             #If the doctor is requesting to remove a Medical Center from the patients report
             elif (args["action_type"] == "remove_medCenter"):
 
-                    #first remove the diagnosis from the database
                     self.remove_medCenter(args["p_ssn"], args["id"], args["medCenter_to_remove"])
-                    #then return updated report information
-                    # form = self.get_report(args["p_ssn"], args["id"])
 
                     return jsonify(
                         logged_in=1,
@@ -166,10 +152,7 @@ class DoctorForms(Resource):
             #If the doctor is requesting to add a Medical Center from the patients report
             elif (args["action_type"] == "add_medCenter"):
 
-                    #first remove the diagnosis from the database
                     self.add_medCenter(args["p_ssn"], args["id"], args["medCenter_to_add"])
-                    #then return updated report information
-                    # form = self.get_report(args["p_ssn"], args["id"])
 
                     return jsonify(
                         logged_in=1,
@@ -180,7 +163,7 @@ class DoctorForms(Resource):
 
         con, cursor = db.connect_db()
 
-        # Add a diagnosed illness.
+        # Update the patients complaint for the report
         cursor.execute("UPDATE Report SET Complaint = ? WHERE P_SSN = ? AND Report_ID = ?;", (complaint, ssn, id,),)
         con.commit()
         con.close()
@@ -201,7 +184,7 @@ class DoctorForms(Resource):
 
         con, cursor = db.connect_db()
 
-        # Remove a medication from patients report.
+        # Remove a diagnosed illness from patients report.
         cursor.execute("DELETE FROM Diagnoses WHERE P_SSN = ? AND Report_ID = ? AND Illness_name = ?;", (ssn, id, illness,),)
 
         con.commit()
@@ -222,7 +205,7 @@ class DoctorForms(Resource):
 
         con, cursor = db.connect_db()
 
-        # Remove a diagnosed illness.
+        # Remove a medication that was prescribed on patients report.
         cursor.execute("DELETE FROM Prescribes WHERE P_SSN = ? AND Report_ID = ? AND Med_Name = ?;", (ssn, id, medication,),)
 
         con.commit()
@@ -260,14 +243,14 @@ class DoctorForms(Resource):
         )
         patient = cursor.fetchone()
 
-        # Get form.
+        # Get the complaint from patients report.
         cursor.execute(
             "SELECT Complaint FROM Report WHERE Report_ID = ? AND P_SSN = ?;",
             (id, ssn)
         )
         complaint = cursor.fetchone()
 
-        # Get doctor's name.
+        # Get name of the doctor assigned to the patients report.
         cursor.execute(
             "SELECT d.Fname AS Doc_Fname, d.Initial AS Doc_Initial, d.Lname AS Doc_Lname FROM Doctor d, Report r WHERE r.Report_ID = ? AND r.P_SSN = ? AND r.SSN = d.SSN;",
             (id, ssn)
@@ -298,7 +281,7 @@ class DoctorForms(Resource):
         side_effects = cursor.fetchall()
         side_effects = [dict(x) for x in side_effects]
 
-        # Add the effects to the medications.
+        # Add the side effects to the medications.
         for medication in medications:
             medication["Effects"] = []
             for side_effect in side_effects:
@@ -327,10 +310,11 @@ class DoctorForms(Resource):
         #to check is theres a medical history tuple
         has_row = 0;
         cursor.execute("SELECT * FROM Medical_History WHERE P_SSN = ?;", (ssn,))
+        #has_row will be true if a medical history tuple exists for the patient
         has_row = cursor.fetchone()
         
         #if history exists:
-        # retrieve TPAL info
+        # retrieve TPAL (Pregnancy) info
         if has_row:
             # retrieve TPAL info
             cursor.execute(
