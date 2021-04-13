@@ -9,7 +9,7 @@
         </div>
         <div v-if="logged_in">
             <div class="flex flex-col items-center">
-                <p class="text-5xl mt-20 mb-24">Clerk Workstation</p>
+                <p class="text-4xl lg:text-5xl mt-20 mb-24">Clerk Workstation</p>
                 
                 <div class="w-full lg:w-4/5">
                     <p class="text-3xl mb-4"></p>

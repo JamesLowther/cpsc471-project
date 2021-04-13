@@ -23,7 +23,7 @@
         </div>
         <div v-if="logged_in" class="flex flex-col items-center w-full">
             <div class="flex flex-col">
-                <p v-if="create_mode" class="text-5xl mt-20">
+                <p v-if="create_mode" class="text-4xl lg:text-5xl text-5xl mt-20">
                     Create New Applicant Form
                 </p>
                 <div v-else>

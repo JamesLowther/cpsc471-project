@@ -164,8 +164,8 @@
                         </td>
                     </tr>
                     <tr class=" shadow-2xl">
-                        <td class="border-teal-500 border-0 text-pink-300 bg-blue-500 rounded-b-2xl" colspan="3">
-                            {{ error }}.
+                        <td class="border-teal-500 border-0 text-pink-300 bg-blue-500 rounded-b-2xl h-7" colspan="3">
+                            {{ error }}
                         </td>
                     </tr>
                 </tbody>
