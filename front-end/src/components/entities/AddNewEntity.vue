@@ -556,7 +556,7 @@ export default {
 
         add_entity() {
             if (this.entity_type == "medication") {
-                this.organ_system = "";
+                this.organ_system = null;
             } else {
                 this.Is_prescription = 0;
             }
@@ -638,13 +638,6 @@ export default {
                     console.log(e);
                 });
 
-                //Redirect back to the entities panel is not working right
-                // this.$router.go("entities-panel/", {
-                //                     params: {
-                //                         entity_type: this.entity_post,
-                //                         user_type: this.user_type,
-                //                     }, 
-                //                 });
         },
 
         init_entity() {

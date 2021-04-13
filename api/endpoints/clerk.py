@@ -50,7 +50,8 @@ class ClerkForms(Resource):
             "SELECT p.P_SSN, n.Fname, n.Lname, n.Is_approved, m.TPAL_total \
             FROM Patient as p \
             LEFT JOIN New_Applicant_Form as n ON p.P_SSN=n.P_SSN \
-            LEFT JOIN Medical_History as m ON p.P_SSN=m.P_SSN;")
+            LEFT JOIN Medical_History as m ON p.P_SSN=m.P_SSN \
+            ORDER BY n.Is_approved ASC ;")
             
         forms = cursor.fetchall()
         forms = [dict(f) for f in forms]

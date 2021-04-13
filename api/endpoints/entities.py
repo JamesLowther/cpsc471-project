@@ -8,14 +8,6 @@ from database import db
 
 import json
 
-class Entities(Resource):
-    def get(self):
-        if verify_jwt_in_request():
-            current = get_jwt_identity()
-            if current["user_type"] == "doctor" or current["user_type"] == "clerk":
-                return jsonify({**current, "logged_in": 1, "user_type": current["user_type"]})
-            else:
-                return jsonify({**current, "logged_in": 0})
 
 class EntitiesForms(Resource):
     parser = reqparse.RequestParser()
@@ -35,22 +27,6 @@ class EntitiesForms(Resource):
     parser.add_argument("form", type=dict, required=False)
     parser.add_argument("query_string", type=str)
 
-    def get(self):
-        if verify_jwt_in_request():
-            current = get_jwt_identity()
-
-        con, cursor = db.connect_db()
-
-        # Get all medications.
-        cursor.execute("SELECT m.Name, s.Effect FROM Medication AS m LEFT OUTER JOIN Side_Effects AS s ON m.Name = s.Med_Name WHERE m.name LIKE ?;", ("%" + args["theMedicationName"] + "%",))
-        medications = cursor.fetchall()
-
-        con.close()
-
-        return jsonify(
-            logged_in=1,
-            medications=[dict(x) for x in medications]
-        )
 
     def post(self):
         """Returns the primary keys from certain tables in our database.
@@ -163,9 +139,8 @@ class EntitiesForms(Resource):
                 print(er)
                 con.close()
                 return jsonify(
-                    status=1,
-                    error_msg=er,
-                    sys_msg="Error: Could not Add",
+                    status=0,
+                    sys_msg="Error: Could not Add. Entity may already exist.",
                     )
         
         # Add a new illness, and its specified symptoms. Catch any SQL errors
@@ -183,8 +158,7 @@ class EntitiesForms(Resource):
                 con.close()
                 return jsonify(
                     status=0,
-                    error_msg=er,
-                    sys_msg="Error: Could not Add",
+                    sys_msg="Error: Could not Add. Entity may already exist.",
                     )
 
         con.commit()
@@ -208,10 +182,10 @@ class EntitiesForms(Resource):
         # catch any SQL errors eg key or unique name constraints
         if(args["entity_type"] == "medication"):
             try:
-                cursor.execute("DELETE FROM Medication WHERE Name = ?;", (args["entity_name"],),)
-                cursor.execute("INSERT INTO Medication VALUES (?, ?);", (args["entity_name"], args["is_pres"]) )
+                cursor.execute("UPDATE Medication SET Is_prescription = ? WHERE Name = ?;", (args["is_pres"], args["entity_name"]))
 
                 # if users included side-effects, insert into database
+                # delete the all side-effects first, then insert to avoid distinguishing between new and existing tuples
                 cursor.execute("DELETE FROM Side_Effects WHERE Med_Name = (?);", (args["entity_name"],),)
                 if(args["effects"]):
                     for effect in args["effects"]:
@@ -222,15 +196,13 @@ class EntitiesForms(Resource):
                 con.close()
                 return jsonify(
                     status=0,
-                    error_msg=er,
                     sys_msg="Error: Could not update",
                     )
         
         # Update an existing illness, and its specified symptoms. Catch any SQL errors
         elif (args["entity_type"] == "illness"):
             try:
-                cursor.execute("DELETE FROM Illness WHERE Name = ?;", (args["entity_name"],),)
-                cursor.execute("INSERT INTO Illness VALUES (?, ?);", (args["entity_name"], args["org_sys"],),)
+                cursor.execute("UPDATE Illness SET Organ_system = ? WHERE Name = ?;",(args["org_sys"], args["entity_name"]))
 
                 # if users included symptoms, insert into database
                 cursor.execute("DELETE FROM Symptoms WHERE Illness_name = (?);", (args["entity_name"],),)
@@ -243,7 +215,6 @@ class EntitiesForms(Resource):
                 con.close()
                 return jsonify(
                     status=0,
-                    error_msg=er,
                     sys_msg="Error: Could not update",
                     )
 
@@ -268,28 +239,30 @@ class EntitiesForms(Resource):
         # catch any SQL errors eg key or unique name constraints
         if(args["entity_type"] == "medication"):
             try:
+                # Delete from Medication table and all side effects
                 cursor.execute("DELETE FROM Medication WHERE Name = ?;", (args["entity_name"],),)
+                cursor.execute("DELETE FROM Side_Effects WHERE Med_Name = ?;", (args["entity_name"],))
 
             except sqlite3.Error as er:
                 print(er)
                 con.close()
                 return jsonify(
                     status=0,
-                    error_msg=er,
                     sys_msg="Error: Could not delete",
                     )
         
         # Update an existing illness, and its specified symptoms. Catch any SQL errors
         elif (args["entity_type"] == "illness"):
             try:
+                # Delete illness and all Symptoms
                 cursor.execute("DELETE FROM Illness WHERE Name = ?;", (args["entity_name"],),)
+                cursor.execute("DELETE FROM Symptoms WHERE Illness_Name = ?;", (args["entity_name"],))
 
             except sqlite3.Error as er:
                 print(er)
                 con.close()
                 return jsonify(
                     status=0,
-                    error_msg=er,
                     sys_msg="Error: Could not delete",
                     )
 
