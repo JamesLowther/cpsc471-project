@@ -249,17 +249,6 @@ class DoctorForms(Resource):
         con.commit()
         con.close()
 
-    def update_patient_report(self, p_ssn, form):
-        con, cursor = db.connect_db()
-
-        # Update diagnosed illnesses.
-        cursor.execute("DELETE FROM Past_Illnesses WHERE P_SSN = ?;", (ssn,))
-        for illness in form["Past_illnesses"]:
-            cursor.execute("INSERT INTO Past_Illnesses VALUES (?, ?, ?);", (ssn, illness["Illness_name"], illness["Age_of_onset"]))
-
-        con.commit()
-        con.close()
-
 
     def get_report(self, ssn, id):
 
