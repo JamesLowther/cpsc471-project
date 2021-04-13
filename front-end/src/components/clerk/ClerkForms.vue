@@ -208,7 +208,7 @@ export default {
             param_dates: {},
             report_ids: {},
 
-            logged_in: false,
+            logged_in: true,
             forms: []
         };
     },
@@ -283,7 +283,10 @@ export default {
                     },
                 })
                 .then((response) => {
-                    if (response.data.logged_in != "1") return;
+                    if (response.data.logged_in != "1") {
+                        this.logged_in = false;
+                        return;
+                    }
 
                     this.logged_in = true;
                     this.forms = response.data.forms;

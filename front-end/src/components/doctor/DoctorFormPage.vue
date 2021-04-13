@@ -111,7 +111,10 @@ export default {
                 }
             )
             .then((response) => {
-                    if (response.data.logged_in != "1") return;
+                    if (response.data.logged_in != "1") {
+                        this.logged_in = false;
+                        return;
+                    }
 
                     this.logged_in = true;
                     this.patientList = response.data.patients;
@@ -129,7 +132,10 @@ export default {
                     },
                 })
                 .then((response) => {
-                    if (response.data.logged_in != "1") return;
+                    if (response.data.logged_in != "1") {
+                        this.logged_in = false;
+                        return;
+                    }
 
                     this.logged_in = true;
 

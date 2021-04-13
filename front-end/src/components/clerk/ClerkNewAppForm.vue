@@ -69,7 +69,7 @@ export default {
 
     data() {
         return {
-            logged_in: false,
+            logged_in: true,
             existingPatients: [],
         };
     },
@@ -93,7 +93,10 @@ export default {
                 }
             )
             .then((response) => {
-                if (response.data.logged_in != "1") return;
+                if (response.data.logged_in != "1") {
+                        this.logged_in = false;
+                        return;
+                }
 
                 this.logged_in = true;
                 this.existingPatients = response.data.existingPatients;

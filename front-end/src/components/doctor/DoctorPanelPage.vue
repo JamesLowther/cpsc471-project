@@ -63,7 +63,7 @@ export default {
 
     data() {
         return {
-            logged_in: false,
+            logged_in: true,
             ssn: "",
         };
     },
@@ -82,6 +82,7 @@ export default {
                 })
                 .then((response) => {
                     if (response.data.logged_in != "1") {
+                        this.logged_in = false;
                         return;
                     }
 
