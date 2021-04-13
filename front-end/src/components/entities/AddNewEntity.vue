@@ -638,13 +638,6 @@ export default {
                     console.log(e);
                 });
 
-                //Redirect back to the entities panel is not working right
-                // this.$router.go("entities-panel/", {
-                //                     params: {
-                //                         entity_type: this.entity_post,
-                //                         user_type: this.user_type,
-                //                     }, 
-                //                 });
         },
 
         init_entity() {
