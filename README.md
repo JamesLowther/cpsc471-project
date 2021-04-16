@@ -24,17 +24,14 @@ The front end was build using Vue.js, a popular Javascript framework. We used th
 ### Group Members
 #### Member 1
 * Logan Perry-Din
-* ID: 30070661
 * Tutorial 03
 
 #### Member 2
 * Brody Wells
-* ID: 289853
 * Tutorial 03
 
 #### Member 3:
 * James Lowther
-* ID: 30087821
 * Tutorial 06
 
 ***
