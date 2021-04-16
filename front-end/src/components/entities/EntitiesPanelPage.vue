@@ -60,8 +60,8 @@
                                                 entity_type: entity_type,
                                                 user_type: user_type,
                                                 create_mode: true,
-                                                query_string: query_string,
-                                            },
+                                                query_string: query_string
+                                            }
                                         }"
                                         class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-green-700 hover:bg-green-500 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
                                     >
@@ -145,9 +145,8 @@
                                     <td class="border-blue-400 border-2">
                                         <ul class="list-disc text-left pl-5">
                                             <li
-                                                v-for="(
-                                                    effect, i
-                                                ) in entity.Effects"
+                                                v-for="(effect,
+                                                i) in entity.Effects"
                                                 :key="`${i}-${effect}`"
                                             >
                                                 {{ effect }}
@@ -167,9 +166,8 @@
                                     <td class="border-blue-400 border-2">
                                         <ul class="list-disc text-left pl-5">
                                             <li
-                                                v-for="(
-                                                    effect, i
-                                                ) in entity.Effects"
+                                                v-for="(effect,
+                                                i) in entity.Effects"
                                                 :key="`${i}-${effect}`"
                                             >
                                                 {{ effect }}
@@ -186,9 +184,8 @@
                                     <td class="border-blue-400 border-2">
                                         <ul class="list-disc text-left pl-5">
                                             <li
-                                                v-for="(
-                                                    effect, i
-                                                ) in entity.Effects"
+                                                v-for="(effect,
+                                                i) in entity.Effects"
                                                 :key="`${i}-${effect}`"
                                             >
                                                 {{ effect }}
@@ -214,8 +211,8 @@
                                                 is_presc:
                                                     entity.Is_prescription,
                                                 effects: entity.Effects,
-                                                query_string: query_string,
-                                            },
+                                                query_string: query_string
+                                            }
                                         }"
                                         class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-blue-600 hover:bg-yellow-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-1 px-4 m-6"
                                     >
@@ -257,7 +254,7 @@ export default {
             title: "",
             query_string: "",
 
-            user_type: "",
+            user_type: ""
         };
     },
 
@@ -300,16 +297,16 @@ export default {
                     {
                         entity_type: this.entity_post,
                         method: "query",
-                        query_string: this.entity_name,
+                        query_string: this.entity_name
                     },
                     {
                         headers: {
                             Authorization:
-                                "Bearer " + localStorage.getItem("jwt"),
-                        },
+                                "Bearer " + localStorage.getItem("jwt")
+                        }
                     }
                 )
-                .then((response) => {
+                .then(response => {
                     if (response.data.logged_in != "1") {
                         this.logged_in = false;
                         return;
@@ -318,10 +315,10 @@ export default {
                     this.logged_in = true;
                     this.entity_list = response.data.results;
                 })
-                .catch((e) => {
+                .catch(e => {
                     console.log(e);
                 });
-        },
-    },
+        }
+    }
 };
 </script>

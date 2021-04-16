@@ -52,8 +52,8 @@
                                             name: 'edit-report',
                                             params: {
                                                 id: report.Report_ID,
-                                                isClerk: false,
-                                            },
+                                                isClerk: false
+                                            }
                                         }"
                                     >
                                         <div
@@ -96,8 +96,8 @@
                                             name: 'edit-new-applicant',
                                             params: {
                                                 isClerk: false,
-                                                isEdit: false,
-                                            },
+                                                isEdit: false
+                                            }
                                         }"
                                         v-if="new_applicant.length == 0"
                                     >
@@ -158,8 +158,8 @@
                                             params: {
                                                 ssn: report.P_SSN,
                                                 isClerk: false,
-                                                isEdit: true,
-                                            },
+                                                isEdit: true
+                                            }
                                         }"
                                     >
                                         <div
@@ -256,8 +256,8 @@
                                             name: 'edit-covid-screen',
                                             params: {
                                                 date: report.Date,
-                                                isClerk: false,
-                                            },
+                                                isClerk: false
+                                            }
                                         }"
                                     >
                                         <div
@@ -295,8 +295,8 @@
                                             name: 'edit-medical-history',
                                             params: {
                                                 isClerk: false,
-                                                isEdit: false,
-                                            }    
+                                                isEdit: false
+                                            }
                                         }"
                                         v-if="medical_history.length == 0"
                                     >
@@ -325,8 +325,8 @@
                                             params: {
                                                 ssn: report.P_SSN,
                                                 isClerk: false,
-                                                isEdit: true,
-                                            },
+                                                isEdit: true
+                                            }
                                         }"
                                     >
                                         <div
@@ -366,7 +366,7 @@ export default {
             reports: [],
             new_applicant: [],
             covid_screen: [],
-            medical_history: [],
+            medical_history: []
         };
     },
 
@@ -379,10 +379,10 @@ export default {
             axios
                 .get("patient/forms", {
                     headers: {
-                        Authorization: "Bearer " + localStorage.getItem("jwt"),
-                    },
+                        Authorization: "Bearer " + localStorage.getItem("jwt")
+                    }
                 })
-                .then((response) => {
+                .then(response => {
                     if (response.data.logged_in != "1") {
                         this.logged_in = false;
                         return;
@@ -395,10 +395,10 @@ export default {
                     this.covid_screen = response.data.covid_screen;
                     this.medical_history = response.data.medical_history;
                 })
-                .catch((e) => {
+                .catch(e => {
                     console.log(e);
                 });
-        },
-    },
+        }
+    }
 };
 </script>

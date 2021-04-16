@@ -4,6 +4,6 @@
 
 <script>
 export default {
-    name: "EntitiesPanel",
+    name: "EntitiesPanel"
 };
 </script>
