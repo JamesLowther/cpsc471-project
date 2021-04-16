@@ -1,6 +1,8 @@
-# front-end
+# Remote Patient - Doctor Symptom Analyser Front End
 
 ## Project setup
+
+The front end is built using Vue.js.
 
 ```
 npm install
