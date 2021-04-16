@@ -19,7 +19,7 @@
                 <div class="w-full mb-10">
                     <p class="font-bold text-3xl text-left">Pregnancy Info:</p>
                     <p class="text-left text-lg mb-2">
-                        Set values to 0 if not applicable
+                        Leave values set to 0 if not applicable
                     </p>
                     <div
                         class="flex flex-row justify-around items-center w-full h-36 mx-auto bg-blue-500 rounded-2xl border-teal border-2"
@@ -341,10 +341,10 @@ export default {
             form: {
                 Hx_ID: "",
                 P_SSN: "",
-                TPAL_total: "",
-                TPAL_preterm: "",
-                TPAL_aborted: "",
-                TPAL_living: "",
+                TPAL_total: "0",
+                TPAL_preterm: "0",
+                TPAL_aborted: "0",
+                TPAL_living: "0",
                 Past_illnesses: [],
                 Allergies: [],
                 Immunizations: [],
