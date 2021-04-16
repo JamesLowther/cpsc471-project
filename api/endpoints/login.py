@@ -16,6 +16,9 @@ parser.add_argument("password", type=str, required=True,
 
 class Login(Resource):
     def post(self):
+        """Handle post request to the login endpoint.
+        """
+
         args = parser.parse_args()
 
         if args["ssn"] == "" or args["password"] == "":
@@ -23,6 +26,7 @@ class Login(Resource):
 
         status = False
 
+        # Handle login for specfic user type.
         if args["user_type"] == "patient":
             status = login_patient(args)
         elif args["user_type"] == "doctor":
@@ -34,9 +38,10 @@ class Login(Resource):
         if not status:
             return {"logged_in": 0}
 
-        access = create_access_token(identity={"user_type": args["user_type"], "ssn": args["ssn"]})
+        access = create_access_token(
+            identity={"user_type": args["user_type"], "ssn": args["ssn"]})
         data = {
-            "logged_in": 1, 
+            "logged_in": 1,
             "access_token": access,
             "user_type": args["user_type"],
             "ssn": args["ssn"]
@@ -50,10 +55,11 @@ def login_patient(args):
     """Handle the login logic for patients.
     Return True if login successful and False otherwise.
     """
-    
+
     con, cursor = db.connect_db()
 
-    cursor.execute("SELECT * FROM Patient WHERE P_SSN = ? AND Password = ?;", (args["ssn"], args["password"]))
+    cursor.execute("SELECT * FROM Patient WHERE P_SSN = ? AND Password = ?;",
+                   (args["ssn"], args["password"]))
 
     # No user in database with those credentials.
     res = cursor.fetchone()
@@ -65,7 +71,7 @@ def login_patient(args):
     con.close()
     return True
 
-    
+
 def login_doctor(args):
     """Handle the login logic for doctors.
     Return True if login successful and False otherwise.
@@ -73,7 +79,7 @@ def login_doctor(args):
     con, cursor = db.connect_db()
 
     cursor.execute("SELECT * FROM Doctor WHERE SSN = ? AND Password = ?;",
-                     (args["ssn"], args["password"]))
+                   (args["ssn"], args["password"]))
 
     # No user in database with those credentials.
     res = cursor.fetchone()
@@ -93,7 +99,7 @@ def login_clerk(args):
     con, cursor = db.connect_db()
 
     cursor.execute("SELECT * FROM Clerk WHERE SSN = ? AND Password = ?;",
-                     (args["ssn"], args["password"]))
+                   (args["ssn"], args["password"]))
 
     # No user in database with those credentials.
     res = cursor.fetchone()

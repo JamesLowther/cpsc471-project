@@ -7,6 +7,7 @@ SCHEMA_FILE = "schema.sql"
 TEST_DATA_FILE = "test-data.sql"
 USE_TEST_DATA = True
 
+
 def init_db():
     """Connect to the database and create the database cursor.
     """
@@ -41,10 +42,10 @@ def populate_db():
 
     # Optionally populate the database with test data.
     if USE_TEST_DATA:
-        test_data_path = path.dirname(path.abspath(__file__)) + "/" + TEST_DATA_FILE
+        test_data_path = path.dirname(
+            path.abspath(__file__)) + "/" + TEST_DATA_FILE
         with open(test_data_path, "r") as fp:
             cursor.executescript(fp.read())
 
     con.commit()
     con.close()
-        

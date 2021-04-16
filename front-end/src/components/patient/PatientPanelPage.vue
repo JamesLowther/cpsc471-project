@@ -40,7 +40,7 @@ export default {
     data() {
         return {
             logged_in: true,
-            ssn: "",
+            ssn: ""
         };
     },
 
@@ -53,10 +53,10 @@ export default {
             axios
                 .get("patient", {
                     headers: {
-                        Authorization: "Bearer " + localStorage.getItem("jwt"),
-                    },
+                        Authorization: "Bearer " + localStorage.getItem("jwt")
+                    }
                 })
-                .then((response) => {
+                .then(response => {
                     if (response.data.logged_in != "1") {
                         this.logged_in = false;
                         return;
@@ -66,14 +66,14 @@ export default {
 
                     this.ssn = response.data.ssn;
                 })
-                .catch((e) => {
+                .catch(e => {
                     console.log(e);
                 });
         },
         logout() {
             localStorage.removeItem("jwt");
             this.$router.push("/");
-        },
-    },
+        }
+    }
 };
 </script>

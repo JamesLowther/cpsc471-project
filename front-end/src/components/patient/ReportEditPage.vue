@@ -1,8 +1,10 @@
 <template>
     <div id="report-edit">
         <div class="flex justify-end w-full fixed">
-            <button @click="$router.go(-1)"
-            class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
+            <button
+                @click="$router.go(-1)"
+                class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
+            >
                 Back
             </button>
         </div>
@@ -11,10 +13,16 @@
                 <p v-if="create_mode" class="mt-20">
                     Create New Report
                 </p>
-                <p v-else class="mt-20">Edit Report {{ this.$route.params.id }}</p>
+                <p v-else class="mt-20">
+                    Edit Report {{ this.$route.params.id }}
+                </p>
             </div>
-            <div class="flex flex-col items-start mt-10 w:4/5 lg:w-1/2 mx-auto px-8">
-                <div class="w-full mb-6 text-white bg-blue-500 rounded-t-2xl rounded-b-2xl border-teal border-r-0 pb-4 px-1">
+            <div
+                class="flex flex-col items-start mt-10 w:4/5 lg:w-1/2 mx-auto px-8"
+            >
+                <div
+                    class="w-full mb-6 text-white bg-blue-500 rounded-t-2xl rounded-b-2xl border-teal border-r-0 pb-4 px-1"
+                >
                     <p class="text-xl">Chief Complaint</p>
                     <textarea
                         class="text-black border border-black mb-2 p-1 rounded-lg w-full text-xl shadow-2xl"
@@ -43,8 +51,16 @@
                         <p class="text-xl mb-1">Diagnosis</p>
                         <table class="table-auto w-full mb-10">
                             <thead>
-                                <th class="w-1/4 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2">Illness</th>
-                                <th class="w-1/4 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2">Organ System</th>
+                                <th
+                                    class="w-1/4 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2"
+                                >
+                                    Illness
+                                </th>
+                                <th
+                                    class="w-1/4 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2"
+                                >
+                                    Organ System
+                                </th>
                             </thead>
                             <tbody>
                                 <tr
@@ -60,7 +76,10 @@
                                     </td>
                                 </tr>
                                 <tr class=" shadow-2xl">
-                                    <td class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl h-6" colspan="2"></td>
+                                    <td
+                                        class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl h-6"
+                                        colspan="2"
+                                    ></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -69,9 +88,21 @@
                         <p class="text-xl mb-1">Medications</p>
                         <table class="table-auto w-full mb-10">
                             <thead>
-                                <th class="w-1/4 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2">Name</th>
-                                <th class="w-1/4 text-white bg-blue-500 border-teal border-b-2">Prescription</th>
-                                <th class="w-2/4 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2">Side Effects</th>
+                                <th
+                                    class="w-1/4 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2"
+                                >
+                                    Name
+                                </th>
+                                <th
+                                    class="w-1/4 text-white bg-blue-500 border-teal border-b-2"
+                                >
+                                    Prescription
+                                </th>
+                                <th
+                                    class="w-2/4 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2"
+                                >
+                                    Side Effects
+                                </th>
                             </thead>
                             <tbody>
                                 <tr
@@ -87,14 +118,20 @@
                                     </td>
                                     <td class="border-blue-300 border-2">
                                         <ul class="pl-5 list-disc text-left">
-                                            <li v-for="effect in medication.Effects" :key="effect">
+                                            <li
+                                                v-for="effect in medication.Effects"
+                                                :key="effect"
+                                            >
                                                 {{ effect }}
                                             </li>
                                         </ul>
                                     </td>
                                 </tr>
                                 <tr class=" shadow-2xl">
-                                    <td class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl h-6" colspan="3"></td>
+                                    <td
+                                        class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl h-6"
+                                        colspan="3"
+                                    ></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -103,9 +140,21 @@
                         <p class="text-xl mb-1">Medical Centres</p>
                         <table class="table-auto w-full mb-10">
                             <thead>
-                                <th class="w-1/4 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2">Name</th>
-                                <th class="w-1/4 text-white bg-blue-500 border-teal border-b-2">Type</th>
-                                <th class="w-2/4 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2">Address</th>
+                                <th
+                                    class="w-1/4 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2"
+                                >
+                                    Name
+                                </th>
+                                <th
+                                    class="w-1/4 text-white bg-blue-500 border-teal border-b-2"
+                                >
+                                    Type
+                                </th>
+                                <th
+                                    class="w-2/4 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2"
+                                >
+                                    Address
+                                </th>
                             </thead>
                             <tbody>
                                 <tr
@@ -124,7 +173,10 @@
                                     </td>
                                 </tr>
                                 <tr class=" shadow-2xl">
-                                    <td class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl h-6" colspan="3"></td>
+                                    <td
+                                        class="border-teal-500 border-0 text-white bg-blue-500 rounded-b-2xl h-6"
+                                        colspan="3"
+                                    ></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -180,7 +232,7 @@ export default {
     name: "FormEditPage",
     props: {
         isClerk: Boolean,
-        pssn: Number,
+        pssn: Number
     },
 
     data() {
@@ -200,7 +252,7 @@ export default {
             },
             complaint_error: "",
             medical_centre_error: "",
-            post_error: "",
+            post_error: ""
         };
     },
 
@@ -222,7 +274,7 @@ export default {
                         action_type: "get_form",
                         form_type: "report",
                         report_id: this.$route.params.id,
-                        p_ssn: this.pssn,
+                        p_ssn: this.pssn
                     },
                     {
                         headers: {
@@ -246,72 +298,80 @@ export default {
                 });
         },
         postCreateReportForm() {
-
-            if (![this.checkComplaint(), this.checkMedicalCentre()].every((x) => {return x === true})) return
-
-            axios.post(
-                "patient/forms",
-                {
-                    action_type: "submit_form",
-                    form_type: "report",
-                    new_form: 1,
-                    p_ssn: this.pssn,
-                    form: {
-                        Complaint: this.form.Complaint,
-                        medical_centre: this.medical_centre
-                    }
-                },
-                {
-                    headers: {
-                        Authorization: "Bearer " + localStorage.getItem("jwt")
-                    }
-                }
+            if (
+                ![this.checkComplaint(), this.checkMedicalCentre()].every(x => {
+                    return x === true;
+                })
             )
-            .then((response) => {
-                if (response.data.successful != 1) {
-                    this.post_error =
-                        "There was an issue with your request.";
-                } else {
-                    this.post_error = "";
+                return;
 
-                    if (this.isClerk) {
-                        this.$router.push("/clerk-panel/forms");
-                    } else {
-                        this.$router.push("/patient-panel/forms");
+            axios
+                .post(
+                    "patient/forms",
+                    {
+                        action_type: "submit_form",
+                        form_type: "report",
+                        new_form: 1,
+                        p_ssn: this.pssn,
+                        form: {
+                            Complaint: this.form.Complaint,
+                            medical_centre: this.medical_centre
+                        }
+                    },
+                    {
+                        headers: {
+                            Authorization:
+                                "Bearer " + localStorage.getItem("jwt")
+                        }
                     }
-                }
+                )
+                .then(response => {
+                    if (response.data.successful != 1) {
+                        this.post_error =
+                            "There was an issue with your request.";
+                    } else {
+                        this.post_error = "";
 
-            })
+                        if (this.isClerk) {
+                            this.$router.push("/clerk-panel/forms");
+                        } else {
+                            this.$router.push("/patient-panel/forms");
+                        }
+                    }
+                });
         },
         postReportForm() {
             if (!this.checkComplaint()) {
                 return;
-            } 
+            }
 
-            axios.post(
-                "patient/forms",
-                {
-                    action_type: "submit_form",
-                    form_type: "report",
-                    report_id: this.$route.params.id,
-                    p_ssn: this.pssn,
-                    form: {
-                        Complaint: this.form.Complaint
+            axios
+                .post(
+                    "patient/forms",
+                    {
+                        action_type: "submit_form",
+                        form_type: "report",
+                        report_id: this.$route.params.id,
+                        p_ssn: this.pssn,
+                        form: {
+                            Complaint: this.form.Complaint
+                        }
+                    },
+                    {
+                        headers: {
+                            Authorization:
+                                "Bearer " + localStorage.getItem("jwt")
+                        }
                     }
-                },
-                {
-                    headers: {
-                        Authorization: "Bearer " + localStorage.getItem("jwt")
+                )
+                .then(response => {
+                    if (response.data.successful != 1) {
+                        this.post_error =
+                            "There was an issue with your request.";
+                    } else {
+                        this.post_error = "";
                     }
-                }
-            ).then((response) => {
-                if (response.data.successful != 1) {
-                    this.post_error =
-                        "There was an issue with your request.";
-                } else {
-                    this.post_error = "";
-                }
-            });
+                });
         },
         getNewFormData() {
             axios
@@ -340,7 +400,7 @@ export default {
         },
         checkMedicalCentre() {
             if (this.medical_centre === "") {
-                this.medical_centre_error = "Please choose a medical center."
+                this.medical_centre_error = "Please choose a medical center.";
                 return false;
             }
             this.medical_centre_error = "";

@@ -75,8 +75,8 @@ export default {
     name: "IndexPage",
     data() {
         return {
-            creepy_mode: false,
+            creepy_mode: false
         };
-    },
+    }
 };
 </script>

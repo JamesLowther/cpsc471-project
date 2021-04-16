@@ -13,13 +13,22 @@
             >
         </div>
         <div class="bg-rose-300">
-            <img class="object-contain md:object-scale-down pt-10 h-96 w-full ..." src="@/assets/Gregor_Mendel_login2.jpeg">
+            <img
+                class="object-contain md:object-scale-down pt-10 h-96 w-full ..."
+                src="@/assets/Gregor_Mendel_login2.jpeg"
+            />
         </div>
-        <div class="flex flex-col items-center ml-auto mr-auto pt-2 w-1/12 mt-3 mb-4">
-            <table class="w-full md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg">
+        <div
+            class="flex flex-col items-center ml-auto mr-auto pt-2 w-1/12 mt-3 mb-4"
+        >
+            <table
+                class="w-full md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg"
+            >
                 <thead>
                     <tr>
-                        <th class="text-lg text-white w-full bg-blue-500 rounded-t-2xl border-teal border-b-2 border-r-2"> 
+                        <th
+                            class="text-lg text-white w-full bg-blue-500 rounded-t-2xl border-teal border-b-2 border-r-2"
+                        >
                             New Account
                         </th>
                     </tr>
@@ -44,7 +53,9 @@
                             <input
                                 class="border p-1 rounded-lg"
                                 v-bind:class="[
-                                    invalid_fname ? 'border-red-700' : 'border-black',
+                                    invalid_fname
+                                        ? 'border-red-700'
+                                        : 'border-black'
                                 ]"
                                 type="text"
                                 placeholder="First Name"
@@ -60,7 +71,9 @@
                             <input
                                 class="border p-1 rounded-lg"
                                 v-bind:class="[
-                                    invalid_initial ? 'border-red-700' : 'border-black',
+                                    invalid_initial
+                                        ? 'border-red-700'
+                                        : 'border-black'
                                 ]"
                                 type="text"
                                 placeholder="Initial"
@@ -76,7 +89,9 @@
                             <input
                                 class="border p-1 rounded-lg"
                                 v-bind:class="[
-                                    invalid_lname ? 'border-red-700' : 'border-black',
+                                    invalid_lname
+                                        ? 'border-red-700'
+                                        : 'border-black'
                                 ]"
                                 type="text"
                                 placeholder="Last Name"
@@ -93,7 +108,9 @@
                                 class="border border-black p-1 rounded-lg"
                                 type="text"
                                 v-bind:class="[
-                                    invalid_DoB ? 'border-red-700' : 'border-black',
+                                    invalid_DoB
+                                        ? 'border-red-700'
+                                        : 'border-black'
                                 ]"
                                 placeholder="Date of Birth (yyyy-mm-dd)"
                                 id="dob"
@@ -108,7 +125,9 @@
                             <input
                                 class="border p-1 rounded-lg"
                                 v-bind:class="[
-                                    invalid_spec ? 'border-red-700' : 'border-black',
+                                    invalid_spec
+                                        ? 'border-red-700'
+                                        : 'border-black'
                                 ]"
                                 type="text"
                                 pattern="[0-9]{9}"
@@ -125,7 +144,9 @@
                             <input
                                 class="border p-1 rounded-lg"
                                 v-bind:class="[
-                                    invalid_ssn ? 'border-red-700' : 'border-black',
+                                    invalid_ssn
+                                        ? 'border-red-700'
+                                        : 'border-black'
                                 ]"
                                 type="text"
                                 pattern="[0-9]{9}"
@@ -142,7 +163,9 @@
                             <input
                                 class="border border-black p-1 rounded-lg"
                                 v-bind:class="[
-                                    empty_pass ? 'border-red-700' : 'border-black',
+                                    empty_pass
+                                        ? 'border-red-700'
+                                        : 'border-black'
                                 ]"
                                 type="password"
                                 placeholder="Password"
@@ -164,7 +187,10 @@
                         </td>
                     </tr>
                     <tr class=" shadow-2xl">
-                        <td class="border-teal-500 border-0 text-pink-300 bg-blue-500 rounded-b-2xl h-7" colspan="3">
+                        <td
+                            class="border-teal-500 border-0 text-pink-300 bg-blue-500 rounded-b-2xl h-7"
+                            colspan="3"
+                        >
                             {{ error }}
                         </td>
                     </tr>
@@ -197,7 +223,7 @@ export default {
             invalid_lname: false,
             invalid_initial: false,
             invalid_spec: false,
-            empty_pass: false,
+            empty_pass: false
         };
     },
 
@@ -236,7 +262,8 @@ export default {
             if (!/^[0-9]{4}-[0-9]{2}-[0-9]{2}$/.test(dob)) {
                 //change to red border, if black
                 this.invalid_DoB = true;
-                this.error = "Please enter your date of birth in the form yyyy-mm-dd";
+                this.error =
+                    "Please enter your date of birth in the form yyyy-mm-dd";
                 return true;
             }
             return false;
@@ -252,7 +279,6 @@ export default {
             return false;
         },
 
-
         invalidLname() {
             let lname = this.$refs.lname.value;
             if (!lname) {
@@ -262,7 +288,6 @@ export default {
             }
             return false;
         },
-
 
         invalidInitial() {
             let initial = this.$refs.initial.value;
@@ -286,7 +311,7 @@ export default {
 
         loginPost() {
             // check for proper input
-            if (this.user_type != 'patient') {
+            if (this.user_type != "patient") {
                 if (!this.invalidFname()) {
                     this.invalid_fname = false;
                     this.error = "";
@@ -308,7 +333,7 @@ export default {
                 } else return;
             }
 
-            if (this.user_type == 'doctor') {
+            if (this.user_type == "doctor") {
                 if (!this.invalidSpec()) {
                     this.invalid_spec = false;
                     this.error = "";
@@ -325,7 +350,6 @@ export default {
                 this.error = "";
             } else return;
 
-
             axios
                 .post("new-account", {
                     user_type: this.user_type,
@@ -337,17 +361,17 @@ export default {
                     DoB: this.DoB,
                     Specialization: this.Specialization
                 })
-                .then((response) => {
+                .then(response => {
                     if (response.data.successful == "1") {
                         this.$router.push("login");
                     } else {
                         this.error = "Error creating a new account";
                     }
                 })
-                .catch((e) => {
+                .catch(e => {
                     console.log(e);
                 });
-        },
-    },
+        }
+    }
 };
 </script>

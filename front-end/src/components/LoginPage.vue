@@ -13,13 +13,22 @@
             >
         </div>
         <div class="bg-rose-300">
-            <img class="object-contain md:object-scale-down pt-10 h-96 w-full ..." src="@/assets/Gregor_Mendel_login.jpeg">
+            <img
+                class="object-contain md:object-scale-down pt-10 h-96 w-full ..."
+                src="@/assets/Gregor_Mendel_login.jpeg"
+            />
         </div>
-        <div class="flex flex-col items-center ml-auto mr-auto pt-2 w-1/12 mt-3 mb-4">
-            <table class="w-full md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg">
+        <div
+            class="flex flex-col items-center ml-auto mr-auto pt-2 w-1/12 mt-3 mb-4"
+        >
+            <table
+                class="w-full md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg"
+            >
                 <thead>
                     <tr>
-                        <th class="text-lg text-white w-full bg-blue-500 rounded-t-2xl border-teal border-b-2 border-r-2"> 
+                        <th
+                            class="text-lg text-white w-full bg-blue-500 rounded-t-2xl border-teal border-b-2 border-r-2"
+                        >
                             Login
                         </th>
                     </tr>
@@ -44,7 +53,9 @@
                             <input
                                 class="border p-1 rounded-lg"
                                 v-bind:class="[
-                                    invalid_ssn ? 'border-red-700' : 'border-black',
+                                    invalid_ssn
+                                        ? 'border-red-700'
+                                        : 'border-black'
                                 ]"
                                 type="text"
                                 pattern="[0-9]{9}"
@@ -61,7 +72,9 @@
                             <input
                                 class="border border-black p-1 rounded-lg"
                                 v-bind:class="[
-                                    empty_pass ? 'border-red-700' : 'border-black',
+                                    empty_pass
+                                        ? 'border-red-700'
+                                        : 'border-black'
                                 ]"
                                 type="password"
                                 placeholder="Password"
@@ -84,7 +97,10 @@
                         </td>
                     </tr>
                     <tr class=" shadow-2xl">
-                        <td class="border-teal-500 border-0 text-pink-300 bg-blue-500 rounded-b-2xl h-7" colspan="3">
+                        <td
+                            class="border-teal-500 border-0 text-pink-300 bg-blue-500 rounded-b-2xl h-7"
+                            colspan="3"
+                        >
                             {{ error }}
                         </td>
                     </tr>
@@ -107,7 +123,7 @@ export default {
             password: "",
             error: "",
             invalid_ssn: false,
-            empty_pass: false,
+            empty_pass: false
         };
     },
 
@@ -153,11 +169,11 @@ export default {
                     {
                         user_type: this.user_type,
                         ssn: this.ssn,
-                        password: this.password,
+                        password: this.password
                     },
                     { withCredentials: true }
                 )
-                .then((response) => {
+                .then(response => {
                     if (response.data.logged_in != "1") {
                         this.error = "Error logging in";
                         return;
@@ -173,10 +189,10 @@ export default {
                         this.$router.push("clerk-panel");
                     }
                 })
-                .catch((e) => {
+                .catch(e => {
                     console.log(e);
                 });
-        },
-    },
+        }
+    }
 };
 </script>
