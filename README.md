@@ -14,6 +14,13 @@ This tool serves as a proof-of-concept that the dangers of transmission from in-
 The design of the *Remote Patient - Doctor Symptom Analyser* consists of three different end users with varying access levels to data: Patients, Doctors, and Clerks. The users have access to submit and edit various forms and sections of forms relevant to their role. Furthermore, Clerks and Doctors have access to edit the database of illnesses, medications and the relevant symptoms and side effects. These illnesses and medications are used in reference with various forms to perform accurate diagnosis’ and simplified completion of forms.
 
 ***
+
+### Technologies
+The back end API was built using Flask, a framework for Python 3. We used SQLite3 for our DBMS and JWT tokens to handle user authtication.
+
+The front end was build using Vue.js, a popular Javascript framework. We used the axios library to handle HTTP requests and TailwindCSS for styling.
+
+***
 ### Group Members
 #### Member 1
 * Logan Perry-Din
