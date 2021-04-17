@@ -1,8 +1,10 @@
 <template>
     <div id="form-edit">
         <div class="flex justify-end w-full fixed">
-            <button @click="$router.go(-1)"
-            class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6">
+            <button
+                @click="$router.go(-1)"
+                class="text-white mt-5 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
+            >
                 Back
             </button>
         </div>
@@ -186,10 +188,14 @@
                     <table class="table-auto w-full mb-3">
                         <thead>
                             <tr>
-                                <th class="text-lg w-1/3 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2">
+                                <th
+                                    class="text-lg w-1/3 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2"
+                                >
                                     Allergy:
                                 </th>
-                                <th class="w-1/3 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2"></th>
+                                <th
+                                    class="w-1/3 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2"
+                                ></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -248,10 +254,14 @@
                     <table class="table-auto w-full mb-3">
                         <thead>
                             <tr>
-                                <th class="text-lg w-1/3 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2">
+                                <th
+                                    class="text-lg w-1/3 text-white bg-blue-500 rounded-tl-2xl border-teal border-b-2 border-r-2"
+                                >
                                     Immunization:
                                 </th>
-                                <th class="w-1/3 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2"></th>
+                                <th
+                                    class="w-1/3 text-white bg-blue-500 rounded-tr-2xl border-teal border-b-2 border-l-2"
+                                ></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -331,7 +341,7 @@ export default {
     name: "MedicalHistoryEditPage",
     props: {
         isClerk: Boolean,
-        isEdit: Boolean,
+        isEdit: Boolean
     },
 
     data() {
@@ -347,7 +357,7 @@ export default {
                 TPAL_living: "0",
                 Past_illnesses: [],
                 Allergies: [],
-                Immunizations: [],
+                Immunizations: []
             },
             illness_query: "",
             illness_results: [],
@@ -358,7 +368,7 @@ export default {
             past_illnesses_error: "",
             allergies_error: "",
             immunization_error: "",
-            post_error: "",
+            post_error: ""
         };
     },
 
@@ -377,16 +387,16 @@ export default {
                     {
                         action_type: "get_form",
                         form_type: "medical_history",
-                        p_ssn: this.$route.params.ssn,
+                        p_ssn: this.$route.params.ssn
                     },
                     {
                         headers: {
                             Authorization:
-                                "Bearer " + localStorage.getItem("jwt"),
-                        },
+                                "Bearer " + localStorage.getItem("jwt")
+                        }
                     }
                 )
-                .then((response) => {
+                .then(response => {
                     if (response.data.logged_in != "1") {
                         this.logged_in = false;
                         return;
@@ -396,7 +406,7 @@ export default {
 
                     this.form = response.data.form;
                 })
-                .catch((e) => {
+                .catch(e => {
                     console.log(e);
                 });
         },
@@ -412,16 +422,16 @@ export default {
                         action_type: "submit_form",
                         form_type: "medical_history",
                         p_ssn: this.$route.params.ssn,
-                        form: this.form,
+                        form: this.form
                     },
                     {
                         headers: {
                             Authorization:
-                                "Bearer " + localStorage.getItem("jwt"),
-                        },
+                                "Bearer " + localStorage.getItem("jwt")
+                        }
                     }
                 )
-                .then((response) => {
+                .then(response => {
                     if (response.data.successful != 1) {
                         this.post_error =
                             "There was an issue with your request.";
@@ -491,16 +501,16 @@ export default {
                     {
                         entity_type: "illness",
                         method: "query",
-                        query_string: this.illness_query,
+                        query_string: this.illness_query
                     },
                     {
                         headers: {
                             Authorization:
-                                "Bearer " + localStorage.getItem("jwt"),
-                        },
+                                "Bearer " + localStorage.getItem("jwt")
+                        }
                     }
                 )
-                .then((response) => {
+                .then(response => {
                     if (response.data.logged_in != "1") {
                         this.logged_in = false;
                         return;
@@ -509,7 +519,7 @@ export default {
                     this.logged_in = true;
                     this.illness_results = response.data.results;
                 })
-                .catch((e) => {
+                .catch(e => {
                     console.log(e);
                 });
         },
@@ -529,7 +539,7 @@ export default {
 
             this.form.Past_illnesses.push({
                 Illness_name: illness,
-                Age_of_onset: this.new_age_of_onset,
+                Age_of_onset: this.new_age_of_onset
             });
 
             this.new_age_of_onset = "";
@@ -595,7 +605,7 @@ export default {
                     this.form.Immunizations.push(temp_array[i]);
                 }
             }
-        },
-    },
+        }
+    }
 };
 </script>

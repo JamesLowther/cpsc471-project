@@ -11,12 +11,20 @@
         </div>
         <div v-if="logged_in">
             <div class="flex flex-col">
-                <p class="text-3xl md:text-4xl lg:text-5xl mt-20 bg-blue-300">Doctor Panel</p>
-                <p class="text-2xl md:text-3xl lg:text-4xl mt-4 bg-blue-300">SSN: {{ ssn }}</p>
+                <p class="text-3xl md:text-4xl lg:text-5xl mt-20 bg-blue-300">
+                    Doctor Panel
+                </p>
+                <p class="text-2xl md:text-3xl lg:text-4xl mt-4 bg-blue-300">
+                    SSN: {{ ssn }}
+                </p>
             </div>
-            <div class="flex flex-wrap items-center justify-center mt-16 md:mt-24 lg:mt-48">
+            <div
+                class="flex flex-wrap items-center justify-center mt-16 md:mt-24 lg:mt-48"
+            >
                 <div class="w-full sm:w-1/3 lg:w-1/4 mb-10">
-                    <p class="text-2xl md:text-3xl lg:text-4xl mt-2 mb-2">Patient Reports:</p>
+                    <p class="text-2xl md:text-3xl lg:text-4xl mt-2 mb-2">
+                        Patient Reports:
+                    </p>
 
                     <router-link to="doctor-panel/forms">
                         <div
@@ -26,22 +34,54 @@
                         </div>
                     </router-link>
 
-                    <p class="text-2xl md:text-3xl lg:text-4xl mt-2 mb-2">Update Database:</p>
+                    <p class="text-2xl md:text-3xl lg:text-4xl mt-2 mb-2">
+                        Update Database:
+                    </p>
 
-                    <router-link :to="{name: 'entities-panel',params: { entity_type: 'medication', user_type:'doctor' }}">
-                        <div class="text-white shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-4 md:py-8 px-4 m-2 text-1xl md:text-2xl">
+                    <router-link
+                        :to="{
+                            name: 'entities-panel',
+                            params: {
+                                entity_type: 'medication',
+                                user_type: 'doctor'
+                            }
+                        }"
+                    >
+                        <div
+                            class="text-white shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-4 md:py-8 px-4 m-2 text-1xl md:text-2xl"
+                        >
                             Medications
                         </div>
                     </router-link>
 
-                    <router-link :to="{name: 'entities-panel',params: { entity_type: 'illness', user_type:'doctor' }}">
-                        <div class="text-white shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-4 md:py-8 :py-8 px-4 m-2 text-1xl md:text-2xl">
+                    <router-link
+                        :to="{
+                            name: 'entities-panel',
+                            params: {
+                                entity_type: 'illness',
+                                user_type: 'doctor'
+                            }
+                        }"
+                    >
+                        <div
+                            class="text-white shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-4 md:py-8 :py-8 px-4 m-2 text-1xl md:text-2xl"
+                        >
                             Illnesses
                         </div>
                     </router-link>
 
-                    <router-link :to="{name: 'entities-panel',params: { entity_type: 'symptom', user_type:'doctor' }}">
-                        <div class="text-white shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-4 md:py-8 px-4 m-2 text-1xl md:text-2xl">
+                    <router-link
+                        :to="{
+                            name: 'entities-panel',
+                            params: {
+                                entity_type: 'symptom',
+                                user_type: 'doctor'
+                            }
+                        }"
+                    >
+                        <div
+                            class="text-white shadow-lg transition duration-300 ease-in-out bg-purple-600 hover:bg-purple-700 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-4 md:py-8 px-4 m-2 text-1xl md:text-2xl"
+                        >
                             Symptoms
                         </div>
                     </router-link>
@@ -64,7 +104,7 @@ export default {
     data() {
         return {
             logged_in: true,
-            ssn: "",
+            ssn: ""
         };
     },
 
@@ -77,10 +117,10 @@ export default {
             axios
                 .get("doctor", {
                     headers: {
-                        Authorization: "Bearer " + localStorage.getItem("jwt"),
-                    },
+                        Authorization: "Bearer " + localStorage.getItem("jwt")
+                    }
                 })
-                .then((response) => {
+                .then(response => {
                     if (response.data.logged_in != "1") {
                         this.logged_in = false;
                         return;
@@ -90,14 +130,14 @@ export default {
 
                     this.ssn = response.data.ssn;
                 })
-                .catch((e) => {
+                .catch(e => {
                     console.log(e);
                 });
         },
         logout() {
             localStorage.removeItem("jwt");
             this.$router.push("/");
-        },
-    },
+        }
+    }
 };
 </script>

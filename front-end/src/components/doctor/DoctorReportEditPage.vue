@@ -11,61 +11,99 @@
         </div>
         <div v-if="logged_in">
             <div class="flex flex-col">
-                <p class="text-3xl md:text-4xl lg:text-5xl mt-20 bg-blue-300">Doctor Panel</p>
-                <p class="text-2xl md:text-3xl lg:text-4xl mt-4 bg-blue-300"><b>Edit Report</b>
-                <br />Patient SSN: {{ p_ssn }}
-                <br />Patient Name: {{
-                                        this.form.Fname +
-                                        " " +
-                                        this.form.Initial +
-                                        ". " +
-                                        this.form.Lname
-                                    }}
-                                </p>
+                <p class="text-3xl md:text-4xl lg:text-5xl mt-20 bg-blue-300">
+                    Doctor Panel
+                </p>
+                <p class="text-2xl md:text-3xl lg:text-4xl mt-4 bg-blue-300">
+                    <b>Edit Report</b> <br />Patient SSN: {{ p_ssn }}
+                    <br />Patient Name:
+                    {{
+                        this.form.Fname +
+                            " " +
+                            this.form.Initial +
+                            ". " +
+                            this.form.Lname
+                    }}
+                </p>
             </div>
             <div class="flex flex-col items-center justify-center w-full p-5">
-                
-                <p class="text-xl"><b><i>COVID SCREEN STATUS:</i></b></p>
-                    <svg v-if="this.form.Has_passed" class="w-20 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="green">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <svg v-else class="w-20 mx-auto" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="red">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-
+                <p class="text-xl">
+                    <b><i>COVID SCREEN STATUS:</i></b>
+                </p>
+                <svg
+                    v-if="this.form.Has_passed"
+                    class="w-20 mx-auto"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="green"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                </svg>
+                <svg
+                    v-else
+                    class="w-20 mx-auto"
+                    xmlns="http://www.w3.org/2000/svg"
+                    fill="none"
+                    viewBox="0 0 24 24"
+                    stroke="red"
+                >
+                    <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
+                    />
+                </svg>
             </div>
-                <table class="w-full ml-auto md: mr-auto md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg">
-                    <thead>
-                        <tr>
-                            <th class="text-lg w-full text-white bg-blue-500 rounded-t-2xl border-teal border-r-0"> 
-                                Chief Complaint
-                                <textarea
-                                    class="border border-black text-black mb-2 p-1 rounded-lg w-full text-xl h-40 shadow-2xl"
-                                    type="text"
-                                    name="email"
-                                    v-model="form.Complaint"
-                                />
-                            </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td class="border-blue-300 border-0 bg-blue-500 rounded-b-2xl pb-0">
-                                <button
-                                    class="text-white mt-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-green-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
-                                    @click="updateComplaint()"
-                                >
-                                    Save
-                                </button>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
+            <table
+                class="w-full ml-auto md: mr-auto md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg"
+            >
+                <thead>
+                    <tr>
+                        <th
+                            class="text-lg w-full text-white bg-blue-500 rounded-t-2xl border-teal border-r-0"
+                        >
+                            Chief Complaint
+                            <textarea
+                                class="border border-black text-black mb-2 p-1 rounded-lg w-full text-xl h-40 shadow-2xl"
+                                type="text"
+                                name="email"
+                                v-model="form.Complaint"
+                            />
+                        </th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td
+                            class="border-blue-300 border-0 bg-blue-500 rounded-b-2xl pb-0"
+                        >
+                            <button
+                                class="text-white mt-2 shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-green-600 transform hover:-translate-y-1 hover:scale-110 rounded-lg py-2 px-8 m-6"
+                                @click="updateComplaint()"
+                            >
+                                Save
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
             <div class="w-full mb-6 mt-12">
-                <table class="w-full ml-auto md: mr-auto md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg">
+                <table
+                    class="w-full ml-auto md: mr-auto md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg"
+                >
                     <thead>
                         <tr>
-                            <th class="text-lg text-white w-full bg-blue-500 rounded-t-2xl border-teal border-r-0" colspan="3">
+                            <th
+                                class="text-lg text-white w-full bg-blue-500 rounded-t-2xl border-teal border-r-0"
+                                colspan="3"
+                            >
                                 Patients Medical History
                             </th>
                             <th />
@@ -85,31 +123,54 @@
                             </td>
                         </tr>
                         <tr v-if="this.form.Sex == 'F'">
-                            <td class="bg-blue-500 border-blue-300 border-2 border-r-0 border-l-0 text-white">
+                            <td
+                                class="bg-blue-500 border-blue-300 border-2 border-r-0 border-l-0 text-white"
+                            >
                                 <b>Pregnancy Info:</b>
                             </td>
-                            <td class="border-blue-300 border-2 border-l-0 bg-blue-100" colspan="2">
+                            <td
+                                class="border-blue-300 border-2 border-l-0 bg-blue-100"
+                                colspan="2"
+                            >
                                 <ul class="list-disc text-left pl-5">
-                                    <li v-if="this.form.TPAL_total != undefined">
-                                        <b>{{ this.form.TPAL_total }}</b> : Total
+                                    <li
+                                        v-if="this.form.TPAL_total != undefined"
+                                    >
+                                        <b>{{ this.form.TPAL_total }}</b> :
+                                        Total
                                     </li>
                                     <li v-else>
                                         Total: N/A
                                     </li>
-                                    <li v-if="this.form.TPAL_preterm != undefined">
-                                        <b>{{ this.form.TPAL_preterm }}</b> : Preterm
+                                    <li
+                                        v-if="
+                                            this.form.TPAL_preterm != undefined
+                                        "
+                                    >
+                                        <b>{{ this.form.TPAL_preterm }}</b> :
+                                        Preterm
                                     </li>
                                     <li v-else>
                                         Preterm: N/A
                                     </li>
-                                    <li v-if="this.form.TPAL_aborted != undefined">
-                                        <b>{{ this.form.TPAL_aborted }}</b> : Aborted
+                                    <li
+                                        v-if="
+                                            this.form.TPAL_aborted != undefined
+                                        "
+                                    >
+                                        <b>{{ this.form.TPAL_aborted }}</b> :
+                                        Aborted
                                     </li>
                                     <li v-else>
                                         Aborted: N/A
                                     </li>
-                                    <li v-if="this.form.TPAL_living != undefined">
-                                        <b>{{ this.form.TPAL_living }}</b> : Living
+                                    <li
+                                        v-if="
+                                            this.form.TPAL_living != undefined
+                                        "
+                                    >
+                                        <b>{{ this.form.TPAL_living }}</b> :
+                                        Living
                                     </li>
                                     <li v-else>
                                         Living: N/A
@@ -118,44 +179,71 @@
                             </td>
                         </tr>
                         <tr>
-                            <td class="bg-blue-500 border-blue-300 border-2 border-r-0 border-l-0 text-white">
+                            <td
+                                class="bg-blue-500 border-blue-300 border-2 border-r-0 border-l-0 text-white"
+                            >
                                 <b>Allergies:</b>
                             </td>
-                            <td class="border-blue-300 border-2 border-l-0 bg-blue-100" colspan="2">
+                            <td
+                                class="border-blue-300 border-2 border-l-0 bg-blue-100"
+                                colspan="2"
+                            >
                                 <ul class="list-disc text-left pl-5">
-                                    <li v-for="allergy in form.allergies" :key="allergy.Allergy">
+                                    <li
+                                        v-for="allergy in form.allergies"
+                                        :key="allergy.Allergy"
+                                    >
                                         <b>{{ allergy.Allergy }}</b>
                                     </li>
                                 </ul>
                             </td>
                         </tr>
                         <tr>
-                            <td class="bg-blue-500 border-blue-300 border-2 border-r-0 border-l-0 text-white">
+                            <td
+                                class="bg-blue-500 border-blue-300 border-2 border-r-0 border-l-0 text-white"
+                            >
                                 <b>Immunizations:</b>
                             </td>
-                            <td class="border-blue-300 border-2 border-l-0 bg-blue-100" colspan="2">
+                            <td
+                                class="border-blue-300 border-2 border-l-0 bg-blue-100"
+                                colspan="2"
+                            >
                                 <ul class="list-disc text-left pl-5">
-                                    <li v-for="immunization in form.immunizations" :key="immunization.Immunization">
+                                    <li
+                                        v-for="immunization in form.immunizations"
+                                        :key="immunization.Immunization"
+                                    >
                                         <b>{{ immunization.Immunization }}</b>
                                     </li>
                                 </ul>
                             </td>
                         </tr>
                         <tr>
-                            <td class="bg-blue-500 border-blue-300  border-b-0 border-r-0 border-l-0 border-2 text-white">
+                            <td
+                                class="bg-blue-500 border-blue-300  border-b-0 border-r-0 border-l-0 border-2 text-white"
+                            >
                                 <b>Past Illnesses:</b><br />[Age of Onset]
                             </td>
-                            <td class="border-blue-300 border-2 border-b-0 border-l-0 bg-blue-100" colspan="2">
+                            <td
+                                class="border-blue-300 border-2 border-b-0 border-l-0 bg-blue-100"
+                                colspan="2"
+                            >
                                 <ul class="list-disc text-left pl-5">
-                                    <li v-for="past_illness in form.past_illnesses" :key="past_illness.Illness_name">
-                                        <b>{{ past_illness.Illness_name }}</b> [{{ past_illness.Age_of_onset }}]
+                                    <li
+                                        v-for="past_illness in form.past_illnesses"
+                                        :key="past_illness.Illness_name"
+                                    >
+                                        <b>{{ past_illness.Illness_name }}</b>
+                                        [{{ past_illness.Age_of_onset }}]
                                     </li>
                                 </ul>
-
                             </td>
                         </tr>
                         <tr class=" shadow-2xl">
-                            <td class="border-teal-500 border-0 text-white bg-blue-300 rounded-b-2xl h-7" colspan="4" />
+                            <td
+                                class="border-teal-500 border-0 text-white bg-blue-300 rounded-b-2xl h-7"
+                                colspan="4"
+                            />
                         </tr>
                     </tbody>
                 </table>
@@ -165,7 +253,7 @@
                     <p class="text-xl">Assigned Doctor</p>
                     <p class="text-lg font-bold">
                         {{
-                                this.form.Doc_Fname +
+                            this.form.Doc_Fname +
                                 " " +
                                 this.form.Doc_Initial +
                                 ". " +
@@ -174,20 +262,29 @@
                     </p>
                 </div>
                 <div class="w-full mb-6">
-                    <table class="w-full ml-auto md: mr-auto md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg">
+                    <table
+                        class="w-full ml-auto md: mr-auto md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg"
+                    >
                         <thead>
                             <tr>
-                                <th class="text-lg text-white w-1/2 bg-blue-500 rounded-tl-2xl border-teal border-r-2">
+                                <th
+                                    class="text-lg text-white w-1/2 bg-blue-500 rounded-tl-2xl border-teal border-r-2"
+                                >
                                     Current diagnosis:
                                 </th>
-                                <th class="text-lg text-white w-1/2 bg-blue-500 ">
+                                <th
+                                    class="text-lg text-white w-1/2 bg-blue-500 "
+                                >
                                     Organ System:
                                 </th>
-                                <th class="text-lg text-white bg-blue-500 rounded-tr-2xl border-teal border-l-2 px-8"></th>
+                                <th
+                                    class="text-lg text-white bg-blue-500 rounded-tr-2xl border-teal border-l-2 px-8"
+                                ></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr class="bg-blue-100"
+                            <tr
+                                class="bg-blue-100"
                                 v-for="illness in form.Diagnosis"
                                 :key="illness.Name"
                             >
@@ -200,16 +297,17 @@
                                 <td class="border-blue-300 border-2">
                                     <button
                                         class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-red-600 transform hover:scale-105 rounded-lg py-1 px-8 m-2"
-                                        v-on:click="
-                                            removeIllness(illness.Name)
-                                        "
+                                        v-on:click="removeIllness(illness.Name)"
                                     >
                                         Remove
                                     </button>
                                 </td>
                             </tr>
                             <tr class="border-t-2">
-                                <td class="border-teal-500 border-0 border-b-2 bg-blue-400 " colspan="1">
+                                <td
+                                    class="border-teal-500 border-0 border-b-2 bg-blue-400 "
+                                    colspan="1"
+                                >
                                     <input
                                         class="border border-blue-700 mb-2 mt-2 p-1 rounded-lg w-4/5"
                                         type="text"
@@ -219,18 +317,27 @@
                                         v-on:keyup="queryIllness()"
                                     />
                                 </td>
-                                <td v-if="diagnosed_illnesses_error == ''" class="border-teal-500 border-0 border-b-2 text-white bg-blue-400 " colspan="2">
+                                <td
+                                    v-if="diagnosed_illnesses_error == ''"
+                                    class="border-teal-500 border-0 border-b-2 text-white bg-blue-400 "
+                                    colspan="2"
+                                >
                                     <p class="text-xl mx-auto text-red-600">
                                         {{ diagnosed_illnesses_error }}
                                     </p>
                                 </td>
-                                <td v-else class="border-teal-500 border-0 border-b-2 text-white bg-red-100 " colspan="2">
+                                <td
+                                    v-else
+                                    class="border-teal-500 border-0 border-b-2 text-white bg-red-100 "
+                                    colspan="2"
+                                >
                                     <p class="text-xl mx-auto text-red-600">
                                         {{ diagnosed_illnesses_error }}
                                     </p>
                                 </td>
                             </tr>
-                            <tr class="bg-blue-100"
+                            <tr
+                                class="bg-blue-100"
                                 v-for="illness in illness_results"
                                 :key="illness.Name"
                             >
@@ -243,44 +350,76 @@
                                 <td class="border-blue-300 border-2">
                                     <button
                                         class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-1 px-5 m-2"
-                                        v-on:click="addNewIllness(illness.Name, illness.Organ_system)"
+                                        v-on:click="
+                                            addNewIllness(
+                                                illness.Name,
+                                                illness.Organ_system
+                                            )
+                                        "
                                     >
                                         Add
                                     </button>
                                 </td>
                             </tr>
                             <tr class=" shadow-2xl">
-                                <td class="border-teal-500 border-0 text-white bg-blue-400 rounded-b-2xl h-7" colspan="3" />
+                                <td
+                                    class="border-teal-500 border-0 text-white bg-blue-400 rounded-b-2xl h-7"
+                                    colspan="3"
+                                />
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <br />
                 <div class="w-full mb-6">
-                <table class="w-full ml-auto md: mr-auto md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg">
+                    <table
+                        class="w-full ml-auto md: mr-auto md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg"
+                    >
                         <thead>
-                            <th class="text-lg text-white w-full bg-blue-500 rounded-tl-2xl border-teal border-r-2 p-2 pb-0">Treatment</th>
-                            <th class="text-lg text-white bg-blue-500 p-2 pb-0 border-r-2">Prescription</th>
-                            <th class="text-lg text-white bg-blue-500 p-2 pb-0">Side_Effects</th>
-                            <th class="text-lg text-white bg-blue-500 rounded-tr-2xl border-teal border-l-2 px-8"></th>
+                            <th
+                                class="text-lg text-white w-full bg-blue-500 rounded-tl-2xl border-teal border-r-2 p-2 pb-0"
+                            >
+                                Treatment
+                            </th>
+                            <th
+                                class="text-lg text-white bg-blue-500 p-2 pb-0 border-r-2"
+                            >
+                                Prescription
+                            </th>
+                            <th class="text-lg text-white bg-blue-500 p-2 pb-0">
+                                Side_Effects
+                            </th>
+                            <th
+                                class="text-lg text-white bg-blue-500 rounded-tr-2xl border-teal border-l-2 px-8"
+                            ></th>
                         </thead>
                         <tbody>
-                            <tr class="bg-blue-100"
+                            <tr
+                                class="bg-blue-100"
                                 v-for="medication in form.Medications"
                                 :key="medication.Name"
                             >
                                 <td class="border-blue-300 border-2">
                                     {{ medication.Name }}
                                 </td>
-                                <td v-if="medication.Is_prescription == 1" class="border-teal-500 border-2 bg-green-300">
+                                <td
+                                    v-if="medication.Is_prescription == 1"
+                                    class="border-teal-500 border-2 bg-green-300"
+                                >
                                     YES
                                 </td>
-                                <td v-else class="border-teal-300 border-2 bg-red-300">
+                                <td
+                                    v-else
+                                    class="border-teal-300 border-2 bg-red-300"
+                                >
                                     NO
                                 </td>
                                 <td class="border-blue-300 border-2">
                                     <ul class="list-disc text-left pl-5">
-                                        <li v-for="effect in medication.Effects" :key="effect">
+                                        <li
+                                            v-for="effect in medication.Effects"
+                                            :key="effect"
+                                        >
                                             {{ effect }}
                                         </li>
                                     </ul>
@@ -297,7 +436,10 @@
                                 </td>
                             </tr>
                             <tr class="border-t-2">
-                                <td class="border-teal-500 border-b-2 bg-blue-400" colspan="1">
+                                <td
+                                    class="border-teal-500 border-b-2 bg-blue-400"
+                                    colspan="1"
+                                >
                                     <input
                                         class="border border-blue-700 mb-2 mt-2 p-1 rounded-lg w-4/5"
                                         type="text"
@@ -307,63 +449,107 @@
                                         v-on:keyup="queryMedications()"
                                     />
                                 </td>
-                                <td v-if="add_medication_error == ''" class="border-teal-500 border-b-2 bg-blue-400" colspan="3">
+                                <td
+                                    v-if="add_medication_error == ''"
+                                    class="border-teal-500 border-b-2 bg-blue-400"
+                                    colspan="3"
+                                >
                                     <p class="text-xl mx-auto text-red-600">
                                         {{ add_medication_error }}
                                     </p>
                                 </td>
-                                <td v-else class="border-teal-500 border-b-2 bg-red-100" colspan="3">
+                                <td
+                                    v-else
+                                    class="border-teal-500 border-b-2 bg-red-100"
+                                    colspan="3"
+                                >
                                     <p class="text-xl mx-auto text-red-600">
                                         {{ add_medication_error }}
                                     </p>
                                 </td>
                             </tr>
-                            <tr class="bg-blue-100"
+                            <tr
+                                class="bg-blue-100"
                                 v-for="medication in medication_results"
                                 :key="medication.Name"
                             >
                                 <td class="border-blue-300 border-2">
                                     {{ medication.Name }}
                                 </td>
-                                <td v-if="medication.Is_prescription == 1" class="border-teal-500 border-2 bg-green-300">
+                                <td
+                                    v-if="medication.Is_prescription == 1"
+                                    class="border-teal-500 border-2 bg-green-300"
+                                >
                                     YES
                                 </td>
-                                <td v-else class="border-teal-500 border-2 bg-red-300">
+                                <td
+                                    v-else
+                                    class="border-teal-500 border-2 bg-red-300"
+                                >
                                     NO
                                 </td>
-                                    <td class="border-blue-300 border-2">
-                                        <ul class="list-disc text-left pl-5">
-                                            <li v-for="effect in medication.Effects" :key="effect">
-                                                {{ effect }}
-                                            </li>
-                                        </ul>
-                                    </td>
+                                <td class="border-blue-300 border-2">
+                                    <ul class="list-disc text-left pl-5">
+                                        <li
+                                            v-for="effect in medication.Effects"
+                                            :key="effect"
+                                        >
+                                            {{ effect }}
+                                        </li>
+                                    </ul>
+                                </td>
                                 <td class="border-blue-300 border-2">
                                     <button
                                         class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-1 px-5 m-2"
-                                        v-on:click="addNewMedication(medication.Name, medication.Is_prescription, medication.Effects)"
+                                        v-on:click="
+                                            addNewMedication(
+                                                medication.Name,
+                                                medication.Is_prescription,
+                                                medication.Effects
+                                            )
+                                        "
                                     >
                                         Add
                                     </button>
                                 </td>
                             </tr>
                             <tr class=" shadow-2xl">
-                                <td class="border-teal-500 border-0 text-white bg-blue-400 rounded-b-2xl h-7" colspan="4"/>
+                                <td
+                                    class="border-teal-500 border-0 text-white bg-blue-400 rounded-b-2xl h-7"
+                                    colspan="4"
+                                />
                             </tr>
                         </tbody>
                     </table>
                 </div>
                 <br />
                 <div class="w-full mb-6">
-                    <table class="w-full ml-auto md: mr-auto md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg">
+                    <table
+                        class="w-full ml-auto md: mr-auto md:w-3/4 2xl:w-1/2 mb-3 rounded-b-none shadow-lg"
+                    >
                         <thead>
-                            <th class="text-lg text-white w-1/2 bg-blue-500 rounded-tl-2xl border-teal border-r-2">Med. Center Name</th>
-                            <th class="text-lg text-white bg-blue-500 p-2 pb-0 border-teal border-r-2">Type</th>
-                            <th class="text-lg text-white w-1/2 bg-blue-500 p-2 pb-0">Address</th>
-                            <th class="text-lg text-white bg-blue-500 rounded-tr-2xl border-teal border-l-2 px-8"></th>
+                            <th
+                                class="text-lg text-white w-1/2 bg-blue-500 rounded-tl-2xl border-teal border-r-2"
+                            >
+                                Med. Center Name
+                            </th>
+                            <th
+                                class="text-lg text-white bg-blue-500 p-2 pb-0 border-teal border-r-2"
+                            >
+                                Type
+                            </th>
+                            <th
+                                class="text-lg text-white w-1/2 bg-blue-500 p-2 pb-0"
+                            >
+                                Address
+                            </th>
+                            <th
+                                class="text-lg text-white bg-blue-500 rounded-tr-2xl border-teal border-l-2 px-8"
+                            ></th>
                         </thead>
                         <tbody>
-                            <tr class="bg-blue-100"
+                            <tr
+                                class="bg-blue-100"
                                 v-for="medical_centre in form.Medical_centres"
                                 :key="medical_centre.Name"
                             >
@@ -388,7 +574,10 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td class="border-teal-500 border-2 border-r-0 border-l-0 bg-blue-400" colspan="2">
+                                <td
+                                    class="border-teal-500 border-2 border-r-0 border-l-0 bg-blue-400"
+                                    colspan="2"
+                                >
                                     <input
                                         class="border border-blue-700 mb-2 mt-2 p-1 rounded-lg w-4/5"
                                         type="text"
@@ -398,19 +587,29 @@
                                         v-on:keyup="queryMedCenters()"
                                     />
                                 </td>
-                                <td v-if="medCenter_error == ''" class="border-teal-500 border-2 bg-blue-400 border-r-0 border-l-0 " colspan="2">
+                                <td
+                                    v-if="medCenter_error == ''"
+                                    class="border-teal-500 border-2 bg-blue-400 border-r-0 border-l-0 "
+                                    colspan="2"
+                                >
                                     <p class="text-xl mx-auto text-red-600">
                                         {{ medCenter_error }}
                                     </p>
                                 </td>
-                                <td v-else class="border-teal-500 border-2 bg-red-100 border-r-0 border-l-0 " colspan="2">
+                                <td
+                                    v-else
+                                    class="border-teal-500 border-2 bg-red-100 border-r-0 border-l-0 "
+                                    colspan="2"
+                                >
                                     <p class="text-xl mx-auto text-red-600">
                                         {{ medCenter_error }}
                                     </p>
                                 </td>
                             </tr>
-                            <tr class="bg-blue-100"
-                                v-for="(med_center, i) in Medical_Centers_results"
+                            <tr
+                                class="bg-blue-100"
+                                v-for="(med_center,
+                                i) in Medical_Centers_results"
                                 :key="`${i}-${med_center}`"
                             >
                                 <td class="border-blue-300 border-2">
@@ -425,14 +624,23 @@
                                 <td class="border-blue-300 border-2">
                                     <button
                                         class="text-white shadow-lg transition duration-300 ease-in-out bg-gray-700 hover:bg-blue-600 transform hover:-translate-y-1 hover:scale-105 rounded-lg py-1 px-5 m-2"
-                                        v-on:click="addMedCenter(med_center.Name, med_center.Type, med_center.Address)"
+                                        v-on:click="
+                                            addMedCenter(
+                                                med_center.Name,
+                                                med_center.Type,
+                                                med_center.Address
+                                            )
+                                        "
                                     >
                                         Add
                                     </button>
                                 </td>
                             </tr>
                             <tr class=" shadow-2xl">
-                                <td class="border-teal-500 border-0 text-white bg-blue-400 rounded-b-2xl h-7" colspan="4" />
+                                <td
+                                    class="border-teal-500 border-0 text-white bg-blue-400 rounded-b-2xl h-7"
+                                    colspan="4"
+                                />
                             </tr>
                         </tbody>
                     </table>
@@ -478,7 +686,7 @@ export default {
                 past_illnesses: [],
                 allergies: [],
                 immunizations: [],
-                Has_passed: "",
+                Has_passed: ""
             },
             illness_query: "",
             illness_results: [],
@@ -488,7 +696,7 @@ export default {
             Medical_Centers_results: [],
             diagnosed_illnesses_error: "",
             medCenter_error: "",
-            add_medication_error: "",
+            add_medication_error: ""
         };
     },
 
@@ -511,7 +719,7 @@ export default {
                         form_type: "report",
                         p_ssn: this.$route.params.p_ssn,
                         id: this.$route.params.id,
-                        form: this.form,
+                        form: this.form
                     },
                     {
                         headers: {
@@ -543,7 +751,7 @@ export default {
                     form_type: "report",
                     p_ssn: this.$route.params.p_ssn,
                     id: this.$route.params.id,
-                    complaint: this.form.Complaint,
+                    complaint: this.form.Complaint
                 },
                 {
                     headers: {
@@ -576,16 +784,16 @@ export default {
                     {
                         entity_type: "illness",
                         method: "query",
-                        query_string: this.illness_query,
+                        query_string: this.illness_query
                     },
                     {
                         headers: {
                             Authorization:
-                                "Bearer " + localStorage.getItem("jwt"),
-                        },
+                                "Bearer " + localStorage.getItem("jwt")
+                        }
                     }
                 )
-                .then((response) => {
+                .then(response => {
                     if (response.data.logged_in != "1") {
                         this.logged_in = false;
                         return;
@@ -597,7 +805,7 @@ export default {
                     this.logged_in = true;
                     this.illness_results = response.data.results;
                 })
-                .catch((e) => {
+                .catch(e => {
                     console.log(e);
                 });
         },
@@ -611,72 +819,68 @@ export default {
                 }
             }
 
-            axios.post(
-                "doctor/forms",
-                {
-                    action_type: "add_illness",
-                    form_type: "report",
-                    illness_to_add: illness,
-                    id: this.id,
-                    p_ssn: this.p_ssn,
-                },
+            axios
+                .post(
+                    "doctor/forms",
+                    {
+                        action_type: "add_illness",
+                        form_type: "report",
+                        illness_to_add: illness,
+                        id: this.id,
+                        p_ssn: this.p_ssn
+                    },
                     {
                         headers: {
                             Authorization:
                                 "Bearer " + localStorage.getItem("jwt")
                         }
                     }
-                    )
-                    .then(response => {
-                        if (response.data.logged_in != "1") {
+                )
+                .then(response => {
+                    if (response.data.logged_in != "1") {
                         this.logged_in = false;
                         return;
                     }
 
                     this.logged_in = true;
-
 
                     // Update the html list of Diagnosed illnesses
                     this.diagnosed_illnesses_error = "";
 
                     this.form.Diagnosis.push({
                         Name: illness,
-                        Organ_system: Organ_system,
+                        Organ_system: Organ_system
                     });
-
-
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    }
-            );
+                })
+                .catch(e => {
+                    console.log(e);
+                });
         },
         removeIllness(illness) {
-
-            axios.post(
-                "doctor/forms",
-                {
-                    action_type: "remove_illness",
-                    form_type: "report",
-                    illness_to_remove: illness,
-                    id: this.id,
-                    p_ssn: this.p_ssn,
-                },
+            axios
+                .post(
+                    "doctor/forms",
+                    {
+                        action_type: "remove_illness",
+                        form_type: "report",
+                        illness_to_remove: illness,
+                        id: this.id,
+                        p_ssn: this.p_ssn
+                    },
                     {
                         headers: {
                             Authorization:
                                 "Bearer " + localStorage.getItem("jwt")
                         }
                     }
-                    )
-                    .then(response => {
-                        if (response.data.logged_in != "1") {
+                )
+                .then(response => {
+                    if (response.data.logged_in != "1") {
                         this.logged_in = false;
                         return;
                     }
 
                     this.logged_in = true;
-
 
                     // Clear any error meesage
                     this.diagnosed_illnesses_error = "";
@@ -690,12 +894,10 @@ export default {
                             this.form.Diagnosis.push(temp_array[i]);
                         }
                     }
-
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    }
-            );
+                })
+                .catch(e => {
+                    console.log(e);
+                });
         },
         queryMedications() {
             axios
@@ -704,28 +906,28 @@ export default {
                     {
                         entity_type: "medication",
                         method: "query",
-                        query_string: this.medication_query,
+                        query_string: this.medication_query
                     },
                     {
                         headers: {
                             Authorization:
-                                "Bearer " + localStorage.getItem("jwt"),
-                        },
+                                "Bearer " + localStorage.getItem("jwt")
+                        }
                     }
                 )
-                .then((response) => {
+                .then(response => {
                     if (response.data.logged_in != "1") {
                         this.logged_in = false;
                         return;
                     }
-            
+
                     // Clear any error meesage
                     this.add_medication_error = "";
 
                     this.logged_in = true;
                     this.medication_results = response.data.results;
                 })
-                .catch((e) => {
+                .catch(e => {
                     console.log(e);
                 });
         },
@@ -739,30 +941,30 @@ export default {
                 }
             }
 
-            axios.post(
-                "doctor/forms",
-                {
-                    action_type: "add_medication",
-                    form_type: "report",
-                    medication_to_add: medication,
-                    id: this.id,
-                    p_ssn: this.p_ssn,
-                },
+            axios
+                .post(
+                    "doctor/forms",
+                    {
+                        action_type: "add_medication",
+                        form_type: "report",
+                        medication_to_add: medication,
+                        id: this.id,
+                        p_ssn: this.p_ssn
+                    },
                     {
                         headers: {
                             Authorization:
                                 "Bearer " + localStorage.getItem("jwt")
                         }
                     }
-                    )
-                    .then(response => {
-                        if (response.data.logged_in != "1") {
+                )
+                .then(response => {
+                    if (response.data.logged_in != "1") {
                         this.logged_in = false;
                         return;
                     }
 
                     this.logged_in = true;
-
 
                     // Update the html list of Diagnosed illnesses
                     this.add_medication_error = "";
@@ -770,48 +972,43 @@ export default {
                     this.form.Medications.push({
                         Name: medication,
                         Is_prescription: Is_prescription,
-                        Effects: Effect,
+                        Effects: Effect
                     });
-
-
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    }
-            );
+                })
+                .catch(e => {
+                    console.log(e);
+                });
         },
         removeMedication(medication) {
-
-            axios.post(
-                "doctor/forms",
-                {
-                    action_type: "remove_medication",
-                    form_type: "report",
-                    medication_to_remove: medication,
-                    id: this.id,
-                    p_ssn: this.p_ssn,
-                },
+            axios
+                .post(
+                    "doctor/forms",
+                    {
+                        action_type: "remove_medication",
+                        form_type: "report",
+                        medication_to_remove: medication,
+                        id: this.id,
+                        p_ssn: this.p_ssn
+                    },
                     {
                         headers: {
                             Authorization:
                                 "Bearer " + localStorage.getItem("jwt")
                         }
                     }
-                    )
-                    .then(response => {
-                        if (response.data.logged_in != "1") {
-                            this.logged_in = false;
-                            return;
-                        }
-
-                        this.logged_in = true;
-
-                    })
-                    .catch(e => {
-                        console.log(e);
+                )
+                .then(response => {
+                    if (response.data.logged_in != "1") {
+                        this.logged_in = false;
+                        return;
                     }
-            );
-            
+
+                    this.logged_in = true;
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+
             // Clear any error meesage
             this.add_medication_error = "";
 
@@ -830,28 +1027,28 @@ export default {
                     "keys",
                     {
                         entity: "medical_centre",
-                        query_string: this.med_center_query,
+                        query_string: this.med_center_query
                     },
                     {
                         headers: {
                             Authorization:
-                                "Bearer " + localStorage.getItem("jwt"),
-                        },
+                                "Bearer " + localStorage.getItem("jwt")
+                        }
                     }
                 )
-                .then((response) => {
+                .then(response => {
                     if (response.data.logged_in != "1") {
                         this.logged_in = false;
                         return;
                     }
-            
+
                     // Clear any error meesage
                     this.medCenter_error = "";
 
                     this.logged_in = true;
                     this.Medical_Centers_results = response.data.result;
                 })
-                .catch((e) => {
+                .catch(e => {
                     console.log(e);
                 });
         },
@@ -865,30 +1062,30 @@ export default {
                 }
             }
 
-            axios.post(
-                "doctor/forms",
-                {
-                    action_type: "add_medCenter",
-                    form_type: "report",
-                    medCenter_to_add: MedCenter_Name,
-                    id: this.id,
-                    p_ssn: this.p_ssn,
-                },
+            axios
+                .post(
+                    "doctor/forms",
+                    {
+                        action_type: "add_medCenter",
+                        form_type: "report",
+                        medCenter_to_add: MedCenter_Name,
+                        id: this.id,
+                        p_ssn: this.p_ssn
+                    },
                     {
                         headers: {
                             Authorization:
                                 "Bearer " + localStorage.getItem("jwt")
                         }
                     }
-                    )
-                    .then(response => {
-                        if (response.data.logged_in != "1") {
+                )
+                .then(response => {
+                    if (response.data.logged_in != "1") {
                         this.logged_in = false;
                         return;
                     }
 
                     this.logged_in = true;
-
 
                     // Update the html list of Diagnosed illnesses
                     this.medCenter_error = "";
@@ -896,42 +1093,39 @@ export default {
                     this.form.Medical_centres.push({
                         Name: MedCenter_Name,
                         Type: type,
-                        Address: address,
+                        Address: address
                     });
-
-
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    }
-            );
+                })
+                .catch(e => {
+                    console.log(e);
+                });
         },
         removeMedCenter(MedCenter_Name) {
-
-            axios.post(
-                "doctor/forms",
-                {
-                    action_type: "remove_medCenter",
-                    form_type: "report",
-                    medCenter_to_remove: MedCenter_Name,
-                    id: this.id,
-                    p_ssn: this.p_ssn,
-                },
+            axios
+                .post(
+                    "doctor/forms",
+                    {
+                        action_type: "remove_medCenter",
+                        form_type: "report",
+                        medCenter_to_remove: MedCenter_Name,
+                        id: this.id,
+                        p_ssn: this.p_ssn
+                    },
                     {
                         headers: {
                             Authorization:
                                 "Bearer " + localStorage.getItem("jwt")
                         }
                     }
-                    )
-                    .then(response => {
-                        if (response.data.logged_in != "1") {
+                )
+                .then(response => {
+                    if (response.data.logged_in != "1") {
                         this.logged_in = false;
                         return;
                     }
 
                     this.logged_in = true;
-            
+
                     // Clear any error meesage
                     this.medCenter_error = "";
 
@@ -944,13 +1138,11 @@ export default {
                             this.form.Medical_centres.push(temp_array[i]);
                         }
                     }
-
-                    })
-                    .catch(e => {
-                        console.log(e);
-                    }
-            );
-        },
+                })
+                .catch(e => {
+                    console.log(e);
+                });
+        }
     }
 };
 </script>
