@@ -35,6 +35,8 @@ api = Api(app)
 jwt = JWTManager(app)
 
 # Taken from https://flask-jwt-extended.readthedocs.io/en/stable/refreshing_tokens/
+
+
 @app.after_request
 def refresh_expiring_jwts(response):
     """Refresh any JWT tokens that are set to expire in 30 minutes.
@@ -51,15 +53,16 @@ def refresh_expiring_jwts(response):
         # Case where there is not a valid JWT. Just return the original respone
         return response
 
+
 def init_api():
-    """ Call functions which initialize the API.
+    """Call functions which initialize the API.
     """
     db.init_db()
     add_api_endpoints()
 
 
 def add_api_endpoints():
-    """ Adds all of the endpoints to our API.
+    """Adds all of the endpoints to our API.
     Endpoints need to be imported from the endpoints module.
     """
 

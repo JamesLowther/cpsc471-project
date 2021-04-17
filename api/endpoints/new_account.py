@@ -23,6 +23,9 @@ parser.add_argument("Specialization", type=str, required=False,
 
 class NewAccount(Resource):
     def post(self):
+        """Handle post request to new-account endpoint.
+        """
+
         args = parser.parse_args()
 
         status = False
@@ -52,6 +55,7 @@ def create_patient(args):
     if cursor.fetchone():
         return False
 
+    # Add the patient to the database.
     cursor.execute("INSERT INTO Patient VALUES (?, ?);",
                    (args["ssn"], args["password"]))
     con.commit()
@@ -71,6 +75,7 @@ def create_doctor(args):
     if cursor.fetchone():
         return False
 
+    # Add the doctor to the database.
     cursor.execute("INSERT INTO Doctor VALUES (?, ?, ?, ?, ?, ?, ?);",
                    (args["ssn"], args["Specialization"], args["Fname"], args["Lname"], args["Initial"], args["DoB"], args["password"]))
 
@@ -91,6 +96,7 @@ def create_clerk(args):
     if cursor.fetchone():
         return False
 
+    # Add the clerk to the database.
     cursor.execute("INSERT INTO Clerk VALUES (?, ?, ?, ?, ?, ?);",
                    (args["ssn"], args["Fname"], args["Lname"], args["Initial"], args["DoB"], args["password"]))
 

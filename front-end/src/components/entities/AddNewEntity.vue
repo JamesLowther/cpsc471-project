@@ -6,8 +6,8 @@
                 params: {
                     entity_type: entity_type,
                     user_type: user_type,
-                    query_string: query_string,
-                },
+                    query_string: query_string
+                }
             }"
             class="flex justify-end w-full fixed"
         >
@@ -350,7 +350,7 @@
                                 </button>
                             </td>
                             <td class="border-blue-300 border-2 py-2">
-                             <table
+                                <table
                                     class="mx-auto w-4/5 text-center rounded-b-none shadow-lg"
                                 >
                                     <thead>
@@ -471,7 +471,7 @@ export default {
             effect: "", // Either a symptom (illness) or side-effect (medication)
             effects: [],
 
-            create_mode: true,
+            create_mode: true
         };
     },
 
@@ -524,13 +524,12 @@ export default {
 
             for (let i = 0; i < this.effects.length; i++) {
                 if (this.effects[i] == this.effect) {
-                    this.sys_msg =
-                        "You have already added that.";
+                    this.sys_msg = "You have already added that.";
                     this.effect = "";
                     return;
                 }
             }
-            
+
             this.effects.push(this.effect);
             this.effect = "";
             this.sys_msg = "";
@@ -570,20 +569,20 @@ export default {
                         entity_name: this.entity_name,
                         is_pres: parseInt(this.Is_prescription),
                         org_sys: this.organ_system,
-                        effects: this.effects,
+                        effects: this.effects
                     },
                     {
                         headers: {
                             Authorization:
-                                "Bearer " + localStorage.getItem("jwt"),
-                        },
+                                "Bearer " + localStorage.getItem("jwt")
+                        }
                     }
                 )
-                .then((response) => {
+                .then(response => {
                     this.status = response.data.status;
                     this.sys_msg = response.data.sys_msg;
                 })
-                .catch((e) => {
+                .catch(e => {
                     console.log(e);
                 });
         },
@@ -597,20 +596,20 @@ export default {
                         entity_name: this.entity_name,
                         is_pres: this.Is_prescription,
                         org_sys: this.organ_system,
-                        effects: this.effects,
+                        effects: this.effects
                     },
                     {
                         headers: {
                             Authorization:
-                                "Bearer " + localStorage.getItem("jwt"),
-                        },
+                                "Bearer " + localStorage.getItem("jwt")
+                        }
                     }
                 )
-                .then((response) => {
+                .then(response => {
                     this.status = response.data.status;
                     this.sys_msg = response.data.sys_msg;
                 })
-                .catch((e) => {
+                .catch(e => {
                     console.log(e);
                 });
         },
@@ -621,23 +620,22 @@ export default {
                     {
                         entity_type: this.entity_post,
                         method: "delete",
-                        entity_name: this.entity_name,
+                        entity_name: this.entity_name
                     },
                     {
                         headers: {
                             Authorization:
-                                "Bearer " + localStorage.getItem("jwt"),
-                        },
+                                "Bearer " + localStorage.getItem("jwt")
+                        }
                     }
                 )
-                .then((response) => {
+                .then(response => {
                     this.status = response.data.status;
                     this.sys_msg = response.data.sys_msg;
                 })
-                .catch((e) => {
+                .catch(e => {
                     console.log(e);
                 });
-
         },
 
         init_entity() {
@@ -651,7 +649,7 @@ export default {
                 this.entity_attr = "Illness";
                 this.entity_post = "symptom";
             }
-        },
-    },
+        }
+    }
 };
 </script>

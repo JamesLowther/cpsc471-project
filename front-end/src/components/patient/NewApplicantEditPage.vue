@@ -23,11 +23,16 @@
         </div>
         <div v-if="logged_in" class="flex flex-col items-center w-full">
             <div class="flex flex-col">
-                <p v-if="create_mode" class="text-4xl lg:text-5xl text-5xl mt-20">
+                <p
+                    v-if="create_mode"
+                    class="text-4xl lg:text-5xl text-5xl mt-20"
+                >
                     Create New Applicant Form
                 </p>
                 <div v-else>
-                    <p class="text-4xl lg:text-5xl mt-20 mb-2">Edit New Applicant Form</p>
+                    <p class="text-4xl lg:text-5xl mt-20 mb-2">
+                        Edit New Applicant Form
+                    </p>
                     <div class="flex flex-row justify-center items-center h-16">
                         <p class="text-3xl">Approved:</p>
                         <svg
@@ -63,8 +68,12 @@
                     </div>
                 </div>
             </div>
-            <div class="flex flex-col mt-10 mx-auto bg-blue-500 rounded-2xl border-teal border-2 p-5">
-                <div class="flex flex-col items-center lg:items-start mb-6 w-full bg-blue-100 py-1 text-black rounded-2xl">
+            <div
+                class="flex flex-col mt-10 mx-auto bg-blue-500 rounded-2xl border-teal border-2 p-5"
+            >
+                <div
+                    class="flex flex-col items-center lg:items-start mb-6 w-full bg-blue-100 py-1 text-black rounded-2xl"
+                >
                     <div class="mx-2">
                         <p class="text-xl">Email</p>
                         <input
@@ -79,7 +88,9 @@
                         {{ email_error }}
                     </p>
                 </div>
-                <div class="mb-6 w-full bg-blue-100 py-1 text-black rounded-2xl">
+                <div
+                    class="mb-6 w-full bg-blue-100 py-1 text-black rounded-2xl"
+                >
                     <div class="flex flex-col lg:flex-row">
                         <div class="mx-2">
                             <p class="text-xl">First Name</p>
@@ -141,7 +152,9 @@
                         {{ gender_error }}
                     </p>
                 </div>
-                <div class="flex flex-col items-center lg:items-start mb-6 bg-blue-100 py-1 text-black rounded-2xl">
+                <div
+                    class="flex flex-col items-center lg:items-start mb-6 bg-blue-100 py-1 text-black rounded-2xl"
+                >
                     <div class="mx-2">
                         <p class="text-xl">Date of Birth</p>
                         <input
@@ -156,7 +169,9 @@
                         {{ DoB_error }}
                     </p>
                 </div>
-                <div class="flex flex-col items-center lg:items-start mb-6 bg-blue-100 py-1 text-black rounded-2xl">
+                <div
+                    class="flex flex-col items-center lg:items-start mb-6 bg-blue-100 py-1 text-black rounded-2xl"
+                >
                     <div class="mx-2">
                         <p class="text-xl">Phone</p>
                         <input
@@ -230,7 +245,7 @@ export default {
 
     props: {
         isClerk: Boolean,
-        isEdit: Boolean,
+        isEdit: Boolean
     },
 
     data() {
@@ -249,7 +264,7 @@ export default {
                 Healthcare_no: "",
                 HCN_expiry: "",
                 HCN_province: "",
-                Is_approved: "",
+                Is_approved: ""
             },
             email_error: "",
             name_error: "",
@@ -257,7 +272,7 @@ export default {
             DoB_error: "",
             phone_error: "",
             HCN_error: "",
-            post_error: "",
+            post_error: ""
         };
     },
 
@@ -276,16 +291,16 @@ export default {
                     {
                         action_type: "get_form",
                         form_type: "new_applicant_form",
-                        p_ssn: this.$route.params.ssn,
+                        p_ssn: this.$route.params.ssn
                     },
                     {
                         headers: {
                             Authorization:
-                                "Bearer " + localStorage.getItem("jwt"),
-                        },
+                                "Bearer " + localStorage.getItem("jwt")
+                        }
                     }
                 )
-                .then((response) => {
+                .then(response => {
                     if (response.data.logged_in != "1") {
                         this.logged_in = false;
                         return;
@@ -295,7 +310,7 @@ export default {
 
                     this.form = response.data.form;
                 })
-                .catch((e) => {
+                .catch(e => {
                     console.log(e);
                 });
         },
@@ -307,8 +322,8 @@ export default {
                     this.checkGender(),
                     this.checkDoB(),
                     this.checkPhone(),
-                    this.checkHCN(),
-                ].every((x) => {
+                    this.checkHCN()
+                ].every(x => {
                     return x === true;
                 })
             )
@@ -332,17 +347,17 @@ export default {
                             phone: this.form.Phone,
                             healthcare_no: this.form.Healthcare_no,
                             hcn_expiry: this.form.HCN_expiry,
-                            hcn_province: this.form.HCN_province,
-                        },
+                            hcn_province: this.form.HCN_province
+                        }
                     },
                     {
                         headers: {
                             Authorization:
-                                "Bearer " + localStorage.getItem("jwt"),
-                        },
+                                "Bearer " + localStorage.getItem("jwt")
+                        }
                     }
                 )
-                .then((response) => {
+                .then(response => {
                     if (response.data.successful != 1) {
                         this.post_error =
                             "There was an issue with your request.";
@@ -371,13 +386,13 @@ export default {
                     {
                         form_type: "new_application_form",
                         action_type: "submit_form",
-                        P_SSN: this.$route.params.ssn,
+                        P_SSN: this.$route.params.ssn
                     },
                     {
                         headers: {
                             Authorization:
-                                "Bearer " + localStorage.getItem("jwt"),
-                        },
+                                "Bearer " + localStorage.getItem("jwt")
+                        }
                     }
                 )
                 .then(() => {
@@ -451,7 +466,7 @@ export default {
             }
             this.HCN_error = "";
             return true;
-        },
-    },
+        }
+    }
 };
 </script>
