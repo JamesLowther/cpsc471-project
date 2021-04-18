@@ -32,14 +32,9 @@ class EntitiesForms(Resource):
     def check_user_type(self, userType):
         """Verify user is a doctor
         """
+        return (userType == "doctor" or userType == "clerk")
 
-        # Returns doctor information for logged in user.
-        if (userType == "doctor" or userType == "clerk"):
-            return 1
-        else:
-            return 0
-
-
+        
     def post(self):
         """Returns the primary keys from certain tables in our database.
         This is needed for certain selectors on form pages on the front-end.

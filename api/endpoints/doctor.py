@@ -44,12 +44,7 @@ class DoctorForms(Resource):
     def check_user_type(self, userType):
         """Verify user is a doctor
         """
-
-        # Returns doctor information for logged in user.
-        if userType == "doctor":
-            return 1
-        else:
-            return 0
+        return userType == "doctor"
 
 
     def get(self):

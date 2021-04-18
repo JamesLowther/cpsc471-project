@@ -35,12 +35,7 @@ class ClerkForms(Resource):
     def check_user_type(self, userType):
         """Verify user is a clerk
         """
-
-        # Returns clerk information for logged in user.
-        if userType == "clerk":
-            return 1
-        else:
-            return 0
+        return userType == "clerk"
 
 
     def get(self):
