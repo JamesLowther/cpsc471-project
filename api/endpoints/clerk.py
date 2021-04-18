@@ -12,8 +12,10 @@ class Clerk(Resource):
     def get(self):
         if verify_jwt_in_request():
             current = get_jwt_identity()
-
-        return jsonify({**current, "logged_in": 1})
+            if current["user_type"] == "clerk":
+                return jsonify({**current, "logged_in": 1})
+            else:
+                return jsonify({**current, "logged_in": 0})
 
 
 class ClerkForms(Resource):
@@ -29,15 +31,25 @@ class ClerkForms(Resource):
                         help="Bad choice: {error_msg}")
     parser.add_argument("P_SSN", type=int, required=False)
 
+
+    def check_user_type(self, userType):
+        """Verify user is a clerk
+        """
+        return userType == "clerk"
+
+
     def get(self):
         """
         A GET request returns all Patient's SSN's and the keys of their existing forms.
         """
 
-        # Verify the request is sent from logged in user
+        # Verify user is a clerk
         if verify_jwt_in_request():
             current = get_jwt_identity()
+        if not self.check_user_type(current["user_type"]):
+            return  jsonify({**current, "logged_in": 0})
 
+        # If user is a clerk open a db connection
         con, cursor = db.connect_db()
 
         # Get Patients and keys of all their forms. Null if no report of that kind exists
@@ -78,9 +90,14 @@ class ClerkForms(Resource):
         A POST request takes parameters to decide on the action type
         and perform the specified action, using the given data.
         """
+
+        # Verify user is a clerk
         if verify_jwt_in_request():
             current = get_jwt_identity()
+        if not self.check_user_type(current["user_type"]):
+            return  jsonify({**current, "logged_in": 0})
 
+        # If user is a clerk perform post request
         args = self.parser.parse_args()
 
         if(args["action_type"] == "submit_form"):

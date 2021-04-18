@@ -97,7 +97,6 @@
 import axios from "axios";
 export default {
     name: "DoctorFormPage",
-
     data() {
         return {
             dropdown: false,
@@ -108,11 +107,9 @@ export default {
             }
         };
     },
-
     created() {
         this.getForms();
     },
-
     methods: {
         searchPatients() {
             axios
@@ -136,7 +133,6 @@ export default {
                         this.logged_in = false;
                         return;
                     }
-
                     this.logged_in = true;
                     this.patientList = response.data.patients;
                 })
@@ -144,7 +140,6 @@ export default {
                     console.log(e);
                 });
         },
-
         getForms() {
             axios
                 .get("doctor/forms", {
@@ -157,9 +152,7 @@ export default {
                         this.logged_in = false;
                         return;
                     }
-
                     this.logged_in = true;
-
                     this.patientList = response.data.patients;
                 })
                 .catch(e => {

@@ -97,21 +97,17 @@
 
 <script>
 import axios from "axios";
-
 export default {
     name: "DoctorPanelPage",
-
     data() {
         return {
             logged_in: true,
             ssn: ""
         };
     },
-
     created() {
         this.doctorGet();
     },
-
     methods: {
         doctorGet() {
             axios
@@ -125,9 +121,7 @@ export default {
                         this.logged_in = false;
                         return;
                     }
-
                     this.logged_in = true;
-
                     this.ssn = response.data.ssn;
                 })
                 .catch(e => {
