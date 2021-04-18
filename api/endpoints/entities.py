@@ -28,13 +28,30 @@ class EntitiesForms(Resource):
     parser.add_argument("form", type=dict, required=False)
     parser.add_argument("query_string", type=str)
 
+
+    def check_user_type(self, userType):
+        """Verify user is a doctor
+        """
+
+        # Returns doctor information for logged in user.
+        if (userType == "doctor" or userType == "clerk"):
+            return 1
+        else:
+            return 0
+
+
     def post(self):
         """Returns the primary keys from certain tables in our database.
         This is needed for certain selectors on form pages on the front-end.
         """
+
+        # Verify user is a clerk or doctor
         if verify_jwt_in_request():
             current = get_jwt_identity()
+        if not self.check_user_type(current["user_type"]):
+            return  jsonify({**current, "logged_in": 0})
 
+        # If user is a clerk or doctor perform post request
         args = self.parser.parse_args()
 
         results = {}

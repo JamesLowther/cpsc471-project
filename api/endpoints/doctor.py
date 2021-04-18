@@ -40,13 +40,29 @@ class DoctorForms(Resource):
     parser.add_argument("medCenter_to_add", type=str)
     parser.add_argument("complaint", type=str)
 
+
+    def check_user_type(self, userType):
+        """Verify user is a doctor
+        """
+
+        # Returns doctor information for logged in user.
+        if userType == "doctor":
+            return 1
+        else:
+            return 0
+
+
     def get(self):
         """Handle get request for doctor/forms endpoint.
         """
 
+        # Verify user is a doctor
         if verify_jwt_in_request():
             current = get_jwt_identity()
+        if not self.check_user_type(current["user_type"]):
+            return  jsonify({**current, "logged_in": 0})
 
+        # If user is a doctor open a db connection
         con, cursor = db.connect_db()
 
         # Get all reports.
@@ -65,6 +81,13 @@ class DoctorForms(Resource):
         """Handle post request for doctor/forms endpoint.
         """
 
+        # Verify user is a doctor
+        if verify_jwt_in_request():
+            current = get_jwt_identity()
+        if not self.check_user_type(current["user_type"]):
+            return  jsonify({**current, "logged_in": 0})
+
+        # If user is a doctor open a db connection
         args = self.parser.parse_args()
 
         if args["thePatientName"] is not None:
